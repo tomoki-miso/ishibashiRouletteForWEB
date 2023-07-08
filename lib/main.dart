@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ishibashi/random.dart';
+import 'package:ishibashi/top.dart';
 
 import 'map.dart';
 import 'info.dart';
 import 'list.dart';
+import 'serch.dart';
+import 'random.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +23,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      routes: {
+        '/random': (context) =>RandomPage(),
+        '/map': (context) => MapPage(),
+        '/list': (context) => ListPage(),
+        '/page2': (context) => SerchPage(),
+      },
       home: const MyStatefulWidget(),
     );
   }
@@ -32,8 +42,9 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  
   static  List<StatelessWidget> _screens = [
-    ListPage(),
+    TopPage(),
     MapPage(),
     InfoPage(),
   ];
