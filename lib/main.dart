@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-
 import 'top.dart';
 import 'map.dart';
 import 'info.dart';
@@ -30,6 +29,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [
         Locale('ja'),
       ],
+      
       home: const MyStatefulWidget(),
       routes: {
         '/list': (context) => ListPage(),
@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
         '/top': (context) => TopPage(),
         '/map': (context) => MapPage(),
         '/serch': (context) => SerchPage(),
+        '/info':(context) => InfoPage(),
       },
     );
   }
@@ -50,7 +51,7 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  static  List<Widget> _screens = [
+  static List<Widget> _screens = [
     ListPage(),
     RandomPage(),
     TopPage(),
@@ -63,7 +64,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     '/random',
     '/top',
     '/map',
-    '/serch',
+    '/info',
   ];
 
   int _selectedIndex = 2;
