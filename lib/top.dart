@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:ishibashi/random.dart';
+import 'package:ishibashi/store.dart';
 import 'map.dart';
 import 'serch.dart';
 
@@ -41,6 +42,15 @@ class TopPage extends StatelessWidget {
                 );
               },
               child: const Text('こだわり検索'),
+            ),
+             ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => StorePage()),
+                );
+              },
+              child: const Text('ランダムに決める'),
             ),
           ],
         ),
