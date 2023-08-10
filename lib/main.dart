@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'top.dart';
 import 'map.dart';
@@ -21,98 +20,97 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        DefaultWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('ja'),
-      ],
-      
-      home: const MyStatefulWidget(),
-      routes: {
-        '/list': (context) => ListPage(),
-        '/random': (context) => RandomPage(),
-        '/top': (context) => TopPage(),
-        '/map': (context) => MapPage(),
-        '/serch': (context) => SerchPage(),
-        '/info':(context) => InfoPage(),
-      },
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const BasePage(),
     );
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  static List<Widget> _screens = [
-    ListPage(),
-    RandomPage(),
-    TopPage(),
-    MapPage(),
-    InfoPage(),
-  ];
-
-  static const List<String> _routeNames = [
-    '/list',
-    '/random',
-    '/top',
-    '/map',
-    '/info',
-  ];
-
-  int _selectedIndex = 2;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    Navigator.of(context).pushNamed(_routeNames[index]);
-  }
+class BasePage extends StatelessWidget {
+  const BasePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.list_bullet),
-            label: 'リスト',
+    final pages = [
+       ListPage(),
+      RandomPage(),
+      TopPage(),
+      MapPage(),
+      InfoPage(),      
+    ];
+
+    return Scaffold(
+      body: PersistentTabView(
+        context,
+        screens: pages,
+        navBarStyle: NavBarStyle.simple,
+        items: [
+          PersistentBottomNavBarItem(
+            icon: const Icon(
+              Icons.rectangle,
+            ),
+            inactiveIcon: const Icon(
+              Icons.rectangle_outlined,
+            ),
+            title: 'リスト',
+            activeColorPrimary: Color.fromARGB(124, 252, 0,0),
+            inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.list_bullet),
-            label: 'ランダム',
+
+          PersistentBottomNavBarItem(
+            icon: const Icon(
+              Icons.circle,
+            ),
+            inactiveIcon: const Icon(
+              Icons.circle_outlined,
+            ),
+            title: 'ランダム',
+            activeColorPrimary: Color.fromARGB(124, 252, 0,0),
+            inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.list_bullet),
-            label: 'Top',
+
+          PersistentBottomNavBarItem(
+            icon: const Icon(
+              Icons.star,
+            ),
+            inactiveIcon: const Icon(
+              // text snippet, article, description, restaurant
+              Icons.star_border,
+            ),
+            title: 'トップ',
+            activeColorPrimary: Color.fromARGB(124, 252, 0,0),
+            inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.mapLocationDot),
-            label: 'マップ',
+
+          PersistentBottomNavBarItem(
+            icon: const Icon(
+              Icons.star,
+            ),
+            inactiveIcon: const Icon(
+              // text snippet, article, description, restaurant
+              Icons.star_border,
+            ),
+            title: 'マップ',
+            activeColorPrimary: Color.fromARGB(124, 252, 0,0),
+            inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.circleInfo),
-            label: '情報',
+
+          PersistentBottomNavBarItem(
+            icon: const Icon(
+              Icons.star,
+            ),
+            inactiveIcon: const Icon(
+              // text snippet, article, description, restaurant
+              Icons.star_border,
+            ),
+            title: '情報',
+            activeColorPrimary: Color.fromARGB(124, 252, 0,0),
+            inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
         ],
-        onTap: _onItemTapped,
-        currentIndex: _selectedIndex,
       ),
-      tabBuilder: (context, index) {
-        return CupertinoTabView(
-          builder: (context) {
-            return _screens[index];
-          },
-        );
-      },
     );
   }
 }
