@@ -6,7 +6,7 @@ import 'top.dart';
 import 'map.dart';
 import 'info.dart';
 import 'list.dart';
-import 'serch.dart';
+import 'search.dart';
 import 'random.dart';
 
 void main() {

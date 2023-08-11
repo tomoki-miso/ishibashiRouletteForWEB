@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'random.dart';
 import 'package:ishibashi/random.dart';
-import 'package:ishibashi/store.dart';
 import 'map.dart';
-import 'serch.dart';
+import 'search.dart';
 
 class TopPage extends StatelessWidget {
   const TopPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var _screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(title: const Text("Top")),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(_screenSize.height * 0.08),
+        child: AppBar(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20)),
+          ),
+        ),
+      ),
       body: Center(
         child: Column(
           children: [
@@ -26,7 +37,7 @@ class TopPage extends StatelessWidget {
               },
               child: const Text('ランダムに決める'),
             ),
-             ElevatedButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
@@ -34,23 +45,15 @@ class TopPage extends StatelessWidget {
                 );
               },
               child: const Text('地図から探す'),
-            ),ElevatedButton(
+            ),
+            ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SerchPage()),
+                  MaterialPageRoute(builder: (context) => SearchPage()),
                 );
               },
               child: const Text('こだわり検索'),
-            ),
-             ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => StorePage()),
-                );
-              },
-              child: const Text('ランダムに決める'),
             ),
           ],
         ),
