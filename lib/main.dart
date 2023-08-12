@@ -34,11 +34,11 @@ class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pages = [
-       ListPage(),
+      ListPage(),
       RandomPage(),
       TopPage(),
       MapPage(),
-      InfoPage(),      
+      InfoPage(),
     ];
 
     return Scaffold(
@@ -49,28 +49,26 @@ class BasePage extends StatelessWidget {
         items: [
           PersistentBottomNavBarItem(
             icon: const Icon(
-              Icons.rectangle,
+              Icons.list,
             ),
             inactiveIcon: const Icon(
-              Icons.rectangle_outlined,
+              Icons.list,
             ),
             title: 'リスト',
-            activeColorPrimary: Color.fromARGB(124, 252, 0,0),
+            activeColorPrimary: Color.fromARGB(124, 252, 0, 0),
             inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
-
           PersistentBottomNavBarItem(
-            icon: const Icon(
-              Icons.circle,
+            icon: const FaIcon(
+              FontAwesomeIcons.shop,
             ),
-            inactiveIcon: const Icon(
-              Icons.circle_outlined,
+            inactiveIcon: const FaIcon(
+              FontAwesomeIcons.shop,
             ),
             title: 'ランダム',
-            activeColorPrimary: Color.fromARGB(124, 252, 0,0),
+           activeColorPrimary: Color.fromARGB(124, 252, 0, 0),
             inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
-
           PersistentBottomNavBarItem(
             icon: const Icon(
               Icons.star,
@@ -80,33 +78,28 @@ class BasePage extends StatelessWidget {
               Icons.star_border,
             ),
             title: 'トップ',
-            activeColorPrimary: Color.fromARGB(124, 252, 0,0),
+              activeColorPrimary: Color.fromARGB(124, 252, 0, 0),
             inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
-
           PersistentBottomNavBarItem(
-            icon: const Icon(
-              Icons.star,
-            ),
-            inactiveIcon: const Icon(
-              // text snippet, article, description, restaurant
-              Icons.star_border,
-            ),
+            icon: const FaIcon(FontAwesomeIcons.mapLocationDot),
+            inactiveIcon: const FaIcon(
+                // text snippet, article, description, restaurant
+                FontAwesomeIcons.mapLocationDot),
             title: 'マップ',
-            activeColorPrimary: Color.fromARGB(124, 252, 0,0),
+            activeColorPrimary: Color.fromARGB(124, 252, 0, 0),
             inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
-
           PersistentBottomNavBarItem(
             icon: const Icon(
-              Icons.star,
+              Icons.info,
             ),
             inactiveIcon: const Icon(
               // text snippet, article, description, restaurant
-              Icons.star_border,
+              Icons.info,
             ),
             title: '情報',
-            activeColorPrimary: Color.fromARGB(124, 252, 0,0),
+            activeColorPrimary: Color.fromARGB(124, 252, 0, 0),
             inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
         ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class InfoPage extends StatelessWidget {
   @override
@@ -27,7 +28,7 @@ class InfoPage extends StatelessWidget {
               width: _screenSize.width * 0.9,
               height: _screenSize.height * 0.2,
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: Colors.greenAccent,
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
@@ -36,7 +37,9 @@ class InfoPage extends StatelessWidget {
             Container(
               child: Column(
                 children: [
+                  Padding(padding: EdgeInsets.only(top: _screenSize.height*0.03)),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(fixedSize: Size(_screenSize.width*0.8, _screenSize.height*0.01),primary: Colors.black),
                     onPressed: () async {
                       final url = 'https://twitter.com/pochipochitudoi';
                       if (await canLaunch(url)) {
@@ -45,9 +48,20 @@ class InfoPage extends StatelessWidget {
                         throw 'Could not launch $url';
                       }
                     },
-                    child: Text("Twitter"),
+                    child: 
+                    RichText(text: TextSpan(
+                      children: [
+                        WidgetSpan(child: FaIcon(
+                          FontAwesomeIcons.twitter,)
+                        ),
+                        TextSpan(
+                          text: "X(旧Twitter)アカウント"
+                        ),
+                      ]
+                    )),
                   ),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(fixedSize: Size(_screenSize.width*0.8, _screenSize.height*0.01),primary: Color.fromARGB(124, 252, 0, 0)),
                     onPressed: () async {
                       final String emailAddress = 'pochipochi.tudoi@gmail.com';
                       final String subject = 'お問い合わせ'; // 任意の件名を指定
@@ -61,14 +75,23 @@ class InfoPage extends StatelessWidget {
                       }
                     },
                     //メールは実機検証が必要　のむら
-                    child: Text("メール"),
+                    child: RichText(text: TextSpan(
+                      children: [
+                        WidgetSpan(child: FaIcon(
+                          FontAwesomeIcons.envelope,)
+                        ),
+                        TextSpan(
+                          text: "メールを送信"
+                        ),
+                      ]
+                    )),
                   ),
                 ],
               ),
               width: _screenSize.width * 0.9,
               height: _screenSize.height * 0.2,
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: Colors.greenAccent,
                 borderRadius: BorderRadius.circular(10),
               ),
             ),

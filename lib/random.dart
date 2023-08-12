@@ -16,6 +16,9 @@ class RandomPage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(_screenSize.height * 0.08),
         child: AppBar(
+          iconTheme: IconThemeData(
+          color: Colors.greenAccent
+          ),
           backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
