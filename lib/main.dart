@@ -44,6 +44,7 @@ class BasePage extends StatelessWidget {
     return Scaffold(
       body: PersistentTabView(
         context,
+        controller: PersistentTabController(initialIndex: 2),
         screens: pages,
         navBarStyle: NavBarStyle.simple,
         items: [

@@ -2,23 +2,21 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
+
+import 'stores.dart';
+
 class RandomPage extends StatelessWidget {
   const RandomPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width; //横幅
-    final height = MediaQuery.of(context).size.height; //高さ
-
     var _screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(_screenSize.height * 0.08),
         child: AppBar(
-          iconTheme: IconThemeData(
-          color: Colors.greenAccent
-          ),
+          iconTheme: IconThemeData(color: Colors.greenAccent),
           backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -29,8 +27,8 @@ class RandomPage extends StatelessWidget {
       ),
       body: Center(
           child: Container(
-        width: width,
-        height: height,
+        width: _screenSize.width,
+        height: _screenSize.height,
         color: Colors.greenAccent,
         child: Center(
           child: Column(
@@ -91,21 +89,25 @@ class RandomPage extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.all(10),
                       child: ElevatedButton(
-                          onPressed: () {}, child: Text("くわしくみる"))
-                      //Text('石橋駅を降りてスグ！！なつかしい町、石橋。ふれあいの街、石橋商店街。小物達との出会いの”いしばしや”。豊富な品揃えで何でもそろう下町のセレクトショップです。駅前の待ち合わせや雨宿りにもご利用くださいませ。')
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => StorePage()));
+                          },
+                          child: Text("くわしくみる"))
+                      
                       ,
                     )
+                    
                   ], //白いボックスの中身
                 ),
               ),
-              
               Container(
                 padding: EdgeInsets.only(top: 20),
-                width: width * 0.7,
+                width: _screenSize.width * 0.7,
                 child: OutlinedButton(
-                  onPressed: () {
-                    /* ボタンが押せる時 */
-                  },
+                  onPressed: () {},
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.lightGreenAccent, // 背景色
 
