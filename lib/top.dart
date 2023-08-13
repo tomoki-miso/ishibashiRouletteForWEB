@@ -171,7 +171,7 @@ class _TopPageState extends State<TopPage> {
                       ),
                       WidgetSpan(child: Padding(padding: EdgeInsets.all(4))),
                       TextSpan(
-                        text: '地図から探す',
+                        text: 'こだわり検索',
                         style: TextStyle(color: Colors.black),
                       ),
                     ],
