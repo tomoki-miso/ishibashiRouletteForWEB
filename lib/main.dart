@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'firebase_options.dart';
 import 'top.dart';
 import 'map.dart';
 import 'info.dart';
@@ -9,8 +12,12 @@ import 'list.dart';
 import 'search.dart';
 import 'random.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  ); // Firebaseの初期化
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -67,7 +74,7 @@ class BasePage extends StatelessWidget {
               FontAwesomeIcons.shop,
             ),
             title: 'ランダム',
-           activeColorPrimary: Color.fromARGB(124, 252, 0, 0),
+            activeColorPrimary: Color.fromARGB(124, 252, 0, 0),
             inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
           PersistentBottomNavBarItem(
@@ -79,7 +86,7 @@ class BasePage extends StatelessWidget {
               Icons.star_border,
             ),
             title: 'トップ',
-              activeColorPrimary: Color.fromARGB(124, 252, 0, 0),
+            activeColorPrimary: Color.fromARGB(124, 252, 0, 0),
             inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
           PersistentBottomNavBarItem(

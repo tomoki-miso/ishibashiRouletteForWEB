@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:ishibashi/stores.dart';
+import 'firebase_options.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ListPage extends StatelessWidget {
-   
+class ListPage extends StatefulWidget {
+  const ListPage({Key? key}) : super(key: key);
 
   @override
+  _ListPageState createState() => _ListPageState();
+}
+
+class _ListPageState extends State<ListPage> {
+  @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
-    return  Scaffold(
+     var _screenSize = MediaQuery.of(context).size;
+    return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(_screenSize.height * 0.08),
         child: AppBar(
-          iconTheme: IconThemeData(
-          color: Colors.greenAccent
-          ),
           backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -21,8 +27,37 @@ class ListPage extends StatelessWidget {
           ),
         ),
       ),
-      body: Center(
-        child: Text("リスト用画面"),
+      body: Container(
+        color: Colors.greenAccent,
+        child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+         
+          stream: FirebaseFirestore.instance.collection("stores").snapshots(),
+          builder: (BuildContext context,
+              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            }
+            return ListView(
+              children: snapshot.data!.docs
+                  .map((DocumentSnapshot<Map<String, dynamic>> document) {
+                return Card(
+                  child: ListTile(
+                    title: Text(document.data()!['name']),
+                    trailing: IconButton(
+                      icon: Icon(Icons.edit), // ボタンに表示するアイコン
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => StorePage()),
+                        );
+                      },
+                    ),
+                  ),
+                );
+              }).toList(),
+            );
+          },
+        ),
       ),
     );
   }
