@@ -2,7 +2,6 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-
 import 'stores.dart';
 
 class RandomPage extends StatelessWidget {
@@ -90,16 +89,10 @@ class RandomPage extends StatelessWidget {
                       padding: EdgeInsets.all(10),
                       child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => StorePage()));
+                            //Navigator.push(context,   MaterialPageRoute( builder: (context) => StorePage()));
                           },
-                          child: Text("くわしくみる"))
-                      
-                      ,
+                          child: Text("くわしくみる")),
                     )
-                    
                   ], //白いボックスの中身
                 ),
               ),

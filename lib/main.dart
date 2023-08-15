@@ -36,17 +36,20 @@ class MyApp extends StatelessWidget {
 }
 
 class BasePage extends StatelessWidget {
+  
   const BasePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final pages = [
-      ListPage(),
-      RandomPage(),
-      TopPage(),
-      MapPage(),
-      InfoPage(),
-    ];
+    
+   final pages = [
+  ListPage(),
+  RandomPage(),
+  TopPage(),
+  MapPage(),
+  InfoPage(),
+];
+
 
     return Scaffold(
       body: PersistentTabView(
