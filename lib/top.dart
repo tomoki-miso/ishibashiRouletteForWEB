@@ -50,7 +50,7 @@ class _TopPageState extends State<TopPage> {
               Container(
                 height: _screenSize.height * 0.22,
                 child: Scrollbar(
-                  isAlwaysShown: true,
+                  thumbVisibility: true,
                   controller:scrollController,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,

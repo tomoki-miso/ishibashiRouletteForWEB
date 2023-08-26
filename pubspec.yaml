@@ -39,9 +39,9 @@ dependencies:
   flutter_localization: ^0.1.12
   url_launcher: ^6.1.11
   persistent_bottom_nav_bar_v2: ^4.2.8
-  flutter_datetime_picker: ^1.5.1
   flutter_riverpod: ^2.3.6
   english_words: ^4.0.0
+  flutter_datetime_picker_plus: ^2.0.1
 
 dev_dependencies:
   flutter_test:
