@@ -1,16 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class StorePage extends StatelessWidget {
-  final String documentId; // FirestoreのドキュメントIDを保持する変数
+//class StorePage extends StatelessWidget {final String documentId; // FirestoreのドキュメントIDを保持する変数StorePage({required this.documentId, Key? key}) : super(key: key);
 
-  StorePage({required this.documentId, Key? key}) : super(key: key);
+import 'random.dart'; // インポートパスを確認してください
 
+class StorePage extends StatefulWidget {
+  final BuildContext context; // コンテキストを受け取る
+  const StorePage({Key? key, required this.context}) : super(key: key);
+
+
+  @override
+  _StorePageState createState() => _StorePageState();
+}
+
+class _StorePageState extends State<StorePage> {
   @override
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
+    final storeName = context.watch<StoreDataProvider>().storeName;
+    final storeDetail = context.watch<StoreDataProvider>().storeDetail;
+    final storeWeb = context.watch<StoreDataProvider>().storeWeb;
+    final storeTwitter = context.watch<StoreDataProvider>().storeTwitter;
+    final storeInsta = context.watch<StoreDataProvider>().storeInsta;
+    final storeTabelog = context.watch<StoreDataProvider>().storeTabelog;
+    final storePhotoUrl = context.watch<StoreDataProvider>().storePhotoUrl;
 
     return Scaffold(
       appBar: PreferredSize(
@@ -49,45 +67,19 @@ class StorePage extends StatelessWidget {
                           ),
                           margin: const EdgeInsets.only(top: 20),
                           padding: const EdgeInsets.only(
-                            top: 20,
-                            left: 10,
-                            right: 10,
-                            bottom: 20,
-                          ),
+
+                              top: 20, left: 10, right: 10, bottom: 20),
                           width: _screenSize.width * 0.9,
                           child: Column(
                             children: [
-                              StreamBuilder<DocumentSnapshot>(
-                                stream: FirebaseFirestore.instance
-                                    .collection('stores')
-                                    .doc(documentId)
-                                    .snapshots(),
-                                builder: (BuildContext context,
-                                    AsyncSnapshot<DocumentSnapshot> snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return CircularProgressIndicator();
-                                  }
+                              Text(
+                                storeName, // 正しいプロバイダーから取得
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black54,
+                                ),
 
-                                  if (!snapshot.hasData ||
-                                      !snapshot.data!.exists) {
-                                    return Text('ドキュメントが見つかりません');
-                                  }
-
-                                  final name = snapshot.data!.get('name');
-
-                                  return Container(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      name,
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black54,
-                                      ),
-                                    ),
-                                  );
-                                },
                               ),
                               Row(
                                 children: [
@@ -112,163 +104,125 @@ class StorePage extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(height: 16),
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.network(
-                                  'https://www.ss-ishibashi.jp/wp-content/uploads/2014/03/f260a701c32672bf1b5b2899adf3a9fe-600x450.jpg',
-                                  width: _screenSize.width * 0.8,
-                                  fit: BoxFit.cover,
-                                ),
+
+                              Container(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                child: storePhotoUrl
+                                        .isNotEmpty // storePhotoUrl が空でない場合の条件
+                                    ? ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(5), // 角の丸みを指定
+                                        child: Image.network(
+                                          storePhotoUrl, // 画像のURL
+                                          width: _screenSize.width * 0.8, // 幅
+                                          fit: BoxFit.cover, // 画像の表示方法を指定
+                                        ),
+                                      )
+                                    : Container(), // storePhotoUrl が空の場合は何も表示しない
                               ),
                               SizedBox(height: 16),
-                              StreamBuilder<DocumentSnapshot>(
-                                stream: FirebaseFirestore.instance
-                                    .collection('stores')
-                                    .doc(documentId)
-                                    .snapshots(),
-                                builder: (BuildContext context,
-                                    AsyncSnapshot<DocumentSnapshot> snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return CircularProgressIndicator();
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  storeDetail,
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  fixedSize: Size(_screenSize.width * 0.8,
+                                      _screenSize.height * 0.01),
+                                  primary: Color.fromARGB(124, 252, 0, 0),
+                                ),
+                                onPressed: () async {
+                                  if (await canLaunch(storeWeb)) {
+                                    await launch(storeWeb);
+                                  } else {
+                                    throw 'Could not launch $storeWeb';
                                   }
-
-                                  if (!snapshot.hasData ||
-                                      !snapshot.data!.exists) {
-                                    return Text('ドキュメントが見つかりません');
-                                  }
-
-                                  final detail = snapshot.data!.get('detail');
-                                  final web = snapshot.data!.get('web');
-                                  final twitter = snapshot.data!.get('twitter');
-                                  final insta =  snapshot.data!.get('insta');
-                                  final tabelog =  snapshot.data!.get('tabelog');
-
-                                  return Column(
-                                    children: [
-                                      Container(
-                                         alignment: Alignment.centerLeft,
-                                        padding: EdgeInsets.all(10),
-                                        child: Text(detail),
-                                      ),
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          fixedSize: Size(
-                                            _screenSize.width * 0.8,
-                                            _screenSize.height * 0.01,
-                                          ),
-                                          primary:
-                                              Color.fromARGB(124, 252, 0, 0),
-                                        ),
-                                        onPressed: () async {
-                                          final url =
-                                              web;
-                                          if (await canLaunch(url)) {
-                                            await launch(url);
-                                          } else {
-                                            throw 'Could not launch $url';
-                                          }
-                                        },
-                                        child: RichText(
-                                          text: TextSpan(children: [
-                                            WidgetSpan(
-                                              child: Icon(
-                                                Icons.public,
-                                              ),
-                                            ),
-                                            TextSpan(text: "公式ウェブサイト"),
-                                          ]),
-                                        ),
-                                      ),
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          fixedSize: Size(
-                                            _screenSize.width * 0.8,
-                                            _screenSize.height * 0.01,
-                                          ),
-                                          primary:
-                                              Color.fromARGB(255, 254, 170, 1),
-                                        ),
-                                        onPressed: () async {
-                                          final url =
-                                              tabelog;
-                                          if (await canLaunch(url)) {
-                                            await launch(url);
-                                          } else {
-                                            throw 'Could not launch $url';
-                                          }
-                                        },
-                                        child: RichText(
-                                          text: TextSpan(children: [
-                                            WidgetSpan(
-                                              child: Icon(
-                                                Icons.public,
-                                              ),
-                                            ),
-                                            TextSpan(text: "食べログ"),
-                                          ]),
-                                        ),
-                                      ),
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          fixedSize: Size(
-                                            _screenSize.width * 0.8,
-                                            _screenSize.height * 0.01,
-                                          ),
-                                          primary: Colors.black,
-                                        ),
-                                        onPressed: () async {
-                                          final url =
-                                              twitter;
-                                          if (await canLaunch(url)) {
-                                            await launch(url);
-                                          } else {
-                                            throw 'Could not launch $url';
-                                          }
-                                        },
-                                        child: RichText(
-                                          text: TextSpan(children: [
-                                            WidgetSpan(
-                                              child: FaIcon(
-                                                FontAwesomeIcons.twitter,
-                                              ),
-                                            ),
-                                            TextSpan(text: "X(旧Twitter)"),
-                                          ]),
-                                        ),
-                                      ),
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          fixedSize: Size(
-                                            _screenSize.width * 0.8,
-                                            _screenSize.height * 0.01,
-                                          ),
-                                          primary:
-                                              Color.fromARGB(255, 99, 70, 185),
-                                        ),
-                                        onPressed: () async {
-                                          final url =
-                                              insta;
-                                          if (await canLaunch(url)) {
-                                            await launch(url);
-                                          } else {
-                                            throw 'Could not launch $url';
-                                          }
-                                        },
-                                        child: RichText(
-                                          text: TextSpan(children: [
-                                            WidgetSpan(
-                                              child: FaIcon(
-                                                FontAwesomeIcons.instagram,
-                                              ),
-                                            ),
-                                            TextSpan(text: "Instagram"),
-                                          ]),
-                                        ),
-                                      ),
-                                    ],
-                                  );
                                 },
+                                child: RichText(
+                                  text: TextSpan(children: [
+                                    WidgetSpan(
+                                      child: Icon(
+                                        Icons.public,
+                                      ),
+                                    ),
+                                    TextSpan(text: "公式ウェブサイト"),
+                                  ]),
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  fixedSize: Size(_screenSize.width * 0.8,
+                                      _screenSize.height * 0.01),
+                                  primary: Color.fromARGB(255, 254, 170, 1),
+                                ),
+                                onPressed: () async {
+                                  if (await canLaunch(storeTabelog)) {
+                                    await launch(storeTabelog);
+                                  } else {
+                                    throw 'Could not launch $storeTabelog';
+                                  }
+                                },
+                                child: RichText(
+                                  text: TextSpan(children: [
+                                    WidgetSpan(
+                                      child: Icon(
+                                        Icons.public,
+                                      ),
+                                    ),
+                                    TextSpan(text: "食べログ"),
+                                  ]),
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  fixedSize: Size(_screenSize.width * 0.8,
+                                      _screenSize.height * 0.01),
+                                  primary: Colors.black,
+                                ),
+                                onPressed: () async {
+                                  if (await canLaunch(storeTwitter)) {
+                                    await launch(storeTwitter);
+                                  } else {
+                                    throw 'Could not launch $storeTwitter';
+                                  }
+                                },
+                                child: RichText(
+                                  text: TextSpan(children: [
+                                    WidgetSpan(
+                                      child: FaIcon(
+                                        FontAwesomeIcons.twitter,
+                                      ),
+                                    ),
+                                    TextSpan(text: "X(旧Twitter)"),
+                                  ]),
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  fixedSize: Size(_screenSize.width * 0.8,
+                                      _screenSize.height * 0.01),
+                                  primary: Color.fromARGB(255, 99, 70, 185),
+                                ),
+                                onPressed: () async {
+                                  if (await canLaunch(storeInsta)) {
+                                    await launch(storeInsta);
+                                  } else {
+                                    throw 'Could not launch $storeInsta';
+                                  }
+                                },
+                                child: RichText(
+                                  text: TextSpan(children: [
+                                    WidgetSpan(
+                                      child: FaIcon(
+                                        FontAwesomeIcons.instagram,
+                                      ),
+                                    ),
+                                    TextSpan(text: "Instagram"),
+                                  ]),
+                                ),
+
                               ),
                             ],
                           ),
