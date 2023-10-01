@@ -25,7 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
+
         return macos;
+
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -70,6 +72,7 @@ class DefaultFirebaseOptions {
     iosBundleId: 'com.example.ishibashi',
   );
 
+
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyAzDfIO8WcAMJI9EQkLtMGWokxh5y3d-ek',
     appId: '1:766148127415:ios:321bf5e8b02ba2f0eabb32',
@@ -79,4 +82,5 @@ class DefaultFirebaseOptions {
     iosClientId: '766148127415-2agsu8gjbpecj6u3ee3cfuvkkbutmpp3.apps.googleusercontent.com',
     iosBundleId: 'com.example.ishibashi',
   );
+
 }

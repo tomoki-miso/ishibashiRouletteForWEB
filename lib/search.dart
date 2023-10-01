@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
+
+import 'result.dart';
+
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -9,9 +13,12 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  
   List<String> selectedTags = [];
+  List<String> selectedDays = [];
+
   final tags = [
-    '飲み屋',
+    '居酒屋',
     'カフェ',
     'イタリアン',
     '和食',
@@ -52,6 +59,39 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
+  final TextEditingController _nameController = TextEditingController();
+  late QuerySnapshot _querySnapshot;
+
+Future<void> _search() async {
+  final String name = _nameController.text;
+
+  Query query = FirebaseFirestore.instance.collection('stores');
+
+  if (name.isNotEmpty) {
+    query = query.where('name', isEqualTo: name);
+  }
+
+  if (selectedDays.isNotEmpty) {
+    query = query.where('daysOfWeek', arrayContainsAny: selectedDays);
+  }
+
+  if (selectedTags.isNotEmpty) {
+    query = query.where('tags', arrayContainsAny: selectedTags);
+  }
+
+  final QuerySnapshot querySnapshot = await query.get();
+
+  // 検索結果を表示するページに遷移
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) =>
+          ResultPage(querySnapshot, selectedDays, selectedTags),
+    ),
+  );
+}
+
+
   @override
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
@@ -60,9 +100,7 @@ class _SearchPageState extends State<SearchPage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(_screenSize.height * 0.08),
         child: AppBar(
-          iconTheme: IconThemeData(
-          color: Colors.greenAccent
-          ),
+          iconTheme: IconThemeData(color: Colors.greenAccent),
           backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -96,6 +134,7 @@ class _SearchPageState extends State<SearchPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TextField(
+                        controller: _nameController,
                         decoration: InputDecoration(
                           labelText: 'Search',
                           hintText: 'Enter search keyword...',
@@ -135,18 +174,16 @@ class _SearchPageState extends State<SearchPage> {
                                   final isSelected = selectedTags.contains(tag);
                                   return InkWell(
                                     child: GestureDetector(
-                                      onTap: () {
-                                        //デバック文　できれば消したいね
-                                        print('タップされました: $tag');
-                                        if (isSelected) {
-                                          print('選択解除: $tag');
-                                          selectedTags.remove(tag);
-                                        } else {
-                                          print('選択: $tag');
-                                          selectedTags.add(tag);
-                                        }
-                                        setState(() {});
-                                      },
+                                       onTap: () {
+                                    setState(() {
+                                      if (isSelected) {
+                                        selectedTags.remove(tag);
+                                      } else {
+                                        selectedTags.add(tag);
+                                      }
+                                      print('選択中の曜日: $selectedTags');
+                                    });
+                                  },
                                       child: Container(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 5, vertical: 3),
@@ -224,15 +261,17 @@ class _SearchPageState extends State<SearchPage> {
                               runSpacing: 8,
                               spacing: 8,
                               children: daysOfWeek.map((day) {
-                                final isSelected = selectedTags.contains(day);
+                                final isSelected = selectedDays.contains(day);
                                 return InkWell(
                                   onTap: () {
-                                    if (isSelected) {
-                                      selectedTags.remove(day);
-                                    } else {
-                                      selectedTags.add(day);
-                                    }
-                                    setState(() {});
+                                    setState(() {
+                                      if (isSelected) {
+                                        selectedDays.remove(day);
+                                      } else {
+                                        selectedDays.add(day);
+                                      }
+                                      print('選択中の曜日: $selectedDays');
+                                    });
                                   },
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
@@ -291,6 +330,13 @@ class _SearchPageState extends State<SearchPage> {
                               ),
                             ),
                           ],
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: _search,
+                        child: const Text(
+                          '検索',
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ],

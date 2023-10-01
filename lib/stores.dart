@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+//class StorePage extends StatelessWidget {final String documentId; // FirestoreのドキュメントIDを保持する変数StorePage({required this.documentId, Key? key}) : super(key: key);
+
 import 'random.dart'; // インポートパスを確認してください
 
 class StorePage extends StatefulWidget {
   final BuildContext context; // コンテキストを受け取る
   const StorePage({Key? key, required this.context}) : super(key: key);
+
 
   @override
   _StorePageState createState() => _StorePageState();
@@ -61,6 +67,7 @@ class _StorePageState extends State<StorePage> {
                           ),
                           margin: const EdgeInsets.only(top: 20),
                           padding: const EdgeInsets.only(
+
                               top: 20, left: 10, right: 10, bottom: 20),
                           width: _screenSize.width * 0.9,
                           child: Column(
@@ -72,6 +79,7 @@ class _StorePageState extends State<StorePage> {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black54,
                                 ),
+
                               ),
                               Row(
                                 children: [
@@ -96,6 +104,7 @@ class _StorePageState extends State<StorePage> {
                                 ],
                               ),
                               SizedBox(height: 16),
+
                               Container(
                                 padding: EdgeInsets.symmetric(vertical: 10),
                                 child: storePhotoUrl
@@ -213,6 +222,7 @@ class _StorePageState extends State<StorePage> {
                                     TextSpan(text: "Instagram"),
                                   ]),
                                 ),
+
                               ),
                             ],
                           ),
