@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
+
 import 'stores.dart';
 
 class RandomPage extends StatelessWidget {
