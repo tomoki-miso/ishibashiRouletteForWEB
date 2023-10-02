@@ -17,7 +17,7 @@ class _ListPageState extends State<ListPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => StorePage(documentId: documentId)),
+          builder: (context) => StorePage(documentId: documentId, context: context,)),
     );
   }
 

@@ -270,7 +270,7 @@ class _RandomPageState extends State<RandomPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  StorePage(context: context), // contextを渡す
+                                  StorePage(context: context, documentId: '',), // contextを渡す
                             ),
                           );
                         },

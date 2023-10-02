@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 //class StorePage extends StatelessWidget {final String documentId; // FirestoreのドキュメントIDを保持する変数StorePage({required this.documentId, Key? key}) : super(key: key);
 
@@ -11,7 +11,8 @@ import 'random.dart'; // インポートパスを確認してください
 
 class StorePage extends StatefulWidget {
   final BuildContext context; // コンテキストを受け取る
-  const StorePage({Key? key, required this.context}) : super(key: key);
+  final String documentId;
+  const StorePage({Key? key, required this.context,required this.documentId}) : super(key: key);
 
 
   @override
