@@ -1,35 +1,18 @@
-import 'dart:math';
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:ishibashi/main.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'stores.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => StoreDataProvider(),
-      child: MyApp(),
-    ),
-  );
-}
 
 class StoreDataProvider with ChangeNotifier {
   String storeName = '';
   String storeDetail = '';
+  List<String> formattedTags = [];
+  String storePhotoUrl = '';
   String storeWeb = '';
   String storeTwitter = '';
   String storeInsta = '';
   String storeTabelog = '';
-  String storePhotoUrl = '';
-  List<String> formattedTags = [];
 
   void setStoreName(String name) {
     storeName = name;
@@ -41,23 +24,8 @@ class StoreDataProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setStoreWeb(String web) {
-    storeWeb = web;
-    notifyListeners();
-  }
-
-  void setStoreTwitter(String twitter) {
-    storeTwitter = twitter;
-    notifyListeners();
-  }
-
-  void setStoreInsta(String insta) {
-    storeInsta = insta;
-    notifyListeners();
-  }
-
-  void setStoreTabelog(String tabelog) {
-    storeTabelog = tabelog;
+  void setFormattedTags(List<String> tags) {
+    formattedTags = tags; // タグを設定
     notifyListeners();
   }
 
@@ -65,10 +33,25 @@ class StoreDataProvider with ChangeNotifier {
     storePhotoUrl = photoUrl;
     notifyListeners();
   }
+}
 
-  void setFormattedTags(List<String> tags) {
-    formattedTags = tags.map((tag) => '#$tag').toList();
-    notifyListeners();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => StoreDataProvider(),
+      child: MyApp(),
+    ),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'My App',
+      home: RandomPage(),
+    );
   }
 }
 
@@ -80,16 +63,6 @@ class RandomPage extends StatefulWidget {
 }
 
 class _RandomPageState extends State<RandomPage> {
-  String storeName = '';
-  String storeDetail = '';
-  String storeWeb = '';
-  String storeTwitter = '';
-  String storeInsta = '';
-  String storeTabelog = '';
-  String storePhotoUrl = '';
-
-  get formattedTags => null;
-
   @override
   void initState() {
     super.initState();
@@ -110,37 +83,20 @@ class _RandomPageState extends State<RandomPage> {
     final storeData = storeSnapshot.docs[storeId - 1].data();
     final storeNameData = storeData?['name'] ?? '';
     final storeDetailData = storeData?['detail'] ?? '';
-    final storeWebData = storeData?['web'] ?? '';
-    final storeTwitterData = storeData?['twitter'] ?? '';
-    final storeInstaData = storeData?['insta'] ?? '';
-    final storeTabelogData = storeData?['tabelog'] ?? '';
     final storePhotoUrlData = storeData?['photoUrl'] ?? '';
 
-    print("Fetched storeNameData: $storeNameData");
+    final tags = await _fetchTags(storeSnapshot.docs[storeId - 1].reference);
 
     Provider.of<StoreDataProvider>(context, listen: false)
         .setStoreName(storeNameData);
     Provider.of<StoreDataProvider>(context, listen: false)
         .setStoreDetail(storeDetailData);
-    Provider.of<StoreDataProvider>(context, listen: false)
-        .setStoreWeb(storeWebData);
-    Provider.of<StoreDataProvider>(context, listen: false)
-        .setStoreTwitter(storeTwitterData);
-    Provider.of<StoreDataProvider>(context, listen: false)
-        .setStoreInsta(storeInstaData);
-    Provider.of<StoreDataProvider>(context, listen: false)
-        .setStoreTabelog(storeTabelogData);
+    Provider.of<StoreDataProvider>(context, listen: false).setFormattedTags(tags);
     Provider.of<StoreDataProvider>(context, listen: false)
         .setStorePhotoUrl(storePhotoUrlData);
 
     setState(() {
-      storeName = storeNameData;
-      storeDetail = storeDetailData;
-      storeWeb = storeWebData;
-      storeTwitter = storeTwitterData;
-      storeInsta = storeInstaData;
-      storeTabelog = storeTabelogData;
-      storePhotoUrl = storePhotoUrlData;
+      // ステートの更新は必要ないので削除
     });
   }
 
@@ -148,20 +104,14 @@ class _RandomPageState extends State<RandomPage> {
     final QuerySnapshot querySnapshot =
         await storeReference.collection('tags').get();
 
-    // タグのリストを初期化
     final List<String> tags = [];
 
-    // サブコレクション内のドキュメントからタグ情報を取得
     querySnapshot.docs.forEach((doc) {
-      final data =
-          doc.data() as Map<String, dynamic>?; // Map<String, dynamic>としてキャスト
+      final data = doc.data() as Map<String, dynamic>?;
       if (data != null && data.containsKey("tag")) {
         tags.add(data["tag"].toString());
       }
     });
-
-    // タグ情報をログに出力
-    print("Fetched tags: $tags");
 
     return tags;
   }
@@ -184,130 +134,136 @@ class _RandomPageState extends State<RandomPage> {
         ),
       ),
       body: Center(
-          child: Container(
-        width: _screenSize.width,
-        height: _screenSize.height,
-        color: Colors.greenAccent,
-        child: Center(
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  color: Colors.white,
-                ),
-                margin: const EdgeInsets.only(top: 20),
-                padding: const EdgeInsets.all(6),
-                width: _screenSize.width * 0.9,
-                height: _screenSize.height * 0.6,
-                child: Column(
-                  children: [
-                    Text(
-                      storeName,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black54,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        LikeButton(),
-                        Wrap(
-                          spacing: 8, // タグ間のスペース
-                          children: formattedTags != null &&
-                                  formattedTags.isNotEmpty
-                              ? formattedTags.map((formattedTag) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4.0),
-                                      color: Colors.deepOrangeAccent,
-                                    ),
-                                    margin: EdgeInsets.all(2.0),
-                                    child: Center(
-                                      child: Text(
-                                        formattedTag,
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }).toList()
-                              : [], // tags が null または空の場合は空のリストを使用して非表示にする
-                        )
-                      ],
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: storePhotoUrl
-                              .isNotEmpty // storePhotoUrl が空でない場合の条件
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(5), // 角の丸みを指定
-                              child: Image.network(
-                                storePhotoUrl, // 画像のURL
-                                width: _screenSize.width * 0.8, // 幅
-                                fit: BoxFit.cover, // 画像の表示方法を指定
-                              ),
-                            )
-                          : Container(), // storePhotoUrl が空の場合は何も表示しない
-                    ),
-                    SizedBox(height: 16),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: SingleChildScrollView(
-                        child: Text(
-                          storeDetail,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  StorePage(context: context, documentId: '',), // contextを渡す
-                            ),
-                          );
-                        },
-                        child: Text("くわしくみる"),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 20),
-                width: _screenSize.width * 0.7,
-                child: OutlinedButton(
-                  onPressed: _fetchData,
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors.lightGreenAccent, // 背景色
+        child: Container(
+          width: _screenSize.width,
+          height: _screenSize.height,
+          color: Colors.greenAccent,
+          child: Center(
+            child: Column(
+              children: [
+                Consumer<StoreDataProvider>(
+                  builder: (context, provider, _) {
+                    final storeName = provider.storeName;
+                    final formattedTags = provider.formattedTags;
 
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 18), // パディング
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10), // 角の丸み
-                    ),
-                    side: BorderSide(color: Colors.black87), // 枠線の色
-                  ),
-                  child: Text(
-                    'お店を探す',
-                    style: TextStyle(
-                      fontSize: 22, // フォントサイズ
-                      color: Colors.black87, // テキストの色（上記の primary と同じ）
-                    ),
-                  ),
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        color: Colors.white,
+                      ),
+                      margin: const EdgeInsets.only(top: 20),
+                      padding: const EdgeInsets.all(6),
+                      width: _screenSize.width * 0.9,
+                      height: _screenSize.height * 0.6,
+                      child: Column(
+                        children: [
+                          Text(
+                            storeName,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              LikeButton(),
+                              Wrap(
+                                spacing: 8,
+                                children: formattedTags != null && formattedTags.isNotEmpty
+                                    ? formattedTags.map((formattedTag) {
+                                        return Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(4.0),
+                                            color: Colors.deepOrangeAccent,
+                                          ),
+                                          margin: EdgeInsets.all(2.0),
+                                          child: Center(
+                                            child: Text(
+                                              formattedTag,
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }).toList()
+                                    : [],
+                              )
+                            ],
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: provider.storePhotoUrl.isNotEmpty
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(5),
+                                    child: Image.network(
+                                      provider.storePhotoUrl,
+                                      width: _screenSize.width * 0.8,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : Container(),
+                          ),
+                          SizedBox(height: 16),
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            child: SingleChildScrollView(
+                              child: Text(
+                                provider.storeDetail,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => StorePage(
+                                      context: context,
+                                      documentId: '',
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Text("くわしくみる"),
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  },
                 ),
-              )
-            ],
+                Container(
+                  padding: EdgeInsets.only(top: 20),
+                  width: _screenSize.width * 0.7,
+                  child: OutlinedButton(
+                    onPressed: _fetchData,
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: Colors.lightGreenAccent,
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      side: BorderSide(color: Colors.black87),
+                    ),
+                    child: Text(
+                      'お店を探す',
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
-      )),
+      ),
     );
   }
 }

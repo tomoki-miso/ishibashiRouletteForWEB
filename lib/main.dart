@@ -1,35 +1,32 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ishibashi/firebase_options.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_android/webview_flutter_android.dart'; // Android の実装をインポート
+import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart'; // iOS の実装をインポート
 
 import 'package:provider/provider.dart';
 
-
-import 'firebase_options.dart';
 import 'top.dart';
 import 'map.dart';
 import 'info.dart';
 import 'list.dart';
-import 'search.dart';
 import 'random.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     ChangeNotifierProvider(
       create: (context) => StoreDataProvider(),
       child: MyApp(),
     ),
   );
-
 }
 
 class MyApp extends StatelessWidget {
@@ -48,20 +45,17 @@ class MyApp extends StatelessWidget {
 }
 
 class BasePage extends StatelessWidget {
-  
   const BasePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    
-   final pages = [
-  ListPage(),
-  RandomPage(),
-  TopPage(),
-  MapPage(),
-  InfoPage(),
-];
-
+    final pages = [
+      ListPage(),
+      RandomPage(),
+      TopPage(),
+      MapPage(),
+      InfoPage(),
+    ];
 
     return Scaffold(
       body: PersistentTabView(

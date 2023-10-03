@@ -19,9 +19,9 @@ class _TopPageState extends State<TopPage> {
   @override
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
-    final scrollController =  ScrollController(
-                      initialScrollOffset:
-                          2 * (MediaQuery.of(context).size.width * 0.8 + -10));
+    final scrollController = ScrollController(
+        initialScrollOffset:
+            2 * (MediaQuery.of(context).size.width * 0.8 + -10));
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(_screenSize.height * 0.08),
@@ -36,7 +36,8 @@ class _TopPageState extends State<TopPage> {
       ),
       body: Center(
         child: Container(
-          padding: EdgeInsets.only(top: 20),
+          alignment: Alignment.center,
+          padding: EdgeInsets.only(top: 100),
           child: Column(
             children: [
               Container(
@@ -47,7 +48,7 @@ class _TopPageState extends State<TopPage> {
                 child: Text("ロゴ配置"),
               ),
               Padding(padding: EdgeInsets.all(6)),
-              Container(
+              /*   Container(
                 height: _screenSize.height * 0.22,
                 child: Scrollbar(
                   thumbVisibility: true,
@@ -75,7 +76,7 @@ class _TopPageState extends State<TopPage> {
                   ),
                   
                 ),
-              ),
+              ), */
               Padding(padding: EdgeInsets.all(10)),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
