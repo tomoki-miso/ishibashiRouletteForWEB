@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
@@ -152,15 +151,15 @@ class _RandomPageState extends State<RandomPage> {
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
+    var screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(_screenSize.height * 0.08),
+        preferredSize: Size.fromHeight(screenSize.height * 0.08),
         child: AppBar(
-          iconTheme: IconThemeData(color: Colors.greenAccent),
+          iconTheme: const IconThemeData(color: Colors.greenAccent),
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20)),
@@ -169,8 +168,8 @@ class _RandomPageState extends State<RandomPage> {
       ),
       body: Center(
         child: Container(
-          width: _screenSize.width,
-          height: _screenSize.height,
+          width: screenSize.width,
+          height: screenSize.height,
           color: Colors.greenAccent,
           child: Center(
             child: Column(
@@ -182,13 +181,13 @@ class _RandomPageState extends State<RandomPage> {
                   ),
                   margin: const EdgeInsets.only(top: 20),
                   padding: const EdgeInsets.all(6),
-                  width: _screenSize.width * 0.9,
-                  height: _screenSize.height * 0.6,
+                  width: screenSize.width * 0.9,
+                  height: screenSize.height * 0.6,
                   child: Column(
                     children: [
                       Text(
                         storeName,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.black54,
@@ -207,11 +206,11 @@ class _RandomPageState extends State<RandomPage> {
                                             BorderRadius.circular(4.0),
                                         color: Colors.deepOrangeAccent,
                                       ),
-                                      margin: EdgeInsets.all(2.0),
+                                      margin: const EdgeInsets.all(2.0),
                                       child: Center(
                                         child: Text(
                                           formattedTag,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 12,
                                             color: Colors.white,
                                           ),
@@ -224,20 +223,20 @@ class _RandomPageState extends State<RandomPage> {
                         ],
                       ),
                       Container(
-                        height: _screenSize.height * 0.3,
-                        padding: EdgeInsets.symmetric(vertical: 10),
+                        height: screenSize.height * 0.3,
+                        padding: const EdgeInsets.symmetric(vertical: 10),
                         child: storePhotoUrl.isNotEmpty
                             ? ClipRRect(
                                 borderRadius: BorderRadius.circular(5),
                                 child: Image.network(
                                   storePhotoUrl,
-                                  width: _screenSize.width * 0.8,
+                                  width: screenSize.width * 0.8,
                                   fit: BoxFit.cover,
                                 ),
                               )
                             : Container(),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       /*   Container(
                         padding: EdgeInsets.all(10),
                         child: SingleChildScrollView(
@@ -247,7 +246,7 @@ class _RandomPageState extends State<RandomPage> {
                         ),
                       ), */
                       Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
@@ -260,27 +259,27 @@ class _RandomPageState extends State<RandomPage> {
                               ),
                             );
                           },
-                          child: Text("くわしくみる"),
+                          child: const Text("くわしくみる"),
                         ),
                       )
                     ],
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(top: 20),
-                  width: _screenSize.width * 0.7,
+                  padding: const EdgeInsets.only(top: 20),
+                  width: screenSize.width * 0.7,
                   child: OutlinedButton(
                     onPressed: _fetchData,
                     style: OutlinedButton.styleFrom(
                       backgroundColor: Colors.lightGreenAccent,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                          const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      side: BorderSide(color: Colors.black87),
+                      side: const BorderSide(color: Colors.black87),
                     ),
-                    child: Text(
+                    child: const Text(
                       'お店を探す',
                       style: TextStyle(
                         fontSize: 22,
@@ -315,7 +314,7 @@ class _LikeButtonState extends State<LikeButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: _isLiked ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
+      icon: _isLiked ? const Icon(Icons.favorite) : const Icon(Icons.favorite_border),
       onPressed: _toggleLike,
     );
   }

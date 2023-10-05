@@ -1,13 +1,12 @@
-import 'dart:io';
+
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ishibashi/firebase_options.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:webview_flutter_android/webview_flutter_android.dart'; // Android の実装をインポート
-import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart'; // iOS の実装をインポート
+
+
 
 import 'package:provider/provider.dart';
 
@@ -28,7 +27,7 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (context) => StoreDataProvider()),
       // 他のプロバイダーを追加できます
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ),
 );
 
@@ -55,10 +54,10 @@ class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pages = [
-      ListPage(),
-      RandomPage(),
-      TopPage(),
-      MapPage(),
+      const ListPage(),
+      const RandomPage(),
+      const TopPage(),
+      const MapPage(),
       InfoPage(),
     ];
 
@@ -77,7 +76,7 @@ class BasePage extends StatelessWidget {
               Icons.list,
             ),
             title: 'リスト',
-            activeColorPrimary: Color.fromARGB(124, 252, 0, 0),
+            activeColorPrimary: const Color.fromARGB(124, 252, 0, 0),
             inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
           PersistentBottomNavBarItem(
@@ -88,7 +87,7 @@ class BasePage extends StatelessWidget {
               FontAwesomeIcons.shop,
             ),
             title: 'ランダム',
-            activeColorPrimary: Color.fromARGB(124, 252, 0, 0),
+            activeColorPrimary: const Color.fromARGB(124, 252, 0, 0),
             inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
           PersistentBottomNavBarItem(
@@ -100,7 +99,7 @@ class BasePage extends StatelessWidget {
               Icons.star_border,
             ),
             title: 'トップ',
-            activeColorPrimary: Color.fromARGB(124, 252, 0, 0),
+            activeColorPrimary: const Color.fromARGB(124, 252, 0, 0),
             inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
           PersistentBottomNavBarItem(
@@ -109,7 +108,7 @@ class BasePage extends StatelessWidget {
                 // text snippet, article, description, restaurant
                 FontAwesomeIcons.mapLocationDot),
             title: 'マップ',
-            activeColorPrimary: Color.fromARGB(124, 252, 0, 0),
+            activeColorPrimary: const Color.fromARGB(124, 252, 0, 0),
             inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
           PersistentBottomNavBarItem(
@@ -121,7 +120,7 @@ class BasePage extends StatelessWidget {
               Icons.info,
             ),
             title: '情報',
-            activeColorPrimary: Color.fromARGB(124, 252, 0, 0),
+            activeColorPrimary: const Color.fromARGB(124, 252, 0, 0),
             inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
         ],

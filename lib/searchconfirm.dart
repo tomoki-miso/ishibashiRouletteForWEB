@@ -15,9 +15,9 @@ class SearchConfirmPage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(size.height * 0.08),
         child: AppBar(
-          iconTheme: IconThemeData(color: Colors.greenAccent),
+          iconTheme: const IconThemeData(color: Colors.greenAccent),
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20)),
@@ -36,12 +36,12 @@ class SearchConfirmPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => DaySearchPage(),
+                      builder: (context) => const DaySearchPage(),
                     ),
                   );
                 },
                 child: RichText(
-                  text: TextSpan(
+                  text: const TextSpan(
                     children: [
                       WidgetSpan(
                         child: FaIcon(
@@ -66,12 +66,12 @@ class SearchConfirmPage extends StatelessWidget {
                       color: Color.fromARGB(255, 107, 190, 253),
                       style: BorderStyle.solid),
                   backgroundColor: const Color(0xFFC5E4FC),
-                  foregroundColor: Color.fromARGB(255, 42, 35, 35),
+                  foregroundColor: const Color.fromARGB(255, 42, 35, 35),
                   shape: const StadiumBorder(),
                 ),
               ),
             ),
-            Padding(padding: EdgeInsets.all(8)),
+            const Padding(padding: EdgeInsets.all(8)),
             Container(
               width: size.width * 0.9,
               height: size.height * 0.1,
@@ -79,12 +79,12 @@ class SearchConfirmPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => KeywordSearchPage(),
+                      builder: (context) => const KeywordSearchPage(),
                     ),
                   );
                 },
                 child: RichText(
-                  text: TextSpan(
+                  text: const TextSpan(
                     children: [
                       WidgetSpan(
                         child: Icon(
@@ -110,12 +110,12 @@ class SearchConfirmPage extends StatelessWidget {
                       color: Color.fromARGB(255, 107, 190, 253),
                       style: BorderStyle.solid),
                   backgroundColor: const Color(0xFFC5E4FC),
-                  foregroundColor: Color.fromARGB(255, 42, 35, 35),
+                  foregroundColor: const Color.fromARGB(255, 42, 35, 35),
                   shape: const StadiumBorder(),
                 ),
               ),
             ),
-            Padding(padding: EdgeInsets.all(8)),
+            const Padding(padding: EdgeInsets.all(8)),
             /* Container(
               width: size.width * 0.9,
               height: size.height * 0.1,

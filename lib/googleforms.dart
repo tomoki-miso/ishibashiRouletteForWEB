@@ -34,7 +34,7 @@ class _FormPageState extends State<FormPage> {
     return Scaffold(
       appBar: AppBar(
          backgroundColor: Colors.white,
-         shape: RoundedRectangleBorder(
+         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20)),

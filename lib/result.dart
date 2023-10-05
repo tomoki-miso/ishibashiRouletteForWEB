@@ -7,13 +7,13 @@ class ResultPage extends StatelessWidget {
   final List<String> selectedDays; 
   final List<String> selectedTags;
 
-  ResultPage(this.querySnapshot, this.selectedDays, this.selectedTags);
+  const ResultPage(this.querySnapshot, this.selectedDays, this.selectedTags, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search Result'),
+        title: const Text('Search Result'),
       ),
       body: Container(
         color: Colors.greenAccent,
@@ -30,7 +30,7 @@ class ResultPage extends StatelessWidget {
                 child: ListTile(
                   title: Text('$name'),
                   trailing: IconButton(
-                    icon: Icon(Icons.edit),
+                    icon: const Icon(Icons.edit),
                     onPressed: () {
                       navigateToStorePage(context, document.id);
                     },
@@ -38,9 +38,7 @@ class ResultPage extends StatelessWidget {
                 ),
               );
             } else {
-              return Container(
-                child: Text("404 Not Found!!",style: TextStyle(color: Colors.white),),
-              ); // 表示されない場合は空のコンテナを返す
+              return const Text("404 Not Found!!",style: TextStyle(color: Colors.white),); // 表示されない場合は空のコンテナを返す
             }
           },
         ),

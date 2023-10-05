@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:english_words/english_words.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'random.dart';
-import 'package:ishibashi/random.dart';
 import 'map.dart';
 import 'search.dart';
 
@@ -18,16 +15,13 @@ class TopPage extends StatefulWidget {
 class _TopPageState extends State<TopPage> {
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
-    final scrollController = ScrollController(
-        initialScrollOffset:
-            2 * (MediaQuery.of(context).size.width * 0.8 + -10));
+    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(_screenSize.height * 0.08),
+        preferredSize: Size.fromHeight(screenSize.height * 0.08),
         child: AppBar(
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20)),
@@ -37,17 +31,17 @@ class _TopPageState extends State<TopPage> {
       body: Center(
         child: Container(
           alignment: Alignment.center,
-          padding: EdgeInsets.only(top: 100),
+          padding: const EdgeInsets.only(top: 100),
           child: Column(
             children: [
               Container(
                 alignment: Alignment.center,
-                height: _screenSize.height * 0.12,
-                width: _screenSize.width * 0.6,
+                height: screenSize.height * 0.12,
+                width: screenSize.width * 0.6,
                 color: Colors.amber,
-                child: Text("ロゴ配置"),
+                child: const Text("ロゴ配置"),
               ),
-              Padding(padding: EdgeInsets.all(6)),
+              const Padding(padding: EdgeInsets.all(6)),
               /*   Container(
                 height: _screenSize.height * 0.22,
                 child: Scrollbar(
@@ -77,22 +71,21 @@ class _TopPageState extends State<TopPage> {
                   
                 ),
               ), */
-              Padding(padding: EdgeInsets.all(10)),
+              const Padding(padding: EdgeInsets.all(10)),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
+                        borderRadius: BorderRadius.circular(30)), backgroundColor: Colors.greenAccent,
                     fixedSize:
-                        Size(_screenSize.width * 0.9, _screenSize.height * 0.1),
-                    primary: Colors.greenAccent),
+                        Size(screenSize.width * 0.9, screenSize.height * 0.1)),
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => RandomPage()),
+                    MaterialPageRoute(builder: (context) => const RandomPage()),
                   );
                 },
                 child: RichText(
-                  text: TextSpan(
+                  text: const TextSpan(
                     style: TextStyle(
                         color: Color.fromARGB(255, 62, 61, 61), fontSize: 16),
                     children: [
@@ -111,13 +104,13 @@ class _TopPageState extends State<TopPage> {
                   ),
                 ),
               ),
-              Padding(padding: EdgeInsets.all(6)),
+              const Padding(padding: EdgeInsets.all(6)),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
                     fixedSize:
-                        Size(_screenSize.width * 0.9, _screenSize.height * 0.1),
+                        Size(screenSize.width * 0.9, screenSize.height * 0.1),
                     primary: Colors.greenAccent),
                 onPressed: () {
                   Navigator.push(
@@ -126,7 +119,7 @@ class _TopPageState extends State<TopPage> {
                   );
                 },
                 child: RichText(
-                  text: TextSpan(
+                  text: const TextSpan(
                     style: TextStyle(
                         color: Color.fromARGB(255, 62, 61, 61), fontSize: 16),
                     children: [
@@ -145,22 +138,22 @@ class _TopPageState extends State<TopPage> {
                   ),
                 ),
               ),
-              Padding(padding: EdgeInsets.all(6)),
+              const Padding(padding: EdgeInsets.all(6)),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
                     fixedSize:
-                        Size(_screenSize.width * 0.9, _screenSize.height * 0.1),
+                        Size(screenSize.width * 0.9, screenSize.height * 0.1),
                     primary: Colors.greenAccent),
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SearchPage()),
+                    MaterialPageRoute(builder: (context) => const SearchPage()),
                   );
                 },
                 child: RichText(
-                  text: TextSpan(
+                  text: const TextSpan(
                     style: TextStyle(
                         color: Color.fromARGB(255, 62, 61, 61), fontSize: 16),
                     children: [

@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'stores.dart';
-import 'search.dart';
 import 'searchconfirm.dart';
 
 class ListPage extends StatefulWidget {
@@ -34,16 +33,16 @@ class _ListPageState extends State<ListPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SearchConfirmPage()),
+                    MaterialPageRoute(builder: (context) => const SearchConfirmPage()),
                   );
                 },
-                icon: FaIcon(
+                icon: const FaIcon(
                   FontAwesomeIcons.magnifyingGlass,
                   color: Color.fromARGB(255, 62, 61, 61),
                 ))
           ],
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(20),
               bottomRight: Radius.circular(20),
@@ -59,7 +58,7 @@ class _ListPageState extends State<ListPage> {
             builder: (BuildContext context,
                 AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
               return ListView(
                 children: snapshot.data!.docs
@@ -67,13 +66,13 @@ class _ListPageState extends State<ListPage> {
                   return Card(
                     child: ListTile(
                       contentPadding:
-                          EdgeInsets.only(left: 16.0), // 左右の余白を設定
+                          const EdgeInsets.only(left: 16.0), // 左右の余白を設定
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(document.data()!['name']),
                           IconButton(
-                            icon: Icon(Icons.chevron_right),
+                            icon: const Icon(Icons.chevron_right),
                             onPressed: () {
                               navigateToStorePage(document.id);
                             },

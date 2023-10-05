@@ -26,7 +26,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
   ];
 
   // フレンドを検索する関数
-  void _search() async {
+  void _searchDays() async {
     if (selectedDays.isNotEmpty) {
       final querySnapshot = await _firestore
           .collection('stores')
@@ -82,7 +82,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                             } else {
                               selectedDays.add(day);
                             }
-                            _search();
+                            _searchDays();
                             print('選択中の曜日: $selectedDays');
                           });
                         },

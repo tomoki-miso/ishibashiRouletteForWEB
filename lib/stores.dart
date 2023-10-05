@@ -105,9 +105,9 @@ class _StorePageState extends State<StorePage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(_screenSize.height * 0.08),
         child: AppBar(
-          iconTheme: IconThemeData(color: Colors.greenAccent),
+          iconTheme: const IconThemeData(color: Colors.greenAccent),
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(20),
               bottomRight: Radius.circular(20),
@@ -144,7 +144,7 @@ class _StorePageState extends State<StorePage> {
                             children: [
                               Text(
                                 storeName,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black54,
@@ -163,11 +163,11 @@ class _StorePageState extends State<StorePage> {
                                             BorderRadius.circular(4.0),
                                         color: Colors.deepOrangeAccent,
                                       ),
-                                      margin: EdgeInsets.all(2.0),
+                                      margin: const EdgeInsets.all(2.0),
                                       child: Center(
                                         child: Text(
                                           formattedTag,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 12,
                                             color: Colors.white,
                                           ),
@@ -179,9 +179,9 @@ class _StorePageState extends State<StorePage> {
                           ),
                         ],
                       ),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               Container(
-                                padding: EdgeInsets.symmetric(vertical: 10),
+                                padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: storePhotoUrl.isNotEmpty
                                     ? ClipRRect(
                                         borderRadius: BorderRadius.circular(5),
@@ -193,9 +193,9 @@ class _StorePageState extends State<StorePage> {
                                       )
                                     : Container(),
                               ),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               Container(
-                                padding: EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 child: Text(
                                   storeDetail,
                                 ),
@@ -204,7 +204,7 @@ class _StorePageState extends State<StorePage> {
                                 style: ElevatedButton.styleFrom(
                                   fixedSize: Size(_screenSize.width * 0.8,
                                       _screenSize.height * 0.01),
-                                  primary: Color.fromARGB(124, 252, 0, 0),
+                                  primary: const Color.fromARGB(124, 252, 0, 0),
                                 ),
                                 onPressed: () async {
                                   if (await canLaunch(storeWeb)) {
@@ -214,7 +214,7 @@ class _StorePageState extends State<StorePage> {
                                   }
                                 },
                                 child: RichText(
-                                  text: TextSpan(children: [
+                                  text: const TextSpan(children: [
                                     WidgetSpan(
                                       child: Icon(
                                         Icons.public,
@@ -228,7 +228,7 @@ class _StorePageState extends State<StorePage> {
                                 style: ElevatedButton.styleFrom(
                                   fixedSize: Size(_screenSize.width * 0.8,
                                       _screenSize.height * 0.01),
-                                  primary: Color.fromARGB(255, 254, 170, 1),
+                                  primary: const Color.fromARGB(255, 254, 170, 1),
                                 ),
                                 onPressed: () async {
                                   if (await canLaunch(storeTabelog)) {
@@ -238,7 +238,7 @@ class _StorePageState extends State<StorePage> {
                                   }
                                 },
                                 child: RichText(
-                                  text: TextSpan(children: [
+                                  text: const TextSpan(children: [
                                     WidgetSpan(
                                       child: Icon(
                                         Icons.public,
@@ -262,7 +262,7 @@ class _StorePageState extends State<StorePage> {
                                   }
                                 },
                                 child: RichText(
-                                  text: TextSpan(children: [
+                                  text: const TextSpan(children: [
                                     WidgetSpan(
                                       child: FaIcon(
                                         FontAwesomeIcons.twitter,
@@ -276,7 +276,7 @@ class _StorePageState extends State<StorePage> {
                                 style: ElevatedButton.styleFrom(
                                   fixedSize: Size(_screenSize.width * 0.8,
                                       _screenSize.height * 0.01),
-                                  primary: Color.fromARGB(255, 99, 70, 185),
+                                  primary: const Color.fromARGB(255, 99, 70, 185),
                                 ),
                                 onPressed: () async {
                                   if (await canLaunch(storeInsta)) {
@@ -286,7 +286,7 @@ class _StorePageState extends State<StorePage> {
                                   }
                                 },
                                 child: RichText(
-                                  text: TextSpan(children: [
+                                  text: const TextSpan(children: [
                                     WidgetSpan(
                                       child: FaIcon(
                                         FontAwesomeIcons.instagram,
@@ -329,7 +329,7 @@ class _LikeButtonState extends State<LikeButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: _isLiked ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
+      icon: _isLiked ? const Icon(Icons.favorite) : const Icon(Icons.favorite_border),
       onPressed: _toggleLike,
     );
   }

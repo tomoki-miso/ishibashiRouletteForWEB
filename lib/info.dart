@@ -37,13 +37,13 @@ class _InfoPageState extends State<InfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
+    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(_screenSize.height * 0.08),
+        preferredSize: Size.fromHeight(screenSize.height * 0.08),
         child: AppBar(
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(20),
               bottomRight: Radius.circular(20),
@@ -55,27 +55,27 @@ class _InfoPageState extends State<InfoPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(padding: EdgeInsets.all(_screenSize.height * 0.02)),
-            Text("このアプリについて"),
+            Padding(padding: EdgeInsets.all(screenSize.height * 0.02)),
+            const Text("このアプリについて"),
             Container(
-              width: _screenSize.width * 0.9,
-              height: _screenSize.height * 0.2,
+              width: screenSize.width * 0.9,
+              height: screenSize.height * 0.2,
               decoration: BoxDecoration(
                 color: Colors.greenAccent,
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            Padding(padding: EdgeInsets.all(_screenSize.height * 0.01)),
-            Text("お問い合わせ"),
+            Padding(padding: EdgeInsets.all(screenSize.height * 0.01)),
+            const Text("お問い合わせ"),
             Container(
               child: Column(
                 children: [
                   Padding(
-                      padding: EdgeInsets.only(top: _screenSize.height * 0.03)),
+                      padding: EdgeInsets.only(top: screenSize.height * 0.03)),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         fixedSize: Size(
-                            _screenSize.width * 0.8, _screenSize.height * 0.06),
+                            screenSize.width * 0.8, screenSize.height * 0.06),
                         primary: Colors.black),
                     onPressed: () async {
                       final url = 'https://twitter.com/pochipochitudoi';
@@ -85,7 +85,7 @@ class _InfoPageState extends State<InfoPage> {
                         throw 'Could not launch $url';
                       }
                     },
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         FaIcon(FontAwesomeIcons.twitter),
@@ -97,8 +97,8 @@ class _InfoPageState extends State<InfoPage> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         fixedSize: Size(
-                            _screenSize.width * 0.8, _screenSize.height * 0.06),
-                        primary: Color.fromARGB(124, 252, 0, 0)),
+                            screenSize.width * 0.8, screenSize.height * 0.06),
+                        primary: const Color.fromARGB(124, 252, 0, 0)),
                     onPressed: connectionStatus
                         ? () async {
                             final String emailAddress =
@@ -114,7 +114,7 @@ class _InfoPageState extends State<InfoPage> {
                             }
                           }
                         : null, // Disable the button if no internet connection
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         FaIcon(FontAwesomeIcons.envelope),
@@ -125,18 +125,18 @@ class _InfoPageState extends State<InfoPage> {
                   ),
                 ],
               ),
-              width: _screenSize.width * 0.9,
-              height: _screenSize.height * 0.2,
+              width: screenSize.width * 0.9,
+              height: screenSize.height * 0.2,
               decoration: BoxDecoration(
                 color: Colors.greenAccent,
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            Padding(padding: EdgeInsets.all(_screenSize.height * 0.01)),
-            Text("ご意見"),
+            Padding(padding: EdgeInsets.all(screenSize.height * 0.01)),
+            const Text("ご意見"),
             Container(
-              width: _screenSize.width * 0.9,
-              height: _screenSize.height * 0.15,
+              width: screenSize.width * 0.9,
+              height: screenSize.height * 0.15,
               decoration: BoxDecoration(
                 color: Colors.greenAccent,
                 borderRadius: BorderRadius.circular(10),
@@ -144,19 +144,19 @@ class _InfoPageState extends State<InfoPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(padding: EdgeInsets.all(_screenSize.height * 0.02)),
+                  Padding(padding: EdgeInsets.all(screenSize.height * 0.02)),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          fixedSize: Size(_screenSize.width * 0.8,
-                              _screenSize.height * 0.06),
-                          primary:  Color.fromARGB(124, 252, 0, 0)),
+                          fixedSize: Size(screenSize.width * 0.8,
+                              screenSize.height * 0.06),
+                          primary:  const Color.fromARGB(124, 252, 0, 0)),
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => FormPage()),
+                          MaterialPageRoute(builder: (context) => const FormPage()),
                         );
                       },
-                      child: Text("お問い合わせフォーム")),
+                      child: const Text("お問い合わせフォーム")),
                 ],
               ),
             )

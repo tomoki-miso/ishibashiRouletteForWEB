@@ -60,7 +60,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   final TextEditingController _nameController = TextEditingController();
-  late QuerySnapshot _querySnapshot;
+
 
 Future<void> _search() async {
   final String name = _nameController.text;
@@ -94,15 +94,15 @@ Future<void> _search() async {
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
+    var screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(_screenSize.height * 0.08),
+        preferredSize: Size.fromHeight(screenSize.height * 0.08),
         child: AppBar(
-          iconTheme: IconThemeData(color: Colors.greenAccent),
+          iconTheme: const IconThemeData(color: Colors.greenAccent),
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20)),
@@ -113,8 +113,8 @@ Future<void> _search() async {
         child: Center(
           child: Column(children: <Widget>[
             Container(
-              width: _screenSize.width * 0.9,
-              margin: EdgeInsets.only(top: 20, bottom: 50),
+              width: screenSize.width * 0.9,
+              margin: const EdgeInsets.only(top: 20, bottom: 50),
               decoration: BoxDecoration(
                 color: Colors.greenAccent,
                 border: Border.all(
@@ -125,12 +125,12 @@ Future<void> _search() async {
               child: Column(
                 children: [
                   Container(
-                    width: _screenSize.width * 0.89,
+                    width: screenSize.width * 0.89,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       color: Colors.white,
                     ),
-                    margin: EdgeInsets.symmetric(vertical: 13.0),
+                    margin: const EdgeInsets.symmetric(vertical: 13.0),
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TextField(
@@ -138,7 +138,7 @@ Future<void> _search() async {
                         decoration: InputDecoration(
                           labelText: 'Search',
                           hintText: 'Enter search keyword...',
-                          prefixIcon: Icon(Icons.search),
+                          prefixIcon: const Icon(Icons.search),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
@@ -152,19 +152,19 @@ Future<void> _search() async {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "ジャンル",
                       ),
                       Container(
-                        width: _screenSize.width * 0.85,
-                        height: _screenSize.height * 0.4,
+                        width: screenSize.width * 0.85,
+                        height: screenSize.height * 0.4,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
                           color: Colors.white,
                         ),
-                        margin: EdgeInsets.symmetric(vertical: 10.0),
+                        margin: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Container(
-                          padding: EdgeInsets.all(8), // タグのパディングを小さく調整
+                          padding: const EdgeInsets.all(8), // タグのパディングを小さく調整
                           child: Column(
                             children: [
                               Wrap(
@@ -214,7 +214,7 @@ Future<void> _search() async {
                               Expanded(
                                 child: Center(
                                   child: Container(
-                                    margin: EdgeInsets.only(top: 10),
+                                    margin: const EdgeInsets.only(top: 10),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -244,19 +244,19 @@ Future<void> _search() async {
                           ),
                         ),
                       ),
-                      Text("営業日"),
+                      const Text("営業日"),
                       Container(
                         //営業曜日
-                        width: _screenSize.width * 0.85,
-                        height: _screenSize.height * 0.1, // 高さ
+                        width: screenSize.width * 0.85,
+                        height: screenSize.height * 0.1, // 高さ
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
                           color: Colors.white,
                         ),
-                        margin: EdgeInsets.symmetric(vertical: 10.0),
+                        margin: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Center(
                           child: Container(
-                            padding: EdgeInsets.all(3),
+                            padding: const EdgeInsets.all(3),
                             child: Wrap(
                               runSpacing: 8,
                               spacing: 8,
@@ -301,24 +301,24 @@ Future<void> _search() async {
                           ),
                         ),
                       ),
-                      Text("営業時間"),
+                      const Text("営業時間"),
                       Container(
-                        width: _screenSize.width * 0.85,
+                        width: screenSize.width * 0.85,
                         height: 100, // 高さ
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
                           color: Colors.white,
                         ),
-                        margin: EdgeInsets.symmetric(vertical: 10.0),
+                        margin: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Column(
                           children: [
-                            Padding(
+                            const Padding(
                                 padding: EdgeInsets.only(
                                     top: 3)), //できればpadding以外で調節したい　野村
 
                             Text(
                               "${dateTime.hour}時${dateTime.minute}分",
-                              style: TextStyle(fontSize: 25),
+                              style: const TextStyle(fontSize: 25),
                             ),
                             ElevatedButton(
                               onPressed: () {
