@@ -339,6 +339,7 @@ Future<void> _search() async {
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
+                      
                     ],
                   ),
                 ],

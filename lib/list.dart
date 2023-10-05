@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'stores.dart';
 import 'search.dart';
+import 'searchconfirm.dart';
 
 class ListPage extends StatefulWidget {
   const ListPage({Key? key}) : super(key: key);
@@ -33,7 +34,7 @@ class _ListPageState extends State<ListPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SearchPage()),
+                    MaterialPageRoute(builder: (context) => SearchConfirmPage()),
                   );
                 },
                 icon: FaIcon(
