@@ -1,25 +1,95 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'random.dart';
 
 
-//class StorePage extends StatelessWidget {final String documentId; // FirestoreのドキュメントIDを保持する変数StorePage({required this.documentId, Key? key}) : super(key: key);
-
-import 'random.dart'; // インポートパスを確認してください
 
 class StorePage extends StatefulWidget {
-  final BuildContext context; // コンテキストを受け取る
   final String documentId;
-  const StorePage({Key? key, required this.context,required this.documentId}) : super(key: key);
-
+  const StorePage({Key? key, required this.documentId, }) : super(key: key);
 
   @override
   _StorePageState createState() => _StorePageState();
 }
 
 class _StorePageState extends State<StorePage> {
+  List<String> formattedTags = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchStoreData(widget.documentId);
+  }
+
+  Future<void> _fetchStoreData(String documentId) async {
+    try {
+      final storeSnapshot = await FirebaseFirestore.instance
+          .collection('stores')
+          .doc(documentId)
+          .get();
+
+      if (storeSnapshot.exists) {
+        final storeData = storeSnapshot.data();
+        if (storeData != null) {
+          final storeName = storeData['name'] ?? '';
+          final storeDetail = storeData['detail'] ?? '';
+          final storeWeb = storeData['web'] ?? '';
+          final storeTwitter = storeData['twitter'] ?? '';
+          final storeInsta = storeData['insta'] ?? '';
+          final storeTabelog = storeData['tabelog'] ?? '';
+          final storePhotoUrl = storeData['photoUrl'] ?? '';
+
+          Provider.of<StoreDataProvider>(context, listen: false)
+              .setStoreName(storeName);
+          Provider.of<StoreDataProvider>(context, listen: false)
+              .setStoreDetail(storeDetail);
+          Provider.of<StoreDataProvider>(context, listen: false)
+              .setStoreWeb(storeWeb);
+          Provider.of<StoreDataProvider>(context, listen: false)
+              .setStoreTwitter(storeTwitter);
+          Provider.of<StoreDataProvider>(context, listen: false)
+              .setStoreInsta(storeInsta);
+          Provider.of<StoreDataProvider>(context, listen: false)
+              .setStoreTabelog(storeTabelog);
+          Provider.of<StoreDataProvider>(context, listen: false)
+              .setStorePhotoUrl(storePhotoUrl);
+
+          final tags = await _fetchTags(FirebaseFirestore.instance
+              .collection('stores')
+              .doc(widget.documentId));
+          Provider.of<StoreDataProvider>(context, listen: false)
+              .setFormattedTags(tags);
+        }
+      }
+    } catch (error) {
+      print("Error fetching store data in storespage: $error");
+    }
+  }
+
+  Future<List<String>> _fetchTags(DocumentReference storeReference) async {
+  final storeSnapshot = await storeReference.get();
+  final storeData = storeSnapshot.data() as Map<String, dynamic>?;
+
+  // タグ情報を取得
+  if (storeData != null && storeData.containsKey("tags")) {
+    final tags = storeData["tags"] as List<dynamic>;
+    final formattedTags = tags.map((tag) => tag.toString()).toList();
+    print("Fetched tags in storespage: $formattedTags");
+
+    
+
+    return formattedTags;
+  } else {
+    print("Tags field not found or empty.");
+    return [];
+  }
+}
+
+
   @override
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
@@ -68,58 +138,60 @@ class _StorePageState extends State<StorePage> {
                           ),
                           margin: const EdgeInsets.only(top: 20),
                           padding: const EdgeInsets.only(
-
                               top: 20, left: 10, right: 10, bottom: 20),
                           width: _screenSize.width * 0.9,
                           child: Column(
                             children: [
                               Text(
-                                storeName, // 正しいプロバイダーから取得
+                                storeName,
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black54,
                                 ),
-
                               ),
                               Row(
-                                children: [
-                                  LikeButton(),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4.0),
-                                      color: Colors.deepOrangeAccent,
-                                    ),
-                                    margin: EdgeInsets.all(2.0),
-                                    width: _screenSize.width * 0.15,
-                                    child: Center(
-                                      child: Text(
-                                        '#喫茶店',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.white,
+                        children: [
+                          LikeButton(),
+                          Wrap(
+                            spacing: 8,
+                            children: formattedTags.isNotEmpty
+                                ? formattedTags.map((formattedTag) {
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
+                                        color: Colors.deepOrangeAccent,
+                                      ),
+                                      margin: EdgeInsets.all(2.0),
+                                      child: Center(
+                                        child: Text(
+                                          formattedTag,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                    );
+                                  }).toList()
+                                : [],
+                          ),
+                        ],
+                      ),
                               SizedBox(height: 16),
-
                               Container(
                                 padding: EdgeInsets.symmetric(vertical: 10),
-                                child: storePhotoUrl
-                                        .isNotEmpty // storePhotoUrl が空でない場合の条件
+                                child: storePhotoUrl.isNotEmpty
                                     ? ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(5), // 角の丸みを指定
+                                        borderRadius: BorderRadius.circular(5),
                                         child: Image.network(
-                                          storePhotoUrl, // 画像のURL
-                                          width: _screenSize.width * 0.8, // 幅
-                                          fit: BoxFit.cover, // 画像の表示方法を指定
+                                          storePhotoUrl,
+                                          width: _screenSize.width * 0.8,
+                                          fit: BoxFit.cover,
                                         ),
                                       )
-                                    : Container(), // storePhotoUrl が空の場合は何も表示しない
+                                    : Container(),
                               ),
                               SizedBox(height: 16),
                               Container(
@@ -223,7 +295,6 @@ class _StorePageState extends State<StorePage> {
                                     TextSpan(text: "Instagram"),
                                   ]),
                                 ),
-
                               ),
                             ],
                           ),
@@ -260,44 +331,6 @@ class _LikeButtonState extends State<LikeButton> {
     return IconButton(
       icon: _isLiked ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
       onPressed: _toggleLike,
-    );
-  }
-}
-
-class LinkButton extends StatelessWidget {
-  final IconData icon;
-  final String text;
-  final String url;
-
-  const LinkButton({
-    required this.icon,
-    required this.text,
-    required this.url,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () async {
-        if (await canLaunch(url)) {
-          await launch(url);
-        } else {
-          throw 'Could not launch $url';
-        }
-      },
-      child: RichText(
-        text: TextSpan(
-          children: [
-            WidgetSpan(
-              child: Icon(icon),
-            ),
-            TextSpan(
-              text: " $text",
-              style: TextStyle(color: Colors.blue),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

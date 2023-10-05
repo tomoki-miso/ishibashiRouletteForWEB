@@ -51,7 +51,7 @@ class ResultPage extends StatelessWidget {
   void navigateToStorePage(BuildContext context, String documentId) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => StorePage(documentId: documentId, context: context,)),
+      MaterialPageRoute(builder: (context) => StorePage(documentId: documentId)),
     );
   }
 }

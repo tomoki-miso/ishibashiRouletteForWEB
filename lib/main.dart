@@ -21,12 +21,17 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => StoreDataProvider(),
-      child: MyApp(),
-    ),
-  );
+
+ runApp(
+  MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => StoreDataProvider()),
+      // 他のプロバイダーを追加できます
+    ],
+    child: MyApp(),
+  ),
+);
+
 }
 
 class MyApp extends StatelessWidget {

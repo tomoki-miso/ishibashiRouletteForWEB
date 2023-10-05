@@ -1,18 +1,19 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 
 import 'stores.dart';
 
 class StoreDataProvider with ChangeNotifier {
   String storeName = '';
   String storeDetail = '';
-  List<String> formattedTags = [];
-  String storePhotoUrl = '';
   String storeWeb = '';
   String storeTwitter = '';
   String storeInsta = '';
   String storeTabelog = '';
+  String storePhotoUrl = '';
+  List<String> formattedTags = [];
 
   void setStoreName(String name) {
     storeName = name;
@@ -24,8 +25,23 @@ class StoreDataProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setFormattedTags(List<String> tags) {
-    formattedTags = tags; // タグを設定
+  void setStoreWeb(String web) {
+    storeWeb = web;
+    notifyListeners();
+  }
+
+  void setStoreTwitter(String twitter) {
+    storeTwitter = twitter;
+    notifyListeners();
+  }
+
+  void setStoreInsta(String insta) {
+    storeInsta = insta;
+    notifyListeners();
+  }
+
+  void setStoreTabelog(String tabelog) {
+    storeTabelog = tabelog;
     notifyListeners();
   }
 
@@ -33,25 +49,10 @@ class StoreDataProvider with ChangeNotifier {
     storePhotoUrl = photoUrl;
     notifyListeners();
   }
-}
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => StoreDataProvider(),
-      child: MyApp(),
-    ),
-  );
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My App',
-      home: RandomPage(),
-    );
+  void setFormattedTags(List<String> tags) {
+    formattedTags = tags.map((tags) => tags).toList();
+    notifyListeners();
   }
 }
 
@@ -63,6 +64,16 @@ class RandomPage extends StatefulWidget {
 }
 
 class _RandomPageState extends State<RandomPage> {
+  String storeName = '';
+  String storeDetail = '';
+  String storeWeb = '';
+  String storeTwitter = '';
+  String storeInsta = '';
+  String storeTabelog = '';
+  String storePhotoUrl = '';
+  String documentId = '';
+  List<String> formattedTags = [];
+
   @override
   void initState() {
     super.initState();
@@ -81,39 +92,62 @@ class _RandomPageState extends State<RandomPage> {
     final storeId = storeIds.first;
 
     final storeData = storeSnapshot.docs[storeId - 1].data();
-    final storeNameData = storeData?['name'] ?? '';
-    final storeDetailData = storeData?['detail'] ?? '';
-    final storePhotoUrlData = storeData?['photoUrl'] ?? '';
+    final storeNameData = storeData['name'] ?? '';
+    final storeDetailData = storeData['detail'] ?? '';
+    final storeWebData = storeData['web'] ?? '';
+    final storeTwitterData = storeData['twitter'] ?? '';
+    final storeInstaData = storeData['insta'] ?? '';
+    final storeTabelogData = storeData['tabelog'] ?? '';
+    final storePhotoUrlData = storeData['photo_url'] ?? '';
 
-    final tags = await _fetchTags(storeSnapshot.docs[storeId - 1].reference);
+    print("Fetched storeNameData: $storeNameData");
 
     Provider.of<StoreDataProvider>(context, listen: false)
         .setStoreName(storeNameData);
     Provider.of<StoreDataProvider>(context, listen: false)
         .setStoreDetail(storeDetailData);
-    Provider.of<StoreDataProvider>(context, listen: false).setFormattedTags(tags);
+    Provider.of<StoreDataProvider>(context, listen: false)
+        .setStoreWeb(storeWebData);
+    Provider.of<StoreDataProvider>(context, listen: false)
+        .setStoreTwitter(storeTwitterData ?? ''); // null の場合は空文字列をセット
+    Provider.of<StoreDataProvider>(context, listen: false)
+        .setStoreInsta(storeInstaData);
+    Provider.of<StoreDataProvider>(context, listen: false)
+        .setStoreTabelog(storeTabelogData ?? '');
     Provider.of<StoreDataProvider>(context, listen: false)
         .setStorePhotoUrl(storePhotoUrlData);
 
+    // タグ情報を取得してformattedTagsに設定
+    final tags = await _fetchTags(storeSnapshot.docs[storeId - 1].reference);
+    Provider.of<StoreDataProvider>(context, listen: false)
+        .setFormattedTags(tags);
+
     setState(() {
-      // ステートの更新は必要ないので削除
+      storeName = storeNameData;
+      storeDetail = storeDetailData;
+      storeWeb = storeWebData;
+      storeTwitter = storeTwitterData;
+      storeInsta = storeInstaData;
+      storeTabelog = storeTabelogData;
+      storePhotoUrl = storePhotoUrlData;
+      formattedTags = tags;
     });
   }
 
   Future<List<String>> _fetchTags(DocumentReference storeReference) async {
-    final QuerySnapshot querySnapshot =
-        await storeReference.collection('tags').get();
+    final storeSnapshot = await storeReference.get();
+    final storeData = storeSnapshot.data() as Map<String, dynamic>?;
 
-    final List<String> tags = [];
-
-    querySnapshot.docs.forEach((doc) {
-      final data = doc.data() as Map<String, dynamic>?;
-      if (data != null && data.containsKey("tag")) {
-        tags.add(data["tag"].toString());
-      }
-    });
-
-    return tags;
+    // タグ情報を取得
+    if (storeData != null && storeData.containsKey("tags")) {
+      final tags = storeData["tags"] as List<dynamic>;
+      final formattedTags = tags.map((tag) => tag.toString()).toList();
+      print("Fetched tags: $formattedTags");
+      return formattedTags;
+    } else {
+      print("Tags field not found or empty.");
+      return [];
+    }
   }
 
   @override
@@ -141,101 +175,96 @@ class _RandomPageState extends State<RandomPage> {
           child: Center(
             child: Column(
               children: [
-                Consumer<StoreDataProvider>(
-                  builder: (context, provider, _) {
-                    final storeName = provider.storeName;
-                    final formattedTags = provider.formattedTags;
-
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.0),
-                        color: Colors.white,
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    color: Colors.white,
+                  ),
+                  margin: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.all(6),
+                  width: _screenSize.width * 0.9,
+                  height: _screenSize.height * 0.6,
+                  child: Column(
+                    children: [
+                      Text(
+                        storeName,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                        ),
                       ),
-                      margin: const EdgeInsets.only(top: 20),
-                      padding: const EdgeInsets.all(6),
-                      width: _screenSize.width * 0.9,
-                      height: _screenSize.height * 0.6,
-                      child: Column(
+                      Row(
                         children: [
-                          Text(
-                            storeName,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black54,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              LikeButton(),
-                              Wrap(
-                                spacing: 8,
-                                children: formattedTags != null && formattedTags.isNotEmpty
-                                    ? formattedTags.map((formattedTag) {
-                                        return Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(4.0),
-                                            color: Colors.deepOrangeAccent,
+                          LikeButton(),
+                          Wrap(
+                            spacing: 8,
+                            children: formattedTags.isNotEmpty
+                                ? formattedTags.map((formattedTag) {
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
+                                        color: Colors.deepOrangeAccent,
+                                      ),
+                                      margin: EdgeInsets.all(2.0),
+                                      child: Center(
+                                        child: Text(
+                                          formattedTag,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white,
                                           ),
-                                          margin: EdgeInsets.all(2.0),
-                                          child: Center(
-                                            child: Text(
-                                              formattedTag,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }).toList()
-                                    : [],
-                              )
-                            ],
+                                        ),
+                                      ),
+                                    );
+                                  }).toList()
+                                : [],
                           ),
-                          Container(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            child: provider.storePhotoUrl.isNotEmpty
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(5),
-                                    child: Image.network(
-                                      provider.storePhotoUrl,
-                                      width: _screenSize.width * 0.8,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
-                                : Container(),
-                          ),
-                          SizedBox(height: 16),
-                          Container(
-                            padding: EdgeInsets.all(10),
-                            child: SingleChildScrollView(
-                              child: Text(
-                                provider.storeDetail,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(10),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => StorePage(
-                                      context: context,
-                                      documentId: '',
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Text("くわしくみる"),
-                            ),
-                          )
                         ],
                       ),
-                    );
-                  },
+                      Container(
+                        height: _screenSize.height * 0.3,
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: storePhotoUrl.isNotEmpty
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: Image.network(
+                                  storePhotoUrl,
+                                  width: _screenSize.width * 0.8,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : Container(),
+                      ),
+                      SizedBox(height: 16),
+                      /*   Container(
+                        padding: EdgeInsets.all(10),
+                        child: SingleChildScrollView(
+                          child: Text(
+                            storeDetail,
+                          ),
+                        ),
+                      ), */
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => StorePage(
+                      
+                                  documentId: documentId,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Text("くわしくみる"),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 Container(
                   padding: EdgeInsets.only(top: 20),
@@ -244,7 +273,8 @@ class _RandomPageState extends State<RandomPage> {
                     onPressed: _fetchData,
                     style: OutlinedButton.styleFrom(
                       backgroundColor: Colors.lightGreenAccent,
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 18),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
