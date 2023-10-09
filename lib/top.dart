@@ -3,7 +3,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'random.dart';
 import 'map.dart';
-import 'search.dart';
+import 'searchconfirm.dart';
+
 
 class TopPage extends StatefulWidget {
   const TopPage({Key? key}) : super(key: key);
@@ -149,7 +150,7 @@ class _TopPageState extends State<TopPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const SearchPage()),
+                    MaterialPageRoute(builder: (context) => const SearchConfirmPage()),
                   );
                 },
                 child: RichText(
@@ -165,7 +166,7 @@ class _TopPageState extends State<TopPage> {
                       ),
                       WidgetSpan(child: Padding(padding: EdgeInsets.all(4))),
                       TextSpan(
-                        text: 'こだわり検索',
+                        text: '検索',
                         style: TextStyle(color: Colors.black),
                       ),
                     ],

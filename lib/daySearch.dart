@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -51,7 +52,14 @@ class _DaySearchPageState extends State<DaySearchPage> {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFC5E4FC),
+        iconTheme: const IconThemeData(color: Colors.greenAccent),
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(20),
+          ),
+        ),
       ),
       body: Container(
         width: size.width,
@@ -112,7 +120,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                 ),
               ),
             ),
-      
+
             // 検索結果を表示
             Expanded(
               child: selectedDays.isEmpty &&
@@ -140,7 +148,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                             final storePhotoUrl =
                                 recordData['photo_url'] as String;
                             final detail = recordData['detail'] as String;
-      
+
                             return InkWell(
                               onTap: () {
                                 // ドキュメントIDを詳細画面に渡す
@@ -187,14 +195,15 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                                       .circular(
                                                                           5),
                                                               child:
-                                                                  Image.network(
-                                                                storePhotoUrl,
+                                                                  CachedNetworkImage(
+                                                                imageUrl:
+                                                                    storePhotoUrl,
                                                                 width:
                                                                     size.width *
                                                                         0.8,
-                                                                fit: BoxFit.cover,
-                                                              ),
-                                                            )
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ))
                                                           : Container(),
                                                     ),
                                                   ],
@@ -217,8 +226,8 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                       width: size.width * 0.38,
                                                       decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                20),
+                                                            BorderRadius
+                                                                .circular(20),
                                                         color: Color.fromARGB(
                                                             255, 197, 228, 252),
                                                       ),
@@ -235,16 +244,17 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                       width: size.width * 0.38,
                                                       decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                20),
+                                                            BorderRadius
+                                                                .circular(20),
                                                         color: Color.fromARGB(
                                                             255, 197, 228, 252),
                                                       ),
                                                       child: Padding(
-                                                        padding: EdgeInsets.only(
-                                                            top: 10,
-                                                            left: 8,
-                                                            right: 5),
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 10,
+                                                                left: 8,
+                                                                right: 5),
                                                         child: Text(
                                                           detail,
                                                           style: TextStyle(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'stores.dart';
 
@@ -228,32 +229,40 @@ class _RandomPageState extends State<RandomPage> {
                         child: storePhotoUrl.isNotEmpty
                             ? ClipRRect(
                                 borderRadius: BorderRadius.circular(5),
-                                child: Image.network(
-                                  storePhotoUrl,
+                                child: CachedNetworkImage(
+                                  imageUrl: storePhotoUrl,
                                   width: screenSize.width * 0.8,
                                   fit: BoxFit.cover,
-                                ),
-                              )
+                                ))
                             : Container(),
                       ),
-                      const SizedBox(height: 16),
-                      /*   Container(
-                        padding: EdgeInsets.all(10),
-                        child: SingleChildScrollView(
-                          child: Text(
-                            storeDetail,
-                          ),
+                    
+
+                        Container(
+                          height: screenSize.height*0.09,
+                          width: screenSize.width*0.9,
+                        child: Text(
+                          storeDetail,
+                           maxLines: 3,  
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      ), */
+                      ), 
                       Container(
-                        padding: const EdgeInsets.all(10),
                         child: ElevatedButton(
+                          style: OutlinedButton.styleFrom(
+                            backgroundColor: Colors.orangeAccent,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 2),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                           
+                          ),
                           onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => StorePage(
-                      
                                   documentId: documentId,
                                 ),
                               ),
@@ -272,8 +281,8 @@ class _RandomPageState extends State<RandomPage> {
                     onPressed: _fetchData,
                     style: OutlinedButton.styleFrom(
                       backgroundColor: Colors.lightGreenAccent,
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 18),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -314,7 +323,9 @@ class _LikeButtonState extends State<LikeButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: _isLiked ? const Icon(Icons.favorite) : const Icon(Icons.favorite_border),
+      icon: _isLiked
+          ? const Icon(Icons.favorite)
+          : const Icon(Icons.favorite_border),
       onPressed: _toggleLike,
     );
   }

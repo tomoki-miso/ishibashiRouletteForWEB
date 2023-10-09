@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ishibashi/stores.dart';
@@ -23,12 +24,6 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
         .where('keywords', arrayContainsAny: searchTextList)
         .get();
 
-    /* final querySnapshot = await _firestore
-        .collection('post')
-        .where('uid', isEqualTo: uid)
-        .where('friends', isEqualTo: searchText)
-        .get(); */
-
     print('検索結果のドキュメント数: ${querySnapshot.docs.length}');
 
     setState(() {
@@ -41,8 +36,14 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFC5E4FC),
-        
+        iconTheme: const IconThemeData(color: Colors.greenAccent),
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(20),
+          ),
+        ),
       ),
       body: Column(
         children: [
@@ -56,7 +57,7 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
               controller: _searchController,
               style: TextStyle(fontSize: 16, fontFamily: "KiwiMaru"),
               decoration: InputDecoration(
-                hintText: 'ひとで検索',
+                hintText: '店名、カテゴリーなどを入力',
               ),
               onChanged: (value) {
                 _searchKeyword(value);
@@ -113,12 +114,11 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                               ? ClipRRect(
                                                   borderRadius:
                                                       BorderRadius.circular(5),
-                                                  child: Image.network(
-                                                    storePhotoUrl,
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: storePhotoUrl,
                                                     width: size.width * 0.8,
                                                     fit: BoxFit.cover,
-                                                  ),
-                                                )
+                                                  ))
                                               : Container(),
                                         ),
                                       ],
