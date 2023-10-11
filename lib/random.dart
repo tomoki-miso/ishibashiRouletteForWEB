@@ -236,17 +236,15 @@ class _RandomPageState extends State<RandomPage> {
                                 ))
                             : Container(),
                       ),
-                    
-
-                        Container(
-                          height: screenSize.height*0.09,
-                          width: screenSize.width*0.9,
+                      Container(
+                        height: screenSize.height * 0.09,
+                        width: screenSize.width * 0.9,
                         child: Text(
                           storeDetail,
-                           maxLines: 3,  
+                          maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                         ),
-                      ), 
+                      ),
                       Container(
                         child: ElevatedButton(
                           style: OutlinedButton.styleFrom(
@@ -256,7 +254,6 @@ class _RandomPageState extends State<RandomPage> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
                             ),
-                           
                           ),
                           onPressed: () {
                             Navigator.push(

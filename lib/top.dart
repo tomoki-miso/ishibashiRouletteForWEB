@@ -32,15 +32,14 @@ class _TopPageState extends State<TopPage> {
       body: Center(
         child: Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.only(top: 100),
+          padding: const EdgeInsets.only(top: 60),
           child: Column(
             children: [
               Container(
                 alignment: Alignment.center,
-                height: screenSize.height * 0.12,
-                width: screenSize.width * 0.6,
-                color: Colors.amber,
-                child: const Text("ロゴ配置"),
+                height: screenSize.height * 0.2,
+                
+                child: Image.asset('assets/images/iconKari.png'),
               ),
               const Padding(padding: EdgeInsets.all(6)),
               /*   Container(
