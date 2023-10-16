@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ishibashi/daySearch.dart';
 import 'package:ishibashi/keywordSearch.dart';
 
@@ -44,10 +43,10 @@ class SearchConfirmPage extends StatelessWidget {
                   text: const TextSpan(
                     children: [
                       WidgetSpan(
-                        child: FaIcon(
-                          FontAwesomeIcons.cloudSun,
-                          color: Color.fromARGB(255, 42, 35, 35),
-                        ),
+                        child: Icon(
+                          Icons.calendar_month,
+                          color: Colors.black,
+                        )
                       ),
                       WidgetSpan(
                           child: Padding(
@@ -61,14 +60,11 @@ class SearchConfirmPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(
-                      color: Color.fromARGB(255, 107, 190, 253),
-                      style: BorderStyle.solid),
-                  backgroundColor: const Color(0xFFC5E4FC),
-                  foregroundColor: const Color.fromARGB(255, 42, 35, 35),
-                  shape: const StadiumBorder(),
-                ),
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)), backgroundColor: Colors.greenAccent,
+                    fixedSize:
+                        Size(size.width * 0.9, size.height * 0.1)),
               ),
             ),
             const Padding(padding: EdgeInsets.all(8)),
@@ -76,6 +72,11 @@ class SearchConfirmPage extends StatelessWidget {
               width: size.width * 0.9,
               height: size.height * 0.1,
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)), backgroundColor: Colors.greenAccent,
+                    fixedSize:
+                        Size(size.width * 0.9, size.height * 0.1)),
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -88,7 +89,7 @@ class SearchConfirmPage extends StatelessWidget {
                     children: [
                       WidgetSpan(
                         child: Icon(
-                          Icons.face,
+                          Icons.search,
                           color: Color.fromARGB(255, 42, 35, 35),
                         ),
                       ),
@@ -105,14 +106,7 @@ class SearchConfirmPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(
-                      color: Color.fromARGB(255, 107, 190, 253),
-                      style: BorderStyle.solid),
-                  backgroundColor: const Color(0xFFC5E4FC),
-                  foregroundColor: const Color.fromARGB(255, 42, 35, 35),
-                  shape: const StadiumBorder(),
-                ),
+                
               ),
             ),
             const Padding(padding: EdgeInsets.all(8)),

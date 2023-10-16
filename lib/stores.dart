@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,11 +7,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'random.dart';
 
-
-
 class StorePage extends StatefulWidget {
   final String documentId;
-  const StorePage({Key? key, required this.documentId, }) : super(key: key);
+  const StorePage({
+    Key? key,
+    required this.documentId,
+  }) : super(key: key);
 
   @override
   _StorePageState createState() => _StorePageState();
@@ -71,24 +73,21 @@ class _StorePageState extends State<StorePage> {
   }
 
   Future<List<String>> _fetchTags(DocumentReference storeReference) async {
-  final storeSnapshot = await storeReference.get();
-  final storeData = storeSnapshot.data() as Map<String, dynamic>?;
+    final storeSnapshot = await storeReference.get();
+    final storeData = storeSnapshot.data() as Map<String, dynamic>?;
 
-  // タグ情報を取得
-  if (storeData != null && storeData.containsKey("tags")) {
-    final tags = storeData["tags"] as List<dynamic>;
-    final formattedTags = tags.map((tag) => tag.toString()).toList();
-    print("Fetched tags in storespage: $formattedTags");
+    // タグ情報を取得
+    if (storeData != null && storeData.containsKey("tags")) {
+      final tags = storeData["tags"] as List<dynamic>;
+      final formattedTags = tags.map((tag) => tag.toString()).toList();
+      print("Fetched tags in storespage: $formattedTags");
 
-    
-
-    return formattedTags;
-  } else {
-    print("Tags field not found or empty.");
-    return [];
+      return formattedTags;
+    } else {
+      print("Tags field not found or empty.");
+      return [];
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -151,46 +150,46 @@ class _StorePageState extends State<StorePage> {
                                 ),
                               ),
                               Row(
-                        children: [
-                          LikeButton(),
-                          Wrap(
-                            spacing: 8,
-                            children: formattedTags.isNotEmpty
-                                ? formattedTags.map((formattedTag) {
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(4.0),
-                                        color: Colors.deepOrangeAccent,
-                                      ),
-                                      margin: const EdgeInsets.all(2.0),
-                                      child: Center(
-                                        child: Text(
-                                          formattedTag,
-                                          style: const TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }).toList()
-                                : [],
-                          ),
-                        ],
-                      ),
+                                children: [
+                                  LikeButton(),
+                                  Wrap(
+                                    spacing: 8,
+                                    children: formattedTags.isNotEmpty
+                                        ? formattedTags.map((formattedTag) {
+                                            return Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(4.0),
+                                                color: Colors.deepOrangeAccent,
+                                              ),
+                                              margin: const EdgeInsets.all(2.0),
+                                              child: Center(
+                                                child: Text(
+                                                  formattedTag,
+                                                  style: const TextStyle(
+                                                    fontSize: 12,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          }).toList()
+                                        : [],
+                                  ),
+                                ],
+                              ),
                               const SizedBox(height: 16),
                               Container(
-                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
                                 child: storePhotoUrl.isNotEmpty
                                     ? ClipRRect(
                                         borderRadius: BorderRadius.circular(5),
-                                        child: Image.network(
-                                          storePhotoUrl,
+                                        child: CachedNetworkImage(
+                                          imageUrl: storePhotoUrl,
                                           width: _screenSize.width * 0.8,
                                           fit: BoxFit.cover,
-                                        ),
-                                      )
+                                        ))
                                     : Container(),
                               ),
                               const SizedBox(height: 16),
@@ -228,7 +227,8 @@ class _StorePageState extends State<StorePage> {
                                 style: ElevatedButton.styleFrom(
                                   fixedSize: Size(_screenSize.width * 0.8,
                                       _screenSize.height * 0.01),
-                                  primary: const Color.fromARGB(255, 254, 170, 1),
+                                  primary:
+                                      const Color.fromARGB(255, 254, 170, 1),
                                 ),
                                 onPressed: () async {
                                   if (await canLaunch(storeTabelog)) {
@@ -276,7 +276,8 @@ class _StorePageState extends State<StorePage> {
                                 style: ElevatedButton.styleFrom(
                                   fixedSize: Size(_screenSize.width * 0.8,
                                       _screenSize.height * 0.01),
-                                  primary: const Color.fromARGB(255, 99, 70, 185),
+                                  primary:
+                                      const Color.fromARGB(255, 99, 70, 185),
                                 ),
                                 onPressed: () async {
                                   if (await canLaunch(storeInsta)) {
@@ -329,7 +330,9 @@ class _LikeButtonState extends State<LikeButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: _isLiked ? const Icon(Icons.favorite) : const Icon(Icons.favorite_border),
+      icon: _isLiked
+          ? const Icon(Icons.favorite)
+          : const Icon(Icons.favorite_border),
       onPressed: _toggleLike,
     );
   }
