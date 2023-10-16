@@ -1,12 +1,8 @@
-
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ishibashi/firebase_options.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-
 
 import 'package:provider/provider.dart';
 
@@ -21,16 +17,15 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   WidgetsFlutterBinding.ensureInitialized();
 
- runApp(
-  MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (context) => StoreDataProvider()),
-      // 他のプロバイダーを追加できます
-    ],
-    child: const MyApp(),
-  ),
-);
-
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => StoreDataProvider()),
+        // 他のプロバイダーを追加できます
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -57,7 +52,7 @@ class BasePage extends StatelessWidget {
       const ListPage(),
       const RandomPage(),
       const TopPage(),
-      const MapPage(),
+      MapPage(),
       InfoPage(),
     ];
 
