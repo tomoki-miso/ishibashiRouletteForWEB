@@ -33,7 +33,6 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
         .where('keywords', arrayContainsAny: searchTextList)
         .get();
 
-    print('検索結果のドキュメント数: ${querySnapshot.docs.length}');
 
     setState(() {
       _searchResults = querySnapshot.docs;
@@ -48,10 +47,8 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
     if (storeData != null && storeData.containsKey("tags")) {
       final tags = storeData["tags"] as List<dynamic>;
       final formattedTags = tags.map((tag) => tag.toString()).toList();
-      print("Fetched tags: $formattedTags");
       return formattedTags;
     } else {
-      print("Tags field not found or empty.");
       return [];
     }
   }
@@ -64,10 +61,8 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
       final openDays = (storeData["daysOfWeek"] as List<dynamic>)
           .map((openDay) => openDay.toString())
           .join(", ");
-      print("days: $openDays");
       return openDays; // 例: "Monday, Tuesday, Wednesday"
     } else {
-      print("営業日取得失敗");
       return "営業日情報がありません";
     }
   }
@@ -96,8 +91,8 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
             ),
             child: TextField(
               controller: _searchController,
-              style: TextStyle(fontSize: 16, fontFamily: "KiwiMaru"),
-              decoration: InputDecoration(
+              style: const TextStyle(fontSize: 16, fontFamily: "KiwiMaru"),
+              decoration: const InputDecoration(
                 hintText: '店名、カテゴリーなどを入力',
               ),
               onChanged: (value) {
@@ -121,11 +116,11 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                   future: _fetchTags(record.reference),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator(); // ローディングインジケーターを表示
+                      return const CircularProgressIndicator(); // ローディングインジケーターを表示
                     } else if (snapshot.hasError) {
                       return Text('エラー: ${snapshot.error}');
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return Text('タグはありません');
+                      return const Text('タグはありません');
                     }
 
                     final formattedTags = snapshot.data;
@@ -155,17 +150,17 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(padding: EdgeInsets.all(10)),
+                                  const Padding(padding: EdgeInsets.all(10)),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10),
                                     child: Text(
                                       name,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 18,
                                           fontFamily: "KaiseiDecol"),
                                     ),
                                   ),
-                                  Padding(padding: EdgeInsets.all(4)),
+                                  const Padding(padding: EdgeInsets.all(4)),
                                   Container(
                                     width: size.width * 0.95,
                                     child: Row(
@@ -175,7 +170,7 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                             Container(
                                               height: size.width * 0.45,
                                               width: size.width * 0.45,
-                                              padding: EdgeInsets.only(left: 8),
+                                              padding: const EdgeInsets.only(left: 8),
                                               child: storePhotoUrl.isNotEmpty
                                                   ? ClipRRect(
                                                       borderRadius:
@@ -190,14 +185,14 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                             ),
                                           ],
                                         ),
-                                        Padding(padding: EdgeInsets.all(10)),
+                                        const Padding(padding: EdgeInsets.all(10)),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Padding(padding: EdgeInsets.all(8)),
+                                            const Padding(padding: EdgeInsets.all(8)),
                                             Container(
                                               height: size.height * 0.03,
                                               width: size.width * 0.38,
@@ -242,12 +237,12 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                                         );
                                                       }).toList()
                                                     : [
-                                                        Text("タグがありません")
+                                                        const Text("タグがありません")
                                                       ], // タグが空の場合のデフォルト表示
                                               ),
                                             ),
-                                            Padding(padding: EdgeInsets.all(1)),
-                                            Text("営業日"),
+                                            const Padding(padding: EdgeInsets.all(1)),
+                                            const Text("営業日"),
                                             Container(
                                               child: FutureBuilder<String>(
                                                 // _fetchOpenTime メソッドで営業時間を非同期に取得
@@ -257,7 +252,7 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                                   if (snapshot
                                                           .connectionState ==
                                                       ConnectionState.waiting) {
-                                                    return CircularProgressIndicator(); // ローディングインジケーターを表示
+                                                    return const CircularProgressIndicator(); // ローディングインジケーターを表示
                                                   } else if (snapshot
                                                       .hasError) {
                                                     return Text(
@@ -276,7 +271,7 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                                               20),
                                                     ),
                                                     child: Container(
-                                                      padding: EdgeInsets.only(
+                                                      padding: const EdgeInsets.only(
                                                           top: 10,
                                                           left: 8,
                                                           right: 5),
@@ -288,7 +283,7 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                                               .greenAccent),
                                                       child: Text(
                                                         openDays!,
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                           fontSize: 12,
                                                         ),
                                                         overflow: TextOverflow
@@ -299,7 +294,7 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                                 },
                                               ),
                                             ),
-                                            Padding(padding: EdgeInsets.all(4)),
+                                            const Padding(padding: EdgeInsets.all(4)),
                                             Container(
                                               height: size.height * 0.1,
                                               width: size.width * 0.38,
@@ -309,10 +304,10 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                                 color: Colors.greenAccent,
                                               ),
                                               child: Padding(
-                                                padding: EdgeInsets.all(5),
+                                                padding: const EdgeInsets.all(5),
                                                 child: Text(
                                                   detail,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     fontSize: 12,
                                                   ),
                                                   overflow:
@@ -321,7 +316,7 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                                 ),
                                               ),
                                             ),
-                                            Padding(padding: EdgeInsets.all(6))
+                                            const Padding(padding: EdgeInsets.all(6))
                                           ],
                                         ),
                                       ],

@@ -52,7 +52,7 @@ class BasePage extends StatelessWidget {
       const ListPage(),
       const RandomPage(),
       const TopPage(),
-      MapPage(),
+      const MapPage(),
       InfoPage(),
     ];
 
