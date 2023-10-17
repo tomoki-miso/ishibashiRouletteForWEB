@@ -1,8 +1,12 @@
+// ignore_for_file: empty_catches
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MapPage extends StatefulWidget {
+  const MapPage({super.key});
+
   @override
   _MapPageState createState() => _MapPageState();
 }
@@ -32,7 +36,7 @@ class _MapPageState extends State<MapPage> {
       Set<Marker> markerSet = {};
 
       for (var data in firebaseData) {
-        print('Latitude: ${data['lat']}, Longitude: ${data['long']}');
+        // ignore: duplicate_ignore
         try {
           // データの型を適切に変換
           double lat = double.parse(data['lat']);
@@ -49,8 +53,8 @@ class _MapPageState extends State<MapPage> {
               ),
             ),
           );
+        // ignore: empty_catches
         } catch (e) {
-          print('データの変換エラー: $e');
         }
       }
 
@@ -59,9 +63,7 @@ class _MapPageState extends State<MapPage> {
       });
 
       // マーカーが正しくセットされたかどうかをログで確認
-      print('Markers: $markers');
     } catch (e) {
-      print('エラーが発生しました: $e');
     }
   }
 
@@ -77,20 +79,8 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(_screenSize.height * 0.08),
-        child: AppBar(
-          iconTheme: IconThemeData(color: Colors.greenAccent),
-          backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20)),
-          ),
-        ),
-      ),
+      
       body: GoogleMap(
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(

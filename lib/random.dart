@@ -81,7 +81,6 @@ class _RandomPageState extends State<RandomPage> {
   }
 
   Future<void> _fetchData() async {
-    print("Fetching data...");
 
     final storeSnapshot =
         await FirebaseFirestore.instance.collection('stores').get();
@@ -100,7 +99,6 @@ class _RandomPageState extends State<RandomPage> {
     final storeTabelogData = storeData['tabelog'] ?? '';
     final storePhotoUrlData = storeData['photo_url'] ?? '';
 
-    print("Fetched storeNameData: $storeNameData");
 
     Provider.of<StoreDataProvider>(context, listen: false)
         .setStoreName(storeNameData);
@@ -142,10 +140,8 @@ class _RandomPageState extends State<RandomPage> {
     if (storeData != null && storeData.containsKey("tags")) {
       final tags = storeData["tags"] as List<dynamic>;
       final formattedTags = tags.map((tag) => tag.toString()).toList();
-      print("Fetched tags: $formattedTags");
       return formattedTags;
     } else {
-      print("Tags field not found or empty.");
       return [];
     }
   }

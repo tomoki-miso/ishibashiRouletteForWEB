@@ -167,7 +167,7 @@ class _InfoPageState extends State<InfoPage> {
                               screenSize.width * 0.8, screenSize.height * 0.06),
                           primary: Colors.black),
                       onPressed: () async {
-                        final url = 'https://twitter.com/pochipochitudoi';
+                        const url = 'https://twitter.com/pochipochitudoi';
                         if (await canLaunch(url)) {
                           await launch(url);
                         } else {
@@ -190,9 +190,9 @@ class _InfoPageState extends State<InfoPage> {
                           primary: Colors.deepOrangeAccent),
                       onPressed: connectionStatus
                           ? () async {
-                              final String emailAddress =
+                              const String emailAddress =
                                   'pochipochi.tudoi@gmail.com';
-                              final String subject = 'お問い合わせ'; // 任意の件名を指定
+                              const String subject = 'お問い合わせ'; // 任意の件名を指定
                               final String emailLaunchUrl =
                                   'mailto:${Uri.encodeComponent(emailAddress)}?subject=${Uri.encodeComponent(subject)}';
 

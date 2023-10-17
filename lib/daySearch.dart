@@ -34,7 +34,6 @@ class _DaySearchPageState extends State<DaySearchPage> {
           .where('daysOfWeek', arrayContainsAny: selectedDays)
           .get();
 
-      print('検索結果のドキュメント数: ${querySnapshot.docs.length}');
 
       setState(() {
         _searchResults = querySnapshot.docs;
@@ -55,10 +54,8 @@ class _DaySearchPageState extends State<DaySearchPage> {
     if (storeData != null && storeData.containsKey("tags")) {
       final tags = storeData["tags"] as List<dynamic>;
       final formattedTags = tags.map((tag) => tag.toString()).toList();
-      print("Fetched tags: $formattedTags");
       return formattedTags;
     } else {
-      print("Tags field not found or empty.");
       return [];
     }
   }
@@ -71,10 +68,8 @@ class _DaySearchPageState extends State<DaySearchPage> {
       final openDays = (storeData["daysOfWeek"] as List<dynamic>)
           .map((openDay) => openDay.toString())
           .join(", ");
-      print("days: $openDays");
       return openDays; // 例: "Monday, Tuesday, Wednesday"
     } else {
-      print("営業日取得失敗");
       return "営業日情報がありません";
     }
   }
@@ -102,10 +97,10 @@ class _DaySearchPageState extends State<DaySearchPage> {
                 borderRadius: BorderRadius.circular(10.0),
                 color: Colors.greenAccent,
               ),
-              margin: EdgeInsets.symmetric(vertical: 10.0),
+              margin: const EdgeInsets.symmetric(vertical: 10.0),
               child: Center(
                 child: Container(
-                  padding: EdgeInsets.all(3),
+                  padding: const EdgeInsets.all(3),
                   child: Wrap(
                     runSpacing: 8,
                     spacing: 8,
@@ -120,7 +115,6 @@ class _DaySearchPageState extends State<DaySearchPage> {
                               selectedDays.add(day);
                             }
                             _searchDays();
-                            print('選択中の曜日: $selectedDays');
                           });
                         },
                         child: Container(
@@ -154,14 +148,14 @@ class _DaySearchPageState extends State<DaySearchPage> {
             Expanded(
               child: selectedDays.isEmpty &&
                       _searchResults.isEmpty // _searchResults が空の場合
-                  ? Center(
+                  ? const Center(
                       child: Text(
                         '曜日を選択してください',
                         style: TextStyle(fontSize: 16),
                       ),
                     )
                   : selectedDays.isNotEmpty && _searchResults.isEmpty
-                      ? Center(
+                      ? const Center(
                           child: Text(
                             '選択された曜日に営業しているお店はありません',
                             style: TextStyle(fontSize: 16),
@@ -184,12 +178,12 @@ class _DaySearchPageState extends State<DaySearchPage> {
                               builder: (context, snapshot) {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
-                                  return CircularProgressIndicator(); // ローディングインジケーターを表示
+                                  return const CircularProgressIndicator(); // ローディングインジケーターを表示
                                 } else if (snapshot.hasError) {
                                   return Text('エラー: ${snapshot.error}');
                                 } else if (!snapshot.hasData ||
                                     snapshot.data!.isEmpty) {
-                                  return Text('タグはありません');
+                                  return const Text('タグはありません');
                                 }
 
                                 final formattedTags = snapshot.data;
@@ -221,7 +215,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Padding(
+                                              const Padding(
                                                   padding:
                                                       EdgeInsets.all(10)),
                                               Padding(
@@ -230,13 +224,13 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                         left: 10),
                                                 child: Text(
                                                   name,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontSize: 18,
                                                       fontFamily:
                                                           "KaiseiDecol"),
                                                 ),
                                               ),
-                                              Padding(
+                                              const Padding(
                                                   padding: EdgeInsets.all(4)),
                                               Container(
                                                 width: size.width * 0.95,
@@ -250,7 +244,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                           width: size.width *
                                                               0.45,
                                                           padding:
-                                                              EdgeInsets.only(
+                                                              const EdgeInsets.only(
                                                                   left: 8),
                                                           child: storePhotoUrl
                                                                   .isNotEmpty
@@ -273,7 +267,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                         ),
                                                       ],
                                                     ),
-                                                    Padding(
+                                                    const Padding(
                                                         padding:
                                                             EdgeInsets.all(
                                                                 10)),
@@ -285,7 +279,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                           MainAxisAlignment
                                                               .center,
                                                       children: [
-                                                        Padding(
+                                                        const Padding(
                                                             padding:
                                                                 EdgeInsets
                                                                     .all(8)),
@@ -341,16 +335,16 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                                     );
                                                                   }).toList()
                                                                 : [
-                                                                    Text(
+                                                                    const Text(
                                                                         "タグがありません")
                                                                   ], // タグが空の場合のデフォルト表示
                                                           ),
                                                         ),
-                                                        Padding(
+                                                        const Padding(
                                                             padding:
                                                                 EdgeInsets
                                                                     .all(1)),
-                                                        Text("営業日"),
+                                                        const Text("営業日"),
                                                         Container(
                                                           child:
                                                               FutureBuilder<
@@ -365,7 +359,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                                       .connectionState ==
                                                                   ConnectionState
                                                                       .waiting) {
-                                                                return CircularProgressIndicator(); // ローディングインジケーターを表示
+                                                                return const CircularProgressIndicator(); // ローディングインジケーターを表示
                                                               } else if (snapshot
                                                                   .hasError) {
                                                                 return Text(
@@ -391,7 +385,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                                 ),
                                                                 child:
                                                                     Container(
-                                                                  padding: EdgeInsets.only(
+                                                                  padding: const EdgeInsets.only(
                                                                       top: 10,
                                                                       left: 8,
                                                                       right:
@@ -405,7 +399,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                                   child: Text(
                                                                     openDays!,
                                                                     style:
-                                                                        TextStyle(
+                                                                        const TextStyle(
                                                                       fontSize:
                                                                           12,
                                                                     ),
@@ -418,7 +412,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                             },
                                                           ),
                                                         ),
-                                                        Padding(
+                                                        const Padding(
                                                             padding:
                                                                 EdgeInsets
                                                                     .all(4)),
@@ -439,12 +433,12 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                           ),
                                                           child: Padding(
                                                             padding:
-                                                                EdgeInsets
+                                                                const EdgeInsets
                                                                     .all(5),
                                                             child: Text(
                                                               detail,
                                                               style:
-                                                                  TextStyle(
+                                                                  const TextStyle(
                                                                 fontSize: 12,
                                                               ),
                                                               overflow:
@@ -454,7 +448,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                             ),
                                                           ),
                                                         ),
-                                                        Padding(
+                                                        const Padding(
                                                             padding:
                                                                 EdgeInsets
                                                                     .all(6))
