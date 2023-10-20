@@ -183,6 +183,7 @@ class _InfoPageState extends State<InfoPage> {
                         ],
                       ),
                     ),
+                    Padding(padding: EdgeInsets.all(20)),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           fixedSize: Size(

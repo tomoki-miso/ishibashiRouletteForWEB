@@ -1,3 +1,6 @@
 {
-    "cmake.sourceDirectory": "/Users/misoshiru/Development/ishibashiRoulette-3/linux"
+    "cmake.sourceDirectory": "/Users/misoshiru/Development/ishibashiRoulette-3/linux",
+    "cSpell.words": [
+        "Firestore"
+    ]
 }

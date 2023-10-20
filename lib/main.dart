@@ -1,10 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ishibashi/firebase_options.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'top.dart';
 import 'map.dart';
@@ -12,42 +12,43 @@ import 'info.dart';
 import 'list.dart';
 import 'random.dart';
 
+
+final storeInfoProvider = StreamProvider.autoDispose((ref) {
+  return FirebaseFirestore.instance.collection('stores').snapshots();
+});
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  WidgetsFlutterBinding.ensureInitialized();
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => StoreDataProvider()),
-        // 他のプロバイダーを追加できます
-      ],
-      child: const MyApp(),
+    // Riverpodでデータを受け渡しできる状態にする
+    ProviderScope(
+      child: MyApp(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const BasePage(),
+      home: BasePage(),
     );
   }
 }
 
 class BasePage extends StatelessWidget {
-  const BasePage({Key? key}) : super(key: key);
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     final pages = [
       const ListPage(),
       const RandomPage(),

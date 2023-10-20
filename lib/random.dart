@@ -1,60 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'stores.dart';
 
-class StoreDataProvider with ChangeNotifier {
-  String storeName = '';
-  String storeDetail = '';
-  String storeWeb = '';
-  String storeTwitter = '';
-  String storeInsta = '';
-  String storeTabelog = '';
-  String storePhotoUrl = '';
-  List<String> formattedTags = [];
 
-  void setStoreName(String name) {
-    storeName = name;
-    notifyListeners();
-  }
-
-  void setStoreDetail(String detail) {
-    storeDetail = detail;
-    notifyListeners();
-  }
-
-  void setStoreWeb(String web) {
-    storeWeb = web;
-    notifyListeners();
-  }
-
-  void setStoreTwitter(String twitter) {
-    storeTwitter = twitter;
-    notifyListeners();
-  }
-
-  void setStoreInsta(String insta) {
-    storeInsta = insta;
-    notifyListeners();
-  }
-
-  void setStoreTabelog(String tabelog) {
-    storeTabelog = tabelog;
-    notifyListeners();
-  }
-
-  void setStorePhotoUrl(String photoUrl) {
-    storePhotoUrl = photoUrl;
-    notifyListeners();
-  }
-
-  void setFormattedTags(List<String> tags) {
-    formattedTags = tags.map((tags) => tags).toList();
-    notifyListeners();
-  }
-}
 
 class RandomPage extends StatefulWidget {
   const RandomPage({Key? key}) : super(key: key);
@@ -81,7 +32,6 @@ class _RandomPageState extends State<RandomPage> {
   }
 
   Future<void> _fetchData() async {
-
     final storeSnapshot =
         await FirebaseFirestore.instance.collection('stores').get();
     final storeIds =
@@ -99,27 +49,6 @@ class _RandomPageState extends State<RandomPage> {
     final storeTabelogData = storeData['tabelog'] ?? '';
     final storePhotoUrlData = storeData['photo_url'] ?? '';
 
-
-    Provider.of<StoreDataProvider>(context, listen: false)
-        .setStoreName(storeNameData);
-    Provider.of<StoreDataProvider>(context, listen: false)
-        .setStoreDetail(storeDetailData);
-    Provider.of<StoreDataProvider>(context, listen: false)
-        .setStoreWeb(storeWebData);
-    Provider.of<StoreDataProvider>(context, listen: false)
-        .setStoreTwitter(storeTwitterData ?? ''); // null の場合は空文字列をセット
-    Provider.of<StoreDataProvider>(context, listen: false)
-        .setStoreInsta(storeInstaData);
-    Provider.of<StoreDataProvider>(context, listen: false)
-        .setStoreTabelog(storeTabelogData ?? '');
-    Provider.of<StoreDataProvider>(context, listen: false)
-        .setStorePhotoUrl(storePhotoUrlData);
-
-    // タグ情報を取得してformattedTagsに設定
-    final tags = await _fetchTags(storeSnapshot.docs[storeId - 1].reference);
-    Provider.of<StoreDataProvider>(context, listen: false)
-        .setFormattedTags(tags);
-
     setState(() {
       storeName = storeNameData;
       storeDetail = storeDetailData;
@@ -128,7 +57,6 @@ class _RandomPageState extends State<RandomPage> {
       storeInsta = storeInstaData;
       storeTabelog = storeTabelogData;
       storePhotoUrl = storePhotoUrlData;
-      formattedTags = tags;
     });
   }
 

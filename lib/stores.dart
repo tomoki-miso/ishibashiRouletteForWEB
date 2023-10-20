@@ -1,104 +1,28 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:ishibashi/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'random.dart';
 
-class StorePage extends StatefulWidget {
+class StorePage extends ConsumerWidget {
   final String documentId;
-  const StorePage({
+  StorePage({
     Key? key,
     required this.documentId,
   }) : super(key: key);
 
-  @override
-  _StorePageState createState() => _StorePageState();
-}
-
-class _StorePageState extends State<StorePage> {
   List<String> formattedTags = [];
 
-  @override
-  void initState() {
-    super.initState();
-    _fetchStoreData(widget.documentId);
-  }
-
-  Future<void> _fetchStoreData(String documentId) async {
-    try {
-      final storeSnapshot = await FirebaseFirestore.instance
-          .collection('stores')
-          .doc(documentId)
-          .get();
-
-      if (storeSnapshot.exists) {
-        final storeData = storeSnapshot.data();
-        if (storeData != null) {
-          final storeName = storeData['name'] ?? '';
-          final storeDetail = storeData['detail'] ?? '';
-          final storeWeb = storeData['web'] ?? '';
-          final storeTwitter = storeData['twitter'] ?? '';
-          final storeInsta = storeData['insta'] ?? '';
-          final storeTabelog = storeData['tabelog'] ?? '';
-          final storePhotoUrl = storeData['photoUrl'] ?? '';
-
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setStoreName(storeName);
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setStoreDetail(storeDetail);
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setStoreWeb(storeWeb);
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setStoreTwitter(storeTwitter);
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setStoreInsta(storeInsta);
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setStoreTabelog(storeTabelog);
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setStorePhotoUrl(storePhotoUrl);
-
-          final tags = await _fetchTags(FirebaseFirestore.instance
-              .collection('stores')
-              .doc(widget.documentId));
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setFormattedTags(tags);
-        }
-      }
-    } catch (error) {
-      print("Error fetching store data in storespage: $error");
-    }
-  }
-
-  Future<List<String>> _fetchTags(DocumentReference storeReference) async {
-    final storeSnapshot = await storeReference.get();
-    final storeData = storeSnapshot.data() as Map<String, dynamic>?;
-
-    // タグ情報を取得
-    if (storeData != null && storeData.containsKey("tags")) {
-      final tags = storeData["tags"] as List<dynamic>;
-      final formattedTags = tags.map((tag) => tag.toString()).toList();
-      print("Fetched tags in storespage: $formattedTags");
-
-      return formattedTags;
-    } else {
-      print("Tags field not found or empty.");
-      return [];
-    }
-  }
+  Future<void> _fetchStoreData(String documentId) async {}
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var _screenSize = MediaQuery.of(context).size;
-    final storeName = context.watch<StoreDataProvider>().storeName;
-    final storeDetail = context.watch<StoreDataProvider>().storeDetail;
-    final storeWeb = context.watch<StoreDataProvider>().storeWeb;
-    final storeTwitter = context.watch<StoreDataProvider>().storeTwitter;
-    final storeInsta = context.watch<StoreDataProvider>().storeInsta;
-    final storeTabelog = context.watch<StoreDataProvider>().storeTabelog;
-    final storePhotoUrl = context.watch<StoreDataProvider>().storePhotoUrl;
+
 
     return Scaffold(
       appBar: PreferredSize(
