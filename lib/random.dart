@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ishibashi/providers/storeInfo.dart';
 import 'package:ishibashi/stateNotifierProvider.dart';
 import 'package:ishibashi/storeClass.dart';
-import 'package:ishibashi/styles.dart';
+import 'package:ishibashi/style/styles.dart';
 
 import 'stores.dart';
 
