@@ -1,263 +1,321 @@
-// import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:ishibashi/main.dart';
-// import 'package:url_launcher/url_launcher.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ishibashi/providers/storeInfo.dart';
+import 'package:ishibashi/stateNotifierProvider.dart';
+import 'package:ishibashi/storeClass.dart';
+import 'package:ishibashi/styles.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-// import 'random.dart';
+final storeProvider = StateNotifierProvider<StoreNotifier, List<StoreClass>>(
+    (ref) => StoreNotifier());
 
-// class StorePage extends ConsumerWidget {
-//   final String documentId;
-//   StorePage({
-//     Key? key,
-//     required this.documentId,
-//   }) : super(key: key);
+class StorePage extends ConsumerWidget {
+  StorePage({Key? key}) : super(key: key);
 
-//   List<String> formattedTags = [];
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    var screenSize = MediaQuery.of(context).size;
 
-//   Future<void> _fetchStoreData(String documentId) async {}
+    final storeProvider = ref.watch(storeInfoNotifierProvider);
 
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     var _screenSize = MediaQuery.of(context).size;
+    final name = storeProvider.when(
+        loading: () => const Text(
+              '準備中...',
+              style: Styles.storeNameStyle,
+            ),
+        error: (e, s) => Text(
+              'エラー $e',
+              style: Styles.storeNameStyle,
+            ),
+        data: (state) => Text(
+              state.StoreName.toString(),
+              style: Styles.storeNameStyle,
+            ));
 
+    final detail = storeProvider.when(
+      loading: () => const Text('準備中...'),
+      error: (e, s) => Text('エラー $e'),
+      data: (state) => Text(
+        state.StoreDetail.toString(),
+        maxLines: 3,
+        overflow: TextOverflow.ellipsis,
+      ), // Fix this line
+    );
 
-//     return Scaffold(
-//       appBar: PreferredSize(
-//         preferredSize: Size.fromHeight(_screenSize.height * 0.08),
-//         child: AppBar(
-//           iconTheme: const IconThemeData(color: Colors.greenAccent),
-//           backgroundColor: Colors.white,
-//           shape: const RoundedRectangleBorder(
-//             borderRadius: BorderRadius.only(
-//               bottomLeft: Radius.circular(20),
-//               bottomRight: Radius.circular(20),
-//             ),
-//           ),
-//         ),
-//       ),
-//       body: Center(
-//         child: Container(
-//           width: _screenSize.width,
-//           height: _screenSize.height,
-//           color: Colors.greenAccent,
-//           child: Center(
-//             child: Padding(
-//               padding: const EdgeInsets.all(12.0),
-//               child: SingleChildScrollView(
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.center,
-//                   children: [
-//                     Container(
-//                       width: _screenSize.width,
-//                       color: Colors.greenAccent,
-//                       child: Center(
-//                         child: Container(
-//                           decoration: BoxDecoration(
-//                             borderRadius: BorderRadius.circular(5.0),
-//                             color: Colors.white,
-//                           ),
-//                           margin: const EdgeInsets.only(top: 20),
-//                           padding: const EdgeInsets.only(
-//                               top: 20, left: 10, right: 10, bottom: 20),
-//                           width: _screenSize.width * 0.9,
-//                           child: Column(
-//                             children: [
-//                               Text(
-//                                 storeName,
-//                                 style: const TextStyle(
-//                                   fontSize: 18,
-//                                   fontWeight: FontWeight.bold,
-//                                   color: Colors.black54,
-//                                 ),
-//                               ),
-//                               Row(
-//                                 children: [
-//                                   LikeButton(),
-//                                   Wrap(
-//                                     spacing: 8,
-//                                     children: formattedTags.isNotEmpty
-//                                         ? formattedTags.map((formattedTag) {
-//                                             return Container(
-//                                               decoration: BoxDecoration(
-//                                                 borderRadius:
-//                                                     BorderRadius.circular(4.0),
-//                                                 color: Colors.deepOrangeAccent,
-//                                               ),
-//                                               margin: const EdgeInsets.all(2.0),
-//                                               child: Center(
-//                                                 child: Text(
-//                                                   formattedTag,
-//                                                   style: const TextStyle(
-//                                                     fontSize: 12,
-//                                                     color: Colors.white,
-//                                                   ),
-//                                                 ),
-//                                               ),
-//                                             );
-//                                           }).toList()
-//                                         : [],
-//                                   ),
-//                                 ],
-//                               ),
-//                               const SizedBox(height: 16),
-//                               Container(
-//                                 padding:
-//                                     const EdgeInsets.symmetric(vertical: 10),
-//                                 child: storePhotoUrl.isNotEmpty
-//                                     ? ClipRRect(
-//                                         borderRadius: BorderRadius.circular(5),
-//                                         child: CachedNetworkImage(
-//                                           imageUrl: storePhotoUrl,
-//                                           width: _screenSize.width * 0.8,
-//                                           fit: BoxFit.cover,
-//                                         ))
-//                                     : Container(),
-//                               ),
-//                               const SizedBox(height: 16),
-//                               Container(
-//                                 padding: const EdgeInsets.all(10),
-//                                 child: Text(
-//                                   storeDetail,
-//                                 ),
-//                               ),
-//                               ElevatedButton(
-//                                 style: ElevatedButton.styleFrom(
-//                                   fixedSize: Size(_screenSize.width * 0.8,
-//                                       _screenSize.height * 0.01),
-//                                   primary: const Color.fromARGB(124, 252, 0, 0),
-//                                 ),
-//                                 onPressed: () async {
-//                                   if (await canLaunch(storeWeb)) {
-//                                     await launch(storeWeb);
-//                                   } else {
-//                                     throw 'Could not launch $storeWeb';
-//                                   }
-//                                 },
-//                                 child: RichText(
-//                                   text: const TextSpan(children: [
-//                                     WidgetSpan(
-//                                       child: Icon(
-//                                         Icons.public,
-//                                       ),
-//                                     ),
-//                                     TextSpan(text: "公式ウェブサイト"),
-//                                   ]),
-//                                 ),
-//                               ),
-//                               ElevatedButton(
-//                                 style: ElevatedButton.styleFrom(
-//                                   fixedSize: Size(_screenSize.width * 0.8,
-//                                       _screenSize.height * 0.01),
-//                                   primary:
-//                                       const Color.fromARGB(255, 254, 170, 1),
-//                                 ),
-//                                 onPressed: () async {
-//                                   if (await canLaunch(storeTabelog)) {
-//                                     await launch(storeTabelog);
-//                                   } else {
-//                                     throw 'Could not launch $storeTabelog';
-//                                   }
-//                                 },
-//                                 child: RichText(
-//                                   text: const TextSpan(children: [
-//                                     WidgetSpan(
-//                                       child: Icon(
-//                                         Icons.public,
-//                                       ),
-//                                     ),
-//                                     TextSpan(text: "食べログ"),
-//                                   ]),
-//                                 ),
-//                               ),
-//                               ElevatedButton(
-//                                 style: ElevatedButton.styleFrom(
-//                                   fixedSize: Size(_screenSize.width * 0.8,
-//                                       _screenSize.height * 0.01),
-//                                   primary: Colors.black,
-//                                 ),
-//                                 onPressed: () async {
-//                                   if (await canLaunch(storeTwitter)) {
-//                                     await launch(storeTwitter);
-//                                   } else {
-//                                     throw 'Could not launch $storeTwitter';
-//                                   }
-//                                 },
-//                                 child: RichText(
-//                                   text: const TextSpan(children: [
-//                                     WidgetSpan(
-//                                       child: FaIcon(
-//                                         FontAwesomeIcons.twitter,
-//                                       ),
-//                                     ),
-//                                     TextSpan(text: "X(旧Twitter)"),
-//                                   ]),
-//                                 ),
-//                               ),
-//                               ElevatedButton(
-//                                 style: ElevatedButton.styleFrom(
-//                                   fixedSize: Size(_screenSize.width * 0.8,
-//                                       _screenSize.height * 0.01),
-//                                   primary:
-//                                       const Color.fromARGB(255, 99, 70, 185),
-//                                 ),
-//                                 onPressed: () async {
-//                                   if (await canLaunch(storeInsta)) {
-//                                     await launch(storeInsta);
-//                                   } else {
-//                                     throw 'Could not launch $storeInsta';
-//                                   }
-//                                 },
-//                                 child: RichText(
-//                                   text: const TextSpan(children: [
-//                                     WidgetSpan(
-//                                       child: FaIcon(
-//                                         FontAwesomeIcons.instagram,
-//                                       ),
-//                                     ),
-//                                     TextSpan(text: "Instagram"),
-//                                   ]),
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//     ));
-//   }
-// }
+    final photo = storeProvider.when(
+      loading: () => Image.asset('assets/images/iconKari.png'),
+      error: (e, s) => Text('エラー $e'),
+      data: (state) => Container(
+        height: screenSize.height * 0.3,
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: state.StorePhotoUrl.isNotEmpty
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: CachedNetworkImage(
+                  imageUrl: state.StorePhotoUrl.toString(),
+                  width: screenSize.width * 0.8,
+                  fit: BoxFit.cover,
+                ))
+            : Container(
+                height: screenSize.height * 0.3,
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Image.asset('assets/images/iconKari.png'),
+              ),
+      ), // Fix this line
+    );
 
-// class LikeButton extends StatefulWidget {
-//   @override
-//   _LikeButtonState createState() => _LikeButtonState();
-// }
+    final tags = storeProvider.when(
+      loading: () => const Text('準備中...'),
+      error: (e, s) => Text('エラー: $e'), // エラーメッセージを表示
+      data: (state) => Expanded(
+        child: Row(
+          children: state.Tags.isNotEmpty
+              ? state.Tags.map((tag) {
+                  return Container(
+                    padding: EdgeInsetsDirectional.symmetric(horizontal: 8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4.0),
+                      color: Colors.deepOrangeAccent,
+                    ),
+                    margin: const EdgeInsets.all(2.0),
+                    child: Center(
+                      child: Text(
+                        tag,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList()
+              : [],
+        ),
+      ),
+    );
 
-// class _LikeButtonState extends State<LikeButton> {
-//   bool _isLiked = false;
+    final WebButton = storeProvider.when(
+      loading: () => const Text('準備中...'),
+      error: (e, s) => Text('エラー $e'),
+      data: (state) {
+        if (state.StoreWeb.isNotEmpty) {
+          return ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01),
+              primary: const Color.fromARGB(124, 252, 0, 0),
+            ),
+            onPressed: () {
+              final weburl = Uri.parse(state.StoreWeb);
+              launchUrl(weburl);
+            },
+            child: RichText(
+              text: const TextSpan(children: [
+                WidgetSpan(
+                  child: Icon(
+                    Icons.public,
+                  ),
+                ),
+                TextSpan(text: "公式ウェブサイト"),
+              ]),
+            ),
+          );
+        } else {
+          // StoreWeb が null または空の場合はボタンを表示しない
+          return Container();
+        }
+      },
+    );
 
-//   void _toggleLike() {
-//     setState(() {
-//       _isLiked = !_isLiked;
-//     });
-//   }
+    final TabelogButton = storeProvider.when(
+      loading: () => const Text('準備中...'),
+      error: (e, s) => Text('エラー $e'),
+      data: (state) {
+        if (state.StoreTabelog.isNotEmpty) {
+          return ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01),
+              primary: const Color.fromARGB(255, 254, 170, 1),
+            ),
+            onPressed: () {
+              final tabelogurl = Uri.parse(state.StoreTabelog);
+              launchUrl(tabelogurl);
+            },
+            child: RichText(
+              text: const TextSpan(children: [
+                WidgetSpan(
+                  child: Icon(
+                    Icons.public,
+                  ),
+                ),
+                TextSpan(text: "食べログ"),
+              ]),
+            ),
+          );
+        } else {
+          // StoreWeb が null または空の場合はボタンを表示しない
+          return Container();
+        }
+      },
+    );
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return IconButton(
-//       icon: _isLiked
-//           ? const Icon(Icons.favorite)
-//           : const Icon(Icons.favorite_border),
-//       onPressed: _toggleLike,
-//     );
-//   }
-// }
+    final TwitterButton = storeProvider.when(
+      loading: () => const Text('準備中...'),
+      error: (e, s) => Text('エラー $e'),
+      data: (state) {
+        if (state.StoreTwitter.isNotEmpty) {
+          return ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01),
+              primary: Colors.black,
+            ),
+            onPressed: () {
+              final Twitterurl = Uri.parse(state.StoreTwitter);
+              launchUrl(Twitterurl);
+            },
+            child: RichText(
+              text: const TextSpan(children: [
+                WidgetSpan(
+                  child: FaIcon(
+                    FontAwesomeIcons.twitter,
+                  ),
+                ),
+                TextSpan(text: "X(旧Twitter)"),
+              ]),
+            ),
+          );
+        } else {
+          // StoreWeb が null または空の場合はボタンを表示しない
+          return Container();
+        }
+      },
+    );
+    final InstaButton = storeProvider.when(
+      loading: () => const Text('準備中...'),
+      error: (e, s) => Text('エラー $e'),
+      data: (state) {
+        if (state.StoreInsta.isNotEmpty) {
+          return ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01),
+              primary: const Color.fromARGB(255, 99, 70, 185),
+            ),
+            onPressed: () {
+              final Instaurl = Uri.parse(state.StoreInsta);
+              launchUrl(Instaurl);
+            },
+            child: RichText(
+              text: const TextSpan(children: [
+                WidgetSpan(
+                  child: FaIcon(
+                    FontAwesomeIcons.instagram,
+                  ),
+                ),
+                TextSpan(text: "Instagram"),
+              ]),
+            ),
+          );
+        } else {
+          // StoreWeb が null または空の場合はボタンを表示しない
+          return Container();
+        }
+      },
+    );
+
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(screenSize.height * 0.08),
+        child: AppBar(
+          iconTheme: const IconThemeData(color: Colors.greenAccent),
+          backgroundColor: Colors.white,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),
+          ),
+        ),
+      ),
+      body: Center(
+        child: Container(
+          width: screenSize.width,
+          height: screenSize.height,
+          color: Colors.greenAccent,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: screenSize.width,
+                      color: Colors.greenAccent,
+                      child: Center(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5.0),
+                            color: Colors.white,
+                          ),
+                          margin: const EdgeInsets.only(top: 20),
+                          padding: const EdgeInsets.all(6),
+                          width: screenSize.width * 0.9,
+                          child: Column(
+                            children: [
+                              name,
+                              Row(
+                                children: [LikeButton(), tags],
+                              ),
+                              Container(
+                                  height: screenSize.height * 0.3,
+                                  child: photo),
+                              Container(
+                                  margin: EdgeInsets.all(10),
+                                  height: screenSize.height * 0.09,
+                                  width: screenSize.width * 0.9,
+                                  child: detail),
+                              WebButton,
+                              TabelogButton,
+                              TwitterButton,
+                              InstaButton,
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LikeButton extends StatefulWidget {
+  @override
+  _LikeButtonState createState() => _LikeButtonState();
+}
+
+class _LikeButtonState extends State<LikeButton> {
+  bool _isLiked = false;
+
+  void _toggleLike() {
+    setState(() {
+      _isLiked = !_isLiked;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: _isLiked
+          ? const Icon(Icons.favorite)
+          : const Icon(Icons.favorite_border),
+      onPressed: _toggleLike,
+    );
+  }
+}

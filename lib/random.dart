@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ishibashi/providers/storeInfo.dart';
@@ -8,7 +7,6 @@ import 'package:ishibashi/storeClass.dart';
 import 'package:ishibashi/styles.dart';
 
 import 'stores.dart';
-import 'stores2.dart';
 
 final storeProvider = StateNotifierProvider<StoreNotifier, List<StoreClass>>(
     (ref) => StoreNotifier());
@@ -156,11 +154,9 @@ class RandomPage extends ConsumerWidget {
                     Row(
                       children: [LikeButton(), tags],
                     ),
+                    Container(height: screenSize.height * 0.3, child: photo),
                     Container(
-                        height: screenSize.height * 0.3,
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: photo),
-                    Container(
+                        margin: EdgeInsets.all(2),
                         height: screenSize.height * 0.09,
                         width: screenSize.width * 0.9,
                         child: detail),

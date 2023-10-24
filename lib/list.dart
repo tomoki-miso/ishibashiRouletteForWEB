@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ishibashi/styles.dart';
 
-import 'stores.dart';
 import 'searchconfirm.dart';
 
 class ListPage extends StatefulWidget {
@@ -53,6 +53,7 @@ class _ListPageState extends State<ListPage> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(size.height * 0.08),
@@ -122,17 +123,19 @@ class _ListPageState extends State<ListPage> {
                               const Padding(padding: EdgeInsets.all(10)),
                               Padding(
                                 padding: const EdgeInsets.only(left: 10),
-                                child: Text(
-                                  name,
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontFamily: "KaiseiDecol",
-                                  ),
-                                ),
+                                child: Text(name, style: Styles.storeNameStyle),
                               ),
                               const Padding(padding: EdgeInsets.all(4)),
                               Container(
                                 width: size.width * 0.95,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.white,
+                                  border: Border.all(
+                                    color: Colors.grey,
+                                    width: 2,
+                                  ),
+                                ),
                                 child: Row(
                                   children: [
                                     Column(
@@ -140,12 +143,12 @@ class _ListPageState extends State<ListPage> {
                                         Container(
                                           height: size.width * 0.45,
                                           width: size.width * 0.45,
-                                          padding: const EdgeInsets.only(left: 8),
+                                          padding:
+                                              const EdgeInsets.only(left: 8),
                                           child: imageUrl.isNotEmpty
                                               ? ClipRRect(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          5),
+                                                      BorderRadius.circular(5),
                                                   child: CachedNetworkImage(
                                                     imageUrl: imageUrl,
                                                     width: size.width * 0.8,
@@ -163,7 +166,8 @@ class _ListPageState extends State<ListPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        const Padding(padding: EdgeInsets.all(8)),
+                                        const Padding(
+                                            padding: EdgeInsets.all(8)),
                                         Container(
                                           height: size.height * 0.03,
                                           width: size.width * 0.38,
@@ -173,34 +177,33 @@ class _ListPageState extends State<ListPage> {
                                           ),
                                           child: Wrap(
                                             direction: Axis.vertical,
-                                            spacing: 100,
+
                                             children: tags != null &&
                                                     tags.isNotEmpty
                                                 ? tags.map((formattedTag) {
-                                                    return Padding(
+                                                    return Container(
                                                       padding:
-                                                          const EdgeInsets
-                                                              .only(left: 2),
-                                                      child: Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      4.0),
-                                                          color: Colors
-                                                              .deepOrangeAccent,
-                                                        ),
-                                                        child: Center(
-                                                          child: Text(
-                                                            formattedTag
-                                                                .toString(),
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 10,
-                                                              color: Colors
-                                                                  .white,
-                                                            ),
+                                                          const EdgeInsetsDirectional
+                                                              .symmetric(
+                                                              horizontal: 4),
+                                                      margin:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 2),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4.0),
+                                                        color: Colors
+                                                            .deepOrangeAccent,
+                                                      ),
+                                                      child: Center(
+                                                        child: Text(
+                                                          formattedTag
+                                                              .toString(),
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize: 12,
+                                                            color: Colors.white,
                                                           ),
                                                         ),
                                                       ),
@@ -211,7 +214,8 @@ class _ListPageState extends State<ListPage> {
                                                   ], // Display default text if tags are empty
                                           ),
                                         ),
-                                        const Padding(padding: EdgeInsets.all(1)),
+                                        const Padding(
+                                            padding: EdgeInsets.all(1)),
                                         const Text("営業日"),
                                         Container(
                                           child: FutureBuilder<String>(
@@ -232,14 +236,14 @@ class _ListPageState extends State<ListPage> {
                                                 width: size.width * 0.38,
                                                 decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          20),
+                                                      BorderRadius.circular(20),
                                                 ),
                                                 child: Container(
-                                                  padding: const EdgeInsets.only(
-                                                      top: 10,
-                                                      left: 8,
-                                                      right: 5),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 10,
+                                                          left: 8,
+                                                          right: 5),
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -259,7 +263,8 @@ class _ListPageState extends State<ListPage> {
                                             },
                                           ),
                                         ),
-                                        const Padding(padding: EdgeInsets.all(4)),
+                                        const Padding(
+                                            padding: EdgeInsets.all(4)),
                                         Container(
                                           height: size.height * 0.1,
                                           width: size.width * 0.38,
@@ -280,18 +285,11 @@ class _ListPageState extends State<ListPage> {
                                             ),
                                           ),
                                         ),
-                                        const Padding(padding: EdgeInsets.all(6))
+                                        const Padding(
+                                            padding: EdgeInsets.all(6))
                                       ],
                                     ),
                                   ],
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                    color: Colors.grey,
-                                    width: 2,
-                                  ),
                                 ),
                               ),
                             ],

@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ishibashi/stores.dart';
 
 class KeywordSearchPage extends StatefulWidget {
   const KeywordSearchPage({Key? key}) : super(key: key);
@@ -32,7 +31,6 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
         .collection('stores')
         .where('keywords', arrayContainsAny: searchTextList)
         .get();
-
 
     setState(() {
       _searchResults = querySnapshot.docs;
@@ -170,7 +168,8 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                             Container(
                                               height: size.width * 0.45,
                                               width: size.width * 0.45,
-                                              padding: const EdgeInsets.only(left: 8),
+                                              padding: const EdgeInsets.only(
+                                                  left: 8),
                                               child: storePhotoUrl.isNotEmpty
                                                   ? ClipRRect(
                                                       borderRadius:
@@ -185,14 +184,16 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                             ),
                                           ],
                                         ),
-                                        const Padding(padding: EdgeInsets.all(10)),
+                                        const Padding(
+                                            padding: EdgeInsets.all(10)),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            const Padding(padding: EdgeInsets.all(8)),
+                                            const Padding(
+                                                padding: EdgeInsets.all(8)),
                                             Container(
                                               height: size.height * 0.03,
                                               width: size.width * 0.38,
@@ -241,7 +242,8 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                                       ], // タグが空の場合のデフォルト表示
                                               ),
                                             ),
-                                            const Padding(padding: EdgeInsets.all(1)),
+                                            const Padding(
+                                                padding: EdgeInsets.all(1)),
                                             const Text("営業日"),
                                             Container(
                                               child: FutureBuilder<String>(
@@ -271,10 +273,11 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                                               20),
                                                     ),
                                                     child: Container(
-                                                      padding: const EdgeInsets.only(
-                                                          top: 10,
-                                                          left: 8,
-                                                          right: 5),
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 10,
+                                                              left: 8,
+                                                              right: 5),
                                                       decoration: BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
@@ -294,7 +297,8 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                                 },
                                               ),
                                             ),
-                                            const Padding(padding: EdgeInsets.all(4)),
+                                            const Padding(
+                                                padding: EdgeInsets.all(4)),
                                             Container(
                                               height: size.height * 0.1,
                                               width: size.width * 0.38,
@@ -304,7 +308,8 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                                 color: Colors.greenAccent,
                                               ),
                                               child: Padding(
-                                                padding: const EdgeInsets.all(5),
+                                                padding:
+                                                    const EdgeInsets.all(5),
                                                 child: Text(
                                                   detail,
                                                   style: const TextStyle(
@@ -316,7 +321,8 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                                 ),
                                               ),
                                             ),
-                                            const Padding(padding: EdgeInsets.all(6))
+                                            const Padding(
+                                                padding: EdgeInsets.all(6))
                                           ],
                                         ),
                                       ],
