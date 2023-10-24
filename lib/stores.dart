@@ -1,108 +1,231 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:ishibashi/providers/storeInfo.dart';
+import 'package:ishibashi/stateNotifierProvider.dart';
+import 'package:ishibashi/storeClass.dart';
+import 'package:ishibashi/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'random.dart';
+final storeProvider = StateNotifierProvider<StoreNotifier, List<StoreClass>>(
+    (ref) => StoreNotifier());
 
-class StorePage extends StatefulWidget {
-  final String documentId;
-  const StorePage({
-    Key? key,
-    required this.documentId,
-  }) : super(key: key);
+class StorePage extends ConsumerWidget {
+  StorePage({Key? key}) : super(key: key);
 
   @override
-  _StorePageState createState() => _StorePageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    var screenSize = MediaQuery.of(context).size;
 
-class _StorePageState extends State<StorePage> {
-  List<String> formattedTags = [];
+    final storeProvider = ref.watch(storeInfoNotifierProvider);
 
-  @override
-  void initState() {
-    super.initState();
-    _fetchStoreData(widget.documentId);
-  }
+    final name = storeProvider.when(
+        loading: () => const Text(
+              '準備中...',
+              style: Styles.storeNameStyle,
+            ),
+        error: (e, s) => Text(
+              'エラー $e',
+              style: Styles.storeNameStyle,
+            ),
+        data: (state) => Text(
+              state.StoreName.toString(),
+              style: Styles.storeNameStyle,
+            ));
 
-  Future<void> _fetchStoreData(String documentId) async {
-    try {
-      final storeSnapshot = await FirebaseFirestore.instance
-          .collection('stores')
-          .doc(documentId)
-          .get();
+    final detail = storeProvider.when(
+      loading: () => const Text('準備中...'),
+      error: (e, s) => Text('エラー $e'),
+      data: (state) => Text(
+        state.StoreDetail.toString(),
+        maxLines: 3,
+        overflow: TextOverflow.ellipsis,
+      ), // Fix this line
+    );
 
-      if (storeSnapshot.exists) {
-        final storeData = storeSnapshot.data();
-        if (storeData != null) {
-          final storeName = storeData['name'] ?? '';
-          final storeDetail = storeData['detail'] ?? '';
-          final storeWeb = storeData['web'] ?? '';
-          final storeTwitter = storeData['twitter'] ?? '';
-          final storeInsta = storeData['insta'] ?? '';
-          final storeTabelog = storeData['tabelog'] ?? '';
-          final storePhotoUrl = storeData['photoUrl'] ?? '';
+    final photo = storeProvider.when(
+      loading: () => Image.asset('assets/images/iconKari.png'),
+      error: (e, s) => Text('エラー $e'),
+      data: (state) => Container(
+        height: screenSize.height * 0.3,
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: state.StorePhotoUrl.isNotEmpty
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: CachedNetworkImage(
+                  imageUrl: state.StorePhotoUrl.toString(),
+                  width: screenSize.width * 0.8,
+                  fit: BoxFit.cover,
+                ))
+            : Container(
+                height: screenSize.height * 0.3,
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Image.asset('assets/images/iconKari.png'),
+              ),
+      ), // Fix this line
+    );
 
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setStoreName(storeName);
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setStoreDetail(storeDetail);
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setStoreWeb(storeWeb);
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setStoreTwitter(storeTwitter);
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setStoreInsta(storeInsta);
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setStoreTabelog(storeTabelog);
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setStorePhotoUrl(storePhotoUrl);
+    final tags = storeProvider.when(
+      loading: () => const Text('準備中...'),
+      error: (e, s) => Text('エラー: $e'), // エラーメッセージを表示
+      data: (state) => Expanded(
+        child: Row(
+          children: state.Tags.isNotEmpty
+              ? state.Tags.map((tag) {
+                  return Container(
+                    padding: EdgeInsetsDirectional.symmetric(horizontal: 8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4.0),
+                      color: Colors.deepOrangeAccent,
+                    ),
+                    margin: const EdgeInsets.all(2.0),
+                    child: Center(
+                      child: Text(
+                        tag,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList()
+              : [],
+        ),
+      ),
+    );
 
-          final tags = await _fetchTags(FirebaseFirestore.instance
-              .collection('stores')
-              .doc(widget.documentId));
-          Provider.of<StoreDataProvider>(context, listen: false)
-              .setFormattedTags(tags);
+    final WebButton = storeProvider.when(
+      loading: () => const Text('準備中...'),
+      error: (e, s) => Text('エラー $e'),
+      data: (state) {
+        if (state.StoreWeb.isNotEmpty) {
+          return ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01),
+              primary: const Color.fromARGB(124, 252, 0, 0),
+            ),
+            onPressed: () {
+              final weburl = Uri.parse(state.StoreWeb);
+              launchUrl(weburl);
+            },
+            child: RichText(
+              text: const TextSpan(children: [
+                WidgetSpan(
+                  child: Icon(
+                    Icons.public,
+                  ),
+                ),
+                TextSpan(text: "公式ウェブサイト"),
+              ]),
+            ),
+          );
+        } else {
+          // StoreWeb が null または空の場合はボタンを表示しない
+          return Container();
         }
-      }
-    } catch (error) {
-      print("Error fetching store data in storespage: $error");
-    }
-  }
+      },
+    );
 
-  Future<List<String>> _fetchTags(DocumentReference storeReference) async {
-    final storeSnapshot = await storeReference.get();
-    final storeData = storeSnapshot.data() as Map<String, dynamic>?;
+    final TabelogButton = storeProvider.when(
+      loading: () => const Text('準備中...'),
+      error: (e, s) => Text('エラー $e'),
+      data: (state) {
+        if (state.StoreTabelog.isNotEmpty) {
+          return ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01),
+              primary: const Color.fromARGB(255, 254, 170, 1),
+            ),
+            onPressed: () {
+              final tabelogurl = Uri.parse(state.StoreTabelog);
+              launchUrl(tabelogurl);
+            },
+            child: RichText(
+              text: const TextSpan(children: [
+                WidgetSpan(
+                  child: Icon(
+                    Icons.public,
+                  ),
+                ),
+                TextSpan(text: "食べログ"),
+              ]),
+            ),
+          );
+        } else {
+          // StoreWeb が null または空の場合はボタンを表示しない
+          return Container();
+        }
+      },
+    );
 
-    // タグ情報を取得
-    if (storeData != null && storeData.containsKey("tags")) {
-      final tags = storeData["tags"] as List<dynamic>;
-      final formattedTags = tags.map((tag) => tag.toString()).toList();
-      print("Fetched tags in storespage: $formattedTags");
-
-      return formattedTags;
-    } else {
-      print("Tags field not found or empty.");
-      return [];
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
-    final storeName = context.watch<StoreDataProvider>().storeName;
-    final storeDetail = context.watch<StoreDataProvider>().storeDetail;
-    final storeWeb = context.watch<StoreDataProvider>().storeWeb;
-    final storeTwitter = context.watch<StoreDataProvider>().storeTwitter;
-    final storeInsta = context.watch<StoreDataProvider>().storeInsta;
-    final storeTabelog = context.watch<StoreDataProvider>().storeTabelog;
-    final storePhotoUrl = context.watch<StoreDataProvider>().storePhotoUrl;
+    final TwitterButton = storeProvider.when(
+      loading: () => const Text('準備中...'),
+      error: (e, s) => Text('エラー $e'),
+      data: (state) {
+        if (state.StoreTwitter.isNotEmpty) {
+          return ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01),
+              primary: Colors.black,
+            ),
+            onPressed: () {
+              final Twitterurl = Uri.parse(state.StoreTwitter);
+              launchUrl(Twitterurl);
+            },
+            child: RichText(
+              text: const TextSpan(children: [
+                WidgetSpan(
+                  child: FaIcon(
+                    FontAwesomeIcons.twitter,
+                  ),
+                ),
+                TextSpan(text: "X(旧Twitter)"),
+              ]),
+            ),
+          );
+        } else {
+          // StoreWeb が null または空の場合はボタンを表示しない
+          return Container();
+        }
+      },
+    );
+    final InstaButton = storeProvider.when(
+      loading: () => const Text('準備中...'),
+      error: (e, s) => Text('エラー $e'),
+      data: (state) {
+        if (state.StoreInsta.isNotEmpty) {
+          return ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01),
+              primary: const Color.fromARGB(255, 99, 70, 185),
+            ),
+            onPressed: () {
+              final Instaurl = Uri.parse(state.StoreInsta);
+              launchUrl(Instaurl);
+            },
+            child: RichText(
+              text: const TextSpan(children: [
+                WidgetSpan(
+                  child: FaIcon(
+                    FontAwesomeIcons.instagram,
+                  ),
+                ),
+                TextSpan(text: "Instagram"),
+              ]),
+            ),
+          );
+        } else {
+          // StoreWeb が null または空の場合はボタンを表示しない
+          return Container();
+        }
+      },
+    );
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(_screenSize.height * 0.08),
+        preferredSize: Size.fromHeight(screenSize.height * 0.08),
         child: AppBar(
           iconTheme: const IconThemeData(color: Colors.greenAccent),
           backgroundColor: Colors.white,
@@ -116,8 +239,8 @@ class _StorePageState extends State<StorePage> {
       ),
       body: Center(
         child: Container(
-          width: _screenSize.width,
-          height: _screenSize.height,
+          width: screenSize.width,
+          height: screenSize.height,
           color: Colors.greenAccent,
           child: Center(
             child: Padding(
@@ -127,7 +250,7 @@ class _StorePageState extends State<StorePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: _screenSize.width,
+                      width: screenSize.width,
                       color: Colors.greenAccent,
                       child: Center(
                         child: Container(
@@ -136,167 +259,26 @@ class _StorePageState extends State<StorePage> {
                             color: Colors.white,
                           ),
                           margin: const EdgeInsets.only(top: 20),
-                          padding: const EdgeInsets.only(
-                              top: 20, left: 10, right: 10, bottom: 20),
-                          width: _screenSize.width * 0.9,
+                          padding: const EdgeInsets.all(6),
+                          width: screenSize.width * 0.9,
                           child: Column(
                             children: [
-                              Text(
-                                storeName,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black54,
-                                ),
-                              ),
+                              name,
                               Row(
-                                children: [
-                                  LikeButton(),
-                                  Wrap(
-                                    spacing: 8,
-                                    children: formattedTags.isNotEmpty
-                                        ? formattedTags.map((formattedTag) {
-                                            return Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(4.0),
-                                                color: Colors.deepOrangeAccent,
-                                              ),
-                                              margin: const EdgeInsets.all(2.0),
-                                              child: Center(
-                                                child: Text(
-                                                  formattedTag,
-                                                  style: const TextStyle(
-                                                    fontSize: 12,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          }).toList()
-                                        : [],
-                                  ),
-                                ],
+                                children: [LikeButton(), tags],
                               ),
-                              const SizedBox(height: 16),
                               Container(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                child: storePhotoUrl.isNotEmpty
-                                    ? ClipRRect(
-                                        borderRadius: BorderRadius.circular(5),
-                                        child: CachedNetworkImage(
-                                          imageUrl: storePhotoUrl,
-                                          width: _screenSize.width * 0.8,
-                                          fit: BoxFit.cover,
-                                        ))
-                                    : Container(),
-                              ),
-                              const SizedBox(height: 16),
+                                  height: screenSize.height * 0.3,
+                                  child: photo),
                               Container(
-                                padding: const EdgeInsets.all(10),
-                                child: Text(
-                                  storeDetail,
-                                ),
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  fixedSize: Size(_screenSize.width * 0.8,
-                                      _screenSize.height * 0.01),
-                                  primary: const Color.fromARGB(124, 252, 0, 0),
-                                ),
-                                onPressed: () async {
-                                  if (await canLaunch(storeWeb)) {
-                                    await launch(storeWeb);
-                                  } else {
-                                    throw 'Could not launch $storeWeb';
-                                  }
-                                },
-                                child: RichText(
-                                  text: const TextSpan(children: [
-                                    WidgetSpan(
-                                      child: Icon(
-                                        Icons.public,
-                                      ),
-                                    ),
-                                    TextSpan(text: "公式ウェブサイト"),
-                                  ]),
-                                ),
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  fixedSize: Size(_screenSize.width * 0.8,
-                                      _screenSize.height * 0.01),
-                                  primary:
-                                      const Color.fromARGB(255, 254, 170, 1),
-                                ),
-                                onPressed: () async {
-                                  if (await canLaunch(storeTabelog)) {
-                                    await launch(storeTabelog);
-                                  } else {
-                                    throw 'Could not launch $storeTabelog';
-                                  }
-                                },
-                                child: RichText(
-                                  text: const TextSpan(children: [
-                                    WidgetSpan(
-                                      child: Icon(
-                                        Icons.public,
-                                      ),
-                                    ),
-                                    TextSpan(text: "食べログ"),
-                                  ]),
-                                ),
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  fixedSize: Size(_screenSize.width * 0.8,
-                                      _screenSize.height * 0.01),
-                                  primary: Colors.black,
-                                ),
-                                onPressed: () async {
-                                  if (await canLaunch(storeTwitter)) {
-                                    await launch(storeTwitter);
-                                  } else {
-                                    throw 'Could not launch $storeTwitter';
-                                  }
-                                },
-                                child: RichText(
-                                  text: const TextSpan(children: [
-                                    WidgetSpan(
-                                      child: FaIcon(
-                                        FontAwesomeIcons.twitter,
-                                      ),
-                                    ),
-                                    TextSpan(text: "X(旧Twitter)"),
-                                  ]),
-                                ),
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  fixedSize: Size(_screenSize.width * 0.8,
-                                      _screenSize.height * 0.01),
-                                  primary:
-                                      const Color.fromARGB(255, 99, 70, 185),
-                                ),
-                                onPressed: () async {
-                                  if (await canLaunch(storeInsta)) {
-                                    await launch(storeInsta);
-                                  } else {
-                                    throw 'Could not launch $storeInsta';
-                                  }
-                                },
-                                child: RichText(
-                                  text: const TextSpan(children: [
-                                    WidgetSpan(
-                                      child: FaIcon(
-                                        FontAwesomeIcons.instagram,
-                                      ),
-                                    ),
-                                    TextSpan(text: "Instagram"),
-                                  ]),
-                                ),
-                              ),
+                                  margin: EdgeInsets.all(10),
+                                  height: screenSize.height * 0.09,
+                                  width: screenSize.width * 0.9,
+                                  child: detail),
+                              WebButton,
+                              TabelogButton,
+                              TwitterButton,
+                              InstaButton,
                             ],
                           ),
                         ),
