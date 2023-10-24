@@ -128,14 +128,14 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                     return InkWell(
                       onTap: () {
                         // ドキュメントIDを詳細画面に渡す
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => StorePage(
-                              documentId: record.id,
-                            ),
-                          ),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => StorePage(
+                        //       documentId: record.id,
+                        //     ),
+                        //   ),
+                        // );
                       },
                       child: Center(
                         child: SingleChildScrollView(

@@ -14,12 +14,12 @@ class ListPage extends StatefulWidget {
 
 class _ListPageState extends State<ListPage> {
   void navigateToStorePage(String documentId) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => StorePage(documentId: documentId),
-      ),
-    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => StorePage(documentId: documentId),
+    //   ),
+    // );
   }
 
   Future<List<String>> _fetchTags(DocumentReference storeReference) async {

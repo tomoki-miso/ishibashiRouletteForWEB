@@ -7,6 +7,7 @@ part 'storeClass.g.dart';
 ///////// b. コード生成するためのクラスを作成 /////////
 
 // freezedでコード生成するために「@freezed」を記述
+
 @freezed
 class StoreClass with _$StoreClass {
   // withの後には「_$[class name]」の形式で記述
@@ -22,10 +23,7 @@ class StoreClass with _$StoreClass {
     required String StoreTabelog,
     required String StorePhotoUrl,
     required List<String> Tags,
-    @Default(false) bool isPremium, // デフォルト値は「@Default([デフォルト値]])」の形式で指定可能
+    @Default(false) bool isPremium, // デフォルト値は「@Default([デフォルト値])」の形式で指定可能
   }) = _StoreClass;
-
-  // json形式で受け取るためのコードを生成するために記述
-  factory StoreClass.fromJson(Map<String, dynamic> json) => _$StoreClass(json);
-  
+  factory StoreClass.fromJson(Map<String, dynamic> json) => _$StoreClassFromJson(json);
 }
