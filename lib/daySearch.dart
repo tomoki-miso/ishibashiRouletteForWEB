@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'stores.dart';
+import 'package:ishibashi/storeList.dart';
+import 'package:ishibashi/style/styles.dart';
 
 class DaySearchPage extends StatefulWidget {
   const DaySearchPage({Key? key}) : super(key: key);
@@ -33,7 +33,6 @@ class _DaySearchPageState extends State<DaySearchPage> {
           .collection('stores')
           .where('daysOfWeek', arrayContainsAny: selectedDays)
           .get();
-
 
       setState(() {
         _searchResults = querySnapshot.docs;
@@ -190,15 +189,14 @@ class _DaySearchPageState extends State<DaySearchPage> {
 
                                 return InkWell(
                                   onTap: () {
-                                    // ドキュメントIDを詳細画面に渡す
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //     builder: (context) => StorePage(
-                                    //       documentId: record.id,
-                                    //     ),
-                                    //   ),
-                                    // );
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => StoreListPage(
+                                          documentId: record.id,
+                                        ),
+                                      ),
+                                    );
                                   },
                                   child: Center(
                                     child: SingleChildScrollView(
@@ -216,35 +214,39 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               const Padding(
-                                                  padding:
-                                                      EdgeInsets.all(10)),
+                                                  padding: EdgeInsets.all(10)),
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.only(
-                                                        left: 10),
+                                                padding: const EdgeInsets.only(
+                                                    left: 10),
                                                 child: Text(
                                                   name,
-                                                  style: const TextStyle(
-                                                      fontSize: 18,
-                                                      fontFamily:
-                                                          "KaiseiDecol"),
+                                                  style: Styles.storeNameStyle,
                                                 ),
                                               ),
                                               const Padding(
                                                   padding: EdgeInsets.all(4)),
                                               Container(
                                                 width: size.width * 0.95,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    color: Colors.white,
+                                                    border: Border.all(
+                                                        color: Colors.grey,
+                                                        width: 2)),
                                                 child: Row(
                                                   children: [
                                                     Column(
                                                       children: [
                                                         Container(
-                                                          height: size.width *
-                                                              0.45,
-                                                          width: size.width *
-                                                              0.45,
+                                                          height:
+                                                              size.width * 0.45,
+                                                          width:
+                                                              size.width * 0.45,
                                                           padding:
-                                                              const EdgeInsets.only(
+                                                              const EdgeInsets
+                                                                  .only(
                                                                   left: 8),
                                                           child: storePhotoUrl
                                                                   .isNotEmpty
@@ -257,9 +259,9 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                                       CachedNetworkImage(
                                                                     imageUrl:
                                                                         storePhotoUrl,
-                                                                    width: size
-                                                                            .width *
-                                                                        0.8,
+                                                                    width:
+                                                                        size.width *
+                                                                            0.8,
                                                                     fit: BoxFit
                                                                         .cover,
                                                                   ))
@@ -269,8 +271,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                     ),
                                                     const Padding(
                                                         padding:
-                                                            EdgeInsets.all(
-                                                                10)),
+                                                            EdgeInsets.all(10)),
                                                     Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -281,38 +282,34 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                       children: [
                                                         const Padding(
                                                             padding:
-                                                                EdgeInsets
-                                                                    .all(8)),
+                                                                EdgeInsets.all(
+                                                                    8)),
                                                         Container(
-                                                          height:
-                                                              size.height *
-                                                                  0.03,
-                                                          width: size.width *
-                                                              0.38,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        20),
-                                                          ),
-                                                          child: Wrap(
-                                                            direction:
-                                                                Axis.vertical,
-                                                            spacing: 100,
-
-                                                            children: formattedTags!
-                                                                    .isNotEmpty
-                                                                ? formattedTags
-                                                                    .map(
-                                                                        (formattedTag) {
-                                                                    return Padding(
-                                                                      padding: const EdgeInsets
-                                                                          .only(
-                                                                          left:
-                                                                              2),
-                                                                      child:
-                                                                          Container(
+                                                            height:
+                                                                size.height *
+                                                                    0.03,
+                                                            width: size.width *
+                                                                0.38,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20),
+                                                            ),
+                                                            child: Wrap(
+                                                              direction:
+                                                                  Axis.vertical,
+                                                              spacing: 100,
+                                                              children: formattedTags!
+                                                                      .isNotEmpty
+                                                                  ? formattedTags
+                                                                      .take(2)
+                                                                      .map(
+                                                                          (formattedTag) {
+                                                                      return Container(
+                                                                        padding:
+                                                                            EdgeInsetsDirectional.symmetric(horizontal: 6),
                                                                         decoration:
                                                                             BoxDecoration(
                                                                           borderRadius:
@@ -320,35 +317,33 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                                           color:
                                                                               Colors.deepOrangeAccent,
                                                                         ),
+                                                                        margin: const EdgeInsets
+                                                                            .all(
+                                                                            1.0),
                                                                         child:
                                                                             Center(
                                                                           child:
                                                                               Text(
                                                                             formattedTag,
-                                                                            style: const TextStyle(
-                                                                              fontSize: 10,
+                                                                            style:
+                                                                                const TextStyle(
+                                                                              fontSize: 12,
                                                                               color: Colors.white,
                                                                             ),
                                                                           ),
                                                                         ),
-                                                                      ),
-                                                                    );
-                                                                  }).toList()
-                                                                : [
-                                                                    const Text(
-                                                                        "タグがありません")
-                                                                  ], // タグが空の場合のデフォルト表示
-                                                          ),
-                                                        ),
+                                                                      );
+                                                                    }).toList()
+                                                                  : [],
+                                                            )),
                                                         const Padding(
                                                             padding:
-                                                                EdgeInsets
-                                                                    .all(1)),
+                                                                EdgeInsets.all(
+                                                                    1)),
                                                         const Text("営業日"),
                                                         Container(
-                                                          child:
-                                                              FutureBuilder<
-                                                                  String>(
+                                                          child: FutureBuilder<
+                                                              String>(
                                                             // _fetchOpenTime メソッドで営業時間を非同期に取得
                                                             future: _fetchOpenDays(
                                                                 record
@@ -367,8 +362,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                               }
 
                                                               final openDays =
-                                                                  snapshot
-                                                                      .data;
+                                                                  snapshot.data;
 
                                                               return Container(
                                                                 height:
@@ -380,16 +374,21 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                                 decoration:
                                                                     BoxDecoration(
                                                                   borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          20),
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              20),
                                                                 ),
                                                                 child:
                                                                     Container(
-                                                                  padding: const EdgeInsets.only(
-                                                                      top: 10,
-                                                                      left: 8,
-                                                                      right:
-                                                                          5),
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                          top:
+                                                                              10,
+                                                                          left:
+                                                                              8,
+                                                                          right:
+                                                                              5),
                                                                   decoration: BoxDecoration(
                                                                       borderRadius:
                                                                           BorderRadius.circular(
@@ -414,14 +413,13 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                         ),
                                                         const Padding(
                                                             padding:
-                                                                EdgeInsets
-                                                                    .all(4)),
+                                                                EdgeInsets.all(
+                                                                    4)),
                                                         Container(
                                                           height:
-                                                              size.height *
-                                                                  0.1,
-                                                          width: size.width *
-                                                              0.38,
+                                                              size.height * 0.1,
+                                                          width:
+                                                              size.width * 0.38,
                                                           decoration:
                                                               BoxDecoration(
                                                             borderRadius:
@@ -450,20 +448,12 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                         ),
                                                         const Padding(
                                                             padding:
-                                                                EdgeInsets
-                                                                    .all(6))
+                                                                EdgeInsets.all(
+                                                                    6))
                                                       ],
                                                     ),
                                                   ],
                                                 ),
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                    color: Colors.white,
-                                                    border: Border.all(
-                                                        color: Colors.grey,
-                                                        width: 2)),
                                               ),
                                             ],
                                           ),

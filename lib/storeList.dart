@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ishibashi/style/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class StoreListPage extends StatefulWidget {
@@ -18,21 +19,50 @@ class StoreListPage extends StatefulWidget {
 
 class _StoreListPageState extends State<StoreListPage> {
   List<String> formattedTags = [];
-  final String storeName = '';
-  final String storeDetail = '';
-  final String storePhotoUrl = '';
-  final String storeWeb = '';
-  final String storeTabelog = '';
-  final String storeTwitter = '';
-  final String storeInsta = '';
-
-  String? get documentId => documentId;
+  String storeName = ''; // 仮の初期値
+  String storeDetail = ''; // 仮の初期値
+  String storePhotoUrl = ''; // 仮の初期値
+  String storeWeb = ''; // 仮の初期値
+  String storeTabelog = ''; // 仮の初期値
+  String storeTwitter = ''; // 仮の初期値
+  String storeInsta = ''; // 仮の初期値
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
+    _fetchStoreData(widget.documentId);
+  }
 
-    await FirebaseFirestore.instance.collection('stores').doc(documentId).get();
+  Future<void> _fetchStoreData(String documentId) async {
+    try {
+      final storeSnapshot = await FirebaseFirestore.instance
+          .collection('stores')
+          .doc(documentId)
+          .get();
+
+      if (storeSnapshot.exists) {
+        final storeData = storeSnapshot.data();
+        if (storeData != null) {
+          storeName = storeData['name'] ?? '';
+          storeDetail = storeData['detail'] ?? '';
+          storeWeb = storeData['web'] ?? '';
+          storeTwitter = storeData['twitter'] ?? '';
+          storeInsta = storeData['insta'] ?? '';
+          storeTabelog = storeData['tabelog'] ?? '';
+          storePhotoUrl = storeData['photo_url'] ?? '';
+
+          final tags = await _fetchTags(FirebaseFirestore.instance
+              .collection('stores')
+              .doc(widget.documentId));
+
+          setState(() {
+            formattedTags = tags;
+          });
+        }
+      }
+    } catch (error) {
+      print("Error fetching store data in storespage: $error");
+    }
   }
 
   Future<List<String>> _fetchTags(DocumentReference storeReference) async {
@@ -92,45 +122,43 @@ class _StoreListPageState extends State<StoreListPage> {
                             color: Colors.white,
                           ),
                           margin: const EdgeInsets.only(top: 20),
-                          padding: const EdgeInsets.only(
-                              top: 20, left: 10, right: 10, bottom: 20),
+                          padding: const EdgeInsets.all(6),
                           width: _screenSize.width * 0.9,
                           child: Column(
                             children: [
-                              Text(
-                                storeName,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black54,
-                                ),
-                              ),
+                              Text(storeName, style: Styles.storeNameStyle),
                               Row(
                                 children: [
                                   LikeButton(),
-                                  Wrap(
-                                    spacing: 8,
-                                    children: formattedTags.isNotEmpty
-                                        ? formattedTags.map((formattedTag) {
-                                            return Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(4.0),
-                                                color: Colors.deepOrangeAccent,
-                                              ),
-                                              margin: const EdgeInsets.all(2.0),
-                                              child: Center(
-                                                child: Text(
-                                                  formattedTag,
-                                                  style: const TextStyle(
-                                                    fontSize: 12,
-                                                    color: Colors.white,
+                                  Expanded(
+                                    child: Row(
+                                      children: formattedTags.isNotEmpty
+                                          ? formattedTags.map((formattedTag) {
+                                              return Container(
+                                                padding: EdgeInsetsDirectional
+                                                    .symmetric(horizontal: 8),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4.0),
+                                                  color:
+                                                      Colors.deepOrangeAccent,
+                                                ),
+                                                margin:
+                                                    const EdgeInsets.all(2.0),
+                                                child: Center(
+                                                  child: Text(
+                                                    formattedTag,
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.white,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            );
-                                          }).toList()
-                                        : [],
+                                              );
+                                            }).toList()
+                                          : [],
+                                    ),
                                   ),
                                 ],
                               ),

@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ishibashi/storeList.dart';
+import 'package:ishibashi/style/styles.dart';
 
 class KeywordSearchPage extends StatefulWidget {
   const KeywordSearchPage({Key? key}) : super(key: key);
@@ -125,15 +127,14 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
 
                     return InkWell(
                       onTap: () {
-                        // ドキュメントIDを詳細画面に渡す
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => StorePage(
-                        //       documentId: record.id,
-                        //     ),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StoreListPage(
+                              documentId: record.id,
+                            ),
+                          ),
+                        );
                       },
                       child: Center(
                         child: SingleChildScrollView(
@@ -153,14 +154,17 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                     padding: const EdgeInsets.only(left: 10),
                                     child: Text(
                                       name,
-                                      style: const TextStyle(
-                                          fontSize: 18,
-                                          fontFamily: "KaiseiDecol"),
+                                      style: Styles.storeNameStyle,
                                     ),
                                   ),
                                   const Padding(padding: EdgeInsets.all(4)),
                                   Container(
                                     width: size.width * 0.95,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.white,
+                                        border: Border.all(
+                                            color: Colors.grey, width: 2)),
                                     child: Row(
                                       children: [
                                         Column(
@@ -203,43 +207,44 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                               ),
                                               child: Wrap(
                                                 direction: Axis.vertical,
-                                                spacing: 100,
+                                                spacing: 8,
                                                 children: formattedTags!
                                                         .isNotEmpty
                                                     ? formattedTags
+                                                        .take(2)
                                                         .map((formattedTag) {
-                                                        return Padding(
+                                                        return Container(
                                                           padding:
+                                                              EdgeInsetsDirectional
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          6),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4.0),
+                                                            color: Colors
+                                                                .deepOrangeAccent,
+                                                          ),
+                                                          margin:
                                                               const EdgeInsets
-                                                                  .only(
-                                                                  left: 2),
-                                                          child: Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4.0),
-                                                              color: Colors
-                                                                  .deepOrangeAccent,
-                                                            ),
-                                                            child: Center(
-                                                              child: Text(
-                                                                formattedTag,
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 10,
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
+                                                                  .all(1.0),
+                                                          child: Center(
+                                                            child: Text(
+                                                              formattedTag,
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 12,
+                                                                color: Colors
+                                                                    .white,
                                                               ),
                                                             ),
                                                           ),
                                                         );
                                                       }).toList()
-                                                    : [
-                                                        const Text("タグがありません")
-                                                      ], // タグが空の場合のデフォルト表示
+                                                    : [],
                                               ),
                                             ),
                                             const Padding(
@@ -327,11 +332,6 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                                         ),
                                       ],
                                     ),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.white,
-                                        border: Border.all(
-                                            color: Colors.grey, width: 2)),
                                   ),
                                 ],
                               ),

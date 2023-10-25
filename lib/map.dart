@@ -53,7 +53,6 @@ class _MapPageState extends State<MapPage> {
               ),
             ),
           );
-        // ignore: empty_catches
         } catch (e) {
         }
       }

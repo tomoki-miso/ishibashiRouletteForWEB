@@ -20,10 +20,7 @@ class RandomPage extends ConsumerWidget {
     final storeProvider = ref.watch(storeInfoNotifierProvider);
 
     final name = storeProvider.when(
-        loading: () => const Text(
-              '準備中...',
-              style: Styles.storeNameStyle,
-            ),
+        loading: () => const Padding(padding: EdgeInsets.all(1)),
         error: (e, s) => Text(
               'エラー $e',
               style: Styles.storeNameStyle,
@@ -36,7 +33,7 @@ class RandomPage extends ConsumerWidget {
             )); //とりあえずExpandedにしてるけどoverFlowで管理してもいいかも。とにかくいしばしやではみ出るのを防ぎたい。
 
     final detail = storeProvider.when(
-      loading: () => const Text('準備中...'),
+      loading: () => Padding(padding: EdgeInsets.all(1)),
       error: (e, s) => Text('エラー $e'),
       data: (state) => Text(
         state.StoreDetail.toString(),
@@ -46,7 +43,7 @@ class RandomPage extends ConsumerWidget {
     );
 
     final photo = storeProvider.when(
-      loading: () => Image.asset('assets/images/iconKari.png'),
+      loading: () => Padding(padding: EdgeInsets.all(1)),
       error: (e, s) => Text('エラー $e'),
       data: (state) => Container(
         height: screenSize.height * 0.3,
@@ -68,7 +65,7 @@ class RandomPage extends ConsumerWidget {
     );
 
     final tags = storeProvider.when(
-      loading: () => const Text('準備中...'),
+      loading: () => Padding(padding: EdgeInsets.all(1)),
       error: (e, s) => Text('エラー: $e'), // エラーメッセージを表示
       data: (state) => Expanded(
         child: Row(

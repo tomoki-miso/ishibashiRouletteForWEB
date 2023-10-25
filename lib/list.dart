@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ishibashi/storeList.dart';
 import 'package:ishibashi/style/styles.dart';
 
 import 'searchconfirm.dart';
@@ -14,12 +15,12 @@ class ListPage extends StatefulWidget {
 
 class _ListPageState extends State<ListPage> {
   void navigateToStorePage(String documentId) {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => StorePage(documentId: documentId),
-    //   ),
-    // );
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => StoreListPage(documentId: documentId),
+      ),
+    );
   }
 
   Future<List<String>> _fetchTags(DocumentReference storeReference) async {
@@ -169,51 +170,51 @@ class _ListPageState extends State<ListPage> {
                                         const Padding(
                                             padding: EdgeInsets.all(8)),
                                         Container(
-                                          height: size.height * 0.03,
-                                          width: size.width * 0.38,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          child: Wrap(
-                                            direction: Axis.vertical,
-
-                                            children: tags != null &&
-                                                    tags.isNotEmpty
-                                                ? tags.map((formattedTag) {
-                                                    return Container(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .symmetric(
-                                                              horizontal: 4),
-                                                      margin:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 2),
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(4.0),
-                                                        color: Colors
-                                                            .deepOrangeAccent,
-                                                      ),
-                                                      child: Center(
-                                                        child: Text(
-                                                          formattedTag
-                                                              .toString(),
-                                                          style:
-                                                              const TextStyle(
-                                                            fontSize: 12,
-                                                            color: Colors.white,
+                                            height: size.height * 0.03,
+                                            width: size.width * 0.38,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
+                                            child: Wrap(
+                                              direction: Axis.vertical,
+                                              spacing: 8,
+                                              children: tags!.isNotEmpty
+                                                  ? tags
+                                                      .take(2)
+                                                      .map((formattedTag) {
+                                                      return Container(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        6),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      4.0),
+                                                          color: Colors
+                                                              .deepOrangeAccent,
+                                                        ),
+                                                        margin: const EdgeInsets
+                                                            .all(1.0),
+                                                        child: Center(
+                                                          child: Text(
+                                                            formattedTag,
+                                                            style:
+                                                                const TextStyle(
+                                                              fontSize: 12,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    );
-                                                  }).toList()
-                                                : [
-                                                    const Text("タグがありません")
-                                                  ], // Display default text if tags are empty
-                                          ),
-                                        ),
+                                                      );
+                                                    }).toList()
+                                                  : [],
+                                            )),
                                         const Padding(
                                             padding: EdgeInsets.all(1)),
                                         const Text("営業日"),

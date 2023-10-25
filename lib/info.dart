@@ -72,7 +72,7 @@ class _InfoPageState extends State<InfoPage> {
                       child: const Row(
                         children: [
                           Icon(
-                             Icons.list,
+                            Icons.list,
                             size: 70,
                             color: Colors.deepOrangeAccent,
                           ),
@@ -109,7 +109,7 @@ class _InfoPageState extends State<InfoPage> {
                       child: const Row(
                         children: [
                           FaIcon(
-                           FontAwesomeIcons.shop,
+                            FontAwesomeIcons.shop,
                             size: 60,
                             color: Colors.deepOrangeAccent,
                           ),
@@ -149,7 +149,6 @@ class _InfoPageState extends State<InfoPage> {
                         ],
                       ),
                     ),
-                     
                   ],
                 ),
               ),
@@ -183,7 +182,6 @@ class _InfoPageState extends State<InfoPage> {
                         ],
                       ),
                     ),
-                    Padding(padding: EdgeInsets.all(20)),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           fixedSize: Size(
