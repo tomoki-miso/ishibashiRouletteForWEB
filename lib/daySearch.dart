@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:ishibashi/storeList.dart';
 import 'package:ishibashi/style/styles.dart';
 
 class DaySearchPage extends StatefulWidget {
-  const DaySearchPage({Key? key}) : super(key: key);
+  const DaySearchPage({super.key});
 
   @override
   _DaySearchPageState createState() => _DaySearchPageState();
@@ -27,7 +27,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
   ];
 
   // フレンドを検索する関数
-  void _searchDays() async {
+  Future<void> _searchDays() async {
     if (selectedDays.isNotEmpty) {
       final querySnapshot = await _firestore
           .collection('stores')
@@ -50,8 +50,8 @@ class _DaySearchPageState extends State<DaySearchPage> {
     final storeData = storeSnapshot.data() as Map<String, dynamic>?;
 
     // タグ情報を取得
-    if (storeData != null && storeData.containsKey("tags")) {
-      final tags = storeData["tags"] as List<dynamic>;
+    if (storeData != null && storeData.containsKey('tags')) {
+      final tags = storeData['tags'] as List<dynamic>;
       final formattedTags = tags.map((tag) => tag.toString()).toList();
       return formattedTags;
     } else {
@@ -63,13 +63,13 @@ class _DaySearchPageState extends State<DaySearchPage> {
     final storeSnapshot = await storeReference.get();
     final storeData = storeSnapshot.data() as Map<String, dynamic>?;
 
-    if (storeData != null && storeData.containsKey("daysOfWeek")) {
-      final openDays = (storeData["daysOfWeek"] as List<dynamic>)
+    if (storeData != null && storeData.containsKey('daysOfWeek')) {
+      final openDays = (storeData['daysOfWeek'] as List<dynamic>)
           .map((openDay) => openDay.toString())
-          .join(", ");
+          .join(', ');
       return openDays; // 例: "Monday, Tuesday, Wednesday"
     } else {
-      return "営業日情報がありません";
+      return '営業日情報がありません';
     }
   }
 
@@ -93,10 +93,10 @@ class _DaySearchPageState extends State<DaySearchPage> {
               width: size.width * 0.85,
               height: size.height * 0.1, // 高さ
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(10),
                 color: Colors.greenAccent,
               ),
-              margin: const EdgeInsets.symmetric(vertical: 10.0),
+              margin: const EdgeInsets.symmetric(vertical: 10),
               child: Center(
                 child: Container(
                   padding: const EdgeInsets.all(3),
@@ -107,23 +107,22 @@ class _DaySearchPageState extends State<DaySearchPage> {
                       final isSelected = selectedDays.contains(day);
                       return InkWell(
                         onTap: () {
-                          setState(() {
+                          setState(() async {
                             if (isSelected) {
                               selectedDays.remove(day);
                             } else {
                               selectedDays.add(day);
                             }
-                            _searchDays();
+                            await _searchDays();
                           });
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 5),
+                              horizontal: 10, vertical: 5,),
                           decoration: BoxDecoration(
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(16)),
                             border: Border.all(
-                              width: 1,
                               color: Colors.pink,
                             ),
                             color: isSelected ? Colors.pink : null,
@@ -165,7 +164,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                           itemBuilder: (context, index) {
                             final record = _searchResults[index];
                             final recordData =
-                                record.data() as Map<String, dynamic>;
+                                record.data()! as Map<String, dynamic>;
                             final name = recordData['name'] as String;
                             final detail = recordData['detail'] as String;
                             final storePhotoUrl =
@@ -188,8 +187,8 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                 final formattedTags = snapshot.data;
 
                                 return InkWell(
-                                  onTap: () {
-                                    Navigator.push(
+                                  onTap: () async {
+                                    await Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => StoreListPage(
@@ -214,27 +213,27 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               const Padding(
-                                                  padding: EdgeInsets.all(10)),
+                                                  padding: EdgeInsets.all(10),),
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    left: 10),
+                                                    left: 10,),
                                                 child: Text(
                                                   name,
                                                   style: Styles.storeNameStyle,
                                                 ),
                                               ),
                                               const Padding(
-                                                  padding: EdgeInsets.all(4)),
+                                                  padding: EdgeInsets.all(4),),
                                               Container(
                                                 width: size.width * 0.95,
                                                 decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            20),
+                                                            20,),
                                                     color: Colors.white,
                                                     border: Border.all(
                                                         color: Colors.grey,
-                                                        width: 2)),
+                                                        width: 2,),),
                                                 child: Row(
                                                   children: [
                                                     Column(
@@ -247,14 +246,14 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                           padding:
                                                               const EdgeInsets
                                                                   .only(
-                                                                  left: 8),
+                                                                  left: 8,),
                                                           child: storePhotoUrl
                                                                   .isNotEmpty
                                                               ? ClipRRect(
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
-                                                                              5),
+                                                                              5,),
                                                                   child:
                                                                       CachedNetworkImage(
                                                                     imageUrl:
@@ -264,14 +263,14 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                                             0.8,
                                                                     fit: BoxFit
                                                                         .cover,
-                                                                  ))
+                                                                  ),)
                                                               : Container(),
                                                         ),
                                                       ],
                                                     ),
                                                     const Padding(
                                                         padding:
-                                                            EdgeInsets.all(10)),
+                                                            EdgeInsets.all(10),),
                                                     Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -283,7 +282,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                         const Padding(
                                                             padding:
                                                                 EdgeInsets.all(
-                                                                    8)),
+                                                                    8,),),
                                                         Container(
                                                             height:
                                                                 size.height *
@@ -295,7 +294,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          20),
+                                                                          20,),
                                                             ),
                                                             child: Wrap(
                                                               direction:
@@ -306,20 +305,19 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                                   ? formattedTags
                                                                       .take(2)
                                                                       .map(
-                                                                          (formattedTag) {
-                                                                      return Container(
+                                                                          (formattedTag) => Container(
                                                                         padding:
-                                                                            EdgeInsetsDirectional.symmetric(horizontal: 6),
+                                                                            const EdgeInsetsDirectional.symmetric(horizontal: 6),
                                                                         decoration:
                                                                             BoxDecoration(
                                                                           borderRadius:
-                                                                              BorderRadius.circular(4.0),
+                                                                              BorderRadius.circular(4),
                                                                           color:
                                                                               Colors.deepOrangeAccent,
                                                                         ),
                                                                         margin: const EdgeInsets
                                                                             .all(
-                                                                            1.0),
+                                                                            1,),
                                                                         child:
                                                                             Center(
                                                                           child:
@@ -332,89 +330,86 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                                             ),
                                                                           ),
                                                                         ),
-                                                                      );
-                                                                    }).toList()
+                                                                      ),).toList()
                                                                   : [],
-                                                            )),
+                                                            ),),
                                                         const Padding(
                                                             padding:
                                                                 EdgeInsets.all(
-                                                                    1)),
-                                                        const Text("営業日"),
-                                                        Container(
-                                                          child: FutureBuilder<
-                                                              String>(
-                                                            // _fetchOpenTime メソッドで営業時間を非同期に取得
-                                                            future: _fetchOpenDays(
-                                                                record
-                                                                    .reference),
-                                                            builder: (context,
-                                                                snapshot) {
-                                                              if (snapshot
-                                                                      .connectionState ==
-                                                                  ConnectionState
-                                                                      .waiting) {
-                                                                return const CircularProgressIndicator(); // ローディングインジケーターを表示
-                                                              } else if (snapshot
-                                                                  .hasError) {
-                                                                return Text(
-                                                                    'エラー: ${snapshot.error}');
-                                                              }
+                                                                    1,),),
+                                                        const Text('営業日'),
+                                                        FutureBuilder<
+                                                            String>(
+                                                          // _fetchOpenTime メソッドで営業時間を非同期に取得
+                                                          future: _fetchOpenDays(
+                                                              record
+                                                                  .reference,),
+                                                          builder: (context,
+                                                              snapshot,) {
+                                                            if (snapshot
+                                                                    .connectionState ==
+                                                                ConnectionState
+                                                                    .waiting) {
+                                                              return const CircularProgressIndicator(); // ローディングインジケーターを表示
+                                                            } else if (snapshot
+                                                                .hasError) {
+                                                              return Text(
+                                                                  'エラー: ${snapshot.error}',);
+                                                            }
 
-                                                              final openDays =
-                                                                  snapshot.data;
+                                                            final openDays =
+                                                                snapshot.data;
 
-                                                              return Container(
-                                                                height:
-                                                                    size.height *
-                                                                        0.06,
-                                                                width:
-                                                                    size.width *
-                                                                        0.38,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              20),
-                                                                ),
-                                                                child:
-                                                                    Container(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          top:
-                                                                              10,
-                                                                          left:
-                                                                              8,
-                                                                          right:
-                                                                              5),
-                                                                  decoration: BoxDecoration(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              10),
-                                                                      color: Colors
-                                                                          .greenAccent),
-                                                                  child: Text(
-                                                                    openDays!,
-                                                                    style:
-                                                                        const TextStyle(
-                                                                      fontSize:
-                                                                          12,
-                                                                    ),
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .ellipsis,
+                                                            return Container(
+                                                              height:
+                                                                  size.height *
+                                                                      0.06,
+                                                              width:
+                                                                  size.width *
+                                                                      0.38,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20,),
+                                                              ),
+                                                              child:
+                                                                  Container(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        top:
+                                                                            10,
+                                                                        left:
+                                                                            8,
+                                                                        right:
+                                                                            5,),
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            10,),
+                                                                    color: Colors
+                                                                        .greenAccent,),
+                                                                child: Text(
+                                                                  openDays!,
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        12,
                                                                   ),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
                                                                 ),
-                                                              );
-                                                            },
-                                                          ),
+                                                              ),
+                                                            );
+                                                          },
                                                         ),
                                                         const Padding(
                                                             padding:
                                                                 EdgeInsets.all(
-                                                                    4)),
+                                                                    4,),),
                                                         Container(
                                                           height:
                                                               size.height * 0.1,
@@ -425,7 +420,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
-                                                                        10),
+                                                                        10,),
                                                             color: Colors
                                                                 .greenAccent,
                                                           ),
@@ -449,7 +444,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                                         const Padding(
                                                             padding:
                                                                 EdgeInsets.all(
-                                                                    6))
+                                                                    6,),),
                                                       ],
                                                     ),
                                                   ],
@@ -468,6 +463,6 @@ class _DaySearchPageState extends State<DaySearchPage> {
                         ),
             ),
           ],
-        ));
+        ),);
   }
 }

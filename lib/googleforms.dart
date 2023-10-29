@@ -20,7 +20,7 @@ class _FormPageState extends State<FormPage> {
 
   /// 初期状態を設定
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
     webViewController = WebViewController()
       ..loadRequest(
@@ -30,20 +30,18 @@ class _FormPageState extends State<FormPage> {
 
   /// アプリのUIを構築
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.greenAccent),
          backgroundColor: Colors.white,
          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20)),
+                bottomRight: Radius.circular(20),),
           ),
       ),
       body: WebViewWidget(
         controller: webViewController,
       ),
     );
-  }
 }

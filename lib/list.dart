@@ -1,21 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:ishibashi/searchconfirm.dart';
 import 'package:ishibashi/storeList.dart';
 import 'package:ishibashi/style/styles.dart';
 
-import 'searchconfirm.dart';
-
 class ListPage extends StatefulWidget {
-  const ListPage({Key? key}) : super(key: key);
+  const ListPage({super.key});
 
   @override
   _ListPageState createState() => _ListPageState();
 }
 
 class _ListPageState extends State<ListPage> {
-  void navigateToStorePage(String documentId) {
-    Navigator.push(
+  Future<void> navigateToStorePage(String documentId) async {
+    await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => StoreListPage(documentId: documentId),
@@ -23,31 +22,18 @@ class _ListPageState extends State<ListPage> {
     );
   }
 
-  Future<List<String>> _fetchTags(DocumentReference storeReference) async {
-    final storeSnapshot = await storeReference.get();
-    final storeData = storeSnapshot.data() as Map<String, dynamic>?;
-
-    // タグ情報を取得
-    if (storeData != null && storeData.containsKey("tags")) {
-      final tags = storeData["tags"] as List<dynamic>;
-      final formattedTags = tags.map((tag) => tag.toString()).toList();
-      return formattedTags;
-    } else {
-      return [];
-    }
-  }
 
   Future<String> _fetchOpenDays(DocumentReference storeReference) async {
     final storeSnapshot = await storeReference.get();
     final storeData = storeSnapshot.data() as Map<String, dynamic>?;
 
-    if (storeData != null && storeData.containsKey("daysOfWeek")) {
-      final openDays = (storeData["daysOfWeek"] as List<dynamic>)
+    if (storeData != null && storeData.containsKey('daysOfWeek')) {
+      final openDays = (storeData['daysOfWeek'] as List<dynamic>)
           .map((openDay) => openDay.toString())
-          .join(", ");
+          .join(', ');
       return openDays; // 例: "Monday, Tuesday, Wednesday"
     } else {
-      return "営業日情報がありません";
+      return '営業日情報がありません';
     }
   }
 
@@ -61,8 +47,8 @@ class _ListPageState extends State<ListPage> {
         child: AppBar(
           actions: [
             IconButton(
-              onPressed: () {
-                Navigator.push(
+              onPressed: () async {
+                await Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const SearchConfirmPage(),
@@ -73,7 +59,7 @@ class _ListPageState extends State<ListPage> {
                 Icons.search,
                 color: Color(0xFF3E3D3D),
               ),
-            )
+            ),
           ],
           backgroundColor: Colors.white,
           shape: const RoundedRectangleBorder(
@@ -86,16 +72,16 @@ class _ListPageState extends State<ListPage> {
       ),
       body: Center(
         child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-          stream: FirebaseFirestore.instance.collection("stores").snapshots(),
-          builder: (BuildContext context,
-              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          stream: FirebaseFirestore.instance.collection('stores').snapshots(),
+          builder: (context,
+              snapshot,) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             }
             return ListView(
               children: snapshot.data!.docs
-                  .map((DocumentSnapshot<Map<String, dynamic>> document) {
-                final data = document.data()!;
+                  .map((document) {
+                final data = document.data();
 
                 // Extract store data
                 final name = data['name'] as String;
@@ -104,9 +90,9 @@ class _ListPageState extends State<ListPage> {
                 final detail = data['detail'] as String;
 
                 return InkWell(
-                  onTap: () {
+                  onTap: () async {
                     // Navigate to the store page
-                    navigateToStorePage(document.id);
+                    await navigateToStorePage(document.id);
                   },
                   child: Center(
                     child: SingleChildScrollView(
@@ -168,7 +154,7 @@ class _ListPageState extends State<ListPage> {
                                           MainAxisAlignment.center,
                                       children: [
                                         const Padding(
-                                            padding: EdgeInsets.all(8)),
+                                            padding: EdgeInsets.all(8),),
                                         Container(
                                             height: size.height * 0.03,
                                             width: size.width * 0.38,
@@ -182,24 +168,23 @@ class _ListPageState extends State<ListPage> {
                                               children: tags!.isNotEmpty
                                                   ? tags
                                                       .take(2)
-                                                      .map((formattedTag) {
-                                                      return Container(
+                                                      .map((formattedTag) => Container(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .symmetric(
                                                                     horizontal:
-                                                                        6),
+                                                                        6,),
                                                         decoration:
                                                             BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
-                                                                      4.0),
+                                                                      4,),
                                                           color: Colors
                                                               .deepOrangeAccent,
                                                         ),
                                                         margin: const EdgeInsets
-                                                            .all(1.0),
+                                                            .all(1),
                                                         child: Center(
                                                           child: Text(
                                                             formattedTag,
@@ -211,61 +196,58 @@ class _ListPageState extends State<ListPage> {
                                                             ),
                                                           ),
                                                         ),
-                                                      );
-                                                    }).toList()
+                                                      ),).toList()
                                                   : [],
-                                            )),
+                                            ),),
                                         const Padding(
-                                            padding: EdgeInsets.all(1)),
-                                        const Text("営業日"),
-                                        Container(
-                                          child: FutureBuilder<String>(
-                                            future: _fetchOpenDays(
-                                                document.reference),
-                                            builder: (context, snapshot) {
-                                              if (snapshot.connectionState ==
-                                                  ConnectionState.waiting) {
-                                                return const CircularProgressIndicator();
-                                              } else if (snapshot.hasError) {
-                                                return Text(
-                                                    'エラー: ${snapshot.error}');
-                                              }
-                                              final openDays = snapshot.data;
+                                            padding: EdgeInsets.all(1),),
+                                        const Text('営業日'),
+                                        FutureBuilder<String>(
+                                          future: _fetchOpenDays(
+                                              document.reference,),
+                                          builder: (context, snapshot) {
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.waiting) {
+                                              return const CircularProgressIndicator();
+                                            } else if (snapshot.hasError) {
+                                              return Text(
+                                                  'エラー: ${snapshot.error}',);
+                                            }
+                                            final openDays = snapshot.data;
 
-                                              return Container(
-                                                height: size.height * 0.06,
-                                                width: size.width * 0.38,
+                                            return Container(
+                                              height: size.height * 0.06,
+                                              width: size.width * 0.38,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.only(
+                                                        top: 10,
+                                                        left: 8,
+                                                        right: 5,),
                                                 decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.circular(20),
+                                                      BorderRadius.circular(
+                                                          10,),
+                                                  color: Colors.greenAccent,
                                                 ),
-                                                child: Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 10,
-                                                          left: 8,
-                                                          right: 5),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    color: Colors.greenAccent,
+                                                child: Text(
+                                                  openDays!,
+                                                  style: const TextStyle(
+                                                    fontSize: 12,
                                                   ),
-                                                  child: Text(
-                                                    openDays!,
-                                                    style: const TextStyle(
-                                                      fontSize: 12,
-                                                    ),
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                 ),
-                                              );
-                                            },
-                                          ),
+                                              ),
+                                            );
+                                          },
                                         ),
                                         const Padding(
-                                            padding: EdgeInsets.all(4)),
+                                            padding: EdgeInsets.all(4),),
                                         Container(
                                           height: size.height * 0.1,
                                           width: size.width * 0.38,
@@ -287,7 +269,7 @@ class _ListPageState extends State<ListPage> {
                                           ),
                                         ),
                                         const Padding(
-                                            padding: EdgeInsets.all(6))
+                                            padding: EdgeInsets.all(6),),
                                       ],
                                     ),
                                   ],

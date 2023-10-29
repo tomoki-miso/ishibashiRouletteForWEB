@@ -9,14 +9,14 @@ import 'package:ishibashi/style/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final storeProvider = StateNotifierProvider<StoreNotifier, List<StoreClass>>(
-    (ref) => StoreNotifier());
+    (ref) => StoreNotifier(),);
 
 class StorePage extends ConsumerWidget {
-  StorePage({Key? key}) : super(key: key);
+  const StorePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
 
     final storeProvider = ref.watch(storeInfoNotifierProvider);
 
@@ -30,15 +30,15 @@ class StorePage extends ConsumerWidget {
               style: Styles.storeNameStyle,
             ),
         data: (state) => Text(
-              state.StoreName.toString(),
+              state.StoreName,
               style: Styles.storeNameStyle,
-            ));
+            ),);
 
     final detail = storeProvider.when(
       loading: () => const Text('準備中...'),
       error: (e, s) => Text('エラー $e'),
       data: (state) => Text(
-        state.StoreDetail.toString(),
+        state.StoreDetail,
         maxLines: 3,
         overflow: TextOverflow.ellipsis,
       ), // Fix this line
@@ -54,10 +54,10 @@ class StorePage extends ConsumerWidget {
             ? ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: CachedNetworkImage(
-                  imageUrl: state.StorePhotoUrl.toString(),
+                  imageUrl: state.StorePhotoUrl,
                   width: screenSize.width * 0.8,
                   fit: BoxFit.cover,
-                ))
+                ),)
             : Container(
                 height: screenSize.height * 0.3,
                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -72,14 +72,13 @@ class StorePage extends ConsumerWidget {
       data: (state) => Expanded(
         child: Row(
           children: state.Tags.isNotEmpty
-              ? state.Tags.map((tag) {
-                  return Container(
-                    padding: EdgeInsetsDirectional.symmetric(horizontal: 8),
+              ? state.Tags.map((tag) => Container(
+                    padding: const EdgeInsetsDirectional.symmetric(horizontal: 8),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4.0),
+                      borderRadius: BorderRadius.circular(4),
                       color: Colors.deepOrangeAccent,
                     ),
-                    margin: const EdgeInsets.all(2.0),
+                    margin: const EdgeInsets.all(2),
                     child: Center(
                       child: Text(
                         tag,
@@ -89,8 +88,7 @@ class StorePage extends ConsumerWidget {
                         ),
                       ),
                     ),
-                  );
-                }).toList()
+                  ),).toList()
               : [],
         ),
       ),
@@ -103,12 +101,11 @@ class StorePage extends ConsumerWidget {
         if (state.StoreWeb.isNotEmpty) {
           return ElevatedButton(
             style: ElevatedButton.styleFrom(
-              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01),
-              primary: const Color.fromARGB(124, 252, 0, 0),
+              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01), backgroundColor: const Color.fromARGB(124, 252, 0, 0),
             ),
-            onPressed: () {
+            onPressed: () async {
               final weburl = Uri.parse(state.StoreWeb);
-              launchUrl(weburl);
+              await launchUrl(weburl);
             },
             child: RichText(
               text: const TextSpan(children: [
@@ -117,8 +114,8 @@ class StorePage extends ConsumerWidget {
                     Icons.public,
                   ),
                 ),
-                TextSpan(text: "公式ウェブサイト"),
-              ]),
+                TextSpan(text: '公式ウェブサイト'),
+              ],),
             ),
           );
         } else {
@@ -135,12 +132,11 @@ class StorePage extends ConsumerWidget {
         if (state.StoreTabelog.isNotEmpty) {
           return ElevatedButton(
             style: ElevatedButton.styleFrom(
-              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01),
-              primary: const Color.fromARGB(255, 254, 170, 1),
+              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01), backgroundColor: const Color.fromARGB(255, 254, 170, 1),
             ),
-            onPressed: () {
+            onPressed: () async {
               final tabelogurl = Uri.parse(state.StoreTabelog);
-              launchUrl(tabelogurl);
+              await launchUrl(tabelogurl);
             },
             child: RichText(
               text: const TextSpan(children: [
@@ -149,8 +145,8 @@ class StorePage extends ConsumerWidget {
                     Icons.public,
                   ),
                 ),
-                TextSpan(text: "食べログ"),
-              ]),
+                TextSpan(text: '食べログ'),
+              ],),
             ),
           );
         } else {
@@ -167,12 +163,11 @@ class StorePage extends ConsumerWidget {
         if (state.StoreTwitter.isNotEmpty) {
           return ElevatedButton(
             style: ElevatedButton.styleFrom(
-              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01),
-              primary: Colors.black,
+              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01), backgroundColor: Colors.black,
             ),
-            onPressed: () {
+            onPressed: () async {
               final Twitterurl = Uri.parse(state.StoreTwitter);
-              launchUrl(Twitterurl);
+              await launchUrl(Twitterurl);
             },
             child: RichText(
               text: const TextSpan(children: [
@@ -181,8 +176,8 @@ class StorePage extends ConsumerWidget {
                     FontAwesomeIcons.twitter,
                   ),
                 ),
-                TextSpan(text: "X(旧Twitter)"),
-              ]),
+                TextSpan(text: 'X(旧Twitter)'),
+              ],),
             ),
           );
         } else {
@@ -198,12 +193,11 @@ class StorePage extends ConsumerWidget {
         if (state.StoreInsta.isNotEmpty) {
           return ElevatedButton(
             style: ElevatedButton.styleFrom(
-              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01),
-              primary: const Color.fromARGB(255, 99, 70, 185),
+              fixedSize: Size(screenSize.width * 0.8, screenSize.height * 0.01), backgroundColor: const Color.fromARGB(255, 99, 70, 185),
             ),
-            onPressed: () {
+            onPressed: () async {
               final Instaurl = Uri.parse(state.StoreInsta);
-              launchUrl(Instaurl);
+              await launchUrl(Instaurl);
             },
             child: RichText(
               text: const TextSpan(children: [
@@ -212,8 +206,8 @@ class StorePage extends ConsumerWidget {
                     FontAwesomeIcons.instagram,
                   ),
                 ),
-                TextSpan(text: "Instagram"),
-              ]),
+                TextSpan(text: 'Instagram'),
+              ],),
             ),
           );
         } else {
@@ -244,10 +238,9 @@ class StorePage extends ConsumerWidget {
           color: Colors.greenAccent,
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(12),
               child: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       width: screenSize.width,
@@ -255,7 +248,7 @@ class StorePage extends ConsumerWidget {
                       child: Center(
                         child: Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.0),
+                            borderRadius: BorderRadius.circular(5),
                             color: Colors.white,
                           ),
                           margin: const EdgeInsets.only(top: 20),
@@ -265,16 +258,16 @@ class StorePage extends ConsumerWidget {
                             children: [
                               name,
                               Row(
-                                children: [LikeButton(), tags],
+                                children: [const LikeButton(), tags],
                               ),
-                              Container(
+                              SizedBox(
                                   height: screenSize.height * 0.3,
-                                  child: photo),
+                                  child: photo,),
                               Container(
-                                  margin: EdgeInsets.all(10),
+                                  margin: const EdgeInsets.all(10),
                                   height: screenSize.height * 0.09,
                                   width: screenSize.width * 0.9,
-                                  child: detail),
+                                  child: detail,),
                               WebButton,
                               TabelogButton,
                               TwitterButton,
@@ -296,6 +289,8 @@ class StorePage extends ConsumerWidget {
 }
 
 class LikeButton extends StatefulWidget {
+  const LikeButton({super.key});
+
   @override
   _LikeButtonState createState() => _LikeButtonState();
 }
@@ -310,12 +305,10 @@ class _LikeButtonState extends State<LikeButton> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return IconButton(
+  Widget build(BuildContext context) => IconButton(
       icon: _isLiked
           ? const Icon(Icons.favorite)
           : const Icon(Icons.favorite_border),
       onPressed: _toggleLike,
     );
-  }
 }

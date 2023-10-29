@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'random.dart';
-import 'map.dart';
-import 'searchconfirm.dart';
+import 'package:ishibashi/map.dart';
+import 'package:ishibashi/random.dart';
+import 'package:ishibashi/searchconfirm.dart';
 
 
 class TopPage extends StatefulWidget {
-  const TopPage({Key? key}) : super(key: key);
+  const TopPage({super.key});
 
   @override
   State<TopPage> createState() => _TopPageState();
@@ -16,7 +15,7 @@ class TopPage extends StatefulWidget {
 class _TopPageState extends State<TopPage> {
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(screenSize.height * 0.08),
@@ -25,7 +24,7 @@ class _TopPageState extends State<TopPage> {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20)),
+                bottomRight: Radius.circular(20),),
           ),
         ),
       ),
@@ -75,11 +74,11 @@ class _TopPageState extends State<TopPage> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)), backgroundColor: Colors.greenAccent,
+                        borderRadius: BorderRadius.circular(30),), backgroundColor: Colors.greenAccent,
                     fixedSize:
-                        Size(screenSize.width * 0.9, screenSize.height * 0.1)),
-                onPressed: () {
-                  Navigator.push(
+                        Size(screenSize.width * 0.9, screenSize.height * 0.1),),
+                onPressed: () async {
+                  await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const RandomPage()),
                   );
@@ -87,7 +86,7 @@ class _TopPageState extends State<TopPage> {
                 child: RichText(
                   text: const TextSpan(
                     style: TextStyle(
-                        color: Color.fromARGB(255, 62, 61, 61), fontSize: 16),
+                        color: Color.fromARGB(255, 62, 61, 61), fontSize: 16,),
                     children: [
                       WidgetSpan(
                         child: FaIcon(
@@ -108,20 +107,19 @@ class _TopPageState extends State<TopPage> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
+                        borderRadius: BorderRadius.circular(30),), backgroundColor: Colors.greenAccent,
                     fixedSize:
-                        Size(screenSize.width * 0.9, screenSize.height * 0.1),
-                    primary: Colors.greenAccent),
-                onPressed: () {
-                  Navigator.push(
+                        Size(screenSize.width * 0.9, screenSize.height * 0.1),),
+                onPressed: () async {
+                  await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MapPage()),
+                    MaterialPageRoute(builder: (context) => const MapPage()),
                   );
                 },
                 child: RichText(
                   text: const TextSpan(
                     style: TextStyle(
-                        color: Color.fromARGB(255, 62, 61, 61), fontSize: 16),
+                        color: Color.fromARGB(255, 62, 61, 61), fontSize: 16,),
                     children: [
                       WidgetSpan(
                         child: FaIcon(
@@ -142,12 +140,11 @@ class _TopPageState extends State<TopPage> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
+                        borderRadius: BorderRadius.circular(30),), backgroundColor: Colors.greenAccent,
                     fixedSize:
-                        Size(screenSize.width * 0.9, screenSize.height * 0.1),
-                    primary: Colors.greenAccent),
-                onPressed: () {
-                  Navigator.push(
+                        Size(screenSize.width * 0.9, screenSize.height * 0.1),),
+                onPressed: () async {
+                  await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const SearchConfirmPage()),
                   );
@@ -155,7 +152,7 @@ class _TopPageState extends State<TopPage> {
                 child: RichText(
                   text: const TextSpan(
                     style: TextStyle(
-                        color: Color.fromARGB(255, 62, 61, 61), fontSize: 16),
+                        color: Color.fromARGB(255, 62, 61, 61), fontSize: 16,),
                     children: [
                       WidgetSpan(
                         child: FaIcon(

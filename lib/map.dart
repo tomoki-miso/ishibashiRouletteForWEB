@@ -1,10 +1,13 @@
 // ignore_for_file: empty_catches
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
+
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -21,18 +24,19 @@ class _MapPageState extends State<MapPage> {
 
   // Firebaseからデータを取得する関数
   Future<List<Map<String, dynamic>>> _fetchDataFromFirestore() async {
-    List<Map<String, dynamic>> dataList = [];
-    QuerySnapshot snapshot =
+    final List<Map<String, dynamic>> dataList = [];
+    final QuerySnapshot snapshot =
         await FirebaseFirestore.instance.collection('stores').get();
 
-    snapshot.docs.forEach((doc) {
-      dataList.add(doc.data() as Map<String, dynamic>);
-    });
+    for (final doc in snapshot.docs) {
+      dataList.add(doc.data()! as Map<String, dynamic>);
+    }
 
     return dataList;
   }
 
   Future<void> _createMarkersFromFirebaseData() async {
+
     try {
       List<Map<String, dynamic>> firebaseData = await _fetchDataFromFirestore();
       Set<Marker> markerSet = {};
@@ -64,6 +68,7 @@ class _MapPageState extends State<MapPage> {
 
       // マーカーが正しくセットされたかどうかをログで確認
     } catch (e) {}
+
   }
 
   Position? currentPosition;
@@ -76,8 +81,9 @@ class _MapPageState extends State<MapPage> {
   );
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
+
     _createMarkersFromFirebaseData();
 
     //位置情報が許可されていない時に許可をリクエストする
@@ -97,6 +103,7 @@ class _MapPageState extends State<MapPage> {
           ? 'Unknown'
           : '${position.latitude.toString()}, ${position.longitude.toString()}');
     });
+
   }
 
   void _onMapCreated(GoogleMapController controller) {
@@ -104,17 +111,21 @@ class _MapPageState extends State<MapPage> {
   }
 
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: GoogleMap(
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
           target: _center,
-          zoom: 18.0,
+          zoom: 18,
         ),
         myLocationEnabled: true, //現在位置をマップ上に表示
         markers: markers,
       ),
     );
+
   }
+
 }
