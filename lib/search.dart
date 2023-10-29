@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 
-import 'result.dart';
+import 'package:ishibashi/result.dart';
 
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage({super.key});
 
   @override
   _SearchPageState createState() => _SearchPageState();
@@ -43,8 +43,8 @@ class _SearchPageState extends State<SearchPage> {
 
   TimeOfDay dateTime = TimeOfDay.now();
 
-  void _timePicker(BuildContext context) {
-    DatePicker.showPicker(
+  Future<void> _timePicker(BuildContext context) async {
+    await DatePicker.showPicker(
       context,
       pickerModel: TimePickerModel(
         currentTime: DateTime.now(),
@@ -82,7 +82,7 @@ Future<void> _search() async {
   final QuerySnapshot querySnapshot = await query.get();
 
   // 検索結果を表示するページに遷移
-  Navigator.push(
+  await Navigator.push(
     context,
     MaterialPageRoute(
       builder: (context) =>
@@ -94,7 +94,7 @@ Future<void> _search() async {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: PreferredSize(
@@ -105,7 +105,7 @@ Future<void> _search() async {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20)),
+                bottomRight: Radius.circular(20),),
           ),
         ),
       ),
@@ -118,8 +118,7 @@ Future<void> _search() async {
               decoration: BoxDecoration(
                 color: Colors.greenAccent,
                 border: Border.all(
-                  color: Colors.black,
-                  width: 1.0,
+                  
                 ),
               ),
               child: Column(
@@ -127,12 +126,12 @@ Future<void> _search() async {
                   Container(
                     width: screenSize.width * 0.89,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
                     ),
-                    margin: const EdgeInsets.symmetric(vertical: 13.0),
+                    margin: const EdgeInsets.symmetric(vertical: 13),
                     child: Padding(
-                      padding: const EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(5),
                       child: TextField(
                         controller: _nameController,
                         decoration: InputDecoration(
@@ -140,7 +139,7 @@ Future<void> _search() async {
                           hintText: 'Enter search keyword...',
                           prefixIcon: const Icon(Icons.search),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.circular(8),
                           ),
                         ),
                         onChanged: (value) {
@@ -153,16 +152,16 @@ Future<void> _search() async {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "ジャンル",
+                        'ジャンル',
                       ),
                       Container(
                         width: screenSize.width * 0.85,
                         height: screenSize.height * 0.4,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(10),
                           color: Colors.white,
                         ),
-                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                        margin: const EdgeInsets.symmetric(vertical: 10),
                         child: Container(
                           padding: const EdgeInsets.all(8), // タグのパディングを小さく調整
                           child: Column(
@@ -181,17 +180,15 @@ Future<void> _search() async {
                                       } else {
                                         selectedTags.add(tag);
                                       }
-                                      print('選択中の曜日: $selectedTags');
                                     });
                                   },
                                       child: Container(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 5, vertical: 3),
+                                            horizontal: 5, vertical: 3,),
                                         decoration: BoxDecoration(
                                           borderRadius: const BorderRadius.all(
-                                              Radius.circular(16)),
+                                              Radius.circular(16),),
                                           border: Border.all(
-                                            width: 1,
                                             color: Colors.pink,
                                           ),
                                           color:
@@ -230,7 +227,7 @@ Future<void> _search() async {
                                         ElevatedButton(
                                           onPressed: () {
                                             selectedTags = List.of(
-                                                tags); // deep copy を使ってコピーする
+                                                tags,); // deep copy を使ってコピーする
                                             setState(() {});
                                           },
                                           child: const Text('ぜんぶ'),
@@ -244,16 +241,16 @@ Future<void> _search() async {
                           ),
                         ),
                       ),
-                      const Text("営業日"),
+                      const Text('営業日'),
                       Container(
                         //営業曜日
                         width: screenSize.width * 0.85,
                         height: screenSize.height * 0.1, // 高さ
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(10),
                           color: Colors.white,
                         ),
-                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                        margin: const EdgeInsets.symmetric(vertical: 10),
                         child: Center(
                           child: Container(
                             padding: const EdgeInsets.all(3),
@@ -270,17 +267,15 @@ Future<void> _search() async {
                                       } else {
                                         selectedDays.add(day);
                                       }
-                                      print('選択中の曜日: $selectedDays');
                                     });
                                   },
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 5),
+                                        horizontal: 10, vertical: 5,),
                                     decoration: BoxDecoration(
                                       borderRadius: const BorderRadius.all(
-                                          Radius.circular(16)),
+                                          Radius.circular(16),),
                                       border: Border.all(
-                                        width: 1,
                                         color: Colors.pink,
                                       ),
                                       color: isSelected ? Colors.pink : null,
@@ -301,28 +296,28 @@ Future<void> _search() async {
                           ),
                         ),
                       ),
-                      const Text("営業時間"),
+                      const Text('営業時間'),
                       Container(
                         width: screenSize.width * 0.85,
                         height: 100, // 高さ
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(10),
                           color: Colors.white,
                         ),
-                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                        margin: const EdgeInsets.symmetric(vertical: 10),
                         child: Column(
                           children: [
                             const Padding(
                                 padding: EdgeInsets.only(
-                                    top: 3)), //できればpadding以外で調節したい　野村
+                                    top: 3,),), //できればpadding以外で調節したい　野村
 
                             Text(
-                              "${dateTime.hour}時${dateTime.minute}分",
+                              '${dateTime.hour}時${dateTime.minute}分',
                               style: const TextStyle(fontSize: 25),
                             ),
                             ElevatedButton(
-                              onPressed: () {
-                                _timePicker(context);
+                              onPressed: () async {
+                                await _timePicker(context);
                               },
                               child: const Text(
                                 '時間を選択',
@@ -345,7 +340,7 @@ Future<void> _search() async {
                 ],
               ),
             ),
-          ]),
+          ],),
         ),
       ),
     );

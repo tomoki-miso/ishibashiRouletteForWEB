@@ -12,66 +12,53 @@ class StoreNotifier extends StateNotifier<List<StoreClass>> {
 
   // ダミーのデータを削除する.
   void removeNote(StoreClass note) {
-    state = state.where((_note) => _note != note).toList();
+    state = state.where((note) => note != note).toList();
   }
 
   Future<void> getStores() async {
-    try {
-      // Firestore からデータを取得するコードを実装
-      final querySnapshot =
+    // Firestore からデータを取得するコードを実装
+    final querySnapshot =
+        await FirebaseFirestore.instance.collection('stores').get();
+
+    // Firestore から取得したデータを StoreClass リストに変換
+    final data = querySnapshot.docs.map((doc) async {
+      final storeSnapshot =
           await FirebaseFirestore.instance.collection('stores').get();
+      final storeIds =
+          List.generate(storeSnapshot.docs.length, (index) => index + 1);
+      storeIds.shuffle();
+      storeIds.removeAt(0);
+      final storeId = storeIds.first;
+      final storeData = storeSnapshot.docs[storeId - 1].data();
+      final tags = await _fetchTags(storeSnapshot.docs[storeId - 1].reference);
+      // StoreClass のインスタンスを作成し、Firestore からのデータを該当のプロパティに設定
+      return StoreClass(
+        DocumentId: storeData['document_id'] ?? '',
+        StoreName: storeData['name'] ?? '',
+        StoreDetail: storeData['detail'] ?? '',
+        StoreWeb: storeData['web'] ?? '',
+        StoreTwitter: storeData['twitter'] ?? '',
+        StoreInsta: storeData['insta'] ?? '',
+        StoreTabelog: storeData['tabelog'] ?? '',
+        StorePhotoUrl: storeData['photo_url'] ?? '',
+        Tags: tags,
+      );
+    }).toList();
 
-      // Firestore から取得したデータを StoreClass リストに変換
-      final data = querySnapshot.docs.map((doc) async {
-        final storeSnapshot =
-            await FirebaseFirestore.instance.collection('stores').get();
-        final storeIds =
-            List.generate(storeSnapshot.docs.length, (index) => index + 1);
-        storeIds.shuffle();
-        storeIds.removeAt(0);
-        final storeId = storeIds.first;
-        final storeData = storeSnapshot.docs[storeId - 1].data();
-        final tags =
-            await _fetchTags(storeSnapshot.docs[storeId - 1].reference);
-        // StoreClass のインスタンスを作成し、Firestore からのデータを該当のプロパティに設定
-        return StoreClass(
-          DocumentId: storeData['document_id'] ?? '',
-          StoreName: storeData['name'] ?? '',
-          StoreDetail: storeData['detail'] ?? '',
-          StoreWeb: storeData['web'] ?? '',
-          StoreTwitter: storeData['twitter'] ?? '',
-          StoreInsta: storeData['insta'] ?? '',
-          StoreTabelog: storeData['tabelog'] ?? '',
-          StorePhotoUrl: storeData['photo_url'] ?? '',
-          Tags: tags,
-        );
-      }).toList();
-
-      // state を更新
-      state = data.cast<StoreClass>();
-    } catch (error) {
-      // エラーハンドリング: データの取得中にエラーが発生した場合の処理を実装
-      // 例: エラーメッセージをログに出力
-      print('Error fetching data from Firestore: $error');
-    }
+    // state を更新
+    state = data.cast<StoreClass>();
   }
 }
 
 Future<List<String>> _fetchTags(DocumentReference storeReference) async {
-  try {
-    final storeSnapshot = await storeReference.get();
-    final storeData = storeSnapshot.data() as Map<String, dynamic>?;
+  final storeSnapshot = await storeReference.get();
+  final storeData = storeSnapshot.data() as Map<String, dynamic>?;
 
-    if (storeData != null && storeData.containsKey("tags")) {
-      final tags = storeData["tags"] as List<dynamic>;
-      final formattedTags = tags.map((tag) => tag.toString()).toList();
-      return formattedTags;
-    } else {
-      return [];
-    }
-  } catch (error) {
-    // エラーハンドリング: エラーメッセージを出力して、デフォルトの値を返すか、適切なエラーメッセージを返すなどの処理を行います。
-    print('Error in _fetchTags method: $error');
+  if (storeData != null && storeData.containsKey('tags')) {
+    final tags = storeData['tags'] as List<dynamic>;
+    final formattedTags = tags.map((tag) => tag.toString()).toList();
+    return formattedTags;
+  } else {
     return [];
   }
 }

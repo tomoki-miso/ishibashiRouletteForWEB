@@ -6,73 +6,65 @@ part 'storeInfo.g.dart';
 
 @riverpod
 Future<StoreClass> _fetchStoreData() async {
-  try {
-    final storeSnapshot =
-        await FirebaseFirestore.instance.collection('stores').get();
-    final storeIds =
-        List.generate(storeSnapshot.docs.length, (index) => index + 1);
-    storeIds.shuffle();
-    storeIds.removeAt(0);
-    final storeId = storeIds.first;
+  final storeSnapshot =
+      await FirebaseFirestore.instance.collection('stores').get();
+  final storeIds =
+      List.generate(storeSnapshot.docs.length, (index) => index + 1);
+  storeIds
+    ..shuffle()
+    ..removeAt(0);
+  final storeId = storeIds.first;
 
-    final storeData = storeSnapshot.docs[storeId - 1].data();
-    final tags = await _fetchTags(storeSnapshot.docs[storeId - 1].reference);
+  final storeData = storeSnapshot.docs[storeId - 1].data();
+  final tags = await _fetchTags(storeSnapshot.docs[storeId - 1].reference);
 
-    var state = StoreClass(
-      DocumentId: storeData['document_id'] ?? '',
-      StoreName: storeData['name'] ?? '',
-      StoreDetail: storeData['detail'] ?? '',
-      StoreWeb: storeData['web'] ?? '',
-      StoreTwitter: storeData['twitter'] ?? '',
-      StoreInsta: storeData['insta'] ?? '',
-      StoreTabelog: storeData['tabelog'] ?? '',
-      StorePhotoUrl: storeData['photo_url'] ?? '',
-      Tags: tags,
-    );
+  final state = StoreClass(
+    DocumentId: storeData['document_id'] ?? '',
+    StoreName: storeData['name'] ?? '',
+    StoreDetail: storeData['detail'] ?? '',
+    StoreWeb: storeData['web'] ?? '',
+    StoreTwitter: storeData['twitter'] ?? '',
+    StoreInsta: storeData['insta'] ?? '',
+    StoreTabelog: storeData['tabelog'] ?? '',
+    StorePhotoUrl: storeData['photo_url'] ?? '',
+    Tags: tags,
+  );
 
-    return state;
-  } catch (error) {
-    throw error;
-  }
+  return state;
 }
 
 Future<List<String>> _fetchTags(DocumentReference storeReference) async {
-  try {
-    final storeSnapshot = await storeReference.get();
-    final storeData = storeSnapshot.data() as Map<String, dynamic>?;
+  final storeSnapshot = await storeReference.get();
+  final storeData = storeSnapshot.data() as Map<String, dynamic>?;
 
-    if (storeData != null && storeData.containsKey("tags")) {
-      final tags = storeData["tags"] as List<dynamic>;
-      final formattedTags = tags.map((tag) => tag.toString()).toList();
-      return formattedTags;
-    } else {
-      return [];
-    }
-  } catch (error) {
+  if (storeData != null && storeData.containsKey('tags')) {
+    final tags = storeData['tags'] as List<dynamic>;
+    final formattedTags = tags.map((tag) => tag.toString()).toList();
+    return formattedTags;
+  } else {
     return [];
   }
 }
 
 class StoreInfoNotifier extends AutoDisposeAsyncNotifier<StoreClass> {
   @override
-  Future<StoreClass> build() async {
-    return _fetchStoreData();
-  }
+  Future<StoreClass> build() async => _fetchStoreData();
 
-  void updateState() async {
-    try {
-      final storeSnapshot =
-          await FirebaseFirestore.instance.collection('stores').get();
-      final storeIds =
-          List.generate(storeSnapshot.docs.length, (index) => index + 1);
-      storeIds.shuffle();
-      storeIds.removeAt(0);
-      final storeId = storeIds.first;
+  Future<void> updateState() async {
+    final storeSnapshot =
+        await FirebaseFirestore.instance.collection('stores').get();
+    final storeIds =
+        List.generate(storeSnapshot.docs.length, (index) => index + 1);
+    storeIds
+      ..shuffle()
+      ..removeAt(0);
+    final storeId = storeIds.first;
 
-      final storeData = storeSnapshot.docs[storeId - 1].data();
-      final tags = await _fetchTags(storeSnapshot.docs[storeId - 1].reference);
+    final storeData = storeSnapshot.docs[storeId - 1].data();
+    final tags = await _fetchTags(storeSnapshot.docs[storeId - 1].reference);
 
-      AsyncValue<StoreClass> newstate = AsyncValue<StoreClass>.data(StoreClass(
+    final AsyncValue<StoreClass> newstate = AsyncValue<StoreClass>.data(
+      StoreClass(
         DocumentId: storeData['document_id'] ?? '',
         StoreName: storeData['name'] ?? '',
         StoreDetail: storeData['detail'] ?? '',
@@ -82,11 +74,9 @@ class StoreInfoNotifier extends AutoDisposeAsyncNotifier<StoreClass> {
         StoreTabelog: storeData['tabelog'] ?? '',
         StorePhotoUrl: storeData['photo_url'] ?? '',
         Tags: tags,
-      ));
+      ),
+    );
 
-      state = newstate;
-    } catch (error) {
-      throw error;
-    }
+    state = newstate;
   }
 }

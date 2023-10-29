@@ -1,22 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ishibashi/providers/storeInfo.dart';
 import 'package:ishibashi/stateNotifierProvider.dart';
 import 'package:ishibashi/storeClass.dart';
+import 'package:ishibashi/stores.dart';
 import 'package:ishibashi/style/styles.dart';
 
-import 'stores.dart';
-
 final storeProvider = StateNotifierProvider<StoreNotifier, List<StoreClass>>(
-    (ref) => StoreNotifier());
+    (ref) => StoreNotifier(),);
 
 class RandomPage extends ConsumerWidget {
-  const RandomPage({Key? key}) : super(key: key);
+  const RandomPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
     final storeProvider = ref.watch(storeInfoNotifierProvider);
 
     final name = storeProvider.when(
@@ -27,23 +26,23 @@ class RandomPage extends ConsumerWidget {
             ),
         data: (state) => Expanded(
               child: Text(
-                state.StoreName.toString(),
+                state.StoreName,
                 style: Styles.storeNameStyle,
               ),
-            )); //とりあえずExpandedにしてるけどoverFlowで管理してもいいかも。とにかくいしばしやではみ出るのを防ぎたい。
+            ),); //とりあえずExpandedにしてるけどoverFlowで管理してもいいかも。とにかくいしばしやではみ出るのを防ぎたい。
 
     final detail = storeProvider.when(
-      loading: () => Padding(padding: EdgeInsets.all(1)),
+      loading: () => const Padding(padding: EdgeInsets.all(1)),
       error: (e, s) => Text('エラー $e'),
       data: (state) => Text(
-        state.StoreDetail.toString(),
+        state.StoreDetail,
         maxLines: 3,
         overflow: TextOverflow.ellipsis,
       ), // Fix this line
     );
 
     final photo = storeProvider.when(
-      loading: () => Padding(padding: EdgeInsets.all(1)),
+      loading: () => const Padding(padding: EdgeInsets.all(1)),
       error: (e, s) => Text('エラー $e'),
       data: (state) => Container(
         height: screenSize.height * 0.3,
@@ -52,10 +51,10 @@ class RandomPage extends ConsumerWidget {
             ? ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: CachedNetworkImage(
-                  imageUrl: state.StorePhotoUrl.toString(),
+                  imageUrl: state.StorePhotoUrl,
                   width: screenSize.width * 0.8,
                   fit: BoxFit.cover,
-                ))
+                ),)
             : Container(
                 height: screenSize.height * 0.3,
                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -65,19 +64,18 @@ class RandomPage extends ConsumerWidget {
     );
 
     final tags = storeProvider.when(
-      loading: () => Padding(padding: EdgeInsets.all(1)),
+      loading: () => const Padding(padding: EdgeInsets.all(1)),
       error: (e, s) => Text('エラー: $e'), // エラーメッセージを表示
       data: (state) => Expanded(
         child: Row(
           children: state.Tags.isNotEmpty
-              ? state.Tags.map((tag) {
-                  return Container(
-                    padding: EdgeInsetsDirectional.symmetric(horizontal: 8),
+              ? state.Tags.map((tag) => Container(
+                    padding: const EdgeInsetsDirectional.symmetric(horizontal: 8),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4.0),
+                      borderRadius: BorderRadius.circular(4),
                       color: Colors.deepOrangeAccent,
                     ),
-                    margin: const EdgeInsets.all(2.0),
+                    margin: const EdgeInsets.all(2),
                     child: Center(
                       child: Text(
                         tag,
@@ -87,17 +85,16 @@ class RandomPage extends ConsumerWidget {
                         ),
                       ),
                     ),
-                  );
-                }).toList()
+                  ),).toList()
               : [],
         ),
       ),
     );
 
     final RandomButton = OutlinedButton(
-      onPressed: () {
+      onPressed: () async {
         final notifier = ref.read(storeInfoNotifierProvider.notifier);
-        notifier.updateState();
+        await notifier.updateState();
       },
       style: OutlinedButton.styleFrom(
         backgroundColor: Colors.lightGreenAccent,
@@ -125,7 +122,7 @@ class RandomPage extends ConsumerWidget {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20)),
+                bottomRight: Radius.circular(20),),
           ),
         ),
       ),
@@ -138,7 +135,7 @@ class RandomPage extends ConsumerWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
+                  borderRadius: BorderRadius.circular(5),
                   color: Colors.white,
                 ),
                 margin: const EdgeInsets.only(top: 20),
@@ -149,35 +146,33 @@ class RandomPage extends ConsumerWidget {
                   children: [
                     name,
                     Row(
-                      children: [LikeButton(), tags],
+                      children: [const LikeButton(), tags],
                     ),
-                    Container(height: screenSize.height * 0.3, child: photo),
+                    SizedBox(height: screenSize.height * 0.3, child: photo),
                     Container(
-                        margin: EdgeInsets.all(2),
+                        margin: const EdgeInsets.all(2),
                         height: screenSize.height * 0.09,
                         width: screenSize.width * 0.9,
-                        child: detail),
-                    Container(
-                      child: ElevatedButton(
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.orangeAccent,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 2),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
+                        child: detail,),
+                    ElevatedButton(
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: Colors.orangeAccent,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 2,),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => StorePage(),
-                            ),
-                          );
-                        },
-                        child: const Text("くわしくみる"),
                       ),
-                    )
+                      onPressed: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const StorePage(),
+                          ),
+                        );
+                      },
+                      child: const Text('くわしくみる'),
+                    ),
                   ],
                 ),
               ),
@@ -185,7 +180,7 @@ class RandomPage extends ConsumerWidget {
                 padding: const EdgeInsets.only(top: 20),
                 width: screenSize.width * 0.7,
                 child: RandomButton,
-              )
+              ),
             ],
           ),
         ),
@@ -195,6 +190,8 @@ class RandomPage extends ConsumerWidget {
 }
 
 class LikeButton extends StatefulWidget {
+  const LikeButton({super.key});
+
   @override
   _LikeButtonState createState() => _LikeButtonState();
 }
@@ -209,12 +206,10 @@ class _LikeButtonState extends State<LikeButton> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return IconButton(
+  Widget build(BuildContext context) => IconButton(
       icon: _isLiked
           ? const Icon(Icons.favorite)
           : const Icon(Icons.favorite_border),
       onPressed: _toggleLike,
     );
-  }
 }

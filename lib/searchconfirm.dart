@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ishibashi/daySearch.dart';
 import 'package:ishibashi/keywordSearch.dart';
 
-
 class SearchConfirmPage extends StatelessWidget {
-  
   const SearchConfirmPage({super.key});
 
   @override
@@ -18,22 +16,29 @@ class SearchConfirmPage extends StatelessWidget {
           backgroundColor: Colors.white,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20)),
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),
           ),
         ),
       ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(
+            SizedBox(
               width: size.width * 0.9,
               height: size.height * 0.1,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  backgroundColor: Colors.greenAccent,
+                  fixedSize: Size(size.width * 0.9, size.height * 0.1),
+                ),
+                onPressed: () async {
+                  await Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => const DaySearchPage(),
                     ),
@@ -46,12 +51,13 @@ class SearchConfirmPage extends StatelessWidget {
                         child: Icon(
                           Icons.calendar_month,
                           color: Colors.black,
-                        )
+                        ),
                       ),
                       WidgetSpan(
-                          child: Padding(
-                        padding: EdgeInsets.all(4),
-                      )),
+                        child: Padding(
+                          padding: EdgeInsets.all(4),
+                        ),
+                      ),
                       TextSpan(
                         text: '営業日で検索',
                         style:
@@ -60,25 +66,22 @@ class SearchConfirmPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)), backgroundColor: Colors.greenAccent,
-                    fixedSize:
-                        Size(size.width * 0.9, size.height * 0.1)),
               ),
             ),
             const Padding(padding: EdgeInsets.all(8)),
-            Container(
+            SizedBox(
               width: size.width * 0.9,
               height: size.height * 0.1,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)), backgroundColor: Colors.greenAccent,
-                    fixedSize:
-                        Size(size.width * 0.9, size.height * 0.1)),
-                onPressed: () {
-                  Navigator.of(context).push(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  backgroundColor: Colors.greenAccent,
+                  fixedSize: Size(size.width * 0.9, size.height * 0.1),
+                ),
+                onPressed: () async {
+                  await Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => const KeywordSearchPage(),
                     ),
@@ -94,9 +97,10 @@ class SearchConfirmPage extends StatelessWidget {
                         ),
                       ),
                       WidgetSpan(
-                          child: Padding(
-                        padding: EdgeInsets.all(4),
-                      )),
+                        child: Padding(
+                          padding: EdgeInsets.all(4),
+                        ),
+                      ),
                       TextSpan(
                         text: 'キーワード検索',
                         style: TextStyle(
@@ -106,7 +110,6 @@ class SearchConfirmPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                
               ),
             ),
             const Padding(padding: EdgeInsets.all(8)),

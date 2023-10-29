@@ -1,8 +1,8 @@
 // ignore_for_file: empty_catches
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -19,57 +19,52 @@ class _MapPageState extends State<MapPage> {
 
   // Firebaseからデータを取得する関数
   Future<List<Map<String, dynamic>>> _fetchDataFromFirestore() async {
-    List<Map<String, dynamic>> dataList = [];
-    QuerySnapshot snapshot =
+    final List<Map<String, dynamic>> dataList = [];
+    final QuerySnapshot snapshot =
         await FirebaseFirestore.instance.collection('stores').get();
 
-    snapshot.docs.forEach((doc) {
-      dataList.add(doc.data() as Map<String, dynamic>);
-    });
+    for (final doc in snapshot.docs) {
+      dataList.add(doc.data()! as Map<String, dynamic>);
+    }
 
     return dataList;
   }
 
   Future<void> _createMarkersFromFirebaseData() async {
-    try {
-      List<Map<String, dynamic>> firebaseData = await _fetchDataFromFirestore();
-      Set<Marker> markerSet = {};
+    final List<Map<String, dynamic>> firebaseData =
+        await _fetchDataFromFirestore();
+    final Set<Marker> markerSet = {};
 
-      for (var data in firebaseData) {
-        // ignore: duplicate_ignore
-        try {
-          // データの型を適切に変換
-          double lat = double.parse(data['lat']);
-          double long = double.parse(data['long']);
-          String name = data['name'];
+    for (final data in firebaseData) {
+      // ignore: duplicate_ignore
+      // データの型を適切に変換
+      final double lat = double.parse(data['lat']);
+      final double long = double.parse(data['long']);
+      final String name = data['name'];
 
-          // マーカーの作成と追加
-          markerSet.add(
-            Marker(
-              markerId: MarkerId(name), // 一意のIDを指定
-              position: LatLng(lat, long),
-              infoWindow: InfoWindow(
-                title: name, // マーカーのタイトル
-              ),
-            ),
-          );
-        } catch (e) {
-        }
-      }
-
-      setState(() {
-        markers = markerSet; // マーカーセットを更新
-      });
-
-      // マーカーが正しくセットされたかどうかをログで確認
-    } catch (e) {
+      // マーカーの作成と追加
+      markerSet.add(
+        Marker(
+          markerId: MarkerId(name), // 一意のIDを指定
+          position: LatLng(lat, long),
+          infoWindow: InfoWindow(
+            title: name, // マーカーのタイトル
+          ),
+        ),
+      );
     }
+
+    setState(() {
+      markers = markerSet; // マーカーセットを更新
+    });
+
+    // マーカーが正しくセットされたかどうかをログで確認
   }
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
-    _createMarkersFromFirebaseData();
+    await _createMarkersFromFirebaseData();
   }
 
   void _onMapCreated(GoogleMapController controller) {
@@ -77,17 +72,14 @@ class _MapPageState extends State<MapPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      
+  Widget build(BuildContext context) => Scaffold(
       body: GoogleMap(
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
           target: _center,
-          zoom: 18.0,
+          zoom: 18,
         ),
         markers: markers,
       ),
     );
-  }
 }
