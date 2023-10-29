@@ -1,13 +1,11 @@
 // ignore_for_file: empty_catches
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:geolocator/geolocator.dart';
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -36,18 +34,18 @@ class _MapPageState extends State<MapPage> {
   }
 
   Future<void> _createMarkersFromFirebaseData() async {
-
     try {
-      List<Map<String, dynamic>> firebaseData = await _fetchDataFromFirestore();
-      Set<Marker> markerSet = {};
+      final List<Map<String, dynamic>> firebaseData =
+          await _fetchDataFromFirestore();
+      final Set<Marker> markerSet = {};
 
-      for (var data in firebaseData) {
+      for (final data in firebaseData) {
         // ignore: duplicate_ignore
         try {
           // データの型を適切に変換
-          double lat = double.parse(data['lat']);
-          double long = double.parse(data['long']);
-          String name = data['name'];
+          final double lat = double.parse(data['lat']);
+          final double long = double.parse(data['long']);
+          final String name = data['name'];
 
           // マーカーの作成と追加
           markerSet.add(
@@ -68,11 +66,9 @@ class _MapPageState extends State<MapPage> {
 
       // マーカーが正しくセットされたかどうかをログで確認
     } catch (e) {}
-
   }
 
   Position? currentPosition;
-  late GoogleMapController _controller;
   late StreamSubscription<Position> positionStream;
 
   final LocationSettings locationSettings = const LocationSettings(
@@ -81,29 +77,29 @@ class _MapPageState extends State<MapPage> {
   );
 
   @override
-  Future<void> initState() async {
+  @override
+  void initState() {
     super.initState();
+    _initialize();
+  }
 
-    _createMarkersFromFirebaseData();
+  Future<void> _initialize() async {
+    await _createMarkersFromFirebaseData();
 
     //位置情報が許可されていない時に許可をリクエストする
-    Future(() async {
-      LocationPermission permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        await Geolocator.requestPermission();
-      }
-    });
+    final LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      await Geolocator.requestPermission();
+    }
 
     //現在位置を更新し続ける
     positionStream =
         Geolocator.getPositionStream(locationSettings: locationSettings)
-            .listen((Position? position) {
-      currentPosition = position;
-      print(position == null
-          ? 'Unknown'
-          : '${position.latitude.toString()}, ${position.longitude.toString()}');
+            .listen((position) {
+      setState(() {
+        currentPosition = position;
+      });
     });
-
   }
 
   void _onMapCreated(GoogleMapController controller) {
@@ -111,21 +107,15 @@ class _MapPageState extends State<MapPage> {
   }
 
   @override
-
-  Widget build(BuildContext context) {
-    return Scaffold(
-
-      body: GoogleMap(
-        onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(
-          target: _center,
-          zoom: 18,
+  Widget build(BuildContext context) => Scaffold(
+        body: GoogleMap(
+          onMapCreated: _onMapCreated,
+          initialCameraPosition: CameraPosition(
+            target: _center,
+            zoom: 18,
+          ),
+          myLocationEnabled: true, //現在位置をマップ上に表示
+          markers: markers,
         ),
-        myLocationEnabled: true, //現在位置をマップ上に表示
-        markers: markers,
-      ),
-    );
-
-  }
-
+      );
 }

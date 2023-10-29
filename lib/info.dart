@@ -18,9 +18,9 @@ class _InfoPageState extends State<InfoPage> {
   bool connectionStatus = false; // Initialize it to false.
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
-    await checkInternetConnection();
+    checkInternetConnection(); // 非同期処理を直接呼び出すのではなく、ここで呼び出す
   }
 
   Future<void> checkInternetConnection() async {
@@ -81,21 +81,27 @@ class _InfoPageState extends State<InfoPage> {
                           ),
                           Padding(padding: EdgeInsets.all(13)),
                           Flexible(
-                            child: Text.rich(TextSpan(children: [
+                            child: Text.rich(
                               TextSpan(
-                                  text:
-                                      '取り扱っている石橋の飲食店のリストです。\nそれぞれのお店をタップすると詳しい情報をみることができます。\n左上の ',
-                                  style: TextStyle(fontSize: 12),),
-                              WidgetSpan(
-                                child: Icon(
-                                  Icons.search,
-                                  size: 12,
-                                ),
+                                children: [
+                                  TextSpan(
+                                    text:
+                                        '取り扱っている石橋の飲食店のリストです！\nそれぞれのお店をタップすると詳しい情報をみることができます。\n左上の ',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                  WidgetSpan(
+                                    child: Icon(
+                                      Icons.search,
+                                      size: 12,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: 'から「営業日検索」や「キーワード検索」でお店を探すことが出来るよ。',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                ],
                               ),
-                              TextSpan(
-                                  text: 'から「営業日検索」や「キーワード検索」でお店を探すことが出来るよ。',
-                                  style: TextStyle(fontSize: 12),),
-                            ],),),
+                            ),
                           ),
                         ],
                       ),
@@ -118,10 +124,11 @@ class _InfoPageState extends State<InfoPage> {
                           ),
                           Padding(padding: EdgeInsets.all(12)),
                           Flexible(
-                              child: Text(
-                            'お店をランダムに表示します！\n「今日どこでご飯食べようかな…」というときに知らなかったお店と出会うチャンス！',
-                            style: TextStyle(fontSize: 12),
-                          ),),
+                            child: Text(
+                              'お店をランダムに表示します！\n「今日どこでご飯食べようかな…」というときに知らなかったお店と出会うチャンス！',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -143,12 +150,14 @@ class _InfoPageState extends State<InfoPage> {
                           ),
                           const Padding(padding: EdgeInsets.all(12)),
                           const Flexible(
-                              child: Text(
-                            'マップ',
-                            style: TextStyle(fontSize: 12),
-                          ),),
+                            child: Text(
+                              'あなたの現在地と、お店の場所がまるわかり！\n近くのお店に行っても良し！行ったことのないお店に行っても良し！',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
                           SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.12,),
+                            height: MediaQuery.of(context).size.height * 0.12,
+                          ),
                         ],
                       ),
                     ),
@@ -167,12 +176,16 @@ class _InfoPageState extends State<InfoPage> {
                 child: Column(
                   children: [
                     Padding(
-                        padding:
-                            EdgeInsets.only(top: screenSize.height * 0.03),),
+                      padding: EdgeInsets.only(top: screenSize.height * 0.03),
+                    ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          fixedSize: Size(
-                              screenSize.width * 0.8, screenSize.height * 0.06,), backgroundColor: Colors.black,),
+                        fixedSize: Size(
+                          screenSize.width * 0.8,
+                          screenSize.height * 0.06,
+                        ),
+                        backgroundColor: Colors.black,
+                      ),
                       onPressed: () async {
                         const url = 'https://twitter.com/pochipochitudoi';
                         if (await canLaunchUrl(url as Uri)) {
@@ -192,8 +205,12 @@ class _InfoPageState extends State<InfoPage> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          fixedSize: Size(
-                              screenSize.width * 0.8, screenSize.height * 0.06,), backgroundColor: Colors.deepOrangeAccent,),
+                        fixedSize: Size(
+                          screenSize.width * 0.8,
+                          screenSize.height * 0.06,
+                        ),
+                        backgroundColor: Colors.deepOrangeAccent,
+                      ),
                       onPressed: connectionStatus
                           ? () async {
                               const String emailAddress =
@@ -234,17 +251,23 @@ class _InfoPageState extends State<InfoPage> {
                   children: [
                     Padding(padding: EdgeInsets.all(screenSize.height * 0.02)),
                     ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            fixedSize: Size(screenSize.width * 0.8,
-                                screenSize.height * 0.06,), backgroundColor: Colors.deepOrangeAccent,),
-                        onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const FormPage(),),
-                          );
-                        },
-                        child: const Text('お問い合わせフォーム'),),
+                      style: ElevatedButton.styleFrom(
+                        fixedSize: Size(
+                          screenSize.width * 0.8,
+                          screenSize.height * 0.06,
+                        ),
+                        backgroundColor: Colors.deepOrangeAccent,
+                      ),
+                      onPressed: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FormPage(),
+                          ),
+                        );
+                      },
+                      child: const Text('お問い合わせフォーム'),
+                    ),
                   ],
                 ),
               ),
