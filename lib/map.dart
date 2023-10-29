@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geolocator/geolocator.dart';
+import 'dart:async';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -53,8 +55,7 @@ class _MapPageState extends State<MapPage> {
               ),
             ),
           );
-        } catch (e) {
-        }
+        } catch (e) {}
       }
 
       setState(() {
@@ -62,14 +63,40 @@ class _MapPageState extends State<MapPage> {
       });
 
       // マーカーが正しくセットされたかどうかをログで確認
-    } catch (e) {
-    }
+    } catch (e) {}
   }
+
+  Position? currentPosition;
+  late GoogleMapController _controller;
+  late StreamSubscription<Position> positionStream;
+
+  final LocationSettings locationSettings = const LocationSettings(
+    accuracy: LocationAccuracy.high, //正確性:highはAndroid(0-100m),iOS(10m)
+    distanceFilter: 100,
+  );
 
   @override
   void initState() {
     super.initState();
     _createMarkersFromFirebaseData();
+
+    //位置情報が許可されていない時に許可をリクエストする
+    Future(() async {
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        await Geolocator.requestPermission();
+      }
+    });
+
+    //現在位置を更新し続ける
+    positionStream =
+        Geolocator.getPositionStream(locationSettings: locationSettings)
+            .listen((Position? position) {
+      currentPosition = position;
+      print(position == null
+          ? 'Unknown'
+          : '${position.latitude.toString()}, ${position.longitude.toString()}');
+    });
   }
 
   void _onMapCreated(GoogleMapController controller) {
@@ -79,13 +106,13 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: GoogleMap(
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
           target: _center,
           zoom: 18.0,
         ),
+        myLocationEnabled: true, //現在位置をマップ上に表示
         markers: markers,
       ),
     );
