@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ishibashi/providers/storeInfo.dart';
 import 'package:ishibashi/stateNotifierProvider.dart';
-import 'package:ishibashi/storeClass.dart';
+import 'package:ishibashi/screens/storeClass.dart';
 import 'package:ishibashi/style/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 

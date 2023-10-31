@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ishibashi/daySearch.dart';
-import 'package:ishibashi/keywordSearch.dart';
+import 'package:ishibashi/screens/daySearch.dart';
+import 'package:ishibashi/screens/keywordSearch.dart';
 
 class SearchConfirmPage extends StatelessWidget {
   const SearchConfirmPage({super.key});

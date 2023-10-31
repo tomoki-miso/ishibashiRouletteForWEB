@@ -2,8 +2,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 // 生成されるdartファイルを記述
-part 'storeClass.freezed.dart';
-part 'storeClass.g.dart';
+part '../storeClass.freezed.dart';
+part '../storeClass.g.dart';
 ///////// b. コード生成するためのクラスを作成 /////////
 
 // freezedでコード生成するために「@freezed」を記述

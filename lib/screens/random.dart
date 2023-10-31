@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/providers/storeInfo.dart';
 import 'package:ishibashi/stateNotifierProvider.dart';
-import 'package:ishibashi/storeClass.dart';
-import 'package:ishibashi/stores.dart';
+import 'package:ishibashi/screens/storeClass.dart';
+import 'package:ishibashi/screens/stores.dart';
 import 'package:ishibashi/style/styles.dart';
 
 final storeProvider = StateNotifierProvider<StoreNotifier, List<StoreClass>>(

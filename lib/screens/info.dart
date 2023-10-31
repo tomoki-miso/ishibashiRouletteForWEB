@@ -3,7 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ishibashi/googleforms.dart';
+import 'package:ishibashi/components/primary_button.dart';
+import 'package:ishibashi/screens/googleforms.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -271,6 +272,10 @@ class _InfoPageState extends State<InfoPage> {
                   ],
                 ),
               ),
+              
+              ///テスト
+              // PrimaryButton(onPressed: (){},isWithWidget: true,childWidget: Icon(Icons.abc),)
+              
             ],
           ),
         ),
