@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ishibashi/screens/daySearch.dart';
-import 'package:ishibashi/screens/keywordSearch.dart';
+import 'package:ishibashi/pages/day_search.dart';
+import 'package:ishibashi/pages/keyword_search.dart';
 
 class SearchConfirmPage extends StatelessWidget {
   const SearchConfirmPage({super.key});
@@ -113,49 +113,6 @@ class SearchConfirmPage extends StatelessWidget {
               ),
             ),
             const Padding(padding: EdgeInsets.all(8)),
-            /* Container(
-              width: size.width * 0.9,
-              height: size.height * 0.1,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => SearchPlacePage(),
-                    ),
-                  );
-                },
-                child: RichText(
-                  text: TextSpan(
-                    children: [
-                      WidgetSpan(
-                        child: Icon(
-                          Icons.location_on_outlined,
-                          color: Color.fromARGB(255, 42, 35, 35),
-                        ),
-                      ),
-                      WidgetSpan(
-                          child: Padding(
-                        padding: EdgeInsets.all(4),
-                      )),
-                      TextSpan(
-                        text: '場所で検索',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 42, 35, 35),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(
-                      color: Color.fromARGB(255, 107, 190, 253),
-                      style: BorderStyle.solid),
-                  backgroundColor: const Color(0xFFC5E4FC),
-                  foregroundColor: Color.fromARGB(255, 42, 35, 35),
-                  shape: const StadiumBorder(),
-                ),
-              ),
-            ), */
           ],
         ),
       ),

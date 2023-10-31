@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/providers/storeInfo.dart';
-import 'package:ishibashi/stateNotifierProvider.dart';
-import 'package:ishibashi/screens/storeClass.dart';
-import 'package:ishibashi/screens/stores.dart';
+import 'package:ishibashi/providers/stateNotifierProvider.dart';
+import 'package:ishibashi/class/storeClass.dart';
+import 'package:ishibashi/pages/stores_rondom_detail.dart';
 import 'package:ishibashi/style/styles.dart';
 
 final storeProvider = StateNotifierProvider<StoreNotifier, List<StoreClass>>(

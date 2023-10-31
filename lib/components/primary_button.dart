@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ishibashi/style/colors.dart';
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
@@ -8,7 +9,7 @@ class PrimaryButton extends StatelessWidget {
     this.height,
     this.width,
     this.circularSize,
-    this.backgroundColor,
+    this.backgroundColor = ColorName.primaryBase, //デフォルトカラー
     this.foregroundColor,
     this.side = BorderSide.none,
     this.isWithWidget = false,
@@ -56,9 +57,7 @@ class PrimaryButton extends StatelessWidget {
             elevation: elevation,
             backgroundColor: backgroundColor,
             foregroundColor: foregroundColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(circularSize ?? 8),
-            ),
+            shape: const StadiumBorder(),
             padding: padding ??
                 const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             side: side,
