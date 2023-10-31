@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/providers/storeInfo.dart';
 import 'package:ishibashi/providers/stateNotifierProvider.dart';
-import 'package:ishibashi/class/storeClass.dart';
+import 'package:ishibashi/class/store_class.dart';
 import 'package:ishibashi/pages/stores_rondom_detail.dart';
 import 'package:ishibashi/style/styles.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ishibashi/components/big_select_button.dart';
 import 'package:ishibashi/pages/map.dart';
 import 'package:ishibashi/pages/random.dart';
 import 'package:ishibashi/pages/search_confirm.dart';
-
 
 class TopPage extends StatefulWidget {
   const TopPage({super.key});
@@ -23,24 +23,17 @@ class _TopPageState extends State<TopPage> {
           backgroundColor: Colors.white,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),),
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),
           ),
         ),
       ),
       body: Center(
         child: Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.only(top: 60),
           child: Column(
             children: [
-              Container(
-                alignment: Alignment.center,
-                height: screenSize.height * 0.2,
-                
-                child: Image.asset('assets/images/iconKari.png'),
-              ),
-              const Padding(padding: EdgeInsets.all(6)),
               /*   Container(
                 height: _screenSize.height * 0.22,
                 child: Scrollbar(
@@ -70,103 +63,48 @@ class _TopPageState extends State<TopPage> {
                   
                 ),
               ), */
-              const Padding(padding: EdgeInsets.all(10)),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),), backgroundColor: Colors.greenAccent,
-                    fixedSize:
-                        Size(screenSize.width * 0.9, screenSize.height * 0.1),),
-                onPressed: () async {
+
+              BigSelectButton(
+                onTap: () async {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const RandomPage()),
                   );
                 },
-                child: RichText(
-                  text: const TextSpan(
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 62, 61, 61), fontSize: 16,),
-                    children: [
-                      WidgetSpan(
-                        child: FaIcon(
-                          FontAwesomeIcons.shop,
-                          color: Color.fromARGB(194, 255, 2, 2),
-                        ),
-                      ),
-                      WidgetSpan(child: Padding(padding: EdgeInsets.all(4))),
-                      TextSpan(
-                        text: 'ランダムにきめる',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
+                text: 'ランダムに決める',
+                iconChild: const Icon(
+                  Icons.shuffle_outlined,
+                  size: 100,
+                  color: Colors.white,
                 ),
               ),
-              const Padding(padding: EdgeInsets.all(6)),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),), backgroundColor: Colors.greenAccent,
-                    fixedSize:
-                        Size(screenSize.width * 0.9, screenSize.height * 0.1),),
-                onPressed: () async {
+              BigSelectButton(
+                onTap: () async {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const MapPage()),
                   );
                 },
-                child: RichText(
-                  text: const TextSpan(
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 62, 61, 61), fontSize: 16,),
-                    children: [
-                      WidgetSpan(
-                        child: FaIcon(
-                          FontAwesomeIcons.mapLocationDot,
-                          color: Color.fromARGB(194, 255, 2, 2),
-                        ),
-                      ),
-                      WidgetSpan(child: Padding(padding: EdgeInsets.all(4))),
-                      TextSpan(
-                        text: '地図から探す',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
+                text: '地図から探す',
+                iconChild: const Icon(
+                  Icons.shuffle_outlined,
+                  size: 100,
+                  color: Colors.white,
                 ),
               ),
-              const Padding(padding: EdgeInsets.all(6)),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),), backgroundColor: Colors.greenAccent,
-                    fixedSize:
-                        Size(screenSize.width * 0.9, screenSize.height * 0.1),),
-                onPressed: () async {
+              BigSelectButton(
+                onTap: () async {
                   await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const SearchConfirmPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const SearchConfirmPage()),
                   );
                 },
-                child: RichText(
-                  text: const TextSpan(
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 62, 61, 61), fontSize: 16,),
-                    children: [
-                      WidgetSpan(
-                        child: FaIcon(
-                          FontAwesomeIcons.magnifyingGlass,
-                          color: Color.fromARGB(194, 255, 2, 2),
-                        ),
-                      ),
-                      WidgetSpan(child: Padding(padding: EdgeInsets.all(4))),
-                      TextSpan(
-                        text: '検索',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
+                text: 'こだわり検索',
+                iconChild: const Icon(
+                  Icons.shuffle_outlined,
+                  size: 100,
+                  color: Colors.white,
                 ),
               ),
             ],

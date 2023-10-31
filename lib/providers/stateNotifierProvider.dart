@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ishibashi/class/storeClass.dart';
+import 'package:ishibashi/class/store_class.dart';
 
 class StoreNotifier extends StateNotifier<List<StoreClass>> {
   StoreNotifier() : super([]);
