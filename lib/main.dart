@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ishibashi/firebase/firebase_options.dart';
-import 'package:ishibashi/pages/info.dart';
-import 'package:ishibashi/pages/list.dart';
-import 'package:ishibashi/pages/map.dart';
-import 'package:ishibashi/pages/random.dart';
-import 'package:ishibashi/pages/top.dart';
+import 'package:ishibashi/screens/info.dart';
+import 'package:ishibashi/screens/list.dart';
+import 'package:ishibashi/screens/map.dart';
+import 'package:ishibashi/screens/random/components/page/random.dart';
+import 'package:ishibashi/screens/top.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 

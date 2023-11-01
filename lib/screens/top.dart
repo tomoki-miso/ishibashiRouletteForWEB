@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ishibashi/components/big_select_button.dart';
-import 'package:ishibashi/pages/map.dart';
-import 'package:ishibashi/pages/random.dart';
-import 'package:ishibashi/pages/search_confirm.dart';
+import 'package:ishibashi/screens/map.dart';
+import 'package:ishibashi/screens/random/components/page/random.dart';
+import 'package:ishibashi/screens/search_confirm.dart';
 
 class TopPage extends StatefulWidget {
   const TopPage({super.key});

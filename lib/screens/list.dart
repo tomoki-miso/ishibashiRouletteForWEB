@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:ishibashi/pages/search_confirm.dart';
-import 'package:ishibashi/pages/store_list_detail.dart';
+import 'package:ishibashi/screens/search_confirm.dart';
+import 'package:ishibashi/screens/store_list_detail.dart';
 import 'package:ishibashi/style/styles.dart';
 
 class ListPage extends StatefulWidget {
