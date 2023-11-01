@@ -50,51 +50,54 @@ class BigSelectButton extends StatelessWidget {
   final Widget? iconChild;
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          Container(
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.24,
-            color: backgroundColor,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  height: MediaQuery.of(context).size.height * 0.24,
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(child: iconChild),
-                        const Padding(padding: EdgeInsets.only(bottom: 11)),
-                        Text(
-                          text!,
-                          style: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
+  Widget build(BuildContext context) => InkWell(
+    onTap: onTap,
+    child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.24,
+              color: backgroundColor,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    height: MediaQuery.of(context).size.height * 0.24,
+                    child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(child: iconChild),
+                          const Padding(padding: EdgeInsets.only(bottom: 11)),
+                          Text(
+                            text!,
+                            style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  height: MediaQuery.of(context).size.height * 0.24,
-                  color: Colors.white.withOpacity(0.5),
-                  child: const Icon(
-                    Icons.chevron_right_sharp,
-                    size: 100,
-                    color: Colors.white,
+                  Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.24,
+                    color: Colors.white.withOpacity(0.5),
+                    child: const Icon(
+                      Icons.chevron_right_sharp,
+                      size: 100,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Padding(
-              padding:
-                  EdgeInsets.all(MediaQuery.of(context).size.height * 0.01))
-        ],
-      );
+            Padding(
+                padding:
+                    EdgeInsets.all(MediaQuery.of(context).size.height * 0.01))
+          ],
+        ),
+  );
 }

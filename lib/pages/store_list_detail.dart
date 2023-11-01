@@ -4,14 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ishibashi/style/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class StoreListPage extends StatefulWidget {
-
   const StoreListPage({
     required this.documentId,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final String documentId;
 
   @override
@@ -29,9 +27,9 @@ class _StoreListPageState extends State<StoreListPage> {
   String storeInsta = ''; // 仮の初期値
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
-    await _fetchStoreData(widget.documentId);
+    _fetchStoreData(widget.documentId);
   }
 
   Future<void> _fetchStoreData(String documentId) async {
@@ -135,7 +133,8 @@ class _StoreListPageState extends State<StoreListPage> {
                                                   padding:
                                                       const EdgeInsetsDirectional
                                                           .symmetric(
-                                                          horizontal: 8,),
+                                                    horizontal: 8,
+                                                  ),
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -185,116 +184,129 @@ class _StoreListPageState extends State<StoreListPage> {
                                   storeDetail,
                                 ),
                               ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  fixedSize: Size(
-                                    screenSize.width * 0.8,
-                                    screenSize.height * 0.01,
+
+                              // ウェブ
+                              if (storeWeb.isNotEmpty)
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    fixedSize: Size(
+                                      screenSize.width * 0.8,
+                                      screenSize.height * 0.01,
+                                    ),
+                                    backgroundColor:
+                                        const Color.fromARGB(124, 252, 0, 0),
                                   ),
-                                  backgroundColor:
-                                      const Color.fromARGB(124, 252, 0, 0),
-                                ),
-                                onPressed: () async {
-                                  if (await canLaunchUrl(storeWeb as Uri)) {
-                                    await launchUrl(storeWeb as Uri);
-                                  } else {
-                                    throw 'Could not launch $storeWeb';
-                                  }
-                                },
-                                child: RichText(
-                                  text: const TextSpan(
-                                    children: [
-                                      WidgetSpan(
-                                        child: Icon(
-                                          Icons.public,
+                                  onPressed: () async {
+                                    final webUrl = Uri.parse(storeWeb);
+                                    await launchUrl(webUrl);
+                                  },
+                                  child: RichText(
+                                    text: const TextSpan(
+                                      children: [
+                                        WidgetSpan(
+                                          child: Icon(
+                                            Icons.public,
+                                          ),
                                         ),
-                                      ),
-                                      TextSpan(text: '公式ウェブサイト'),
-                                    ],
+                                        TextSpan(text: '公式ウェブサイト'),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  fixedSize: Size(
-                                    screenSize.width * 0.8,
-                                    screenSize.height * 0.01,
-                                  ), backgroundColor: const Color.fromARGB(255, 254, 170, 1),
-                                ),
-                                onPressed: () async {
-                                  if (await canLaunchUrl(storeTabelog as Uri)) {
-                                    await launchUrl(storeTabelog as Uri);
-                                  } else {
-                                    throw 'Could not launch $storeTabelog';
-                                  }
-                                },
-                                child: RichText(
-                                  text: const TextSpan(
-                                    children: [
-                                      WidgetSpan(
-                                        child: Icon(
-                                          Icons.public,
+                                )
+                              else
+                                Container(),
+
+                              // タベログ
+                              if (storeTabelog.isNotEmpty)
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    fixedSize: Size(
+                                      screenSize.width * 0.8,
+                                      screenSize.height * 0.01,
+                                    ),
+                                    backgroundColor:
+                                        const Color.fromARGB(255, 254, 170, 1),
+                                  ),
+                                  onPressed: () async {
+                                    final tabelogUrl = Uri.parse(storeTabelog);
+                                    await launchUrl(tabelogUrl);
+                                  },
+                                  child: RichText(
+                                    text: const TextSpan(
+                                      children: [
+                                        WidgetSpan(
+                                          child: Icon(
+                                            Icons.public,
+                                          ),
                                         ),
-                                      ),
-                                      TextSpan(text: '食べログ'),
-                                    ],
+                                        TextSpan(text: '食べログ'),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  fixedSize: Size(
-                                    screenSize.width * 0.8,
-                                    screenSize.height * 0.01,
-                                  ), backgroundColor: Colors.black,
-                                ),
-                                onPressed: () async {
-                                  if (await canLaunchUrl(storeTwitter as Uri)) {
-                                    await launchUrl(storeTwitter as Uri);
-                                  } else {
-                                    throw 'Could not launch $storeTwitter';
-                                  }
-                                },
-                                child: RichText(
-                                  text: const TextSpan(
-                                    children: [
-                                      WidgetSpan(
-                                        child: FaIcon(
-                                          FontAwesomeIcons.twitter,
+                                )
+                              else
+                                Container(),
+
+                              // Twitter
+                              if (storeTwitter.isNotEmpty)
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    fixedSize: Size(
+                                      screenSize.width * 0.8,
+                                      screenSize.height * 0.01,
+                                    ),
+                                    backgroundColor: Colors.black,
+                                  ),
+                                  onPressed: () async {
+                                    final xUrl = Uri.parse(storeTwitter);
+                                    await launchUrl(xUrl);
+                                  },
+                                  child: RichText(
+                                    text: const TextSpan(
+                                      children: [
+                                        WidgetSpan(
+                                          child: FaIcon(
+                                            FontAwesomeIcons.twitter,
+                                          ),
                                         ),
-                                      ),
-                                      TextSpan(text: 'X(旧Twitter)'),
-                                    ],
+                                        TextSpan(text: 'X(旧Twitter)'),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  fixedSize: Size(
-                                    screenSize.width * 0.8,
-                                    screenSize.height * 0.01,
-                                  ), backgroundColor: const Color.fromARGB(255, 99, 70, 185),
-                                ),
-                                onPressed: () async {
-                                  if (await canLaunchUrl(storeInsta as Uri)) {
-                                    await launchUrlString(storeInsta);
-                                  } else {
-                                    throw 'Could not launch $storeInsta';
-                                  }
-                                },
-                                child: RichText(
-                                  text: const TextSpan(
-                                    children: [
-                                      WidgetSpan(
-                                        child: FaIcon(
-                                          FontAwesomeIcons.instagram,
+                                )
+                              else
+                                Container(),
+
+                              // インスタ
+                              if (storeInsta.isNotEmpty)
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    fixedSize: Size(
+                                      screenSize.width * 0.8,
+                                      screenSize.height * 0.01,
+                                    ),
+                                    backgroundColor:
+                                        const Color.fromARGB(255, 99, 70, 185),
+                                  ),
+                                  onPressed: () async {
+                                    final instaUrl = Uri.parse(storeInsta);
+                                    await launchUrl(instaUrl);
+                                  },
+                                  child: RichText(
+                                    text: const TextSpan(
+                                      children: [
+                                        WidgetSpan(
+                                          child: FaIcon(
+                                            FontAwesomeIcons.instagram,
+                                          ),
                                         ),
-                                      ),
-                                      TextSpan(text: 'Instagram'),
-                                    ],
+                                        TextSpan(text: 'Instagram'),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ),
+                                )
+                              else
+                                Container(), // URLがない場合、空のContainerを描画
                             ],
                           ),
                         ),
@@ -327,9 +339,9 @@ class _LikeButtonState extends State<LikeButton> {
 
   @override
   Widget build(BuildContext context) => IconButton(
-      icon: _isLiked
-          ? const Icon(Icons.favorite)
-          : const Icon(Icons.favorite_border),
-      onPressed: _toggleLike,
-    );
+        icon: _isLiked
+            ? const Icon(Icons.favorite)
+            : const Icon(Icons.favorite_border),
+        onPressed: _toggleLike,
+      );
 }
