@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ishibashi/components/big_select_button.dart';
+import 'package:ishibashi/screens/components_test.dart';
 import 'package:ishibashi/screens/map.dart';
 import 'package:ishibashi/screens/random/components/page/random.dart';
 import 'package:ishibashi/screens/search_confirm.dart';
@@ -97,7 +98,7 @@ class _TopPageState extends State<TopPage> {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const SearchConfirmPage()),
+                        builder: (context) => const ComponentsTest()),//デバッグ用
                   );
                 },
                 text: 'こだわり検索',
