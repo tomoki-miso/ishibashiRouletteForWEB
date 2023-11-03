@@ -7,16 +7,18 @@ import 'package:ishibashi/style/styles.dart';
 class StoreList extends ConsumerWidget {
   const StoreList({
     required this.onTap,
+    required this.tags,
     super.key,
-    this.imageUrl,
-    this.name = '酒と肴　よろず屋',
-    this.detail =
-        'こだわり抜いた魚と美味しい日本酒が楽しめます。みんなでワイワイでも、ひとりでしっぽりでも。どんなときでもくつろげる環境を提供します。',
+    required this.imageUrl,
+    this.name,
+    // this.detail =
+    //     'こだわり抜いた魚と美味しい日本酒が楽しめます。みんなでワイワイでも、ひとりでしっぽりでも。どんなときでもくつろげる環境を提供します。',
   });
   final String? name;
-  final String? imageUrl;
-  final String? detail;
+  final String imageUrl;
+  // final String? detail;
   final VoidCallback? onTap;
+  final List<dynamic> tags;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => Padding(
@@ -45,80 +47,77 @@ class StoreList extends ConsumerWidget {
                         topLeft: Radius.circular(50),
                         bottomLeft: Radius.circular(50),
                       ),
-                      child: CachedNetworkImage(
-                        imageUrl: 'https://placehold.jp/150x150.png',
-                        fit: BoxFit.cover,
-                      ),
+                      child: imageUrl.isNotEmpty
+                          ? CachedNetworkImage(
+                              imageUrl: imageUrl,
+                              fit: BoxFit.cover,
+                            )
+                          : CachedNetworkImage(
+                              imageUrl:
+                                  'https://placehold.jp/150x150.png', //NoTFound的な画像を足す？
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   )),
+
+                  //右側
                   Expanded(
                     child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            name!,
-                            style: Styles.storeNameStyle,
-                          ),
-                          // Wrap(
-                          //                     direction: Axis.vertical,
-                          //                     spacing: 8,
-                          //                     children: tags!.isNotEmpty
-                          //                         ? tags
-                          //                             .take(2)
-                          //                             .map((formattedTag) => Container(
-                          //                               padding:
-                          //                                   const EdgeInsetsDirectional
-                          //                                       .symmetric(
-                          //                                           horizontal:
-                          //                                               6,),
-                          //                               decoration:
-                          //                                   BoxDecoration(
-                          //                                 borderRadius:
-                          //                                     BorderRadius
-                          //                                         .circular(
-                          //                                             4,),
-                          //                                 color: Colors
-                          //                                     .deepOrangeAccent,
-                          //                               ),
-                          //                               margin: const EdgeInsets
-                          //                                   .all(1),
-                          //                               child: Center(
-                          //                                 child: Text(
-                          //                                   formattedTag,
-                          //                                   style:
-                          //                                       const TextStyle(
-                          //                                     fontSize: 12,
-                          //                                     color:
-                          //                                         Colors.white,
-                          //                                   ),
-                          //                                 ),
-                          //                               ),
-                          //                             ),).toList()
-                          //                         : [],
-                          //                   ),
-
-                          Padding(padding: EdgeInsets.all(12)),
-                          const Text(
-                            '#海鮮,#日本酒,#居酒屋',
-                            style: Styles.tagsTextStyle,
-                          ),
-                          Padding(padding: EdgeInsets.all(12)),
-                          Padding(
-                            padding: EdgeInsets.only(left: 20),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: const Text(
-                                '営業時間',
-                                style: Styles.subTitleStyle,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 6),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                      
+                            //名前
+                            Text(
+                              name!,
+                              style: Styles.storeNameStyle,
+                            ),
+                            const Padding(padding: EdgeInsets.all(12)),
+                      
+                            //タグ
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: tags.isNotEmpty
+                                  ? tags
+                                      .take(3)
+                                      .map(
+                                        (formattedTag) => Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 1,
+                                          ),
+                                          margin: const EdgeInsets.all(1),
+                                          child: Center(
+                                            child: Text(
+                                              '#$formattedTag,',
+                                              style: Styles.tagsTextStyle,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                      .toList()
+                                  : [], // タグがない場合は空のリストを使用
+                            ),
+                            const Padding(padding: EdgeInsets.all(12)),
+                      
+                            //営業時間
+                            const Padding(
+                              padding: EdgeInsets.only(left: 20),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  '営業時間',
+                                  style: Styles.subTitleStyle,
+                                ),
                               ),
                             ),
-                          ),
-                          const Text(
-                            '18:00〜24:00',
-                            style: Styles.businnesHours,
-                          ),
-                        ],
+                            const Text(
+                              '18:00〜24:00',
+                              style: Styles.businnesHours,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

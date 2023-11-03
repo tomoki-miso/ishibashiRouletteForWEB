@@ -5,6 +5,7 @@ class Styles {
     fontSize: 16,
     fontWeight: FontWeight.bold,
     color: Colors.black,
+    overflow: TextOverflow.ellipsis
   );
 
   static const subTitleStyle = TextStyle(
@@ -20,7 +21,7 @@ class Styles {
   );
 
   static const tagsTextStyle = TextStyle(
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: FontWeight.bold,
     color: Colors.black,
   );

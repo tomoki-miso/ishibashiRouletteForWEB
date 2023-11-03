@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ishibashi/firebase/firebase_options.dart';
 import 'package:ishibashi/screens/info.dart';
 import 'package:ishibashi/screens/list.dart';
+import 'package:ishibashi/screens/list_copy.dart';
 import 'package:ishibashi/screens/map.dart';
 import 'package:ishibashi/screens/random/components/page/random.dart';
 import 'package:ishibashi/screens/top.dart';
@@ -48,7 +49,7 @@ class BasePage extends StatelessWidget {
     BuildContext context,
   ) {
     final pages = [
-      const ListPage(),
+      ListCopyPage(),
       const RandomPage(),
       const TopPage(),
       const MapPage(),
