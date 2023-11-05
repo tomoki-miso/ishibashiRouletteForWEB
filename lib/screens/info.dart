@@ -273,7 +273,7 @@ class _InfoPageState extends State<InfoPage> {
               ),
 
               ///テスト
-              PrimaryButton(onPressed: (){},isWithWidget: true,childWidget: Icon(Icons.abc),)
+              PrimaryButton(onPressed: (){},isWithWidget: true,childWidget: const Icon(Icons.abc),)
               
             ],
           ),

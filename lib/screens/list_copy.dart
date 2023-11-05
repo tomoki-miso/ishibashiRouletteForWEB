@@ -65,9 +65,9 @@ class _ListCopyPageState extends State<ListCopyPage> {
                     name: name,
                     tags: tags,
                     imageUrl: imageUrl,
-                    onTap: () {
+                    onPressed: () async {
                       // Define what happens when an item is tapped
-                      navigateToStorePage(document.id);
+                      await navigateToStorePage(document.id);
                     },
                     // Pass other data as needed
                   );
