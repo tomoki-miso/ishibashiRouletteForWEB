@@ -6,6 +6,7 @@ class OriginalAppBar extends StatelessWidget implements PreferredSizeWidget {
   const OriginalAppBar({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) => AppBar(
+    iconTheme: const IconThemeData(color: ColorName.greyBase),
       backgroundColor: Colors.white,
       centerTitle: false,
       title: Row(

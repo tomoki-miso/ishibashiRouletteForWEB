@@ -81,11 +81,9 @@ class StoreList extends ConsumerWidget {
                                             horizontal: 1,
                                           ),
                                           margin: const EdgeInsets.all(1),
-                                          child: Expanded(
-                                            child: Text(
-                                              '#$formattedTag,',
-                                              style: Styles.tagsTextStyle,
-                                            ),
+                                          child: Text(
+                                            '#$formattedTag,',
+                                            style: Styles.tagsTextStyle,
                                           ),
                                         ),
                                       )

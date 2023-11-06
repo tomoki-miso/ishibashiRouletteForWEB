@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ishibashi/style/colors.dart';
 
 class Styles {
   static const storeNameStyle = TextStyle(
@@ -25,5 +26,16 @@ class Styles {
     fontWeight: FontWeight.bold,
     color: Colors.black,
     overflow: TextOverflow.clip,
+  );
+
+    static const DrawerTitle = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    color: ColorName.blackSecondary,
+  );
+
+   static const DrawerSubTitle = TextStyle(
+    fontSize: 14,
+    color: ColorName.blackSecondary,
   );
 }

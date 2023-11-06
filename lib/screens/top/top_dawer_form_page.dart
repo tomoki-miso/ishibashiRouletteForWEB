@@ -4,29 +4,33 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 
 /// WebViewアプリの状態を持つStatefulWidget
-class FormPage extends StatefulWidget {
+class TopDrawerFormPage extends StatefulWidget {
   /// WebViewAppのコンストラクタ
-  const FormPage({super.key});
+  const TopDrawerFormPage({super.key});
 
   /// 状態オブジェクトを作成
   @override
-  State<FormPage> createState() => _FormPageState();
+  State<TopDrawerFormPage> createState() => _TopDrawerFormPageState();
 }
 
+
+
 /// WebViewAppの状態を管理するStateクラス
-class _FormPageState extends State<FormPage> {
+class _TopDrawerFormPageState extends State<TopDrawerFormPage> {
   /// WebViewControllerオブジェクト
   late final WebViewController webViewController;
 
   /// 初期状態を設定
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
     webViewController = WebViewController()
       ..loadRequest(
         Uri.parse('https://forms.gle/iiimfxKHgszmbTTx7'),
       );
   }
+  
+
 
   /// アプリのUIを構築
   @override
