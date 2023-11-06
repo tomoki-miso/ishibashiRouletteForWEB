@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ishibashi/components/original_app_bar.dart';
 import 'package:ishibashi/screens/store_list_detail.dart';
+import 'package:ishibashi/style/colors.dart';
 
 import '../components/store_list.dart';
 
@@ -38,6 +39,7 @@ class _ListCopyPageState extends State<ListCopyPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+    backgroundColor: ColorName.primarySecondary,
         appBar: const OriginalAppBar(),
         body: Center(
           child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
@@ -65,7 +67,7 @@ class _ListCopyPageState extends State<ListCopyPage> {
                     name: name,
                     tags: tags,
                     imageUrl: imageUrl,
-                    onPressed: () async {
+                    onTap: () async {
                       // Define what happens when an item is tapped
                       await navigateToStorePage(document.id);
                     },

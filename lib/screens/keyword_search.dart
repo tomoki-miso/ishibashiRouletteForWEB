@@ -115,7 +115,7 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                     name: name,
                     tags: tags,
                     imageUrl: imageUrl,
-                    onPressed: () async {
+                    onTap: () async {
                       await navigateToStorePage(_searchResults[index].id);
                     },
                   );

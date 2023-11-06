@@ -187,7 +187,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                     name: name,
                                     tags: tags,
                                     imageUrl: imageUrl,
-                                    onPressed: () async {
+                                    onTap: () async {
                                       // Define what happens when an item is tapped
                                       await navigateToStorePage(document.id);
                                     },

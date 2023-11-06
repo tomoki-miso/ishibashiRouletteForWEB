@@ -5,7 +5,7 @@ class Styles {
     fontSize: 16,
     fontWeight: FontWeight.bold,
     color: Colors.black,
-    overflow: TextOverflow.ellipsis
+    overflow: TextOverflow.ellipsis,
   );
 
   static const subTitleStyle = TextStyle(
@@ -14,7 +14,7 @@ class Styles {
     color: Colors.black,
   );
 
-   static const businnesHours = TextStyle(
+  static const businnesHours = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.bold,
     color: Colors.black,
@@ -24,5 +24,6 @@ class Styles {
     fontSize: 11,
     fontWeight: FontWeight.bold,
     color: Colors.black,
+    overflow: TextOverflow.clip,
   );
 }

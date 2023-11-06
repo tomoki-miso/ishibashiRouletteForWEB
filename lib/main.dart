@@ -9,7 +9,7 @@ import 'package:ishibashi/screens/list.dart';
 import 'package:ishibashi/screens/list_copy.dart';
 import 'package:ishibashi/screens/map.dart';
 import 'package:ishibashi/screens/random/components/page/random.dart';
-import 'package:ishibashi/screens/top.dart';
+import 'package:ishibashi/screens/top/top.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 
