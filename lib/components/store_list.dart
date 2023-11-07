@@ -73,21 +73,20 @@ class StoreList extends ConsumerWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: tags.isNotEmpty
-                                  ? tags
-                                      .take(3)
-                                      .map(
-                                        (formattedTag) => Container(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 1,
-                                          ),
-                                          margin: const EdgeInsets.all(1),
-                                          child: Text(
-                                            '#$formattedTag,',
-                                            style: Styles.tagsTextStyle,
-                                          ),
+                                  ? tags.take(3).map((formattedTag) {
+                                      final isLastTag =
+                                          formattedTag == tags.last;
+                                      return Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 1,
                                         ),
-                                      )
-                                      .toList()
+                                        margin: const EdgeInsets.all(1),
+                                        child: Text(
+                                          '#$formattedTag${isLastTag ? '' : ','}',
+                                          style: Styles.tagsTextStyle,
+                                        ),
+                                      );
+                                    }).toList()
                                   : [], // タグがない場合は空のリストを使用
                             ),
                             const Padding(padding: EdgeInsets.all(12)),

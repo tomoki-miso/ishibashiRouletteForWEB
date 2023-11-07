@@ -9,6 +9,11 @@ class Styles {
     overflow: TextOverflow.ellipsis,
   );
 
+  static const storeDetailStyle = TextStyle(
+    fontSize: 16,
+    color: Colors.black,
+  );
+
   static const subTitleStyle = TextStyle(
     fontSize: 10,
     fontWeight: FontWeight.bold,

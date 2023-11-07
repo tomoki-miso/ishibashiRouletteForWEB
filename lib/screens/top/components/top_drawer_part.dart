@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ishibashi/screens/top/top_dawer_form_page.dart';
-import 'package:ishibashi/screens/top/top_drawer_inquiry.dart';
-import 'package:ishibashi/screens/top/top_drawer_manual.dart';
+import 'package:ishibashi/screens/top/page/top_dawer_form_page.dart';
+import 'package:ishibashi/screens/top/page/top_drawer_inquiry.dart';
+import 'package:ishibashi/screens/top/page/top_drawer_manual.dart';
 import 'package:ishibashi/style/colors.dart';
 import 'package:ishibashi/style/styles.dart';
 

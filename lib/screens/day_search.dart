@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ishibashi/components/store_list.dart';
-import 'package:ishibashi/screens/store_list_detail.dart';
+import 'package:ishibashi/screens/store_details/page/store_list_detail.dart';
 
 class DaySearchPage extends StatefulWidget {
   const DaySearchPage({super.key});
