@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:ishibashi/screens/store_details/components/store_detail_detail_text_part.dart';
 import 'package:ishibashi/screens/store_details/components/store_detail_image_part.dart';
-import 'package:ishibashi/screens/store_details/components/store_detail_info_part.dart';
 import 'package:ishibashi/screens/store_details/components/store_detail_jump_part.dart';
+import 'package:ishibashi/screens/store_details/components/store_detail_tags_part.dart';
 import 'package:ishibashi/style/colors.dart';
+import 'package:ishibashi/style/styles.dart';
 
 class StoreListPage extends StatefulWidget {
   const StoreListPage({
@@ -78,67 +80,55 @@ class _StoreListPageState extends State<StoreListPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-
-    return Scaffold(
-      backgroundColor: ColorName.primarySecondary,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(screenSize.height * 0.08),
-        child: AppBar(
-          iconTheme: const IconThemeData(color: Colors.greenAccent),
-          backgroundColor: Colors.white,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
+  Widget build(BuildContext context) => Scaffold(
+        backgroundColor: ColorName.primarySecondary,
+        appBar: PreferredSize(
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.08),
+          child: AppBar(
+            iconTheme: const IconThemeData(color: Colors.greenAccent),
+            backgroundColor: Colors.white,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
             ),
           ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const Padding(padding: EdgeInsets.all(14)),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Padding(padding: EdgeInsets.all(14)),
 
-            //名前
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                storeName,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                ),
+              //名前
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Text(storeName,
+                    textAlign: TextAlign.center, style: Styles.detailStoreName),
               ),
-            ),
-            const Padding(padding: EdgeInsets.all(10)),
+              const Padding(padding: EdgeInsets.all(10)),
 
-            //画像部分
-            StoreDetailImagePart(storePhotoUrl: storePhotoUrl),
-            const Padding(padding: EdgeInsets.all(10)),
+              //画像部分
+              StoreDetailImagePart(storePhotoUrl: storePhotoUrl),
+              const Padding(padding: EdgeInsets.all(10)),
 
-            //タグと紹介
-            StoreDetailInfoPart(
-              storePhotoUrl: storePhotoUrl,
-              formattedTags: formattedTags,
-              storeDetail: storeDetail,
-            ),
-            const Padding(padding: EdgeInsets.all(10)),
+              //タグと紹介
+              StoreDetailTagsPart(formattedTags: formattedTags),
+              StoreDetailTextPart(storeDetail: storeDetail),
+              const Padding(padding: EdgeInsets.all(10)),
 
-            //ジャンプ部分
-            StoreDetailJumpPart(
-              storeWeb: storeWeb,
-              storeTabelog: storeTabelog,
-              storeTwitter: storeTwitter,
-              storeInsta: storeInsta,
-            ),
-          ],
+              //ジャンプ部分
+              StoreDetailJumpPart(
+                storeWeb: storeWeb,
+                storeTabelog: storeTabelog,
+                storeTwitter: storeTwitter,
+                storeInsta: storeInsta,
+              ),
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 }
 
 class LikeButton extends StatefulWidget {

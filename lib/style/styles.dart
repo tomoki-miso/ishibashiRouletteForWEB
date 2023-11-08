@@ -33,14 +33,19 @@ class Styles {
     overflow: TextOverflow.clip,
   );
 
-    static const DrawerTitle = TextStyle(
+  static const DrawerTitle = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.bold,
     color: ColorName.blackSecondary,
   );
 
-   static const DrawerSubTitle = TextStyle(
+  static const DrawerSubTitle = TextStyle(
     fontSize: 14,
     color: ColorName.blackSecondary,
+  );
+
+  static const detailStoreName = TextStyle(
+    fontSize: 32,
+    fontWeight: FontWeight.bold,
   );
 }

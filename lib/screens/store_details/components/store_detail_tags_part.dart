@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ishibashi/screens/store_details/components/store_detail_detail_text_part.dart';
 
-class StoreDetailInfoPart extends ConsumerWidget {
-  const StoreDetailInfoPart({
+class StoreDetailTagsPart extends ConsumerWidget {
+  const StoreDetailTagsPart({
     required this.formattedTags,
-    required this.storeDetail,
     super.key,
   });
 
   final List<String> formattedTags;
-  final String storeDetail;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) => Column(
         children: [
@@ -35,7 +33,6 @@ class StoreDetailInfoPart extends ConsumerWidget {
                   }).toList()
                 : [], // タグがない場合は空のリストを使用
           ),
-          StoreDetailTextPart(storeDetail: storeDetail),
         ],
       );
 }
