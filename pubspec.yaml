@@ -53,6 +53,7 @@ dependencies:
   geolocator: ^10.1.0
 
   flutter_riverpod: ^2.4.5
+  lottie: ^2.7.0
 
 
 
@@ -89,6 +90,7 @@ flutter:
 
   assets:
     - assets/images/iconKari.png
+    - assets/lottie/coupon_lottie.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

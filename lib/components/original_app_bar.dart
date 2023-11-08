@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ishibashi/screens/search_confirm.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ishibashi/screens/search_confirm/page/search_confirm.dart';
 import 'package:ishibashi/style/colors.dart';
 
 class OriginalAppBar extends StatelessWidget implements PreferredSizeWidget {
   const OriginalAppBar({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) => AppBar(
-    iconTheme: const IconThemeData(color: ColorName.greyBase),
+      iconTheme: const IconThemeData(color: ColorName.greyBase),
       backgroundColor: Colors.white,
       centerTitle: false,
       title: Row(
@@ -19,23 +20,20 @@ class OriginalAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Image.asset('assets/images/iconKari.png'),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 20, bottom: 30),
-            child: IconButton(
-                onPressed: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SearchConfirmPage(),
-                    ),
-                  );
-                },
-                icon: const Icon(
-                  Icons.search,
-                  color: ColorName.greyBase,
-                  size: 60,
-                )),
-          )
+          IconButton(
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SearchConfirmPage(),
+                  ),
+                );
+              },
+              icon: const FaIcon(
+                FontAwesomeIcons.magnifyingGlass,
+                color: ColorName.greyBase,
+                size: 30,
+              ))
         ],
       ),
       shape: const RoundedRectangleBorder(

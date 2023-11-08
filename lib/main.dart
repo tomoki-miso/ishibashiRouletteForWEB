@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ishibashi/firebase/firebase_options.dart';
+import 'package:ishibashi/screens/coupon.dart';
 import 'package:ishibashi/screens/list.dart';
 import 'package:ishibashi/screens/map.dart';
 import 'package:ishibashi/screens/random/components/page/random.dart';
@@ -46,13 +47,15 @@ class BasePage extends StatelessWidget {
     BuildContext context,
   ) {
     final pages = [
-      ListPage(),
+      const ListPage(),
       const RandomPage(),
       const TopPage(),
+      const CouponPage(),
       const MapPage(),
     ];
 
     return Scaffold(
+      // final listIcon =
       body: PersistentTabView(
         context,
         controller: PersistentTabController(initialIndex: 2),
@@ -60,11 +63,8 @@ class BasePage extends StatelessWidget {
         navBarStyle: NavBarStyle.simple,
         items: [
           PersistentBottomNavBarItem(
-            icon: const Icon(
-              Icons.list,
-            ),
-            inactiveIcon: const Icon(
-              Icons.list,
+            icon: const FaIcon(
+              FontAwesomeIcons.listUl,
             ),
             title: 'リスト',
             activeColorPrimary: const Color.fromARGB(124, 252, 0, 0),
@@ -72,31 +72,30 @@ class BasePage extends StatelessWidget {
           ),
           PersistentBottomNavBarItem(
             icon: const FaIcon(
-              FontAwesomeIcons.shop,
-            ),
-            inactiveIcon: const FaIcon(
-              FontAwesomeIcons.shop,
+              FontAwesomeIcons.shuffle,
             ),
             title: 'ランダム',
             activeColorPrimary: const Color.fromARGB(124, 252, 0, 0),
             inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
           PersistentBottomNavBarItem(
-            icon: const Icon(
-              Icons.star,
-            ),
-            inactiveIcon: const Icon(
-              // text snippet, article, description, restaurant
-              Icons.star_border,
+            icon: const FaIcon(
+              FontAwesomeIcons.house,
             ),
             title: 'トップ',
             activeColorPrimary: const Color.fromARGB(124, 252, 0, 0),
             inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
           PersistentBottomNavBarItem(
-            icon: const FaIcon(FontAwesomeIcons.mapLocationDot),
-            inactiveIcon: const FaIcon(
-              // text snippet, article, description, restaurant
+            icon: const FaIcon(
+              FontAwesomeIcons.ticket,
+            ),
+            title: 'クーポン',
+            activeColorPrimary: const Color.fromARGB(124, 252, 0, 0),
+            inactiveColorPrimary: Theme.of(context).disabledColor,
+          ),
+          PersistentBottomNavBarItem(
+            icon: const FaIcon(
               FontAwesomeIcons.mapLocationDot,
             ),
             title: 'マップ',
