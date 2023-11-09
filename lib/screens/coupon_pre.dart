@@ -3,8 +3,8 @@ import 'package:ishibashi/components/original_app_bar.dart';
 import 'package:ishibashi/style/colors.dart';
 import 'package:lottie/lottie.dart';
 
-class CouponPage extends StatelessWidget {
-  const CouponPage({super.key});
+class CouponPrePage extends StatelessWidget {
+  const CouponPrePage({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -13,7 +13,7 @@ class CouponPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                 height: MediaQuery.of(context).size.width * 0.6,
                 width: MediaQuery.of(context).size.width * 0.6,
                 child: Lottie.asset('assets/lottie/coupon_lottie.json'),

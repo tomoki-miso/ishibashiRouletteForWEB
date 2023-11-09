@@ -54,6 +54,7 @@ dependencies:
 
   flutter_riverpod: ^2.4.5
   lottie: ^2.7.0
+  flutter_slidable: ^3.0.1
 
 
 
