@@ -55,6 +55,7 @@ dependencies:
   flutter_riverpod: ^2.4.5
   lottie: ^2.7.0
   flutter_slidable: ^3.0.1
+  slide_to_act: ^2.0.2
 
 
 
