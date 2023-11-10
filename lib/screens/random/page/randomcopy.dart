@@ -54,7 +54,9 @@ class _RandomCopyPageState extends State<RandomCopyPage> {
 
               //タグと紹介
               RandomStoreTagsPart(formattedTags: formattedTags),
-              RandomStoreTextPart(storeDetail: "storeDetail"),
+              RandomStoreTextPart(
+                  storeDetail:
+                      "storeDetailaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
 
               // //ジャンプ部分
               // RandomStoreJumpPart(

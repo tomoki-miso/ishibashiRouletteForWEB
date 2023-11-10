@@ -11,11 +11,11 @@ class RouletteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(5.0),
         child: PrimaryButton(
           onPressed: () {},
-          width: MediaQuery.of(context).size.width * 0.85,
-          height: MediaQuery.of(context).size.height * 0.085,
+          width: MediaQuery.of(context).size.width * 0.8,
+          height: MediaQuery.of(context).size.height * 0.07,
           text: "ルーレットをまわす",
           style: Styles.RandomRoulette,
         ),
