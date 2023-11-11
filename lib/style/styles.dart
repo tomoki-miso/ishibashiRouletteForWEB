@@ -48,4 +48,14 @@ class Styles {
     fontSize: 32,
     fontWeight: FontWeight.bold,
   );
+
+  static const RandomStore = TextStyle(
+    fontSize: 17,
+    color: ColorName.whiteBase,
+  );
+
+  static const RandomRoulette = TextStyle(
+    fontSize: 21,
+    color: ColorName.whiteBase,
+  );
 }

@@ -8,7 +8,8 @@ import 'package:ishibashi/screens/store_details/page/store_rondom_detail.dart';
 import 'package:ishibashi/style/styles.dart';
 
 final storeProvider = StateNotifierProvider<StoreNotifier, List<StoreClass>>(
-    (ref) => StoreNotifier(),);
+  (ref) => StoreNotifier(),
+);
 
 class RandomPage extends ConsumerWidget {
   const RandomPage({super.key});
@@ -19,17 +20,16 @@ class RandomPage extends ConsumerWidget {
     final storeProvider = ref.watch(storeInfoNotifierProvider);
 
     final name = storeProvider.when(
-        loading: () => const Padding(padding: EdgeInsets.all(1)),
-        error: (e, s) => Text(
-              'エラー $e',
-              style: Styles.storeNameStyle,
-            ),
-        data: (state) => Expanded(
-              child: Text(
-                state.StoreName,
-                style: Styles.storeNameStyle,
-              ),
-            ),); //とりあえずExpandedにしてるけどoverFlowで管理してもいいかも。とにかくいしばしやではみ出るのを防ぎたい。
+      loading: () => const Padding(padding: EdgeInsets.all(1)),
+      error: (e, s) => Text(
+        'エラー $e',
+        style: Styles.storeNameStyle,
+      ),
+      data: (state) => Text(
+        state.StoreName,
+        style: Styles.storeNameStyle,
+      ),
+    ); //とりあえずExpandedにしてるけどoverFlowで管理してもいいかも。とにかくいしばしやではみ出るのを防ぎたい。
 
     final detail = storeProvider.when(
       loading: () => const Padding(padding: EdgeInsets.all(1)),
@@ -54,7 +54,8 @@ class RandomPage extends ConsumerWidget {
                   imageUrl: state.StorePhotoUrl,
                   width: screenSize.width * 0.8,
                   fit: BoxFit.cover,
-                ),)
+                ),
+              )
             : Container(
                 height: screenSize.height * 0.3,
                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -69,8 +70,10 @@ class RandomPage extends ConsumerWidget {
       data: (state) => Expanded(
         child: Row(
           children: state.Tags.isNotEmpty
-              ? state.Tags.map((tag) => Container(
-                    padding: const EdgeInsetsDirectional.symmetric(horizontal: 8),
+              ? state.Tags.map(
+                  (tag) => Container(
+                    padding:
+                        const EdgeInsetsDirectional.symmetric(horizontal: 8),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
                       color: Colors.deepOrangeAccent,
@@ -85,7 +88,8 @@ class RandomPage extends ConsumerWidget {
                         ),
                       ),
                     ),
-                  ),).toList()
+                  ),
+                ).toList()
               : [],
         ),
       ),
@@ -121,8 +125,9 @@ class RandomPage extends ConsumerWidget {
           backgroundColor: Colors.white,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),),
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),
           ),
         ),
       ),
@@ -150,15 +155,18 @@ class RandomPage extends ConsumerWidget {
                     ),
                     SizedBox(height: screenSize.height * 0.3, child: photo),
                     Container(
-                        margin: const EdgeInsets.all(2),
-                        height: screenSize.height * 0.09,
-                        width: screenSize.width * 0.9,
-                        child: detail,),
+                      margin: const EdgeInsets.all(2),
+                      height: screenSize.height * 0.09,
+                      width: screenSize.width * 0.9,
+                      child: detail,
+                    ),
                     ElevatedButton(
                       style: OutlinedButton.styleFrom(
                         backgroundColor: Colors.orangeAccent,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 2,),
+                          horizontal: 20,
+                          vertical: 2,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -207,9 +215,9 @@ class _LikeButtonState extends State<LikeButton> {
 
   @override
   Widget build(BuildContext context) => IconButton(
-      icon: _isLiked
-          ? const Icon(Icons.favorite)
-          : const Icon(Icons.favorite_border),
-      onPressed: _toggleLike,
-    );
+        icon: _isLiked
+            ? const Icon(Icons.favorite)
+            : const Icon(Icons.favorite_border),
+        onPressed: _toggleLike,
+      );
 }
