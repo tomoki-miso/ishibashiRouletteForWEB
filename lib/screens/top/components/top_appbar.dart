@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ishibashi/screens/auth/page/after_sign_out.dart';
 import 'package:ishibashi/screens/auth/page/sign_in_confirm.dart';
-import 'package:ishibashi/screens/auth/sign_in_with_google.dart';
+import 'package:ishibashi/screens/auth/signin/sign_in_with_google.dart';
 import 'package:ishibashi/style/colors.dart';
 
 class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -49,7 +50,7 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
     await Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => SignInConfirmPage(), // 何も表示されないページに遷移してアプリを一旦閉じさせる
+        builder: (context) => AfterSignOutPage(), // 何も表示されないページに遷移してアプリを一旦閉じさせる
       ),
     );
   }
