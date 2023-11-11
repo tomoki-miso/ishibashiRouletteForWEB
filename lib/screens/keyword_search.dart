@@ -92,9 +92,8 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                 decoration: const InputDecoration(
                   hintText: '店名、カテゴリーなどで検索',
                 ),
-                onChanged: (value) {
-                  // Trigger the search when the text field changes
-                  _searchKeyword(value);
+                onChanged: (value) async {
+                  await _searchKeyword(value);
                 },
               ),
             ),
