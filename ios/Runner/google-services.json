@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "766148127415",
+    "project_id": "test-nomura-d6ec4",
+    "storage_bucket": "test-nomura-d6ec4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:766148127415:android:924e6377604ab6cfeabb32",
+        "android_client_info": {
+          "package_name": "com.example.ishibashi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "766148127415-0il0q2l3kqaagdanj281fqmlt0kmev3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR2xf9TJ4x17w3Mj-9Xqn9nvEJD6iEZA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "766148127415-0il0q2l3kqaagdanj281fqmlt0kmev3m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "766148127415-2agsu8gjbpecj6u3ee3cfuvkkbutmpp3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ishibashi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
