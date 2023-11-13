@@ -14,7 +14,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "766148127415-9qm7429lhh6mj6p0hpdlv15ph95ii7vt.apps.googleusercontent.com",
+          "client_id": "766148127415-0il0q2l3kqaagdanj281fqmlt0kmev3m.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +27,43 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "766148127415-9qm7429lhh6mj6p0hpdlv15ph95ii7vt.apps.googleusercontent.com",
+              "client_id": "766148127415-0il0q2l3kqaagdanj281fqmlt0kmev3m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "766148127415-2agsu8gjbpecj6u3ee3cfuvkkbutmpp3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ishibashi"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:766148127415:android:19518b9c19a5fe95eabb32",
+        "android_client_info": {
+          "package_name": "com.potipoti.ishibashi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "766148127415-0il0q2l3kqaagdanj281fqmlt0kmev3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR2xf9TJ4x17w3Mj-9Xqn9nvEJD6iEZA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "766148127415-0il0q2l3kqaagdanj281fqmlt0kmev3m.apps.googleusercontent.com",
               "client_type": 3
             },
             {

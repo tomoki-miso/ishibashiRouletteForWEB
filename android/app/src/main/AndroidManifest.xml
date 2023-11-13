@@ -23,8 +23,8 @@
             <data android:mimeType="*/*" />
         </intent>
     </queries>
-    
-   <application
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
         android:label="石橋ごはんルーレット"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
