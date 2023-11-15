@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ishibashi/screens/auth/page/after_sign_out.dart';
-import 'package:ishibashi/screens/auth/page/sign_in_confirm.dart';
 import 'package:ishibashi/screens/auth/signin/sign_in_with_google.dart';
 import 'package:ishibashi/style/colors.dart';
 
@@ -45,8 +44,8 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Future<void> _logOut(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
-    await googleLogin.signOut();
-    // ログアウト後に必要な場合は追加のロジックを追加できます
+    await googleSignIn?.signOut();
+    
     await Navigator.pushReplacement(
       context,
       MaterialPageRoute(
