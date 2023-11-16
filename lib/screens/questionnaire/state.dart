@@ -12,9 +12,12 @@ class QuestionnaireState with _$QuestionnaireState {
   // プロパティを指定
   const factory QuestionnaireState({
     required TextEditingController userNameController,
+    required TextEditingController departmentController,
     required String selectedGender,
     required String selectedOccupation,
+    required String selectedFaculty,
     required Map<String, String> dropDownGenderMap,
     required Map<String, String> dropDownOccupationMap,
+    required Map<String, String> dropDownFacultyMap,
   }) = _QuestionnaireState;
 }

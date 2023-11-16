@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/base.dart';
-import 'package:ishibashi/components/original_app_bar.dart';
 import 'package:ishibashi/components/primary_button.dart';
 import 'package:ishibashi/screens/questionnaire/componants/select_gender_drop_button.dart';
 import 'package:ishibashi/screens/questionnaire/componants/select_occupation_drop_button.dart';
@@ -46,9 +45,8 @@ class QuestionnairePage extends ConsumerWidget {
                     SelectGenderDropButton(),
                   ],
                 ),
-                // ignore: prefer_const_constructors
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     Text(
                       '職業など',
                       style: TextStyle(fontSize: 20),
