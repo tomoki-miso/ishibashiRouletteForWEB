@@ -12,15 +12,19 @@ class QuestionnaireViewModel extends _$QuestionnaireViewModel {
     final state = QuestionnaireState(
       userNameController: TextEditingController(),
       departmentController: TextEditingController(),
-      selectedGender: 'male',
-      selectedOccupation: 'ouStudent',
-      selectedFaculty: 'literature',
+      selectedGender: 'notSelected',
+      selectedOccupation: 'notSelected',
+      selectedFaculty: 'notSelected',
+      inputedUserName: '',
+      inputedDepartment: '',
       dropDownGenderMap: {
+        'notSelected': '選択してください',
         'male': '男',
         'female': '女',
         'other': '無回答',
       },
       dropDownOccupationMap: {
+        'notSelected': '選択してください',
         'ouStudent': '阪大生',
         'uStudent': '大学生',
         'employee': '会社員',
@@ -32,6 +36,7 @@ class QuestionnaireViewModel extends _$QuestionnaireViewModel {
         'hStudent': '高校生',
       },
       dropDownFacultyMap: {
+        'notSelected': '選択してください',
         'literature': '文学部',
         'human_science': '人間科学部',
         'foreignLanguage': '外国語学部',
@@ -68,5 +73,15 @@ class QuestionnaireViewModel extends _$QuestionnaireViewModel {
   Future<void> selectFaculty(faculty) async {
     final data = state.requireValue;
     state = AsyncData(data.copyWith(selectedFaculty: faculty));
+  }
+
+  Future<void> inputUserName(userName) async {
+    final data = state.requireValue;
+    state = AsyncData(data.copyWith(inputedUserName: userName));
+  }
+
+  Future<void> inputDepartment(department) async {
+    final data = state.requireValue;
+    state = AsyncData(data.copyWith(inputedDepartment: department));
   }
 }

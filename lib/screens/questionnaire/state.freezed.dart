@@ -23,6 +23,8 @@ mixin _$QuestionnaireState {
   String get selectedGender => throw _privateConstructorUsedError;
   String get selectedOccupation => throw _privateConstructorUsedError;
   String get selectedFaculty => throw _privateConstructorUsedError;
+  String get inputedUserName => throw _privateConstructorUsedError;
+  String get inputedDepartment => throw _privateConstructorUsedError;
   Map<String, String> get dropDownGenderMap =>
       throw _privateConstructorUsedError;
   Map<String, String> get dropDownOccupationMap =>
@@ -47,6 +49,8 @@ abstract class $QuestionnaireStateCopyWith<$Res> {
       String selectedGender,
       String selectedOccupation,
       String selectedFaculty,
+      String inputedUserName,
+      String inputedDepartment,
       Map<String, String> dropDownGenderMap,
       Map<String, String> dropDownOccupationMap,
       Map<String, String> dropDownFacultyMap});
@@ -70,6 +74,8 @@ class _$QuestionnaireStateCopyWithImpl<$Res, $Val extends QuestionnaireState>
     Object? selectedGender = null,
     Object? selectedOccupation = null,
     Object? selectedFaculty = null,
+    Object? inputedUserName = null,
+    Object? inputedDepartment = null,
     Object? dropDownGenderMap = null,
     Object? dropDownOccupationMap = null,
     Object? dropDownFacultyMap = null,
@@ -94,6 +100,14 @@ class _$QuestionnaireStateCopyWithImpl<$Res, $Val extends QuestionnaireState>
       selectedFaculty: null == selectedFaculty
           ? _value.selectedFaculty
           : selectedFaculty // ignore: cast_nullable_to_non_nullable
+              as String,
+      inputedUserName: null == inputedUserName
+          ? _value.inputedUserName
+          : inputedUserName // ignore: cast_nullable_to_non_nullable
+              as String,
+      inputedDepartment: null == inputedDepartment
+          ? _value.inputedDepartment
+          : inputedDepartment // ignore: cast_nullable_to_non_nullable
               as String,
       dropDownGenderMap: null == dropDownGenderMap
           ? _value.dropDownGenderMap
@@ -125,6 +139,8 @@ abstract class _$$QuestionnaireStateImplCopyWith<$Res>
       String selectedGender,
       String selectedOccupation,
       String selectedFaculty,
+      String inputedUserName,
+      String inputedDepartment,
       Map<String, String> dropDownGenderMap,
       Map<String, String> dropDownOccupationMap,
       Map<String, String> dropDownFacultyMap});
@@ -146,6 +162,8 @@ class __$$QuestionnaireStateImplCopyWithImpl<$Res>
     Object? selectedGender = null,
     Object? selectedOccupation = null,
     Object? selectedFaculty = null,
+    Object? inputedUserName = null,
+    Object? inputedDepartment = null,
     Object? dropDownGenderMap = null,
     Object? dropDownOccupationMap = null,
     Object? dropDownFacultyMap = null,
@@ -170,6 +188,14 @@ class __$$QuestionnaireStateImplCopyWithImpl<$Res>
       selectedFaculty: null == selectedFaculty
           ? _value.selectedFaculty
           : selectedFaculty // ignore: cast_nullable_to_non_nullable
+              as String,
+      inputedUserName: null == inputedUserName
+          ? _value.inputedUserName
+          : inputedUserName // ignore: cast_nullable_to_non_nullable
+              as String,
+      inputedDepartment: null == inputedDepartment
+          ? _value.inputedDepartment
+          : inputedDepartment // ignore: cast_nullable_to_non_nullable
               as String,
       dropDownGenderMap: null == dropDownGenderMap
           ? _value._dropDownGenderMap
@@ -196,6 +222,8 @@ class _$QuestionnaireStateImpl implements _QuestionnaireState {
       required this.selectedGender,
       required this.selectedOccupation,
       required this.selectedFaculty,
+      required this.inputedUserName,
+      required this.inputedDepartment,
       required final Map<String, String> dropDownGenderMap,
       required final Map<String, String> dropDownOccupationMap,
       required final Map<String, String> dropDownFacultyMap})
@@ -213,6 +241,10 @@ class _$QuestionnaireStateImpl implements _QuestionnaireState {
   final String selectedOccupation;
   @override
   final String selectedFaculty;
+  @override
+  final String inputedUserName;
+  @override
+  final String inputedDepartment;
   final Map<String, String> _dropDownGenderMap;
   @override
   Map<String, String> get dropDownGenderMap {
@@ -242,7 +274,7 @@ class _$QuestionnaireStateImpl implements _QuestionnaireState {
 
   @override
   String toString() {
-    return 'QuestionnaireState(userNameController: $userNameController, departmentController: $departmentController, selectedGender: $selectedGender, selectedOccupation: $selectedOccupation, selectedFaculty: $selectedFaculty, dropDownGenderMap: $dropDownGenderMap, dropDownOccupationMap: $dropDownOccupationMap, dropDownFacultyMap: $dropDownFacultyMap)';
+    return 'QuestionnaireState(userNameController: $userNameController, departmentController: $departmentController, selectedGender: $selectedGender, selectedOccupation: $selectedOccupation, selectedFaculty: $selectedFaculty, inputedUserName: $inputedUserName, inputedDepartment: $inputedDepartment, dropDownGenderMap: $dropDownGenderMap, dropDownOccupationMap: $dropDownOccupationMap, dropDownFacultyMap: $dropDownFacultyMap)';
   }
 
   @override
@@ -260,6 +292,10 @@ class _$QuestionnaireStateImpl implements _QuestionnaireState {
                 other.selectedOccupation == selectedOccupation) &&
             (identical(other.selectedFaculty, selectedFaculty) ||
                 other.selectedFaculty == selectedFaculty) &&
+            (identical(other.inputedUserName, inputedUserName) ||
+                other.inputedUserName == inputedUserName) &&
+            (identical(other.inputedDepartment, inputedDepartment) ||
+                other.inputedDepartment == inputedDepartment) &&
             const DeepCollectionEquality()
                 .equals(other._dropDownGenderMap, _dropDownGenderMap) &&
             const DeepCollectionEquality()
@@ -276,6 +312,8 @@ class _$QuestionnaireStateImpl implements _QuestionnaireState {
       selectedGender,
       selectedOccupation,
       selectedFaculty,
+      inputedUserName,
+      inputedDepartment,
       const DeepCollectionEquality().hash(_dropDownGenderMap),
       const DeepCollectionEquality().hash(_dropDownOccupationMap),
       const DeepCollectionEquality().hash(_dropDownFacultyMap));
@@ -295,6 +333,8 @@ abstract class _QuestionnaireState implements QuestionnaireState {
           required final String selectedGender,
           required final String selectedOccupation,
           required final String selectedFaculty,
+          required final String inputedUserName,
+          required final String inputedDepartment,
           required final Map<String, String> dropDownGenderMap,
           required final Map<String, String> dropDownOccupationMap,
           required final Map<String, String> dropDownFacultyMap}) =
@@ -310,6 +350,10 @@ abstract class _QuestionnaireState implements QuestionnaireState {
   String get selectedOccupation;
   @override
   String get selectedFaculty;
+  @override
+  String get inputedUserName;
+  @override
+  String get inputedDepartment;
   @override
   Map<String, String> get dropDownGenderMap;
   @override

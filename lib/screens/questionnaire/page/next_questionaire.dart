@@ -25,7 +25,6 @@ class NextQuestionnairePage extends ConsumerWidget {
                 '学部を選択してください',
                 style: TextStyle(fontSize: 20),
               ),
-              
               const Padding(padding: EdgeInsets.all(10)),
               const Center(child: SelectFacultyDropButton()),
               const Padding(padding: EdgeInsets.all(16)),
@@ -35,14 +34,25 @@ class NextQuestionnairePage extends ConsumerWidget {
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
-                child: const TextField(),
+                child: TextField(
+                  controller: TextEditingController.fromValue(
+                    TextEditingValue(
+                      text: state.value?.inputedDepartment ?? '',
+                    ),
+                  ),
+                ),
               ),
               const Padding(padding: EdgeInsets.all(20)),
               Center(
                 child: PrimaryButton(
                   width: MediaQuery.of(context).size.width * 0.8,
                   onPressed: () async {
-                    await _navigateToBasePage(context);
+                    if (data.selectedFaculty == 'notSelected' ||
+                        data.inputedDepartment == '') {
+                      await showAlertDialog(context);
+                    } else {
+                      await _navigateToBasePage(context);
+                    }
                   },
                   text: '次へ進む',
                 ),
@@ -56,6 +66,21 @@ class NextQuestionnairePage extends ConsumerWidget {
     );
   }
 }
+
+Future<dynamic> showAlertDialog(BuildContext context) => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('情報を入力してください'),
+        actions: <Widget>[
+          GestureDetector(
+            child: const Text('はい'),
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
 
 Future<void> _navigateToBasePage(BuildContext context) async {
   await Navigator.push(

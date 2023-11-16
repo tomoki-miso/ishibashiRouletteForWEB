@@ -16,6 +16,8 @@ class QuestionnaireState with _$QuestionnaireState {
     required String selectedGender,
     required String selectedOccupation,
     required String selectedFaculty,
+    required String inputedUserName,
+    required String inputedDepartment,
     required Map<String, String> dropDownGenderMap,
     required Map<String, String> dropDownOccupationMap,
     required Map<String, String> dropDownFacultyMap,

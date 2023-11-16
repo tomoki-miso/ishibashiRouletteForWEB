@@ -5,8 +5,17 @@ class AfterSignOutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => const Scaffold(
-      body: Column(
-        children: [Text('ログアウトしました。\nアプリを一旦閉じてください。')],
-      ),
-    );
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'ログアウトしました。\nアプリを一旦閉じてください。',
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              )
+            ],
+          ),
+        ),
+      );
 }

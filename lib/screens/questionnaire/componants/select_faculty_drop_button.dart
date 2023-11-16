@@ -23,7 +23,7 @@ class SelectFacultyDropButton extends ConsumerWidget {
         onChanged: (faculty) async {
           await ref
               .read(questionnaireViewModelProvider.notifier)
-              .selectGender(faculty);
+              .selectFaculty(faculty);
           print(faculty);
         },
       ),

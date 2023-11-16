@@ -30,7 +30,18 @@ class QuestionnairePage extends ConsumerWidget {
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
-                  child: const TextField(),
+                  child: TextField(
+                    controller: TextEditingController.fromValue(
+                      TextEditingValue(
+                        text: state.value?.inputedUserName ?? '',
+                      ),
+                    ),
+                    onSubmitted: (userName) async {
+                      await ref
+                          .read(questionnaireViewModelProvider.notifier)
+                          .inputUserName(userName);
+                    },
+                  ),
                 ),
                 const Padding(padding: EdgeInsets.all(10)),
                 const Row(
@@ -62,7 +73,11 @@ class QuestionnairePage extends ConsumerWidget {
                   child: PrimaryButton(
                     width: MediaQuery.of(context).size.width * 0.8,
                     onPressed: () async {
-                      if (data.selectedOccupation == 'ouStudent') {
+                      if (data.selectedOccupation == 'notSelected' ||
+                          data.selectedGender == 'notSelected' ||
+                          data.inputedUserName == '') {
+                        await showAlertDialog(context);
+                      } else if (data.selectedOccupation == 'ouStudent') {
                         await _navigateToNextQuestionanairePage(context);
                       } else {
                         await _navigateToBasePage(context);
@@ -80,6 +95,21 @@ class QuestionnairePage extends ConsumerWidget {
       loading: () => const Text('loading'),
     );
   }
+
+  Future<dynamic> showAlertDialog(BuildContext context) => showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('情報を入力してください'),
+                          actions: <Widget>[
+                            GestureDetector(
+                              child: const Text('はい'),
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        ),
+                      );
 }
 
 Future<void> _navigateToBasePage(BuildContext context) async {
