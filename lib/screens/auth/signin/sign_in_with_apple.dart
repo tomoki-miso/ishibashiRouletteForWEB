@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ishibashi/base.dart';
+import 'package:ishibashi/screens/questionnaire/page/questionnaire.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 Future<void> signInWithApple(BuildContext context) async {
@@ -38,7 +39,7 @@ Future<void> signInWithApple(BuildContext context) async {
       // 新しいアカウントが作成された後の処理や画面遷移を行う
       await Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const BasePage(), // 遷移先の画面を指定
+          builder: (context) => const QuestionnairePage(), // 遷移先の画面を指定
         ),
       );
     }
@@ -47,9 +48,9 @@ Future<void> signInWithApple(BuildContext context) async {
     await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-          title: const Text('エラー'),
-          content: Text(e.toString()),
-        ),
+        title: const Text('エラー'),
+        content: Text(e.toString()),
+      ),
     );
   }
 }

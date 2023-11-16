@@ -11,20 +11,21 @@ class SelectOccupationDropButton extends ConsumerWidget {
 
     return state.when(
       data: (data) => DropdownButton(
-        items: data.dropDownGenderMap.entries.map((occupation) {
-          final key = occupation.key;
-          final value = occupation.value;
-          return DropdownMenuItem(
-            value: key,
-            child: Text(value),
-          );
-        }).toList(),
+        items: data.dropDownOccupationMap.entries
+            .map(
+              (entry) => DropdownMenuItem(
+                value: entry.key,
+                child: Text(entry.value),
+              ),
+            )
+            .toList(),
+        value: data.selectedOccupation,
         onChanged: (occupation) async {
           await ref
               .read(questionnaireViewModelProvider.notifier)
-              .selectedOccupation(occupation);
+              .selectOccupation(occupation);
+          print(occupation);
         },
-        value: data.selectedOccupation,
       ),
       error: (error, stackTrace) => Text('エラー'),
       loading: () => Text('loading'),

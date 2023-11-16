@@ -11,19 +11,20 @@ class SelectGenderDropButton extends ConsumerWidget {
 
     return state.when(
       data: (data) => DropdownButton(
-        items: data.dropDownGenderMap.entries.map((gender) {
-          final key = gender.key;
-          final value = gender.value;
-          return DropdownMenuItem(
-            value: key,
-            child: Text(value),
-          );
-        }).toList(),
+        items: data.dropDownGenderMap.entries
+            .map(
+              (entry) => DropdownMenuItem(
+                value: entry.key,
+                child: Text(entry.value),
+              ),
+            )
+            .toList(),
         value: data.selectedGender,
         onChanged: (gender) async {
           await ref
               .read(questionnaireViewModelProvider.notifier)
               .selectGender(gender);
+          print(gender);
         },
       ),
       error: (error, stackTrace) => Text('エラー'),

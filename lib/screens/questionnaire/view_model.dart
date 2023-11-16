@@ -12,23 +12,23 @@ class QuestionnaireViewModel extends _$QuestionnaireViewModel {
   FutureOr<QuestionnaireState> build() async {
     final state = QuestionnaireState(
       userNameController: TextEditingController(),
-      selectedGender: '',
-      selectedOccupation: '',
+      selectedGender: 'male',
+      selectedOccupation: 'ouStudent',
       dropDownGenderMap: {
         'male': '男',
         'female': '女',
         'other': '無回答',
       },
       dropDownOccupationMap: {
-        'ou_student':'',
-        'u_student':'',
+        'ouStudent': '阪大生',
+        'uStudent': '大学生',
         'employee': '会社員',
         'self_employed': '自営業',
         'housewife': '主婦',
         'unemployed': '無職',
-        'e_student': '小学生',
-        'jh_student': '中学生',
-        'h_student': '高校生',
+        'eStudent': '小学生',
+        'jhStudent': '中学生',
+        'hStudent': '高校生',
       },
     );
 
@@ -45,7 +45,7 @@ class QuestionnaireViewModel extends _$QuestionnaireViewModel {
     state = AsyncData(data.copyWith(selectedGender: gender));
   }
 
-  Future<void> selectedOccupation(occupation) async {
+  Future<void> selectOccupation(occupation) async {
     final data = state.requireValue;
     state = AsyncData(data.copyWith(selectedOccupation: occupation));
   }
