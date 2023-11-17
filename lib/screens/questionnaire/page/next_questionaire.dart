@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ishibashi/base.dart';
 import 'package:ishibashi/components/primary_button.dart';
 import 'package:ishibashi/screens/questionnaire/componants/select_faculty_drop_button.dart';
 import 'package:ishibashi/screens/questionnaire/view_model.dart';
@@ -11,6 +10,7 @@ class NextQuestionnairePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(questionnaireViewModelProvider);
+    final notifier = ref.read(questionnaireViewModelProvider.notifier);
 
     return state.when(
       data: (data) => Scaffold(
@@ -37,9 +37,7 @@ class NextQuestionnairePage extends ConsumerWidget {
                 child: TextField(
                   controller: data.departmentController,
                   onSubmitted: (department) async {
-                    await ref
-                        .read(questionnaireViewModelProvider.notifier)
-                        .inputDepartment(department);
+                    await notifier.inputDepartment();
                   },
                 ),
               ),
@@ -48,11 +46,12 @@ class NextQuestionnairePage extends ConsumerWidget {
                 child: PrimaryButton(
                   width: MediaQuery.of(context).size.width * 0.8,
                   onPressed: () async {
+                    await notifier.inputDepartment();
                     if (data.selectedFaculty == 'notSelected' ||
                         data.inputedDepartment == '') {
                       await showAlertDialog(context);
                     } else {
-                      await _navigateToBasePage(context);
+                      await notifier.navigateToBasePage(context);
                     }
                   },
                   text: '次へ進む',
@@ -82,10 +81,3 @@ Future<dynamic> showAlertDialog(BuildContext context) => showDialog(
         ],
       ),
     );
-
-Future<void> _navigateToBasePage(BuildContext context) async {
-  await Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const BasePage()),
-  );
-}

@@ -14,45 +14,48 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-UserInfo _$UserInfoFromJson(Map<String, dynamic> json) {
+DomainUserInfo _$DomainUserInfoFromJson(Map<String, dynamic> json) {
   return _UserInfo.fromJson(json);
 }
 
 /// @nodoc
-mixin _$UserInfo {
+mixin _$DomainUserInfo {
   String get userId => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
   String get occupation => throw _privateConstructorUsedError;
-  String get faculty => throw _privateConstructorUsedError;
-  String get department => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
+  String? get faculty => throw _privateConstructorUsedError;
+  String? get department => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserInfoCopyWith<UserInfo> get copyWith =>
+  $DomainUserInfoCopyWith<DomainUserInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserInfoCopyWith<$Res> {
-  factory $UserInfoCopyWith(UserInfo value, $Res Function(UserInfo) then) =
-      _$UserInfoCopyWithImpl<$Res, UserInfo>;
+abstract class $DomainUserInfoCopyWith<$Res> {
+  factory $DomainUserInfoCopyWith(
+          DomainUserInfo value, $Res Function(DomainUserInfo) then) =
+      _$DomainUserInfoCopyWithImpl<$Res, DomainUserInfo>;
   @useResult
   $Res call(
       {String userId,
       String gender,
       String occupation,
-      String faculty,
-      String department,
+      String userName,
+      String? faculty,
+      String? department,
       DateTime? createdAt,
       DateTime? updatedAt});
 }
 
 /// @nodoc
-class _$UserInfoCopyWithImpl<$Res, $Val extends UserInfo>
-    implements $UserInfoCopyWith<$Res> {
-  _$UserInfoCopyWithImpl(this._value, this._then);
+class _$DomainUserInfoCopyWithImpl<$Res, $Val extends DomainUserInfo>
+    implements $DomainUserInfoCopyWith<$Res> {
+  _$DomainUserInfoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -65,8 +68,9 @@ class _$UserInfoCopyWithImpl<$Res, $Val extends UserInfo>
     Object? userId = null,
     Object? gender = null,
     Object? occupation = null,
-    Object? faculty = null,
-    Object? department = null,
+    Object? userName = null,
+    Object? faculty = freezed,
+    Object? department = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -83,14 +87,18 @@ class _$UserInfoCopyWithImpl<$Res, $Val extends UserInfo>
           ? _value.occupation
           : occupation // ignore: cast_nullable_to_non_nullable
               as String,
-      faculty: null == faculty
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      faculty: freezed == faculty
           ? _value.faculty
           : faculty // ignore: cast_nullable_to_non_nullable
-              as String,
-      department: null == department
+              as String?,
+      department: freezed == department
           ? _value.department
           : department // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -105,7 +113,7 @@ class _$UserInfoCopyWithImpl<$Res, $Val extends UserInfo>
 
 /// @nodoc
 abstract class _$$UserInfoImplCopyWith<$Res>
-    implements $UserInfoCopyWith<$Res> {
+    implements $DomainUserInfoCopyWith<$Res> {
   factory _$$UserInfoImplCopyWith(
           _$UserInfoImpl value, $Res Function(_$UserInfoImpl) then) =
       __$$UserInfoImplCopyWithImpl<$Res>;
@@ -115,15 +123,16 @@ abstract class _$$UserInfoImplCopyWith<$Res>
       {String userId,
       String gender,
       String occupation,
-      String faculty,
-      String department,
+      String userName,
+      String? faculty,
+      String? department,
       DateTime? createdAt,
       DateTime? updatedAt});
 }
 
 /// @nodoc
 class __$$UserInfoImplCopyWithImpl<$Res>
-    extends _$UserInfoCopyWithImpl<$Res, _$UserInfoImpl>
+    extends _$DomainUserInfoCopyWithImpl<$Res, _$UserInfoImpl>
     implements _$$UserInfoImplCopyWith<$Res> {
   __$$UserInfoImplCopyWithImpl(
       _$UserInfoImpl _value, $Res Function(_$UserInfoImpl) _then)
@@ -135,8 +144,9 @@ class __$$UserInfoImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? gender = null,
     Object? occupation = null,
-    Object? faculty = null,
-    Object? department = null,
+    Object? userName = null,
+    Object? faculty = freezed,
+    Object? department = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -153,14 +163,18 @@ class __$$UserInfoImplCopyWithImpl<$Res>
           ? _value.occupation
           : occupation // ignore: cast_nullable_to_non_nullable
               as String,
-      faculty: null == faculty
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      faculty: freezed == faculty
           ? _value.faculty
           : faculty // ignore: cast_nullable_to_non_nullable
-              as String,
-      department: null == department
+              as String?,
+      department: freezed == department
           ? _value.department
           : department // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -180,8 +194,9 @@ class _$UserInfoImpl implements _UserInfo {
       {required this.userId,
       required this.gender,
       required this.occupation,
-      required this.faculty,
-      required this.department,
+      required this.userName,
+      this.faculty,
+      this.department,
       this.createdAt,
       this.updatedAt});
 
@@ -195,9 +210,11 @@ class _$UserInfoImpl implements _UserInfo {
   @override
   final String occupation;
   @override
-  final String faculty;
+  final String userName;
   @override
-  final String department;
+  final String? faculty;
+  @override
+  final String? department;
   @override
   final DateTime? createdAt;
   @override
@@ -205,7 +222,7 @@ class _$UserInfoImpl implements _UserInfo {
 
   @override
   String toString() {
-    return 'UserInfo(userId: $userId, gender: $gender, occupation: $occupation, faculty: $faculty, department: $department, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'DomainUserInfo(userId: $userId, gender: $gender, occupation: $occupation, userName: $userName, faculty: $faculty, department: $department, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -217,6 +234,8 @@ class _$UserInfoImpl implements _UserInfo {
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.occupation, occupation) ||
                 other.occupation == occupation) &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
             (identical(other.faculty, faculty) || other.faculty == faculty) &&
             (identical(other.department, department) ||
                 other.department == department) &&
@@ -229,7 +248,7 @@ class _$UserInfoImpl implements _UserInfo {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, userId, gender, occupation,
-      faculty, department, createdAt, updatedAt);
+      userName, faculty, department, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -245,13 +264,14 @@ class _$UserInfoImpl implements _UserInfo {
   }
 }
 
-abstract class _UserInfo implements UserInfo {
+abstract class _UserInfo implements DomainUserInfo {
   const factory _UserInfo(
       {required final String userId,
       required final String gender,
       required final String occupation,
-      required final String faculty,
-      required final String department,
+      required final String userName,
+      final String? faculty,
+      final String? department,
       final DateTime? createdAt,
       final DateTime? updatedAt}) = _$UserInfoImpl;
 
@@ -265,9 +285,11 @@ abstract class _UserInfo implements UserInfo {
   @override
   String get occupation;
   @override
-  String get faculty;
+  String get userName;
   @override
-  String get department;
+  String? get faculty;
+  @override
+  String? get department;
   @override
   DateTime? get createdAt;
   @override

@@ -11,8 +11,9 @@ _$UserInfoImpl _$$UserInfoImplFromJson(Map<String, dynamic> json) =>
       userId: json['userId'] as String,
       gender: json['gender'] as String,
       occupation: json['occupation'] as String,
-      faculty: json['faculty'] as String,
-      department: json['department'] as String,
+      userName: json['userName'] as String,
+      faculty: json['faculty'] as String?,
+      department: json['department'] as String?,
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
@@ -26,6 +27,7 @@ Map<String, dynamic> _$$UserInfoImplToJson(_$UserInfoImpl instance) =>
       'userId': instance.userId,
       'gender': instance.gender,
       'occupation': instance.occupation,
+      'userName': instance.userName,
       'faculty': instance.faculty,
       'department': instance.department,
       'createdAt': instance.createdAt?.toIso8601String(),

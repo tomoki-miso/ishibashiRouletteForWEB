@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ishibashi/base.dart';
 import 'package:ishibashi/components/primary_button.dart';
 import 'package:ishibashi/screens/questionnaire/componants/select_gender_drop_button.dart';
 import 'package:ishibashi/screens/questionnaire/componants/select_occupation_drop_button.dart';
-import 'package:ishibashi/screens/questionnaire/page/next_questionaire.dart';
 import 'package:ishibashi/screens/questionnaire/view_model.dart';
 
 class QuestionnairePage extends ConsumerWidget {
@@ -13,6 +11,7 @@ class QuestionnairePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(questionnaireViewModelProvider);
+    final notifier = ref.read(questionnaireViewModelProvider.notifier);
 
     return state.when(
       data: (data) => Scaffold(
@@ -33,9 +32,7 @@ class QuestionnairePage extends ConsumerWidget {
                   child: TextField(
                     controller: data.userNameController,
                     onSubmitted: (userName) async {
-                      await ref
-                          .read(questionnaireViewModelProvider.notifier)
-                          .inputUserName(userName);
+                      await notifier.inputUserName();
                     },
                   ),
                 ),
@@ -69,14 +66,16 @@ class QuestionnairePage extends ConsumerWidget {
                   child: PrimaryButton(
                     width: MediaQuery.of(context).size.width * 0.8,
                     onPressed: () async {
+                      await notifier.inputUserName();
                       if (data.selectedOccupation == 'notSelected' ||
                           data.selectedGender == 'notSelected' ||
-                          data.inputedUserName == '') {
+                          data.userNameController.text == '') {
                         await showAlertDialog(context);
                       } else if (data.selectedOccupation == 'ouStudent') {
-                        await _navigateToNextQuestionanairePage(context);
+                        await notifier
+                            .navigateToNextQuestionanairePage(context);
                       } else {
-                        await _navigateToBasePage(context);
+                        await notifier.navigateToBasePage(context);
                       }
                     },
                     text: '次へ進む',
@@ -106,18 +105,4 @@ class QuestionnairePage extends ConsumerWidget {
           ],
         ),
       );
-}
-
-Future<void> _navigateToBasePage(BuildContext context) async {
-  await Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const BasePage()),
-  );
-}
-
-Future<void> _navigateToNextQuestionanairePage(BuildContext context) async {
-  await Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const NextQuestionnairePage()),
-  );
 }

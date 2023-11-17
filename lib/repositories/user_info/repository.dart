@@ -12,7 +12,7 @@ class UserInfoRepo extends _$UserInfoRepo {
   @override
   void build() {}
 
-  Future<void> saveUserInfo(UserInfo userInfo) async {
+  Future<void> saveUserInfo(DomainUserInfo userInfo) async {
     await db
         .collection('user_info')
         .doc(userInfo.userId)
