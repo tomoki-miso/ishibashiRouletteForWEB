@@ -7,6 +7,8 @@ import 'package:ishibashi/screens/auth/page/sign_in_confirm.dart';
 import 'package:ishibashi/base.dart';
 import 'package:ishibashi/firebase/firebase_options.dart';
 
+
+
 final storeInfoProvider = FutureProvider.autoDispose(
     (ref) => FirebaseFirestore.instance.collection('stores').snapshots());
 
