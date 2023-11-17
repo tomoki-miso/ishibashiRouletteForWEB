@@ -31,11 +31,7 @@ class QuestionnairePage extends ConsumerWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: TextField(
-                    controller: TextEditingController.fromValue(
-                      TextEditingValue(
-                        text: state.value?.inputedUserName ?? '',
-                      ),
-                    ),
+                    controller: data.userNameController,
                     onSubmitted: (userName) async {
                       await ref
                           .read(questionnaireViewModelProvider.notifier)
@@ -97,19 +93,19 @@ class QuestionnairePage extends ConsumerWidget {
   }
 
   Future<dynamic> showAlertDialog(BuildContext context) => showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text('情報を入力してください'),
-                          actions: <Widget>[
-                            GestureDetector(
-                              child: const Text('はい'),
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        ),
-                      );
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('情報を入力してください'),
+          actions: <Widget>[
+            GestureDetector(
+              child: const Text('はい'),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
 }
 
 Future<void> _navigateToBasePage(BuildContext context) async {

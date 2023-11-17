@@ -25,12 +25,6 @@ mixin _$QuestionnaireState {
   String get selectedFaculty => throw _privateConstructorUsedError;
   String get inputedUserName => throw _privateConstructorUsedError;
   String get inputedDepartment => throw _privateConstructorUsedError;
-  Map<String, String> get dropDownGenderMap =>
-      throw _privateConstructorUsedError;
-  Map<String, String> get dropDownOccupationMap =>
-      throw _privateConstructorUsedError;
-  Map<String, String> get dropDownFacultyMap =>
-      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuestionnaireStateCopyWith<QuestionnaireState> get copyWith =>
@@ -50,10 +44,7 @@ abstract class $QuestionnaireStateCopyWith<$Res> {
       String selectedOccupation,
       String selectedFaculty,
       String inputedUserName,
-      String inputedDepartment,
-      Map<String, String> dropDownGenderMap,
-      Map<String, String> dropDownOccupationMap,
-      Map<String, String> dropDownFacultyMap});
+      String inputedDepartment});
 }
 
 /// @nodoc
@@ -76,9 +67,6 @@ class _$QuestionnaireStateCopyWithImpl<$Res, $Val extends QuestionnaireState>
     Object? selectedFaculty = null,
     Object? inputedUserName = null,
     Object? inputedDepartment = null,
-    Object? dropDownGenderMap = null,
-    Object? dropDownOccupationMap = null,
-    Object? dropDownFacultyMap = null,
   }) {
     return _then(_value.copyWith(
       userNameController: null == userNameController
@@ -109,18 +97,6 @@ class _$QuestionnaireStateCopyWithImpl<$Res, $Val extends QuestionnaireState>
           ? _value.inputedDepartment
           : inputedDepartment // ignore: cast_nullable_to_non_nullable
               as String,
-      dropDownGenderMap: null == dropDownGenderMap
-          ? _value.dropDownGenderMap
-          : dropDownGenderMap // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
-      dropDownOccupationMap: null == dropDownOccupationMap
-          ? _value.dropDownOccupationMap
-          : dropDownOccupationMap // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
-      dropDownFacultyMap: null == dropDownFacultyMap
-          ? _value.dropDownFacultyMap
-          : dropDownFacultyMap // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
     ) as $Val);
   }
 }
@@ -140,10 +116,7 @@ abstract class _$$QuestionnaireStateImplCopyWith<$Res>
       String selectedOccupation,
       String selectedFaculty,
       String inputedUserName,
-      String inputedDepartment,
-      Map<String, String> dropDownGenderMap,
-      Map<String, String> dropDownOccupationMap,
-      Map<String, String> dropDownFacultyMap});
+      String inputedDepartment});
 }
 
 /// @nodoc
@@ -164,9 +137,6 @@ class __$$QuestionnaireStateImplCopyWithImpl<$Res>
     Object? selectedFaculty = null,
     Object? inputedUserName = null,
     Object? inputedDepartment = null,
-    Object? dropDownGenderMap = null,
-    Object? dropDownOccupationMap = null,
-    Object? dropDownFacultyMap = null,
   }) {
     return _then(_$QuestionnaireStateImpl(
       userNameController: null == userNameController
@@ -197,18 +167,6 @@ class __$$QuestionnaireStateImplCopyWithImpl<$Res>
           ? _value.inputedDepartment
           : inputedDepartment // ignore: cast_nullable_to_non_nullable
               as String,
-      dropDownGenderMap: null == dropDownGenderMap
-          ? _value._dropDownGenderMap
-          : dropDownGenderMap // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
-      dropDownOccupationMap: null == dropDownOccupationMap
-          ? _value._dropDownOccupationMap
-          : dropDownOccupationMap // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
-      dropDownFacultyMap: null == dropDownFacultyMap
-          ? _value._dropDownFacultyMap
-          : dropDownFacultyMap // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
     ));
   }
 }
@@ -223,13 +181,7 @@ class _$QuestionnaireStateImpl implements _QuestionnaireState {
       required this.selectedOccupation,
       required this.selectedFaculty,
       required this.inputedUserName,
-      required this.inputedDepartment,
-      required final Map<String, String> dropDownGenderMap,
-      required final Map<String, String> dropDownOccupationMap,
-      required final Map<String, String> dropDownFacultyMap})
-      : _dropDownGenderMap = dropDownGenderMap,
-        _dropDownOccupationMap = dropDownOccupationMap,
-        _dropDownFacultyMap = dropDownFacultyMap;
+      required this.inputedDepartment});
 
   @override
   final TextEditingController userNameController;
@@ -245,36 +197,10 @@ class _$QuestionnaireStateImpl implements _QuestionnaireState {
   final String inputedUserName;
   @override
   final String inputedDepartment;
-  final Map<String, String> _dropDownGenderMap;
-  @override
-  Map<String, String> get dropDownGenderMap {
-    if (_dropDownGenderMap is EqualUnmodifiableMapView)
-      return _dropDownGenderMap;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_dropDownGenderMap);
-  }
-
-  final Map<String, String> _dropDownOccupationMap;
-  @override
-  Map<String, String> get dropDownOccupationMap {
-    if (_dropDownOccupationMap is EqualUnmodifiableMapView)
-      return _dropDownOccupationMap;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_dropDownOccupationMap);
-  }
-
-  final Map<String, String> _dropDownFacultyMap;
-  @override
-  Map<String, String> get dropDownFacultyMap {
-    if (_dropDownFacultyMap is EqualUnmodifiableMapView)
-      return _dropDownFacultyMap;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_dropDownFacultyMap);
-  }
 
   @override
   String toString() {
-    return 'QuestionnaireState(userNameController: $userNameController, departmentController: $departmentController, selectedGender: $selectedGender, selectedOccupation: $selectedOccupation, selectedFaculty: $selectedFaculty, inputedUserName: $inputedUserName, inputedDepartment: $inputedDepartment, dropDownGenderMap: $dropDownGenderMap, dropDownOccupationMap: $dropDownOccupationMap, dropDownFacultyMap: $dropDownFacultyMap)';
+    return 'QuestionnaireState(userNameController: $userNameController, departmentController: $departmentController, selectedGender: $selectedGender, selectedOccupation: $selectedOccupation, selectedFaculty: $selectedFaculty, inputedUserName: $inputedUserName, inputedDepartment: $inputedDepartment)';
   }
 
   @override
@@ -295,13 +221,7 @@ class _$QuestionnaireStateImpl implements _QuestionnaireState {
             (identical(other.inputedUserName, inputedUserName) ||
                 other.inputedUserName == inputedUserName) &&
             (identical(other.inputedDepartment, inputedDepartment) ||
-                other.inputedDepartment == inputedDepartment) &&
-            const DeepCollectionEquality()
-                .equals(other._dropDownGenderMap, _dropDownGenderMap) &&
-            const DeepCollectionEquality()
-                .equals(other._dropDownOccupationMap, _dropDownOccupationMap) &&
-            const DeepCollectionEquality()
-                .equals(other._dropDownFacultyMap, _dropDownFacultyMap));
+                other.inputedDepartment == inputedDepartment));
   }
 
   @override
@@ -313,10 +233,7 @@ class _$QuestionnaireStateImpl implements _QuestionnaireState {
       selectedOccupation,
       selectedFaculty,
       inputedUserName,
-      inputedDepartment,
-      const DeepCollectionEquality().hash(_dropDownGenderMap),
-      const DeepCollectionEquality().hash(_dropDownOccupationMap),
-      const DeepCollectionEquality().hash(_dropDownFacultyMap));
+      inputedDepartment);
 
   @JsonKey(ignore: true)
   @override
@@ -328,17 +245,13 @@ class _$QuestionnaireStateImpl implements _QuestionnaireState {
 
 abstract class _QuestionnaireState implements QuestionnaireState {
   const factory _QuestionnaireState(
-          {required final TextEditingController userNameController,
-          required final TextEditingController departmentController,
-          required final String selectedGender,
-          required final String selectedOccupation,
-          required final String selectedFaculty,
-          required final String inputedUserName,
-          required final String inputedDepartment,
-          required final Map<String, String> dropDownGenderMap,
-          required final Map<String, String> dropDownOccupationMap,
-          required final Map<String, String> dropDownFacultyMap}) =
-      _$QuestionnaireStateImpl;
+      {required final TextEditingController userNameController,
+      required final TextEditingController departmentController,
+      required final String selectedGender,
+      required final String selectedOccupation,
+      required final String selectedFaculty,
+      required final String inputedUserName,
+      required final String inputedDepartment}) = _$QuestionnaireStateImpl;
 
   @override
   TextEditingController get userNameController;
@@ -354,12 +267,6 @@ abstract class _QuestionnaireState implements QuestionnaireState {
   String get inputedUserName;
   @override
   String get inputedDepartment;
-  @override
-  Map<String, String> get dropDownGenderMap;
-  @override
-  Map<String, String> get dropDownOccupationMap;
-  @override
-  Map<String, String> get dropDownFacultyMap;
   @override
   @JsonKey(ignore: true)
   _$$QuestionnaireStateImplCopyWith<_$QuestionnaireStateImpl> get copyWith =>

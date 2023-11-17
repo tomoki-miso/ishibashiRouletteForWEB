@@ -35,11 +35,12 @@ class NextQuestionnairePage extends ConsumerWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: TextField(
-                  controller: TextEditingController.fromValue(
-                    TextEditingValue(
-                      text: state.value?.inputedDepartment ?? '',
-                    ),
-                  ),
+                  controller: data.departmentController,
+                  onSubmitted: (department) async {
+                    await ref
+                        .read(questionnaireViewModelProvider.notifier)
+                        .inputDepartment(department);
+                  },
                 ),
               ),
               const Padding(padding: EdgeInsets.all(20)),
