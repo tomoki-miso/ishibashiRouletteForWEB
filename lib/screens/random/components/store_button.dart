@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ishibashi/components/primary_button.dart';
-import 'package:ishibashi/style/colors.dart';
 import 'package:ishibashi/style/styles.dart';
 
 class StoreButton extends StatelessWidget {
@@ -15,7 +14,7 @@ class StoreButton extends StatelessWidget {
           onPressed: () {},
           width: MediaQuery.of(context).size.width * 0.65,
           height: MediaQuery.of(context).size.height * 0.05,
-          text: "ストアページ",
+          text: 'ストアページ',
           style: Styles.RandomRoulette,
         ),
       );

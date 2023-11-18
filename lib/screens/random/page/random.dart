@@ -15,8 +15,10 @@ class RandomPage extends ConsumerWidget {
   const RandomPage({super.key});
 
   @override
+
   Widget build(BuildContext context, WidgetRef ref) {
-    final screenSize = MediaQuery.of(context).size;
+  final state = ref.watch(storeInfoNotifierProvider);
+  
     final storeProvider = ref.watch(storeInfoNotifierProvider);
 
     final name = storeProvider.when(
@@ -29,7 +31,7 @@ class RandomPage extends ConsumerWidget {
         state.StoreName,
         style: Styles.storeNameStyle,
       ),
-    ); //とりあえずExpandedにしてるけどoverFlowで管理してもいいかも。とにかくいしばしやではみ出るのを防ぎたい。
+    );
 
     final detail = storeProvider.when(
       loading: () => const Padding(padding: EdgeInsets.all(1)),

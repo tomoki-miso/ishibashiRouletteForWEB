@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ishibashi/components/primary_button.dart';
-import 'package:ishibashi/style/colors.dart';
 import 'package:ishibashi/style/styles.dart';
 
 class RouletteButton extends StatelessWidget {
   const RouletteButton({
     super.key,
-    required Future<Null> Function() onPressed,
+    required Future<void> Function() onPressed,
   });
 
   @override
@@ -16,7 +15,7 @@ class RouletteButton extends StatelessWidget {
           onPressed: () {},
           width: MediaQuery.of(context).size.width * 0.8,
           height: MediaQuery.of(context).size.height * 0.07,
-          text: "ルーレットをまわす",
+          text: 'ルーレットをまわす',
           style: Styles.RandomRoulette,
         ),
       );

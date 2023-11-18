@@ -1,11 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/original_app_bar.dart';
 import 'package:ishibashi/providers/storeInfo.dart';
-import 'package:ishibashi/providers/stateNotifierProvider.dart';
-import 'package:ishibashi/class/store_class.dart';
 import 'package:ishibashi/screens/random/components/random_store_image_part.dart';
 import 'package:ishibashi/screens/random/components/random_store_tags_part.dart';
 import 'package:ishibashi/screens/random/components/random_store_text_part.dart';
@@ -15,48 +11,45 @@ import 'package:ishibashi/screens/store_details/page/store_rondom_detail.dart';
 import 'package:ishibashi/style/colors.dart';
 import 'package:ishibashi/style/styles.dart';
 
-class RandomCopyPage extends StatefulWidget {
-  const RandomCopyPage({
-    required this.documentId,
-    super.key,
-  });
-  final String documentId;
+class RandomCopyPage extends ConsumerWidget {
+  RandomCopyPage({super.key});
 
-  @override
-  _RandomCopyPageState createState() => _RandomCopyPageState();
-}
-
-class _RandomCopyPageState extends State<RandomCopyPage> {
   // 文字列を要素とするリスト
-  List<String> formattedTags = ['a', 'b', 'c'];
+  final List<String> formattedTags = ['a', 'b', 'c'];
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(storeInfoNotifierProvider);
+
+    return state.when(
+      data: (data) => Scaffold(
         backgroundColor: ColorName.primarySecondary,
-        appBar: OriginalAppBar(),
+        appBar: const OriginalAppBar(),
         body: SingleChildScrollView(
           child: Column(
             children: [
               const Padding(padding: EdgeInsets.all(14)),
 
               //名前
-              Padding(
-                padding: const EdgeInsets.only(top: 0),
-                child: Text("storeName",
-                    textAlign: TextAlign.center, style: Styles.detailStoreName),
+              const Text(
+                'storeName',
+                textAlign: TextAlign.center,
+                style: Styles.detailStoreName,
               ),
 
               //画像部分
-              RandomStoreImagePart(
-                  storePhotoUrl:
-                      "https://www.ss-ishibashi.jp/wp-content/uploads/2014/03/f260a701c32672bf1b5b2899adf3a9fe-600x450.jpg"),
+              const RandomStoreImagePart(
+                storePhotoUrl:
+                    'https://www.ss-ishibashi.jp/wp-content/uploads/2014/03/f260a701c32672bf1b5b2899adf3a9fe-600x450.jpg',
+              ),
               const Padding(padding: EdgeInsets.all(3)),
 
               //タグと紹介
               RandomStoreTagsPart(formattedTags: formattedTags),
-              RandomStoreTextPart(
-                  storeDetail:
-                      "storeDetailaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
+              const RandomStoreTextPart(
+                storeDetail:
+                    'storeDetailaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+              ),
 
               // //ジャンプ部分
               // RandomStoreJumpPart(
@@ -65,7 +58,7 @@ class _RandomCopyPageState extends State<RandomCopyPage> {
               //   storeTwitter: storeTwitter,
               //   storeInsta: storeInsta,
               // ),
-              StoreButton(),
+              const StoreButton(),
               RouletteButton(
                 onPressed: () async {
                   {
@@ -82,7 +75,11 @@ class _RandomCopyPageState extends State<RandomCopyPage> {
             ],
           ),
         ),
-      );
+      ),
+      error: (error, stackTrace) => Container(),
+      loading: Container.new,
+    );
+  }
 }
 
 class LikeButton extends StatefulWidget {

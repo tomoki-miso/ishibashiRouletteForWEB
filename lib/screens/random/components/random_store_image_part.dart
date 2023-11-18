@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ishibashi/style/colors.dart';
 
 class RandomStoreImagePart extends ConsumerWidget {
   const RandomStoreImagePart({
@@ -19,8 +18,8 @@ class RandomStoreImagePart extends ConsumerWidget {
             child: Container(
               width: 338,
               height: 338,
-              padding: EdgeInsets.all(18),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(18),
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.white,
               ),
