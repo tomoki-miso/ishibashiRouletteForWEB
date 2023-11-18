@@ -54,6 +54,10 @@ dependencies:
 
   flutter_riverpod: ^2.4.5
   lottie: ^2.7.0
+  firebase_auth: ^4.13.0
+  google_sign_in: ^6.1.6
+  sign_in_button: ^3.2.0
+  sign_in_with_apple: ^5.0.0
 
 
 
