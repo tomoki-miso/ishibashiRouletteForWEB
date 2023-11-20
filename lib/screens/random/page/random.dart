@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ishibashi/providers/storeInfo.dart';
-import 'package:ishibashi/providers/stateNotifierProvider.dart';
 import 'package:ishibashi/class/store_class.dart';
+import 'package:ishibashi/providers/stateNotifierProvider.dart';
+import 'package:ishibashi/providers/storeInfo.dart';
 import 'package:ishibashi/screens/store_details/page/store_rondom_detail.dart';
 import 'package:ishibashi/style/styles.dart';
 
@@ -15,10 +15,9 @@ class RandomPage extends ConsumerWidget {
   const RandomPage({super.key});
 
   @override
-
   Widget build(BuildContext context, WidgetRef ref) {
-  final state = ref.watch(storeInfoNotifierProvider);
-  
+    final state = ref.watch(storeInfoNotifierProvider);
+
     final storeProvider = ref.watch(storeInfoNotifierProvider);
 
     final name = storeProvider.when(
@@ -47,19 +46,19 @@ class RandomPage extends ConsumerWidget {
       loading: () => const Padding(padding: EdgeInsets.all(1)),
       error: (e, s) => Text('エラー $e'),
       data: (state) => Container(
-        height: screenSize.height * 0.3,
+        height: MediaQuery.of(context).size.height * 0.3,
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: state.StorePhotoUrl.isNotEmpty
             ? ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: CachedNetworkImage(
                   imageUrl: state.StorePhotoUrl,
-                  width: screenSize.width * 0.8,
+                  width: MediaQuery.of(context).size.width * 0.8,
                   fit: BoxFit.cover,
                 ),
               )
             : Container(
-                height: screenSize.height * 0.3,
+                height: MediaQuery.of(context).size.height * 0.3,
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Image.asset('assets/images/iconKari.png'),
               ),
@@ -121,7 +120,8 @@ class RandomPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(screenSize.height * 0.08),
+        preferredSize:
+            Size.fromHeight(MediaQuery.of(context).size.height * 0.08),
         child: AppBar(
           iconTheme: const IconThemeData(color: Colors.greenAccent),
           backgroundColor: Colors.white,
@@ -135,8 +135,8 @@ class RandomPage extends ConsumerWidget {
       ),
       body: Center(
         child: Container(
-          width: screenSize.width,
-          height: screenSize.height,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
           color: Colors.greenAccent,
           child: Column(
             children: [
@@ -147,19 +147,21 @@ class RandomPage extends ConsumerWidget {
                 ),
                 margin: const EdgeInsets.only(top: 20),
                 padding: const EdgeInsets.all(6),
-                width: screenSize.width * 0.9,
-                height: screenSize.height * 0.6,
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height * 0.6,
                 child: Column(
                   children: [
                     name,
                     Row(
                       children: [const LikeButton(), tags],
                     ),
-                    SizedBox(height: screenSize.height * 0.3, child: photo),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.3,
+                        child: photo),
                     Container(
                       margin: const EdgeInsets.all(2),
-                      height: screenSize.height * 0.09,
-                      width: screenSize.width * 0.9,
+                      height: MediaQuery.of(context).size.height * 0.09,
+                      width: MediaQuery.of(context).size.width * 0.9,
                       child: detail,
                     ),
                     ElevatedButton(
@@ -188,7 +190,7 @@ class RandomPage extends ConsumerWidget {
               ),
               Container(
                 padding: const EdgeInsets.only(top: 20),
-                width: screenSize.width * 0.7,
+                width: MediaQuery.of(context).size.width * 0.7,
                 child: RandomButton,
               ),
             ],

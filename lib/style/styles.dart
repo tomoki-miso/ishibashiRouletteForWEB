@@ -10,7 +10,7 @@ class Styles {
   );
 
   static const storeDetailStyle = TextStyle(
-    fontSize: 16,
+    fontSize: 10,
     color: Colors.black,
   );
 
@@ -45,7 +45,7 @@ class Styles {
   );
 
   static const detailStoreName = TextStyle(
-    fontSize: 32,
+    fontSize: 24,
     fontWeight: FontWeight.bold,
   );
 
@@ -55,7 +55,8 @@ class Styles {
   );
 
   static const RandomRoulette = TextStyle(
-    fontSize: 21,
+    fontSize: 16,
     color: ColorName.whiteBase,
+    fontWeight: FontWeight.bold,
   );
 }

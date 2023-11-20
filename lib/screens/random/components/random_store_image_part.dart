@@ -12,26 +12,16 @@ class RandomStoreImagePart extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 3, bottom: 8),
-          child: ClipOval(
-            child: Container(
-              width: 338,
-              height: 338,
-              padding: const EdgeInsets.all(18),
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-              ),
-              child: ClipOval(
-                child: CachedNetworkImage(
-                  imageUrl: storePhotoUrl.isNotEmpty
-                      ? storePhotoUrl
-                      : 'https://placehold.jp/150x150.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+        child: CircleAvatar(
+          radius: MediaQuery.of(context).size.height * 0.23,
+          backgroundColor: Colors.white,
+          child: CircleAvatar(
+            radius: MediaQuery.of(context).size.height * 0.23 - 18,
+            backgroundImage: storePhotoUrl.isNotEmpty
+                ? NetworkImage(storePhotoUrl)
+                : NetworkImage('https://placehold.jp/150x150.png'),
+
+            /// TODO #18:変更
           ),
         ),
       );

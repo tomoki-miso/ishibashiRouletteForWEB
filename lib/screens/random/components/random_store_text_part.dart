@@ -12,17 +12,23 @@ class RandomStoreTextPart extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final height = MediaQuery.of(context).size.height * 0.07;
     Widget detailTextWidget;
-    if (storeDetail != null && storeDetail!.isNotEmpty) {
+    if (storeDetail != null) {
       detailTextWidget = Container(
+        height: height,
         padding: const EdgeInsets.symmetric(horizontal: 33, vertical: 10),
         child: Text(
           storeDetail!,
           style: Styles.storeDetailStyle,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
         ),
       );
     } else {
-      detailTextWidget = Container();
+      detailTextWidget = Container(
+        height: height,
+      );
     }
 
     return detailTextWidget;

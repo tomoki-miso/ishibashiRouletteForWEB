@@ -19,59 +19,46 @@ class RandomCopyPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(storeInfoNotifierProvider);
+    final data = ref.watch(storeInfoNotifierProvider);
 
-    return state.when(
+    return data.when(
       data: (data) => Scaffold(
         backgroundColor: ColorName.primarySecondary,
         appBar: const OriginalAppBar(),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              const Padding(padding: EdgeInsets.all(14)),
+              const Padding(padding: EdgeInsets.all(8)),
 
               //名前
-              const Text(
-                'storeName',
-                textAlign: TextAlign.center,
-                style: Styles.detailStoreName,
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.width * 0.09,
+                child: Text(
+                  data.StoreName,
+                  textAlign: TextAlign.center,
+                  style: Styles.detailStoreName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
+              const SizedBox(height: 10),
 
               //画像部分
-              const RandomStoreImagePart(
-                storePhotoUrl:
-                    'https://www.ss-ishibashi.jp/wp-content/uploads/2014/03/f260a701c32672bf1b5b2899adf3a9fe-600x450.jpg',
+              RandomStoreImagePart(
+                storePhotoUrl: data.StorePhotoUrl,
               ),
-              const Padding(padding: EdgeInsets.all(3)),
+              const SizedBox(height: 10),
 
               //タグと紹介
               RandomStoreTagsPart(formattedTags: formattedTags),
-              const RandomStoreTextPart(
-                storeDetail:
-                    'storeDetailaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+              RandomStoreTextPart(
+                storeDetail: data.StoreDetail,
               ),
 
-              // //ジャンプ部分
-              // RandomStoreJumpPart(
-              //   storeWeb: storeWeb,
-              //   storeTabelog: storeTabelog,
-              //   storeTwitter: storeTwitter,
-              //   storeInsta: storeInsta,
-              // ),
               const StoreButton(),
-              RouletteButton(
-                onPressed: () async {
-                  {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const StorePage(),
-                      ),
-                    );
-                  }
-                  ;
-                },
-              ),
+
+              const RouletteButton(),
             ],
           ),
         ),
