@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/style/styles.dart';
 
-class RandomStoreTextPart extends ConsumerWidget {
-  const RandomStoreTextPart({
+class RandomStoreDetailPart extends ConsumerWidget {
+  const RandomStoreDetailPart({
     required this.storeDetail,
     super.key,
   });

@@ -1,227 +1,68 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ishibashi/class/store_class.dart';
-import 'package:ishibashi/providers/stateNotifierProvider.dart';
+import 'package:ishibashi/components/original_app_bar.dart';
 import 'package:ishibashi/providers/storeInfo.dart';
-import 'package:ishibashi/screens/store_details/page/store_rondom_detail.dart';
+import 'package:ishibashi/screens/random/components/random_roulette_button.dart';
+import 'package:ishibashi/screens/random/components/random_store_button.dart';
+import 'package:ishibashi/screens/random/components/random_store_detail_part.dart';
+import 'package:ishibashi/screens/random/components/random_store_image_part.dart';
+import 'package:ishibashi/screens/random/components/random_store_tags_part.dart';
+import 'package:ishibashi/style/colors.dart';
 import 'package:ishibashi/style/styles.dart';
-
-final storeProvider = StateNotifierProvider<StoreNotifier, List<StoreClass>>(
-  (ref) => StoreNotifier(),
-);
 
 class RandomPage extends ConsumerWidget {
   const RandomPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(storeInfoNotifierProvider);
+    final data = ref.watch(storeInfoNotifierProvider);
 
-    final storeProvider = ref.watch(storeInfoNotifierProvider);
-
-    final name = storeProvider.when(
-      loading: () => const Padding(padding: EdgeInsets.all(1)),
-      error: (e, s) => Text(
-        'エラー $e',
-        style: Styles.storeNameStyle,
-      ),
-      data: (state) => Text(
-        state.StoreName,
-        style: Styles.storeNameStyle,
-      ),
-    );
-
-    final detail = storeProvider.when(
-      loading: () => const Padding(padding: EdgeInsets.all(1)),
-      error: (e, s) => Text('エラー $e'),
-      data: (state) => Text(
-        state.StoreDetail,
-        maxLines: 3,
-        overflow: TextOverflow.ellipsis,
-      ), // Fix this line
-    );
-
-    final photo = storeProvider.when(
-      loading: () => const Padding(padding: EdgeInsets.all(1)),
-      error: (e, s) => Text('エラー $e'),
-      data: (state) => Container(
-        height: MediaQuery.of(context).size.height * 0.3,
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child: state.StorePhotoUrl.isNotEmpty
-            ? ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: CachedNetworkImage(
-                  imageUrl: state.StorePhotoUrl,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  fit: BoxFit.cover,
-                ),
-              )
-            : Container(
-                height: MediaQuery.of(context).size.height * 0.3,
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Image.asset('assets/images/iconKari.png'),
-              ),
-      ), // Fix this line
-    );
-
-    final tags = storeProvider.when(
-      loading: () => const Padding(padding: EdgeInsets.all(1)),
-      error: (e, s) => Text('エラー: $e'), // エラーメッセージを表示
-      data: (state) => Expanded(
-        child: Row(
-          children: state.Tags.isNotEmpty
-              ? state.Tags.map(
-                  (tag) => Container(
-                    padding:
-                        const EdgeInsetsDirectional.symmetric(horizontal: 8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: Colors.deepOrangeAccent,
-                    ),
-                    margin: const EdgeInsets.all(2),
-                    child: Center(
-                      child: Text(
-                        tag,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ).toList()
-              : [],
-        ),
-      ),
-    );
-
-    final RandomButton = OutlinedButton(
-      onPressed: () async {
-        final notifier = ref.read(storeInfoNotifierProvider.notifier);
-        await notifier.updateState();
-      },
-      style: OutlinedButton.styleFrom(
-        backgroundColor: Colors.lightGreenAccent,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        side: const BorderSide(color: Colors.black87),
-      ),
-      child: const Text(
-        'お店を探す',
-        style: TextStyle(
-          fontSize: 22,
-          color: Colors.black87,
-        ),
-      ),
-    );
-
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize:
-            Size.fromHeight(MediaQuery.of(context).size.height * 0.08),
-        child: AppBar(
-          iconTheme: const IconThemeData(color: Colors.greenAccent),
-          backgroundColor: Colors.white,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
-            ),
-          ),
-        ),
-      ),
-      body: Center(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          color: Colors.greenAccent,
+    return data.when(
+      data: (data) => Scaffold(
+        backgroundColor: ColorName.primarySecondary,
+        appBar: const OriginalAppBar(),
+        body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
-                ),
-                margin: const EdgeInsets.only(top: 20),
-                padding: const EdgeInsets.all(6),
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.6,
-                child: Column(
-                  children: [
-                    name,
-                    Row(
-                      children: [const LikeButton(), tags],
-                    ),
-                    SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.3,
-                        child: photo),
-                    Container(
-                      margin: const EdgeInsets.all(2),
-                      height: MediaQuery.of(context).size.height * 0.09,
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: detail,
-                    ),
-                    ElevatedButton(
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: Colors.orangeAccent,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 2,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                      onPressed: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const StorePage(),
-                          ),
-                        );
-                      },
-                      child: const Text('くわしくみる'),
-                    ),
-                  ],
+              const Padding(padding: EdgeInsets.all(8)),
+
+              /// 名前
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.width * 0.09,
+                child: Text(
+                  data.StoreName,
+                  textAlign: TextAlign.center,
+                  style: Styles.detailStoreName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.only(top: 20),
-                width: MediaQuery.of(context).size.width * 0.7,
-                child: RandomButton,
+              const SizedBox(height: 10),
+
+              /// 画像部分
+              RandomStoreImagePart(
+                storePhotoUrl: data.StorePhotoUrl,
               ),
+              const SizedBox(height: 10),
+
+              /// タグと紹介
+              RandomStoreTagsPart(formattedTags: data.Tags),
+              RandomStoreDetailPart(
+                storeDetail: data.StoreDetail,
+              ),
+
+              /// くわしくみる
+              const StoreButton(),
+
+              ///　ルーレットを回す
+              const RouletteButton(),
             ],
           ),
         ),
       ),
+      error: (error, stackTrace) => Container(),
+      loading: Container.new,
     );
   }
-}
-
-class LikeButton extends StatefulWidget {
-  const LikeButton({super.key});
-
-  @override
-  _LikeButtonState createState() => _LikeButtonState();
-}
-
-class _LikeButtonState extends State<LikeButton> {
-  bool _isLiked = false;
-
-  void _toggleLike() {
-    setState(() {
-      _isLiked = !_isLiked;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) => IconButton(
-        icon: _isLiked
-            ? const Icon(Icons.favorite)
-            : const Icon(Icons.favorite_border),
-        onPressed: _toggleLike,
-      );
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ishibashi/components/big_select_button.dart';
-import 'package:ishibashi/screens/random/page/randomcopy.dart';
+import 'package:ishibashi/screens/random/page/random.dart';
 import 'package:ishibashi/style/colors.dart';
 
 class RandomBigSelectbutton extends StatelessWidget {
@@ -13,7 +13,7 @@ class RandomBigSelectbutton extends StatelessWidget {
           await Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => RandomCopyPage(),
+              builder: (context) => RandomPage(),
             ),
           );
         },
