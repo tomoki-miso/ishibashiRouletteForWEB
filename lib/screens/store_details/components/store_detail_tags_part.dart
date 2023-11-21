@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ishibashi/style/colors.dart';
 
 class StoreDetailTagsPart extends ConsumerWidget {
   const StoreDetailTagsPart({
@@ -25,7 +26,8 @@ class StoreDetailTagsPart extends ConsumerWidget {
                       child: Text(
                         '#$formattedTag${isLastTag ? '' : ','}',
                         style: const TextStyle(
-                          fontSize: 16,
+                          color: ColorName.black2,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

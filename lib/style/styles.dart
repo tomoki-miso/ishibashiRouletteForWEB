@@ -5,19 +5,19 @@ class Styles {
   static const storeNameStyle = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.bold,
-    color: Colors.black,
+    color: ColorName.black2,
     overflow: TextOverflow.ellipsis,
   );
 
   static const storeDetailStyle = TextStyle(
-    fontSize: 10,
-    color: Colors.black,
+    fontSize: 12,
+    color: ColorName.black3,
   );
 
   static const subTitleStyle = TextStyle(
     fontSize: 10,
     fontWeight: FontWeight.bold,
-    color: Colors.black,
+    color: ColorName.black3,
   );
 
   static const businnesHours = TextStyle(
@@ -29,7 +29,7 @@ class Styles {
   static const tagsTextStyle = TextStyle(
     fontSize: 11,
     fontWeight: FontWeight.bold,
-    color: Colors.black,
+    color: ColorName.black2,
     overflow: TextOverflow.clip,
   );
 
@@ -47,6 +47,7 @@ class Styles {
   static const detailStoreName = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
+    color: ColorName.black2,
   );
 
   static const RandomStore = TextStyle(

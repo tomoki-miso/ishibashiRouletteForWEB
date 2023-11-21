@@ -12,7 +12,7 @@ class RandomStoreDetailPart extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final height = MediaQuery.of(context).size.height * 0.07;
+    final height = MediaQuery.of(context).size.height * 0.072;
     Widget detailTextWidget;
     if (storeDetail != null) {
       detailTextWidget = Container(

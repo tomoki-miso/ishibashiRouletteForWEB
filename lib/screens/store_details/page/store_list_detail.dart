@@ -104,8 +104,11 @@ class _StoreListPageState extends State<StoreListPage> {
               //名前
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(storeName,
-                    textAlign: TextAlign.center, style: Styles.detailStoreName),
+                child: Text(
+                  storeName,
+                  textAlign: TextAlign.center,
+                  style: Styles.detailStoreName,
+                ),
               ),
               const Padding(padding: EdgeInsets.all(10)),
 

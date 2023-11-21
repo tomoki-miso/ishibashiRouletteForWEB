@@ -9,11 +9,12 @@ class RandomBigSelectbutton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BigSelectButton(
+        backgroundColor: ColorName.topRed,
         onTap: () async {
           await Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => RandomPage(),
+              builder: (context) => const RandomPage(),
             ),
           );
         },

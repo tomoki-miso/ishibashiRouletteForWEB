@@ -30,7 +30,7 @@ class _ListPageState extends State<ListPage> {
       final formattedTags = (storeData['tags'] as List<dynamic>)
           .map((formattedTags) => formattedTags.toString())
           .join(', ');
-      return formattedTags; // 例: "Monday, Tuesday, Wednesday"
+      return formattedTags;
     } else {
       return '営業日情報がありません';
     }

@@ -9,17 +9,18 @@ class MapBigSelectbutton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BigSelectButton(
-    onTap: () async {
-      await Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const MapPage()),
+        backgroundColor: ColorName.topGreen,
+        onTap: () async {
+          await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MapPage()),
+          );
+        },
+        text: '地図から探す',
+        iconChild: const FaIcon(
+          FontAwesomeIcons.mapLocationDot,
+          color: ColorName.whiteBase,
+          size: 100,
+        ),
       );
-    },
-    text: '地図から探す',
-    iconChild: const FaIcon(
-      FontAwesomeIcons.mapLocationDot,
-      color: ColorName.whiteBase,
-      size: 100,
-    ),
-  );
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ishibashi/components/primary_button.dart';
 import 'package:ishibashi/screens/store_details/page/store_rondom_detail.dart';
+import 'package:ishibashi/style/colors.dart';
 import 'package:ishibashi/style/styles.dart';
 
 class StoreButton extends StatelessWidget {
@@ -10,6 +11,7 @@ class StoreButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => PrimaryButton(
+        backgroundColor: ColorName.orangeBase,
         onPressed: () async {
           await Navigator.push(
             context,

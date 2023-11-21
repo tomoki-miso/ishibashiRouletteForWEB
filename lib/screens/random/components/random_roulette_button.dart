@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/primary_button.dart';
 import 'package:ishibashi/providers/storeInfo.dart';
+import 'package:ishibashi/style/colors.dart';
 import 'package:ishibashi/style/styles.dart';
 
 class RouletteButton extends ConsumerWidget {
@@ -13,6 +14,7 @@ class RouletteButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) => Padding(
         padding: const EdgeInsets.all(5),
         child: PrimaryButton(
+          backgroundColor: ColorName.randomRed,
           onPressed: () async {
             await ref.read(storeInfoNotifierProvider.notifier).updateState();
           },

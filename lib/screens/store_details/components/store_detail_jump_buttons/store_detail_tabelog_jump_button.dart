@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/screens/store_details/components/store_detail_jump_button.dart';
+import 'package:ishibashi/style/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TabelogJumpButton extends ConsumerWidget {
@@ -16,6 +17,7 @@ class TabelogJumpButton extends ConsumerWidget {
     Widget buttonWidget;
     if (storeTabelog.isNotEmpty) {
       buttonWidget = StoreDetailsJumpButton(
+        backgroundColor: ColorName.tabelogRed,
         onPressed: () async {
           final webUrl = Uri.parse(storeTabelog);
           await launchUrl(webUrl);

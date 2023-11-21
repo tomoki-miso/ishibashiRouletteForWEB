@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/screens/store_details/components/store_detail_jump_button.dart';
+import 'package:ishibashi/style/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SiteJumpButton extends ConsumerWidget {
@@ -16,6 +17,7 @@ class SiteJumpButton extends ConsumerWidget {
     Widget buttonWidget;
     if (storeWeb.isNotEmpty) {
       buttonWidget = StoreDetailsJumpButton(
+        backgroundColor: ColorName.orangeBase,
         onPressed: () async {
           final webUrl = Uri.parse(storeWeb);
           await launchUrl(webUrl);

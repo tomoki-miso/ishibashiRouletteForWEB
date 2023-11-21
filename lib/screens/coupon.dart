@@ -13,7 +13,7 @@ class CouponPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                 height: MediaQuery.of(context).size.width * 0.6,
                 width: MediaQuery.of(context).size.width * 0.6,
                 child: Lottie.asset('assets/lottie/coupon_lottie.json'),

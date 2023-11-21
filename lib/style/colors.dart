@@ -27,12 +27,13 @@ class ColorName {
 
   /// Red
   static const Color brightRed = Color(0xFFBF2020);
+  static const Color randomRed = Color(0xFFB44545);
 
   /// TopPage
 
   static const Color topRed = Color(0xFF864242);
   static const Color topGreen = Color(0xFF688446);
-  static const Color topPurple = Color(0xFF864273);
+  static const Color topBlueGreen = Color(0xFF4B959A);
 
   /// SearchConfirmPage
   static const Color searchPurple = Color(0xFF864273);

@@ -9,6 +9,7 @@ class SearchBigSelectbutton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BigSelectButton(
+        backgroundColor: ColorName.topBlueGreen,
         onTap: () async {
           await Navigator.push(
             context,
