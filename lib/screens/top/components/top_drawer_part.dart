@@ -10,48 +10,60 @@ class TopDrawerPart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Drawer(
-          child: ListView(
-            children: [
-                  const DrawerHeader(
-          decoration: BoxDecoration(
-            color: ColorName.primarySecondary,
-          ),
-          child: Text('Information',style: Styles.DrawerTitle,),
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: ColorName.backGroundYellow,
+              ),
+              child: Text(
+                'Information',
+                style: Styles.DrawerTitle,
+              ),
+            ),
+            ListTile(
+              title: const Text(
+                'アプリの使い方',
+                style: Styles.DrawerSubTitle,
+              ),
+              onTap: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const TopDrawerManualPage(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text(
+                'お問い合わせ',
+                style: Styles.DrawerSubTitle,
+              ),
+              onTap: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TopDrawerInquiryPage(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text(
+                'ご意見・お問い合わせ',
+                style: Styles.DrawerSubTitle,
+              ),
+              onTap: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const TopDrawerFormPage(),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
-        ListTile(
-          title: const Text('アプリの使い方',style: Styles.DrawerSubTitle,),
-           onTap: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const TopDrawerManualPage(),
-                    ),
-                  );
-                },
-        ),
-        ListTile(
-          title: const Text('お問い合わせ',style: Styles.DrawerSubTitle,),
-           onTap: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>  TopDrawerInquiryPage(),
-                    ),
-                  );
-                },
-        ),
-         ListTile(
-          title: const Text('ご意見・お問い合わせ',style: Styles.DrawerSubTitle,),
-         onTap: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>  const TopDrawerFormPage(),
-                    ),
-                  );
-                },
-        ),
-            ],
-          ),
-        );
+      );
 }

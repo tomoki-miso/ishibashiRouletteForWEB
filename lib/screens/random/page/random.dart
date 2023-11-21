@@ -19,7 +19,7 @@ class RandomPage extends ConsumerWidget {
 
     return data.when(
       data: (data) => Scaffold(
-        backgroundColor: ColorName.primarySecondary,
+        backgroundColor: ColorName.backGroundYellow,
         appBar: const OriginalAppBar(),
         body: SingleChildScrollView(
           child: Column(

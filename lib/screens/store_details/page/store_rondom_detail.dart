@@ -82,7 +82,7 @@ class StorePage extends ConsumerWidget {
     );
 
     return Scaffold(
-      backgroundColor: ColorName.primarySecondary,
+      backgroundColor: ColorName.backGroundYellow,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(screenSize.height * 0.08),
         child: AppBar(

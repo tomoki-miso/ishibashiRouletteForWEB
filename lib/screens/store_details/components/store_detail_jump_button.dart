@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ishibashi/components/primary_button.dart';
-import 'package:ishibashi/style/colors.dart';
 
 class StoreDetailsJumpButton extends StatelessWidget {
   const StoreDetailsJumpButton({
@@ -10,7 +9,7 @@ class StoreDetailsJumpButton extends StatelessWidget {
     super.key,
     this.style,
     this.circularSize,
-    this.backgroundColor = ColorName.primaryBase, //デフォルトカラー
+    this.backgroundColor,
     this.foregroundColor,
     this.side = BorderSide.none,
     this.padding,
@@ -44,8 +43,8 @@ class StoreDetailsJumpButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(bottom: 12),
-    child: PrimaryButton(
+        padding: const EdgeInsets.only(bottom: 12),
+        child: PrimaryButton(
           width: MediaQuery.of(context).size.width * 0.9,
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
@@ -63,5 +62,5 @@ class StoreDetailsJumpButton extends StatelessWidget {
             ),
           ),
         ),
-  );
+      );
 }

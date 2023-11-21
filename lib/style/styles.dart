@@ -36,12 +36,12 @@ class Styles {
   static const DrawerTitle = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.bold,
-    color: ColorName.blackSecondary,
+    color: ColorName.black2,
   );
 
   static const DrawerSubTitle = TextStyle(
     fontSize: 14,
-    color: ColorName.blackSecondary,
+    color: ColorName.black3,
   );
 
   static const detailStoreName = TextStyle(

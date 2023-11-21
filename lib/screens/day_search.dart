@@ -83,7 +83,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: ColorName.primarySecondary,
+      backgroundColor: ColorName.backGroundYellow,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.greenAccent),
         backgroundColor: Colors.white,
@@ -124,18 +124,19 @@ class _DaySearchPageState extends State<DaySearchPage> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border:
-                              Border.all(color: ColorName.redBase, width: 2),
-                          color: isSelected ? ColorName.redBase : null,
+                              Border.all(color: ColorName.brightRed, width: 2),
+                          color: isSelected ? ColorName.brightRed : null,
                         ),
                         child: CircleAvatar(
                           backgroundColor: isSelected
-                              ? ColorName.redBase
+                              ? ColorName.brightRed
                               : ColorName.whiteBase,
                           child: Text(
                             day,
                             style: TextStyle(
-                              color:
-                                  isSelected ? Colors.white : ColorName.redBase,
+                              color: isSelected
+                                  ? Colors.white
+                                  : ColorName.brightRed,
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
                             ),

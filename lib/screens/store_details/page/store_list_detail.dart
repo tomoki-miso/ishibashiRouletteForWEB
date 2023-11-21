@@ -81,7 +81,7 @@ class _StoreListPageState extends State<StoreListPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: ColorName.primarySecondary,
+        backgroundColor: ColorName.backGroundYellow,
         appBar: PreferredSize(
           preferredSize:
               Size.fromHeight(MediaQuery.of(context).size.height * 0.08),

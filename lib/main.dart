@@ -7,8 +7,6 @@ import 'package:ishibashi/screens/auth/page/sign_in_confirm.dart';
 import 'package:ishibashi/base.dart';
 import 'package:ishibashi/firebase/firebase_options.dart';
 
-
-
 final storeInfoProvider = FutureProvider.autoDispose(
     (ref) => FirebaseFirestore.instance.collection('stores').snapshots());
 
@@ -38,16 +36,18 @@ class MyApp extends ConsumerWidget {
 }
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    User? user = FirebaseAuth.instance.currentUser;
+    final User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
       // ユーザーが認証されている場合、BasePageに移動
       return const BasePage();
     } else {
       // ユーザーが認証されていない場合、ログイン画面を表示
-      return SignInConfirmPage();
+      return const SignInConfirmPage();
     }
   }
 }

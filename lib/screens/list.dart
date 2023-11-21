@@ -5,8 +5,6 @@ import 'package:ishibashi/components/store_list.dart';
 import 'package:ishibashi/screens/store_details/page/store_list_detail.dart';
 import 'package:ishibashi/style/colors.dart';
 
-
-
 class ListPage extends StatefulWidget {
   const ListPage({super.key});
 
@@ -40,7 +38,7 @@ class _ListPageState extends State<ListPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: ColorName.primarySecondary,
+        backgroundColor: ColorName.backGroundYellow,
         appBar: const OriginalAppBar(),
         body: Center(
           child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
@@ -75,8 +73,6 @@ class _ListPageState extends State<ListPage> {
                     // Pass other data as needed
                   );
                 }).toList(),
-
-                
               );
             },
           ),

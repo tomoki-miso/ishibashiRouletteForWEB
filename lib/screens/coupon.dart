@@ -25,7 +25,7 @@ class CouponPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: ColorName.blackSecondary,
+                  color: ColorName.greyBase,
                 ),
               ),
             ],
