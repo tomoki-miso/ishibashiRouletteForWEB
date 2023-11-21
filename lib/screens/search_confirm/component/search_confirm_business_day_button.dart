@@ -9,18 +9,19 @@ class BusinessDayButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BigSelectButton(
-      onTap: () async {
-        await Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const DaySearchPage(),
-          ),
-        );
-      },
-      text: '営業日で検索',
-      iconChild: const FaIcon(
-        FontAwesomeIcons.clock,
-        color: ColorName.whiteBase,
-        size: 100,
-      ),
-    );
+        backgroundColor: ColorName.searchPurple,
+        onTap: () async {
+          await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const DaySearchPage(),
+            ),
+          );
+        },
+        text: '営業日で検索',
+        iconChild: const FaIcon(
+          FontAwesomeIcons.clock,
+          color: ColorName.whiteBase,
+          size: 100,
+        ),
+      );
 }

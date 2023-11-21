@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:ishibashi/components/original_app_bar.dart';
 
 import 'package:ishibashi/components/store_list.dart';
 import 'package:ishibashi/screens/store_details/page/store_list_detail.dart';
@@ -84,16 +85,7 @@ class _DaySearchPageState extends State<DaySearchPage> {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: ColorName.backGroundYellow,
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.greenAccent),
-        backgroundColor: Colors.white,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(20),
-            bottomRight: Radius.circular(20),
-          ),
-        ),
-      ),
+      appBar: const OriginalAppBar(),
       body: Column(
         children: [
           Container(

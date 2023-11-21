@@ -8,18 +8,19 @@ class KeyWordButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BigSelectButton(
-      onTap: () async {
-        await Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const KeywordSearchPage(),
-          ),
-        );
-      },
-      text: 'キーワード検索',
-      iconChild: const Icon(
-        Icons.font_download_outlined,
-        color: ColorName.whiteBase,
-        size: 100,
-      ),
-    );
+        backgroundColor: ColorName.searchCBlue,
+        onTap: () async {
+          await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const KeywordSearchPage(),
+            ),
+          );
+        },
+        text: 'キーワード検索',
+        iconChild: const Icon(
+          Icons.font_download_outlined,
+          color: ColorName.whiteBase,
+          size: 100,
+        ),
+      );
 }
