@@ -27,10 +27,8 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        title: '石橋ごはんルーレット',
+        theme: ThemeData(fontFamily: 'MPLUS'),
         home: const HomePage(),
       );
 }
