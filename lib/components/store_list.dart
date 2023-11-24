@@ -106,7 +106,7 @@ class StoreList extends ConsumerWidget {
                               ),
                             ),
                             Text(
-                              '$openTime〜closeTime',
+                              '$openTime〜$closeTime',
                               // 'aa',
                               style: Styles.businnesHours,
                             ),
