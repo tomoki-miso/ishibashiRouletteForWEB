@@ -184,15 +184,20 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                 final imageUrl = data['photo_url'] as String;
                                 final tags = data['tags'] as List<dynamic>;
 
+                                final openTime =
+                                    data['formattedOpenTime'] as String;
+                                final closeTime =
+                                    data['formattedOpenTime'] as String;
+
                                 return StoreList(
                                   name: name,
                                   tags: tags,
                                   imageUrl: imageUrl,
+                                  openTime: openTime,
+                                  closeTime: closeTime,
                                   onTap: () async {
-                                    // Define what happens when an item is tapped
                                     await navigateToStorePage(document.id);
                                   },
-                                  // Pass other data as needed
                                 );
                               }).toList(),
                             );

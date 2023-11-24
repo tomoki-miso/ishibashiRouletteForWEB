@@ -15,15 +15,6 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
   final TextEditingController _searchController = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   List<DocumentSnapshot> _searchResults = [];
-  final daysOfWeek = [
-    '月',
-    '火',
-    '水',
-    '木',
-    '金',
-    '土',
-    '日',
-  ];
 
   Future<void> navigateToStorePage(String documentId) async {
     await Navigator.push(
@@ -97,23 +88,28 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
                 },
               ),
             ),
-            
+
             // 検索結果
             Expanded(
               child: ListView.builder(
                 itemCount: _searchResults.length,
                 itemBuilder: (context, index) {
                   final document =
-                      _searchResults[index].data() as Map<String, dynamic>;
+                      _searchResults[index].data()! as Map<String, dynamic>;
 
                   final name = document['name'] as String;
                   final imageUrl = document['photo_url'] as String;
                   final tags = document['tags'] as List<dynamic>;
 
+                  final openTime = document['formattedOpenTime'] as String;
+                  final closeTime = document['formattedCloseTime'] as String;
+
                   return StoreList(
                     name: name,
                     tags: tags,
                     imageUrl: imageUrl,
+                    openTime: openTime,
+                    closeTime: closeTime,
                     onTap: () async {
                       await navigateToStorePage(_searchResults[index].id);
                     },

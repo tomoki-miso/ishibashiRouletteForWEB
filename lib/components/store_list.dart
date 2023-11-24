@@ -8,14 +8,16 @@ class StoreList extends ConsumerWidget {
   const StoreList({
     required this.onTap,
     required this.tags,
-    super.key,
     required this.imageUrl,
+    this.openTime,
+    this.closeTime,
+    super.key,
     this.name,
   });
   final String? name;
   final String imageUrl;
-
-  // final String? detail;
+  final String? openTime;
+  final String? closeTime;
   final VoidCallback? onTap;
   final List<dynamic> tags;
 
@@ -84,6 +86,7 @@ class StoreList extends ConsumerWidget {
                                         child: Text(
                                           '#$formattedTag${isLastTag ? '' : ','}',
                                           style: Styles.tagsTextStyle,
+                                          overflow: TextOverflow.clip,
                                         ),
                                       );
                                     }).toList()
@@ -102,8 +105,9 @@ class StoreList extends ConsumerWidget {
                                 ),
                               ),
                             ),
-                            const Text(
-                              '18:00〜24:00',
+                            Text(
+                              '$openTime〜closeTime',
+                              // 'aa',
                               style: Styles.businnesHours,
                             ),
                           ],
