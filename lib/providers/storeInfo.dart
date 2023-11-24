@@ -10,10 +10,10 @@ Future<StoreClass> _fetchStoreData() async {
       await FirebaseFirestore.instance.collection('stores').get();
   final storeIds =
       List.generate(storeSnapshot.docs.length, (index) => index + 1);
-  storeIds
+  final shuffledStoreIds = storeIds
     ..shuffle()
     ..removeAt(0);
-  final storeId = storeIds.first;
+  final storeId = shuffledStoreIds.first;
 
   final storeData = storeSnapshot.docs[storeId - 1].data();
   final tags = await _fetchTags(storeSnapshot.docs[storeId - 1].reference);
@@ -55,10 +55,10 @@ class StoreInfoNotifier extends AutoDisposeAsyncNotifier<StoreClass> {
         await FirebaseFirestore.instance.collection('stores').get();
     final storeIds =
         List.generate(storeSnapshot.docs.length, (index) => index + 1);
-    storeIds
+    final shuffledStoreIds = storeIds
       ..shuffle()
       ..removeAt(0);
-    final storeId = storeIds.first;
+    final storeId = shuffledStoreIds.first;
 
     final storeData = storeSnapshot.docs[storeId - 1].data();
     final tags = await _fetchTags(storeSnapshot.docs[storeId - 1].reference);

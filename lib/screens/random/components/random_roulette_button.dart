@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/primary_button.dart';
@@ -17,6 +18,7 @@ class RouletteButton extends ConsumerWidget {
           backgroundColor: ColorName.randomRed,
           onPressed: () async {
             await ref.read(storeInfoNotifierProvider.notifier).updateState();
+            await FirebaseAnalytics.instance.logEvent(name: 'ルーレット押下');
           },
           width: MediaQuery.of(context).size.width * 0.8,
           height: MediaQuery.of(context).size.height * 0.07,
