@@ -21,36 +21,6 @@ class _TopPageState extends State<TopPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              /*   Container(
-              height: _screenSize.height * 0.22,
-              child: Scrollbar(
-                thumbVisibility: true,
-                controller:scrollController,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      child: TextButton(
-                        child: Text(
-                          "広告",
-                          style: TextStyle(fontSize: 20, color: Colors.black),
-                        ),
-                        onPressed: () {},
-                      ),
-                      margin:
-                          EdgeInsets.symmetric(vertical: 0, horizontal: 4),
-                      width: _screenSize.width * 0.8,
-                      color: colorList[index % colorList.length],
-                    );
-                    
-                  },
-                  controller:scrollController,
-                ),
-                
-              ),
-            ), */
-
               RandomBigSelectbutton(),
               Padding(padding: EdgeInsets.all(5)),
               MapBigSelectbutton(),

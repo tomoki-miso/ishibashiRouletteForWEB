@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ishibashi/screens/top/components/top_delete_account_alert_dialog.dart';
+import 'package:ishibashi/screens/top/components/top_sign_out_alert_dialog.dart';
 import 'package:ishibashi/screens/top/page/top_dawer_form_page.dart';
 import 'package:ishibashi/screens/top/page/top_drawer_inquiry.dart';
 import 'package:ishibashi/screens/top/page/top_drawer_manual.dart';
@@ -60,6 +63,30 @@ class TopDrawerPart extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => const TopDrawerFormPage(),
                   ),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text(
+                'ログアウト',
+                style: Styles.DrawerSubTitle,
+              ),
+              onTap: () async {
+                await showCupertinoDialog(
+                  context: context,
+                  builder: (context) => const TopSignOutAlertDialog(),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text(
+                '退会',
+                style: Styles.DrawerSubTitle,
+              ),
+              onTap: () async {
+                await showCupertinoDialog(
+                  context: context,
+                  builder: (context) => const TopDeleteAccountAlertDialog(),
                 );
               },
             ),
