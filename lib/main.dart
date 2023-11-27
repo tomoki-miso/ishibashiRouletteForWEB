@@ -27,6 +27,7 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: '石橋ごはんルーレット',
         theme: ThemeData(fontFamily: 'MPLUS'),
         home: const HomePage(),
@@ -41,10 +42,8 @@ class HomePage extends StatelessWidget {
     final User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      // ユーザーが認証されている場合、BasePageに移動
       return const BasePage();
     } else {
-      // ユーザーが認証されていない場合、ログイン画面を表示
       return const SignInConfirmPage();
     }
   }

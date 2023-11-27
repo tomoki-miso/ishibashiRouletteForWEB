@@ -58,6 +58,8 @@ dependencies:
   sign_in_button: ^3.2.0
   sign_in_with_apple: ^5.0.0
   firebase_analytics: ^10.7.1
+  intl: ^0.18.1
+  flutter_launcher_icons: ^0.13.1
 
 
 
@@ -128,3 +130,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_icons:       
+  android: true
+  ios: true
+  image_path: "assets/images/icon.png"
