@@ -17,13 +17,10 @@ class RandomStoreImagePart extends ConsumerWidget {
           backgroundColor: Colors.white,
           child: CircleAvatar(
             radius: MediaQuery.of(context).size.height * 0.23 - 18,
-            backgroundImage: CachedNetworkImageProvider(
-              storePhotoUrl.isNotEmpty
-                  ? storePhotoUrl
-                  : 'https://placehold.jp/150x150.png',
-
-              /// TODO #18:変更
-            ),
+            backgroundImage: storePhotoUrl.isNotEmpty
+                ? CachedNetworkImageProvider(storePhotoUrl)
+                : Image.asset('assets/images/icon.png').image
+                    as ImageProvider<Object>?,
           ),
         ),
       );

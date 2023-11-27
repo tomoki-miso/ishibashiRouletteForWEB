@@ -47,11 +47,7 @@ class StoreList extends ConsumerWidget {
                               imageUrl: imageUrl,
                               fit: BoxFit.cover,
                             )
-                          : CachedNetworkImage(
-                              imageUrl:
-                                  'https://placehold.jp/150x150.png', //NoTFound的な画像を足す？
-                              fit: BoxFit.cover,
-                            ),
+                          : Image.asset('assets/images/icon.png'),
                     ),
                   ),
                 ),

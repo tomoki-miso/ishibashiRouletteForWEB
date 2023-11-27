@@ -24,8 +24,8 @@ class StoreDetailImagePart extends ConsumerWidget {
                   width: MediaQuery.of(context).size.width * 0.8,
                   fit: BoxFit.cover,
                 )
-              : CachedNetworkImage(
-                  imageUrl: 'https://placehold.jp/150x150.png',
+              : Image.asset(
+                  'assets/images/icon.png',
                   width: MediaQuery.of(context).size.width * 0.8,
                   fit: BoxFit.cover,
                 ),
