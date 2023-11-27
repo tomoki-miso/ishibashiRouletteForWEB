@@ -21,44 +21,42 @@ class RandomPage extends ConsumerWidget {
       data: (data) => Scaffold(
         backgroundColor: ColorName.backGroundYellow,
         appBar: const OriginalAppBar(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const Padding(padding: EdgeInsets.all(8)),
+        body: Column(
+          children: [
+            const Padding(padding: EdgeInsets.all(4)),
 
-              /// 名前
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: MediaQuery.of(context).size.width * 0.09,
-                child: Text(
-                  data.StoreName,
-                  textAlign: TextAlign.center,
-                  style: Styles.detailStoreName,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+            /// 名前
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              height: MediaQuery.of(context).size.width * 0.09,
+              child: Text(
+                data.StoreName,
+                textAlign: TextAlign.center,
+                style: Styles.detailStoreName,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: 10),
+            ),
+            const SizedBox(height: 10),
 
-              /// 画像部分
-              RandomStoreImagePart(
-                storePhotoUrl: data.StorePhotoUrl,
-              ),
-              const SizedBox(height: 10),
+            /// 画像部分
+            RandomStoreImagePart(
+              storePhotoUrl: data.StorePhotoUrl,
+            ),
+            const SizedBox(height: 10),
 
-              /// タグと紹介
-              RandomStoreTagsPart(formattedTags: data.Tags),
-              RandomStoreDetailPart(
-                storeDetail: data.StoreDetail,
-              ),
+            /// タグと紹介
+            RandomStoreTagsPart(formattedTags: data.Tags),
+            RandomStoreDetailPart(
+              storeDetail: data.StoreDetail,
+            ),
 
-              /// くわしくみる
-              const StoreButton(),
+            /// くわしくみる
+            const StoreButton(),
 
-              ///　ルーレットを回す
-              const RouletteButton(),
-            ],
-          ),
+            ///　ルーレットを回す
+            const RouletteButton(),
+          ],
         ),
       ),
       error: (error, stackTrace) => Container(),
