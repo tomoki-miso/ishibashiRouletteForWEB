@@ -185,9 +185,9 @@ class _DaySearchPageState extends State<DaySearchPage> {
                                 final tags = data['tags'] as List<dynamic>;
 
                                 final openTime =
-                                    data['formattedOpenTime'] as String;
+                                    data['formattedOpenTime'] as String?;
                                 final closeTime =
-                                    data['formattedOpenTime'] as String;
+                                    data['formattedCloseTime'] as String?;
 
                                 return StoreList(
                                   name: name,
