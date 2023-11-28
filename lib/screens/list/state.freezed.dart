@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ListState {
-  StoreClass get storeClass => throw _privateConstructorUsedError;
+  List<dynamic> get storeClassList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ListStateCopyWith<ListState> get copyWith =>
@@ -28,9 +28,7 @@ abstract class $ListStateCopyWith<$Res> {
   factory $ListStateCopyWith(ListState value, $Res Function(ListState) then) =
       _$ListStateCopyWithImpl<$Res, ListState>;
   @useResult
-  $Res call({StoreClass storeClass});
-
-  $StoreClassCopyWith<$Res> get storeClass;
+  $Res call({List<dynamic> storeClassList});
 }
 
 /// @nodoc
@@ -46,22 +44,14 @@ class _$ListStateCopyWithImpl<$Res, $Val extends ListState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? storeClass = null,
+    Object? storeClassList = null,
   }) {
     return _then(_value.copyWith(
-      storeClass: null == storeClass
-          ? _value.storeClass
-          : storeClass // ignore: cast_nullable_to_non_nullable
-              as StoreClass,
+      storeClassList: null == storeClassList
+          ? _value.storeClassList
+          : storeClassList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $StoreClassCopyWith<$Res> get storeClass {
-    return $StoreClassCopyWith<$Res>(_value.storeClass, (value) {
-      return _then(_value.copyWith(storeClass: value) as $Val);
-    });
   }
 }
 
@@ -73,10 +63,7 @@ abstract class _$$ListStateImplCopyWith<$Res>
       __$$ListStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({StoreClass storeClass});
-
-  @override
-  $StoreClassCopyWith<$Res> get storeClass;
+  $Res call({List<dynamic> storeClassList});
 }
 
 /// @nodoc
@@ -90,13 +77,13 @@ class __$$ListStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? storeClass = null,
+    Object? storeClassList = null,
   }) {
     return _then(_$ListStateImpl(
-      storeClass: null == storeClass
-          ? _value.storeClass
-          : storeClass // ignore: cast_nullable_to_non_nullable
-              as StoreClass,
+      storeClassList: null == storeClassList
+          ? _value._storeClassList
+          : storeClassList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
@@ -104,14 +91,20 @@ class __$$ListStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ListStateImpl implements _ListState {
-  const _$ListStateImpl({required this.storeClass});
+  const _$ListStateImpl({required final List<dynamic> storeClassList})
+      : _storeClassList = storeClassList;
 
+  final List<dynamic> _storeClassList;
   @override
-  final StoreClass storeClass;
+  List<dynamic> get storeClassList {
+    if (_storeClassList is EqualUnmodifiableListView) return _storeClassList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_storeClassList);
+  }
 
   @override
   String toString() {
-    return 'ListState(storeClass: $storeClass)';
+    return 'ListState(storeClassList: $storeClassList)';
   }
 
   @override
@@ -119,12 +112,13 @@ class _$ListStateImpl implements _ListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ListStateImpl &&
-            (identical(other.storeClass, storeClass) ||
-                other.storeClass == storeClass));
+            const DeepCollectionEquality()
+                .equals(other._storeClassList, _storeClassList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, storeClass);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_storeClassList));
 
   @JsonKey(ignore: true)
   @override
@@ -134,11 +128,11 @@ class _$ListStateImpl implements _ListState {
 }
 
 abstract class _ListState implements ListState {
-  const factory _ListState({required final StoreClass storeClass}) =
+  const factory _ListState({required final List<dynamic> storeClassList}) =
       _$ListStateImpl;
 
   @override
-  StoreClass get storeClass;
+  List<dynamic> get storeClassList;
   @override
   @JsonKey(ignore: true)
   _$$ListStateImplCopyWith<_$ListStateImpl> get copyWith =>

@@ -11,6 +11,6 @@ class ListState with _$ListState {
 
   // プロパティを指定
   const factory ListState({
-    required StoreClass storeClass,
+    required List storeClassList,
   }) = _ListState;
 }
