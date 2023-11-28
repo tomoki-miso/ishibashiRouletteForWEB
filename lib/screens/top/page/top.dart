@@ -22,9 +22,9 @@ class _TopPageState extends State<TopPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               RandomBigSelectbutton(),
-              Padding(padding: EdgeInsets.all(5)),
+              Padding(padding: EdgeInsets.all(3)),
               MapBigSelectbutton(),
-              Padding(padding: EdgeInsets.all(5)),
+              Padding(padding: EdgeInsets.all(3)),
               SearchBigSelectbutton(),
             ],
           ),

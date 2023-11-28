@@ -13,10 +13,10 @@ class RandomStoreImagePart extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) => Center(
         child: CircleAvatar(
-          radius: MediaQuery.of(context).size.height * 0.23,
+          radius: MediaQuery.of(context).size.height * 0.22,
           backgroundColor: Colors.white,
           child: CircleAvatar(
-            radius: MediaQuery.of(context).size.height * 0.23 - 18,
+            radius: MediaQuery.of(context).size.height * 0.22 - 18,
             backgroundImage: storePhotoUrl.isNotEmpty
                 ? CachedNetworkImageProvider(storePhotoUrl)
                 : Image.asset('assets/images/icon.png').image

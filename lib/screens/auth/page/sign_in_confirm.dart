@@ -14,13 +14,13 @@ class SignInConfirmPage extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
-              const Padding(padding: EdgeInsets.all(40)),
+              const Padding(padding: EdgeInsets.all(60)),
               SizedBox(
                 height: MediaQuery.of(context).size.width * 0.6,
                 width: MediaQuery.of(context).size.width * 0.6,
                 child: Image.asset('assets/images/icon.png'),
               ),
-              const Padding(padding: EdgeInsets.all(12)),
+              const Padding(padding: EdgeInsets.all(20)),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.7,
                 child: const Text(
@@ -29,20 +29,7 @@ class SignInConfirmPage extends StatelessWidget {
                   style: TextStyle(fontSize: 14),
                 ),
               ),
-              const Padding(padding: EdgeInsets.all(20)),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: SignInButton(
-                  Buttons.email,
-                  onPressed: () async {
-                    await Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const EmailSignInPage(),
-                      ),
-                    );
-                  },
-                ),
-              ),
+              const Padding(padding: EdgeInsets.all(16)),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: SignInButton(
