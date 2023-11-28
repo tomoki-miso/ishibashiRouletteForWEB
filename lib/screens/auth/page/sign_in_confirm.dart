@@ -14,13 +14,13 @@ class SignInConfirmPage extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
-              Padding(padding: EdgeInsets.all(40)),
+              const Padding(padding: EdgeInsets.all(40)),
               SizedBox(
                 height: MediaQuery.of(context).size.width * 0.6,
                 width: MediaQuery.of(context).size.width * 0.6,
-                child: Image.asset('assets/images/iconKari.png'),
+                child: Image.asset('assets/images/icon.png'),
               ),
-              Padding(padding: EdgeInsets.all(12)),
+              const Padding(padding: EdgeInsets.all(12)),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.7,
                 child: const Text(
@@ -29,7 +29,7 @@ class SignInConfirmPage extends StatelessWidget {
                   style: TextStyle(fontSize: 14),
                 ),
               ),
-              Padding(padding: EdgeInsets.all(20)),
+              const Padding(padding: EdgeInsets.all(20)),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: SignInButton(
