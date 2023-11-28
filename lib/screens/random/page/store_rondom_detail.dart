@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ishibashi/class/store_class.dart';
-import 'package:ishibashi/providers/stateNotifierProvider.dart';
-import 'package:ishibashi/providers/storeInfo.dart';
+import 'package:ishibashi/screens/random/view_model.dart';
+
 import 'package:ishibashi/screens/store_details/components/store_detail_detail_text_part.dart';
 import 'package:ishibashi/screens/store_details/components/store_detail_image_part.dart';
 import 'package:ishibashi/screens/store_details/components/store_detail_jump_buttons/store_detail_insta_jump_button.dart';
@@ -13,10 +12,6 @@ import 'package:ishibashi/screens/store_details/components/store_detail_tags_par
 import 'package:ishibashi/style/colors.dart';
 import 'package:ishibashi/style/styles.dart';
 
-final storeProvider = StateNotifierProvider<StoreNotifier, List<StoreClass>>(
-  (ref) => StoreNotifier(),
-);
-
 class StorePage extends ConsumerWidget {
   const StorePage({super.key});
 
@@ -24,61 +19,61 @@ class StorePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final screenSize = MediaQuery.of(context).size;
 
-    final storeProvider = ref.watch(storeInfoNotifierProvider);
+    final data = ref.watch(randomViewModelProvider);
 
-    final name = storeProvider.when(
+    final name = data.when(
       loading: Container.new,
       error: (e, s) => Container(),
-      data: (state) => Padding(
+      data: (data) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Text(
-          state.StoreName,
+          data.storeName,
           textAlign: TextAlign.center,
           style: Styles.detailStoreName,
         ),
       ),
     );
 
-    final detail = storeProvider.when(
+    final detail = data.when(
       loading: Container.new,
       error: (e, s) => Container(),
-      data: (state) => StoreDetailTextPart(storeDetail: state.StoreDetail),
+      data: (data) => StoreDetailTextPart(storeDetail: data.storeDetail),
     );
 
-    final photo = storeProvider.when(
+    final photo = data.when(
       loading: () => Image.asset('assets/images/iconKari.png'),
       error: (e, s) => Container(),
-      data: (state) => StoreDetailImagePart(storePhotoUrl: state.StorePhotoUrl),
+      data: (data) => StoreDetailImagePart(storePhotoUrl: data.storePhotoUrl),
     );
 
-    final tags = storeProvider.when(
+    final tags = data.when(
       loading: () => const Text('準備中...'),
       error: (e, s) => Text('エラー: $e'), // エラーメッセージを表示
-      data: (state) => StoreDetailTagsPart(formattedTags: state.Tags),
+      data: (data) => StoreDetailTagsPart(formattedTags: data.tags),
     );
 
-    final WebButton = storeProvider.when(
+    final WebButton = data.when(
       loading: () => const Text('準備中...'),
       error: (e, s) => Text('エラー $e'),
-      data: (state) => SiteJumpButton(storeWeb: state.StoreWeb),
+      data: (data) => SiteJumpButton(storeWeb: data.storeWeb),
     );
 
-    final TabelogButton = storeProvider.when(
+    final TabelogButton = data.when(
       loading: () => const Text('準備中...'),
       error: (e, s) => Text('エラー $e'),
-      data: (state) => TabelogJumpButton(storeTabelog: state.StoreTabelog),
+      data: (data) => TabelogJumpButton(storeTabelog: data.storeTabelog),
     );
 
-    final TwitterButton = storeProvider.when(
+    final TwitterButton = data.when(
       loading: () => const Text('準備中...'),
       error: (e, s) => Text('エラー $e'),
-      data: (state) => TwitterJumpButton(storeTwitter: state.StoreTwitter),
+      data: (data) => TwitterJumpButton(storeTwitter: data.storeTwitter),
     );
 
-    final InstaButton = storeProvider.when(
+    final InstaButton = data.when(
       loading: () => const Text('準備中...'),
       error: (e, s) => Text('エラー $e'),
-      data: (state) => InstaJumpButton(storeInsta: state.StoreInsta),
+      data: (data) => InstaJumpButton(storeInsta: data.storeInsta),
     );
 
     return Scaffold(

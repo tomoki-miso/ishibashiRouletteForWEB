@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ishibashi/components/primary_button.dart';
-import 'package:ishibashi/screens/store_details/page/store_rondom_detail.dart';
+import 'package:ishibashi/screens/random/page/store_rondom_detail.dart';
 import 'package:ishibashi/style/colors.dart';
 import 'package:ishibashi/style/styles.dart';
 

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/original_app_bar.dart';
-import 'package:ishibashi/providers/storeInfo.dart';
+
 import 'package:ishibashi/screens/random/components/random_roulette_button.dart';
 import 'package:ishibashi/screens/random/components/random_store_button.dart';
 import 'package:ishibashi/screens/random/components/random_store_detail_part.dart';
 import 'package:ishibashi/screens/random/components/random_store_image_part.dart';
 import 'package:ishibashi/screens/random/components/random_store_tags_part.dart';
+import 'package:ishibashi/screens/random/view_model.dart';
 import 'package:ishibashi/style/colors.dart';
 import 'package:ishibashi/style/styles.dart';
 
@@ -15,7 +16,7 @@ class RandomPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final data = ref.watch(storeInfoNotifierProvider);
+    final data = ref.watch(randomViewModelProvider);
 
     return data.when(
       data: (data) => Scaffold(
@@ -30,7 +31,7 @@ class RandomPage extends ConsumerWidget {
               width: MediaQuery.of(context).size.width * 0.8,
               height: MediaQuery.of(context).size.width * 0.09,
               child: Text(
-                data.StoreName,
+                data.storeName,
                 textAlign: TextAlign.center,
                 style: Styles.detailStoreName,
                 maxLines: 1,
@@ -41,14 +42,14 @@ class RandomPage extends ConsumerWidget {
 
             /// 画像部分
             RandomStoreImagePart(
-              storePhotoUrl: data.StorePhotoUrl,
+              storePhotoUrl: data.storePhotoUrl,
             ),
             const SizedBox(height: 10),
 
             /// タグと紹介
-            RandomStoreTagsPart(formattedTags: data.Tags),
+            RandomStoreTagsPart(formattedTags: data.tags),
             RandomStoreDetailPart(
-              storeDetail: data.StoreDetail,
+              storeDetail: data.storeDetail,
             ),
 
             /// くわしくみる

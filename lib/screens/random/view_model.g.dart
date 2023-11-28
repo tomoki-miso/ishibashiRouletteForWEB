@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'storeInfo.dart';
+part of 'view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$storeInfoNotifierHash() => r'402591ffcb9771359ee64a540bc0ba109e306659';
+String _$randomViewModelHash() => r'5f85c26c4f8822f7f59049d365a73046069f4324';
 
-/// See also [StoreInfoNotifier].
-@ProviderFor(StoreInfoNotifier)
-final storeInfoNotifierProvider =
-    AutoDisposeAsyncNotifierProvider<StoreInfoNotifier, StoreClass>.internal(
-  StoreInfoNotifier.new,
-  name: r'storeInfoNotifierProvider',
+/// See also [RandomViewModel].
+@ProviderFor(RandomViewModel)
+final randomViewModelProvider =
+    AutoDisposeAsyncNotifierProvider<RandomViewModel, RandomState>.internal(
+  RandomViewModel.new,
+  name: r'randomViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$storeInfoNotifierHash,
+      : _$randomViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$StoreInfoNotifier = AutoDisposeAsyncNotifier<StoreClass>;
+typedef _$RandomViewModel = AutoDisposeAsyncNotifier<RandomState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter

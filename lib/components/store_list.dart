@@ -28,7 +28,8 @@ class StoreList extends ConsumerWidget {
           elevation: 8,
           color: ColorName.whiteBase,
           shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(50))),
+            borderRadius: BorderRadius.all(Radius.circular(50)),
+          ),
           child: InkWell(
             onTap: onTap,
             child: Row(

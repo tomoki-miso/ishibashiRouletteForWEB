@@ -16,7 +16,7 @@ class BasePage extends StatelessWidget {
   ) {
     final pages = [
       const ListPage(),
-      RandomPage(),
+      const RandomPage(),
       const TopPage(),
       const CouponPage(),
       const MapPage(),
