@@ -27,7 +27,7 @@ class StorePage extends ConsumerWidget {
       data: (data) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Text(
-          data.storeName,
+          data.storeClass.storeName,
           textAlign: TextAlign.center,
           style: Styles.detailStoreName,
         ),
@@ -37,43 +37,47 @@ class StorePage extends ConsumerWidget {
     final detail = data.when(
       loading: Container.new,
       error: (e, s) => Container(),
-      data: (data) => StoreDetailTextPart(storeDetail: data.storeDetail),
+      data: (data) =>
+          StoreDetailTextPart(storeDetail: data.storeClass.storeDetail),
     );
 
     final photo = data.when(
       loading: () => Image.asset('assets/images/iconKari.png'),
       error: (e, s) => Container(),
-      data: (data) => StoreDetailImagePart(storePhotoUrl: data.storePhotoUrl),
+      data: (data) =>
+          StoreDetailImagePart(storePhotoUrl: data.storeClass.storePhotoUrl),
     );
 
     final tags = data.when(
       loading: () => const Text('準備中...'),
       error: (e, s) => Text('エラー: $e'), // エラーメッセージを表示
-      data: (data) => StoreDetailTagsPart(formattedTags: data.tags),
+      data: (data) => StoreDetailTagsPart(formattedTags: data.storeClass.tags),
     );
 
     final WebButton = data.when(
       loading: () => const Text('準備中...'),
       error: (e, s) => Text('エラー $e'),
-      data: (data) => SiteJumpButton(storeWeb: data.storeWeb),
+      data: (data) => SiteJumpButton(storeWeb: data.storeClass.storeWeb),
     );
 
     final TabelogButton = data.when(
       loading: () => const Text('準備中...'),
       error: (e, s) => Text('エラー $e'),
-      data: (data) => TabelogJumpButton(storeTabelog: data.storeTabelog),
+      data: (data) =>
+          TabelogJumpButton(storeTabelog: data.storeClass.storeTabelog),
     );
 
     final TwitterButton = data.when(
       loading: () => const Text('準備中...'),
       error: (e, s) => Text('エラー $e'),
-      data: (data) => TwitterJumpButton(storeTwitter: data.storeTwitter),
+      data: (data) =>
+          TwitterJumpButton(storeTwitter: data.storeClass.storeTwitter),
     );
 
     final InstaButton = data.when(
       loading: () => const Text('準備中...'),
       error: (e, s) => Text('エラー $e'),
-      data: (data) => InstaJumpButton(storeInsta: data.storeInsta),
+      data: (data) => InstaJumpButton(storeInsta: data.storeClass.storeInsta),
     );
 
     return Scaffold(

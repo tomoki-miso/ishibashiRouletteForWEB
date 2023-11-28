@@ -16,15 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$RandomState {
-  String get documentId => throw _privateConstructorUsedError;
-  String get storeName => throw _privateConstructorUsedError;
-  String get storeDetail => throw _privateConstructorUsedError;
-  String get storeWeb => throw _privateConstructorUsedError;
-  String get storeTwitter => throw _privateConstructorUsedError;
-  String get storeInsta => throw _privateConstructorUsedError;
-  String get storeTabelog => throw _privateConstructorUsedError;
-  String get storePhotoUrl => throw _privateConstructorUsedError;
-  List<String> get tags => throw _privateConstructorUsedError;
+  StoreClass get storeClass => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RandomStateCopyWith<RandomState> get copyWith =>
@@ -37,16 +29,9 @@ abstract class $RandomStateCopyWith<$Res> {
           RandomState value, $Res Function(RandomState) then) =
       _$RandomStateCopyWithImpl<$Res, RandomState>;
   @useResult
-  $Res call(
-      {String documentId,
-      String storeName,
-      String storeDetail,
-      String storeWeb,
-      String storeTwitter,
-      String storeInsta,
-      String storeTabelog,
-      String storePhotoUrl,
-      List<String> tags});
+  $Res call({StoreClass storeClass});
+
+  $StoreClassCopyWith<$Res> get storeClass;
 }
 
 /// @nodoc
@@ -62,54 +47,22 @@ class _$RandomStateCopyWithImpl<$Res, $Val extends RandomState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? documentId = null,
-    Object? storeName = null,
-    Object? storeDetail = null,
-    Object? storeWeb = null,
-    Object? storeTwitter = null,
-    Object? storeInsta = null,
-    Object? storeTabelog = null,
-    Object? storePhotoUrl = null,
-    Object? tags = null,
+    Object? storeClass = null,
   }) {
     return _then(_value.copyWith(
-      documentId: null == documentId
-          ? _value.documentId
-          : documentId // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeName: null == storeName
-          ? _value.storeName
-          : storeName // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeDetail: null == storeDetail
-          ? _value.storeDetail
-          : storeDetail // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeWeb: null == storeWeb
-          ? _value.storeWeb
-          : storeWeb // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeTwitter: null == storeTwitter
-          ? _value.storeTwitter
-          : storeTwitter // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeInsta: null == storeInsta
-          ? _value.storeInsta
-          : storeInsta // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeTabelog: null == storeTabelog
-          ? _value.storeTabelog
-          : storeTabelog // ignore: cast_nullable_to_non_nullable
-              as String,
-      storePhotoUrl: null == storePhotoUrl
-          ? _value.storePhotoUrl
-          : storePhotoUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      tags: null == tags
-          ? _value.tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      storeClass: null == storeClass
+          ? _value.storeClass
+          : storeClass // ignore: cast_nullable_to_non_nullable
+              as StoreClass,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $StoreClassCopyWith<$Res> get storeClass {
+    return $StoreClassCopyWith<$Res>(_value.storeClass, (value) {
+      return _then(_value.copyWith(storeClass: value) as $Val);
+    });
   }
 }
 
@@ -121,16 +74,10 @@ abstract class _$$EditBookDetailsStateImplCopyWith<$Res>
       __$$EditBookDetailsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String documentId,
-      String storeName,
-      String storeDetail,
-      String storeWeb,
-      String storeTwitter,
-      String storeInsta,
-      String storeTabelog,
-      String storePhotoUrl,
-      List<String> tags});
+  $Res call({StoreClass storeClass});
+
+  @override
+  $StoreClassCopyWith<$Res> get storeClass;
 }
 
 /// @nodoc
@@ -144,53 +91,13 @@ class __$$EditBookDetailsStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? documentId = null,
-    Object? storeName = null,
-    Object? storeDetail = null,
-    Object? storeWeb = null,
-    Object? storeTwitter = null,
-    Object? storeInsta = null,
-    Object? storeTabelog = null,
-    Object? storePhotoUrl = null,
-    Object? tags = null,
+    Object? storeClass = null,
   }) {
     return _then(_$EditBookDetailsStateImpl(
-      documentId: null == documentId
-          ? _value.documentId
-          : documentId // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeName: null == storeName
-          ? _value.storeName
-          : storeName // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeDetail: null == storeDetail
-          ? _value.storeDetail
-          : storeDetail // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeWeb: null == storeWeb
-          ? _value.storeWeb
-          : storeWeb // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeTwitter: null == storeTwitter
-          ? _value.storeTwitter
-          : storeTwitter // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeInsta: null == storeInsta
-          ? _value.storeInsta
-          : storeInsta // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeTabelog: null == storeTabelog
-          ? _value.storeTabelog
-          : storeTabelog // ignore: cast_nullable_to_non_nullable
-              as String,
-      storePhotoUrl: null == storePhotoUrl
-          ? _value.storePhotoUrl
-          : storePhotoUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      tags: null == tags
-          ? _value._tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      storeClass: null == storeClass
+          ? _value.storeClass
+          : storeClass // ignore: cast_nullable_to_non_nullable
+              as StoreClass,
     ));
   }
 }
@@ -198,45 +105,14 @@ class __$$EditBookDetailsStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$EditBookDetailsStateImpl implements _EditBookDetailsState {
-  const _$EditBookDetailsStateImpl(
-      {required this.documentId,
-      required this.storeName,
-      required this.storeDetail,
-      required this.storeWeb,
-      required this.storeTwitter,
-      required this.storeInsta,
-      required this.storeTabelog,
-      required this.storePhotoUrl,
-      required final List<String> tags})
-      : _tags = tags;
+  const _$EditBookDetailsStateImpl({required this.storeClass});
 
   @override
-  final String documentId;
-  @override
-  final String storeName;
-  @override
-  final String storeDetail;
-  @override
-  final String storeWeb;
-  @override
-  final String storeTwitter;
-  @override
-  final String storeInsta;
-  @override
-  final String storeTabelog;
-  @override
-  final String storePhotoUrl;
-  final List<String> _tags;
-  @override
-  List<String> get tags {
-    if (_tags is EqualUnmodifiableListView) return _tags;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tags);
-  }
+  final StoreClass storeClass;
 
   @override
   String toString() {
-    return 'RandomState(documentId: $documentId, storeName: $storeName, storeDetail: $storeDetail, storeWeb: $storeWeb, storeTwitter: $storeTwitter, storeInsta: $storeInsta, storeTabelog: $storeTabelog, storePhotoUrl: $storePhotoUrl, tags: $tags)';
+    return 'RandomState(storeClass: $storeClass)';
   }
 
   @override
@@ -244,37 +120,12 @@ class _$EditBookDetailsStateImpl implements _EditBookDetailsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EditBookDetailsStateImpl &&
-            (identical(other.documentId, documentId) ||
-                other.documentId == documentId) &&
-            (identical(other.storeName, storeName) ||
-                other.storeName == storeName) &&
-            (identical(other.storeDetail, storeDetail) ||
-                other.storeDetail == storeDetail) &&
-            (identical(other.storeWeb, storeWeb) ||
-                other.storeWeb == storeWeb) &&
-            (identical(other.storeTwitter, storeTwitter) ||
-                other.storeTwitter == storeTwitter) &&
-            (identical(other.storeInsta, storeInsta) ||
-                other.storeInsta == storeInsta) &&
-            (identical(other.storeTabelog, storeTabelog) ||
-                other.storeTabelog == storeTabelog) &&
-            (identical(other.storePhotoUrl, storePhotoUrl) ||
-                other.storePhotoUrl == storePhotoUrl) &&
-            const DeepCollectionEquality().equals(other._tags, _tags));
+            (identical(other.storeClass, storeClass) ||
+                other.storeClass == storeClass));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      documentId,
-      storeName,
-      storeDetail,
-      storeWeb,
-      storeTwitter,
-      storeInsta,
-      storeTabelog,
-      storePhotoUrl,
-      const DeepCollectionEquality().hash(_tags));
+  int get hashCode => Object.hash(runtimeType, storeClass);
 
   @JsonKey(ignore: true)
   @override
@@ -286,35 +137,11 @@ class _$EditBookDetailsStateImpl implements _EditBookDetailsState {
 }
 
 abstract class _EditBookDetailsState implements RandomState {
-  const factory _EditBookDetailsState(
-      {required final String documentId,
-      required final String storeName,
-      required final String storeDetail,
-      required final String storeWeb,
-      required final String storeTwitter,
-      required final String storeInsta,
-      required final String storeTabelog,
-      required final String storePhotoUrl,
-      required final List<String> tags}) = _$EditBookDetailsStateImpl;
+  const factory _EditBookDetailsState({required final StoreClass storeClass}) =
+      _$EditBookDetailsStateImpl;
 
   @override
-  String get documentId;
-  @override
-  String get storeName;
-  @override
-  String get storeDetail;
-  @override
-  String get storeWeb;
-  @override
-  String get storeTwitter;
-  @override
-  String get storeInsta;
-  @override
-  String get storeTabelog;
-  @override
-  String get storePhotoUrl;
-  @override
-  List<String> get tags;
+  StoreClass get storeClass;
   @override
   @JsonKey(ignore: true)
   _$$EditBookDetailsStateImplCopyWith<_$EditBookDetailsStateImpl>

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ishibashi/domain/store/store_class.dart';
 
 // 生成されるdartファイルを記述
 part 'state.freezed.dart';
@@ -10,14 +11,6 @@ class RandomState with _$RandomState {
 
   // プロパティを指定
   const factory RandomState({
-    required String documentId,
-    required String storeName,
-    required String storeDetail,
-    required String storeWeb,
-    required String storeTwitter,
-    required String storeInsta,
-    required String storeTabelog,
-    required String storePhotoUrl,
-    required List<String> tags,
+    required StoreClass storeClass,
   }) = _EditBookDetailsState;
 }

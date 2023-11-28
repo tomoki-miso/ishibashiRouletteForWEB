@@ -31,7 +31,7 @@ class RandomPage extends ConsumerWidget {
               width: MediaQuery.of(context).size.width * 0.8,
               height: MediaQuery.of(context).size.width * 0.09,
               child: Text(
-                data.storeName,
+                data.storeClass.storeName,
                 textAlign: TextAlign.center,
                 style: Styles.detailStoreName,
                 maxLines: 1,
@@ -42,14 +42,14 @@ class RandomPage extends ConsumerWidget {
 
             /// 画像部分
             RandomStoreImagePart(
-              storePhotoUrl: data.storePhotoUrl,
+              storePhotoUrl: data.storeClass.storePhotoUrl,
             ),
             const SizedBox(height: 10),
 
             /// タグと紹介
-            RandomStoreTagsPart(formattedTags: data.tags),
+            RandomStoreTagsPart(formattedTags: data.storeClass.tags),
             RandomStoreDetailPart(
-              storeDetail: data.storeDetail,
+              storeDetail: data.storeClass.storeDetail,
             ),
 
             /// くわしくみる

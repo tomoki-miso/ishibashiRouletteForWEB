@@ -6,7 +6,7 @@ part of 'view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$randomViewModelHash() => r'5f85c26c4f8822f7f59049d365a73046069f4324';
+String _$randomViewModelHash() => r'a4225baf4348c70efcb49f6c6555390b13ac5ad4';
 
 /// See also [RandomViewModel].
 @ProviderFor(RandomViewModel)

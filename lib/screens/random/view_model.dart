@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ishibashi/domain/store/store_class.dart';
 import 'package:ishibashi/screens/random/state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -17,10 +18,11 @@ class RandomViewModel extends _$RandomViewModel {
     final storeIds =
         List.generate(_storeSnapshot!.docs.length, (index) => index + 1);
     storeIds.shuffle();
+    storeIds.removeAt(0);
     final storeId = storeIds.first;
     final storeData = _storeSnapshot!.docs[storeId - 1];
     final tags = await _fetchTags(_storeSnapshot!.docs[storeId - 1].reference);
-    final state = RandomState(
+    final StoreClass storeClass = StoreClass(
       documentId: storeData['id'] ?? '',
       storeName: storeData['name'] ?? '',
       storeDetail: storeData['detail'] ?? '',
@@ -31,6 +33,7 @@ class RandomViewModel extends _$RandomViewModel {
       storePhotoUrl: storeData['photo_url'] ?? '',
       tags: tags,
     );
+    final state = RandomState(storeClass: storeClass);
     return state;
   }
 
@@ -43,24 +46,24 @@ class RandomViewModel extends _$RandomViewModel {
         final storeIds =
             List.generate(_storeSnapshot!.docs.length, (index) => index + 1);
         storeIds.shuffle();
+        storeIds.removeAt(0);
         final storeId = storeIds.first;
         final storeData = _storeSnapshot!.docs[storeId - 1];
         final tags =
             await _fetchTags(_storeSnapshot!.docs[storeId - 1].reference);
-
-        state = AsyncValue.data(
-          RandomState(
-            documentId: storeData['id'] ?? '',
-            storeName: storeData['name'] ?? '',
-            storeDetail: storeData['detail'] ?? '',
-            storeWeb: storeData['web'] ?? '',
-            storeTwitter: storeData['twitter'] ?? '',
-            storeInsta: storeData['insta'] ?? '',
-            storeTabelog: storeData['tabelog'] ?? '',
-            storePhotoUrl: storeData['photo_url'] ?? '',
-            tags: tags,
-          ),
+        final StoreClass storeClass = StoreClass(
+          documentId: storeData['id'] ?? '',
+          storeName: storeData['name'] ?? '',
+          storeDetail: storeData['detail'] ?? '',
+          storeWeb: storeData['web'] ?? '',
+          storeTwitter: storeData['twitter'] ?? '',
+          storeInsta: storeData['insta'] ?? '',
+          storeTabelog: storeData['tabelog'] ?? '',
+          storePhotoUrl: storeData['photo_url'] ?? '',
+          tags: tags,
         );
+        final data = state.requireValue;
+        state = AsyncData(data.copyWith(storeClass: storeClass));
       }),
     );
   }
