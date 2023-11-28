@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ishibashi/base.dart';
 import 'package:ishibashi/repositories/user_info/repository.dart';
-import 'package:ishibashi/screens/auth/domain/domain_user_info.dart';
+import 'package:ishibashi/domain/user_info/domain_user_info.dart';
 import 'package:ishibashi/screens/questionnaire/page/next_questionaire.dart';
 import 'package:ishibashi/screens/questionnaire/state.dart';
 

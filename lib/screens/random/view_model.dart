@@ -31,7 +31,7 @@ class RandomViewModel extends _$RandomViewModel {
       storeInsta: storeData['insta'] ?? '',
       storeTabelog: storeData['tabelog'] ?? '',
       storePhotoUrl: storeData['photo_url'] ?? '',
-      tags: tags,
+      tags: tags, 
     );
     final state = RandomState(storeClass: storeClass);
     return state;

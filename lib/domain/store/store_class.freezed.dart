@@ -21,14 +21,14 @@ StoreClass _$StoreClassFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$StoreClass {
   String get documentId => throw _privateConstructorUsedError;
-  String get storeName => throw _privateConstructorUsedError;
-  String get storeDetail => throw _privateConstructorUsedError;
-  String get storeWeb => throw _privateConstructorUsedError;
-  String get storeTwitter => throw _privateConstructorUsedError;
-  String get storeInsta => throw _privateConstructorUsedError;
-  String get storeTabelog => throw _privateConstructorUsedError;
-  String get storePhotoUrl => throw _privateConstructorUsedError;
-  List<String> get tags => throw _privateConstructorUsedError;
+  String? get storeName => throw _privateConstructorUsedError;
+  String? get storeDetail => throw _privateConstructorUsedError;
+  String? get storeWeb => throw _privateConstructorUsedError;
+  String? get storeTwitter => throw _privateConstructorUsedError;
+  String? get storeInsta => throw _privateConstructorUsedError;
+  String? get storeTabelog => throw _privateConstructorUsedError;
+  String? get storePhotoUrl => throw _privateConstructorUsedError;
+  List<String>? get tags => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,14 +44,14 @@ abstract class $StoreClassCopyWith<$Res> {
   @useResult
   $Res call(
       {String documentId,
-      String storeName,
-      String storeDetail,
-      String storeWeb,
-      String storeTwitter,
-      String storeInsta,
-      String storeTabelog,
-      String storePhotoUrl,
-      List<String> tags});
+      String? storeName,
+      String? storeDetail,
+      String? storeWeb,
+      String? storeTwitter,
+      String? storeInsta,
+      String? storeTabelog,
+      String? storePhotoUrl,
+      List<String>? tags});
 }
 
 /// @nodoc
@@ -68,52 +68,52 @@ class _$StoreClassCopyWithImpl<$Res, $Val extends StoreClass>
   @override
   $Res call({
     Object? documentId = null,
-    Object? storeName = null,
-    Object? storeDetail = null,
-    Object? storeWeb = null,
-    Object? storeTwitter = null,
-    Object? storeInsta = null,
-    Object? storeTabelog = null,
-    Object? storePhotoUrl = null,
-    Object? tags = null,
+    Object? storeName = freezed,
+    Object? storeDetail = freezed,
+    Object? storeWeb = freezed,
+    Object? storeTwitter = freezed,
+    Object? storeInsta = freezed,
+    Object? storeTabelog = freezed,
+    Object? storePhotoUrl = freezed,
+    Object? tags = freezed,
   }) {
     return _then(_value.copyWith(
       documentId: null == documentId
           ? _value.documentId
           : documentId // ignore: cast_nullable_to_non_nullable
               as String,
-      storeName: null == storeName
+      storeName: freezed == storeName
           ? _value.storeName
           : storeName // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeDetail: null == storeDetail
+              as String?,
+      storeDetail: freezed == storeDetail
           ? _value.storeDetail
           : storeDetail // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeWeb: null == storeWeb
+              as String?,
+      storeWeb: freezed == storeWeb
           ? _value.storeWeb
           : storeWeb // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeTwitter: null == storeTwitter
+              as String?,
+      storeTwitter: freezed == storeTwitter
           ? _value.storeTwitter
           : storeTwitter // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeInsta: null == storeInsta
+              as String?,
+      storeInsta: freezed == storeInsta
           ? _value.storeInsta
           : storeInsta // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeTabelog: null == storeTabelog
+              as String?,
+      storeTabelog: freezed == storeTabelog
           ? _value.storeTabelog
           : storeTabelog // ignore: cast_nullable_to_non_nullable
-              as String,
-      storePhotoUrl: null == storePhotoUrl
+              as String?,
+      storePhotoUrl: freezed == storePhotoUrl
           ? _value.storePhotoUrl
           : storePhotoUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      tags: null == tags
+              as String?,
+      tags: freezed == tags
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
     ) as $Val);
   }
 }
@@ -128,14 +128,14 @@ abstract class _$$StoreClassImplCopyWith<$Res>
   @useResult
   $Res call(
       {String documentId,
-      String storeName,
-      String storeDetail,
-      String storeWeb,
-      String storeTwitter,
-      String storeInsta,
-      String storeTabelog,
-      String storePhotoUrl,
-      List<String> tags});
+      String? storeName,
+      String? storeDetail,
+      String? storeWeb,
+      String? storeTwitter,
+      String? storeInsta,
+      String? storeTabelog,
+      String? storePhotoUrl,
+      List<String>? tags});
 }
 
 /// @nodoc
@@ -150,52 +150,52 @@ class __$$StoreClassImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? documentId = null,
-    Object? storeName = null,
-    Object? storeDetail = null,
-    Object? storeWeb = null,
-    Object? storeTwitter = null,
-    Object? storeInsta = null,
-    Object? storeTabelog = null,
-    Object? storePhotoUrl = null,
-    Object? tags = null,
+    Object? storeName = freezed,
+    Object? storeDetail = freezed,
+    Object? storeWeb = freezed,
+    Object? storeTwitter = freezed,
+    Object? storeInsta = freezed,
+    Object? storeTabelog = freezed,
+    Object? storePhotoUrl = freezed,
+    Object? tags = freezed,
   }) {
     return _then(_$StoreClassImpl(
       documentId: null == documentId
           ? _value.documentId
           : documentId // ignore: cast_nullable_to_non_nullable
               as String,
-      storeName: null == storeName
+      storeName: freezed == storeName
           ? _value.storeName
           : storeName // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeDetail: null == storeDetail
+              as String?,
+      storeDetail: freezed == storeDetail
           ? _value.storeDetail
           : storeDetail // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeWeb: null == storeWeb
+              as String?,
+      storeWeb: freezed == storeWeb
           ? _value.storeWeb
           : storeWeb // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeTwitter: null == storeTwitter
+              as String?,
+      storeTwitter: freezed == storeTwitter
           ? _value.storeTwitter
           : storeTwitter // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeInsta: null == storeInsta
+              as String?,
+      storeInsta: freezed == storeInsta
           ? _value.storeInsta
           : storeInsta // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeTabelog: null == storeTabelog
+              as String?,
+      storeTabelog: freezed == storeTabelog
           ? _value.storeTabelog
           : storeTabelog // ignore: cast_nullable_to_non_nullable
-              as String,
-      storePhotoUrl: null == storePhotoUrl
+              as String?,
+      storePhotoUrl: freezed == storePhotoUrl
           ? _value.storePhotoUrl
           : storePhotoUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      tags: null == tags
+              as String?,
+      tags: freezed == tags
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
     ));
   }
 }
@@ -205,14 +205,14 @@ class __$$StoreClassImplCopyWithImpl<$Res>
 class _$StoreClassImpl implements _StoreClass {
   const _$StoreClassImpl(
       {required this.documentId,
-      required this.storeName,
-      required this.storeDetail,
-      required this.storeWeb,
-      required this.storeTwitter,
-      required this.storeInsta,
-      required this.storeTabelog,
-      required this.storePhotoUrl,
-      required final List<String> tags})
+      this.storeName,
+      this.storeDetail,
+      this.storeWeb,
+      this.storeTwitter,
+      this.storeInsta,
+      this.storeTabelog,
+      this.storePhotoUrl,
+      final List<String>? tags})
       : _tags = tags;
 
   factory _$StoreClassImpl.fromJson(Map<String, dynamic> json) =>
@@ -221,25 +221,27 @@ class _$StoreClassImpl implements _StoreClass {
   @override
   final String documentId;
   @override
-  final String storeName;
+  final String? storeName;
   @override
-  final String storeDetail;
+  final String? storeDetail;
   @override
-  final String storeWeb;
+  final String? storeWeb;
   @override
-  final String storeTwitter;
+  final String? storeTwitter;
   @override
-  final String storeInsta;
+  final String? storeInsta;
   @override
-  final String storeTabelog;
+  final String? storeTabelog;
   @override
-  final String storePhotoUrl;
-  final List<String> _tags;
+  final String? storePhotoUrl;
+  final List<String>? _tags;
   @override
-  List<String> get tags {
+  List<String>? get tags {
+    final value = _tags;
+    if (value == null) return null;
     if (_tags is EqualUnmodifiableListView) return _tags;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tags);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -302,14 +304,14 @@ class _$StoreClassImpl implements _StoreClass {
 abstract class _StoreClass implements StoreClass {
   const factory _StoreClass(
       {required final String documentId,
-      required final String storeName,
-      required final String storeDetail,
-      required final String storeWeb,
-      required final String storeTwitter,
-      required final String storeInsta,
-      required final String storeTabelog,
-      required final String storePhotoUrl,
-      required final List<String> tags}) = _$StoreClassImpl;
+      final String? storeName,
+      final String? storeDetail,
+      final String? storeWeb,
+      final String? storeTwitter,
+      final String? storeInsta,
+      final String? storeTabelog,
+      final String? storePhotoUrl,
+      final List<String>? tags}) = _$StoreClassImpl;
 
   factory _StoreClass.fromJson(Map<String, dynamic> json) =
       _$StoreClassImpl.fromJson;
@@ -317,21 +319,21 @@ abstract class _StoreClass implements StoreClass {
   @override
   String get documentId;
   @override
-  String get storeName;
+  String? get storeName;
   @override
-  String get storeDetail;
+  String? get storeDetail;
   @override
-  String get storeWeb;
+  String? get storeWeb;
   @override
-  String get storeTwitter;
+  String? get storeTwitter;
   @override
-  String get storeInsta;
+  String? get storeInsta;
   @override
-  String get storeTabelog;
+  String? get storeTabelog;
   @override
-  String get storePhotoUrl;
+  String? get storePhotoUrl;
   @override
-  List<String> get tags;
+  List<String>? get tags;
   @override
   @JsonKey(ignore: true)
   _$$StoreClassImplCopyWith<_$StoreClassImpl> get copyWith =>

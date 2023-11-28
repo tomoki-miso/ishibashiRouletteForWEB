@@ -15,14 +15,14 @@ class StoreClass with _$StoreClass {
   // プロパティを指定
   const factory StoreClass({
     required String documentId,
-    required String storeName,
-    required String storeDetail,
-    required String storeWeb,
-    required String storeTwitter,
-    required String storeInsta,
-    required String storeTabelog,
-    required String storePhotoUrl,
-    required List<String> tags,
+    String? storeName,
+    String? storeDetail,
+    String? storeWeb,
+    String? storeTwitter,
+    String? storeInsta,
+    String? storeTabelog,
+    String? storePhotoUrl,
+    List<String>? tags,
   }) = _StoreClass;
   factory StoreClass.fromJson(Map<String, dynamic> json) =>
       _$StoreClassFromJson(json);

@@ -6,21 +6,21 @@ part of 'view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$randomViewModelHash() => r'747b6b203e7cb564f3fcf38139c7f3ccb1b496d8';
+String _$listViewModelHash() => r'51ef0803fdba3ba06820fb10a3b2e1b5620013da';
 
-/// See also [RandomViewModel].
-@ProviderFor(RandomViewModel)
-final randomViewModelProvider =
-    AutoDisposeAsyncNotifierProvider<RandomViewModel, RandomState>.internal(
-  RandomViewModel.new,
-  name: r'randomViewModelProvider',
+/// See also [ListViewModel].
+@ProviderFor(ListViewModel)
+final listViewModelProvider =
+    AutoDisposeAsyncNotifierProvider<ListViewModel, ListState>.internal(
+  ListViewModel.new,
+  name: r'listViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$randomViewModelHash,
+      : _$listViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$RandomViewModel = AutoDisposeAsyncNotifier<RandomState>;
+typedef _$ListViewModel = AutoDisposeAsyncNotifier<ListState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter

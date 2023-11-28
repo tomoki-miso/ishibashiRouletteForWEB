@@ -6,11 +6,11 @@ part 'state.freezed.dart';
 
 // freezedでコード生成するために「@freezed」を記述
 @freezed
-class RandomState with _$RandomState {
+class ListState with _$ListState {
   // withの後には「_$[class name]」の形式で記述
 
   // プロパティを指定
-  const factory RandomState({
+  const factory ListState({
     required StoreClass storeClass,
-  }) = _RandomState;
+  }) = _ListState;
 }
