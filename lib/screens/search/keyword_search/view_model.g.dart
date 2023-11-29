@@ -6,21 +6,22 @@ part of 'view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$randomViewModelHash() => r'90fbfdf45db0b3e9e3a1370be4864a482ac6a823';
+String _$keywordSearchViewModelHash() =>
+    r'3f563105abc475704b6664b8052acc209fc37226';
 
-/// See also [RandomViewModel].
-@ProviderFor(RandomViewModel)
-final randomViewModelProvider =
-    AutoDisposeAsyncNotifierProvider<RandomViewModel, RandomState>.internal(
-  RandomViewModel.new,
-  name: r'randomViewModelProvider',
+/// See also [KeywordSearchViewModel].
+@ProviderFor(KeywordSearchViewModel)
+final keywordSearchViewModelProvider = AutoDisposeAsyncNotifierProvider<
+    KeywordSearchViewModel, KeywordSearchState>.internal(
+  KeywordSearchViewModel.new,
+  name: r'keywordSearchViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$randomViewModelHash,
+      : _$keywordSearchViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$RandomViewModel = AutoDisposeAsyncNotifier<RandomState>;
+typedef _$KeywordSearchViewModel = AutoDisposeAsyncNotifier<KeywordSearchState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter
