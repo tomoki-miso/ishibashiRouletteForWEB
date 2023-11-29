@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/original_app_bar.dart';
@@ -7,10 +6,11 @@ import 'package:ishibashi/screens/list/view_model.dart';
 import 'package:ishibashi/screens/store_details/page/store_list_detail.dart';
 import 'package:ishibashi/style/colors.dart';
 
-class ListPage extends ConsumerWidget {
-  const ListPage({super.key});
+class List2Page extends ConsumerWidget {
+  const List2Page({super.key});
 
-  Future<void> navigateToStorePage(String documentId) async {
+  Future<void> navigateToStorePage(
+      BuildContext context, String documentId) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
@@ -27,14 +27,26 @@ class ListPage extends ConsumerWidget {
         backgroundColor: ColorName.backGroundYellow,
         appBar: const OriginalAppBar(),
         body: Center(
-          child: StoreList(onTap: () async {
-                      await navigateToStorePage(data.storeClassList);
-                    }, tags: data.storeClassList, imageUrl: data.storeClassList.),
-        
+          child: ListView.builder(
+            itemCount: data.storeClassList.length,
+            itemBuilder: (context, index) {
+              final store = data.storeClassList[index];
+              return StoreList(
+                onTap: () async {
+                  await navigateToStorePage(context, store.documentId);
+                },
+                name: store.storeName,
+                imageUrl: store.storePhotoUrl,
+                tags: store.tags,
+                openTime: store.openTime,
+                closeTime: store.closeTime,
+              );
+            },
+          ),
         ),
       ),
       error: (error, stackTrace) => Container(),
-      loading: () => const Text('loading'),
+      loading: () => const Center(child: CircularProgressIndicator()),
     );
   }
 }

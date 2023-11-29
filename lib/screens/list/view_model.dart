@@ -19,33 +19,33 @@ class ListViewModel extends _$ListViewModel {
     _storeSnapshot ??=
         await FirebaseFirestore.instance.collection('stores').get();
 
-    final List<StoreClass> storeClassList = _storeSnapshot!.docs
-        .map((document) async {
-          final storeData = document.data() as Map<String, dynamic>?;
+    final List<Future<StoreClass>> futureStoreList =
+        _storeSnapshot!.docs.map((document) async {
+      final storeData = document.data() as Map<String, dynamic>?;
 
-          if (storeData != null) {
-            final tags = await _fetchTags(document.reference);
+      if (storeData != null) {
+        final tags = await _fetchTags(document.reference);
+        return StoreClass(
+          documentId: storeData['id'] ?? '',
+          storeName: storeData['name'] ?? '',
+          storeDetail: storeData['detail'] ?? '',
+          storeWeb: storeData['web'] ?? '',
+          storeTwitter: storeData['twitter'] ?? '',
+          storeInsta: storeData['insta'] ?? '',
+          storeTabelog: storeData['tabelog'] ?? '',
+          storePhotoUrl: storeData['photo_url'] ?? '',
+          openTime: storeData['formattedOpenTime'] ?? '',
+          closeTime: storeData['formattedCloseTime'] ?? '',
+          tags: tags,
+        );
+      }
+      return Future.value(const StoreClass(documentId: '1')); // 何らかのデフォルト値を返す
+    }).toList();
 
-            return StoreClass(
-              documentId: storeData['id'] ?? '',
-              storeName: storeData['name'] ?? '',
-              storeDetail: storeData['detail'] ?? '',
-              storeWeb: storeData['web'] ?? '',
-              storeTwitter: storeData['twitter'] ?? '',
-              storeInsta: storeData['insta'] ?? '',
-              storeTabelog: storeData['tabelog'] ?? '',
-              storePhotoUrl: storeData['photo_url'] ?? '',
-              tags: tags,
-            );
-          }
+    // 全てのFutureの完了を待ってStoreClassのリストに変換
+    final List<StoreClass> storeList = await Future.wait(futureStoreList);
 
-          return const StoreClass(documentId: '1'); // この部分は適切に処理する必要があります
-        })
-        .cast<StoreClass>()
-        .toList();
-
-    final state = ListState(storeClassList: storeClassList);
-
+    final state = ListState(storeClassList: storeList);
     return state;
   }
 
