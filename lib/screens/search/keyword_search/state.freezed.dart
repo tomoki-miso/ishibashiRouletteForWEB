@@ -19,7 +19,6 @@ mixin _$KeywordSearchState {
   List<dynamic> get searchResultStoreList => throw _privateConstructorUsedError;
   TextEditingController get searchWordController =>
       throw _privateConstructorUsedError;
-  String? get searchWord => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $KeywordSearchStateCopyWith<KeywordSearchState> get copyWith =>
@@ -34,8 +33,7 @@ abstract class $KeywordSearchStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<dynamic> searchResultStoreList,
-      TextEditingController searchWordController,
-      String? searchWord});
+      TextEditingController searchWordController});
 }
 
 /// @nodoc
@@ -53,7 +51,6 @@ class _$KeywordSearchStateCopyWithImpl<$Res, $Val extends KeywordSearchState>
   $Res call({
     Object? searchResultStoreList = null,
     Object? searchWordController = null,
-    Object? searchWord = freezed,
   }) {
     return _then(_value.copyWith(
       searchResultStoreList: null == searchResultStoreList
@@ -64,10 +61,6 @@ class _$KeywordSearchStateCopyWithImpl<$Res, $Val extends KeywordSearchState>
           ? _value.searchWordController
           : searchWordController // ignore: cast_nullable_to_non_nullable
               as TextEditingController,
-      searchWord: freezed == searchWord
-          ? _value.searchWord
-          : searchWord // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -82,8 +75,7 @@ abstract class _$$KeywordSearchStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {List<dynamic> searchResultStoreList,
-      TextEditingController searchWordController,
-      String? searchWord});
+      TextEditingController searchWordController});
 }
 
 /// @nodoc
@@ -99,7 +91,6 @@ class __$$KeywordSearchStateImplCopyWithImpl<$Res>
   $Res call({
     Object? searchResultStoreList = null,
     Object? searchWordController = null,
-    Object? searchWord = freezed,
   }) {
     return _then(_$KeywordSearchStateImpl(
       searchResultStoreList: null == searchResultStoreList
@@ -110,10 +101,6 @@ class __$$KeywordSearchStateImplCopyWithImpl<$Res>
           ? _value.searchWordController
           : searchWordController // ignore: cast_nullable_to_non_nullable
               as TextEditingController,
-      searchWord: freezed == searchWord
-          ? _value.searchWord
-          : searchWord // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -123,8 +110,7 @@ class __$$KeywordSearchStateImplCopyWithImpl<$Res>
 class _$KeywordSearchStateImpl implements _KeywordSearchState {
   const _$KeywordSearchStateImpl(
       {required final List<dynamic> searchResultStoreList,
-      required this.searchWordController,
-      this.searchWord})
+      required this.searchWordController})
       : _searchResultStoreList = searchResultStoreList;
 
   final List<dynamic> _searchResultStoreList;
@@ -138,12 +124,10 @@ class _$KeywordSearchStateImpl implements _KeywordSearchState {
 
   @override
   final TextEditingController searchWordController;
-  @override
-  final String? searchWord;
 
   @override
   String toString() {
-    return 'KeywordSearchState(searchResultStoreList: $searchResultStoreList, searchWordController: $searchWordController, searchWord: $searchWord)';
+    return 'KeywordSearchState(searchResultStoreList: $searchResultStoreList, searchWordController: $searchWordController)';
   }
 
   @override
@@ -154,17 +138,14 @@ class _$KeywordSearchStateImpl implements _KeywordSearchState {
             const DeepCollectionEquality()
                 .equals(other._searchResultStoreList, _searchResultStoreList) &&
             (identical(other.searchWordController, searchWordController) ||
-                other.searchWordController == searchWordController) &&
-            (identical(other.searchWord, searchWord) ||
-                other.searchWord == searchWord));
+                other.searchWordController == searchWordController));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_searchResultStoreList),
-      searchWordController,
-      searchWord);
+      searchWordController);
 
   @JsonKey(ignore: true)
   @override
@@ -176,16 +157,14 @@ class _$KeywordSearchStateImpl implements _KeywordSearchState {
 
 abstract class _KeywordSearchState implements KeywordSearchState {
   const factory _KeywordSearchState(
-      {required final List<dynamic> searchResultStoreList,
-      required final TextEditingController searchWordController,
-      final String? searchWord}) = _$KeywordSearchStateImpl;
+          {required final List<dynamic> searchResultStoreList,
+          required final TextEditingController searchWordController}) =
+      _$KeywordSearchStateImpl;
 
   @override
   List<dynamic> get searchResultStoreList;
   @override
   TextEditingController get searchWordController;
-  @override
-  String? get searchWord;
   @override
   @JsonKey(ignore: true)
   _$$KeywordSearchStateImplCopyWith<_$KeywordSearchStateImpl> get copyWith =>

@@ -6,22 +6,23 @@ part of 'view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$keywordSearchViewModelHash() =>
-    r'0e3fabb3fce234bb6475fc4d6a52857015f4ffd1';
+String _$businessDaySearchViewModelHash() =>
+    r'd5b92bf3282355d179424a8afb38f9a52e68937e';
 
-/// See also [KeywordSearchViewModel].
-@ProviderFor(KeywordSearchViewModel)
-final keywordSearchViewModelProvider = AutoDisposeAsyncNotifierProvider<
-    KeywordSearchViewModel, KeywordSearchState>.internal(
-  KeywordSearchViewModel.new,
-  name: r'keywordSearchViewModelProvider',
+/// See also [BusinessDaySearchViewModel].
+@ProviderFor(BusinessDaySearchViewModel)
+final businessDaySearchViewModelProvider = AutoDisposeAsyncNotifierProvider<
+    BusinessDaySearchViewModel, BusinessDaySearchState>.internal(
+  BusinessDaySearchViewModel.new,
+  name: r'businessDaySearchViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$keywordSearchViewModelHash,
+      : _$businessDaySearchViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$KeywordSearchViewModel = AutoDisposeAsyncNotifier<KeywordSearchState>;
+typedef _$BusinessDaySearchViewModel
+    = AutoDisposeAsyncNotifier<BusinessDaySearchState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter
