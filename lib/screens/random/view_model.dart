@@ -15,8 +15,23 @@ class RandomViewModel extends _$RandomViewModel {
 
   @override
   FutureOr<RandomState> build() async {
+    final storeClass = await _shuffle();
+    final state = RandomState(storeClass: storeClass);
+    return state;
+  }
+
+  /// ルーレットを回す
+  Future<void> getStores() async {
+    final storeClass = await _shuffle();
+    final data = state.requireValue;
+    state = AsyncData(data.copyWith(storeClass: storeClass));
+  }
+
+  /// シャッフル
+  Future<StoreClass> _shuffle() async {
     _storeSnapshot ??=
         await FirebaseFirestore.instance.collection('stores').get();
+
     final storeIds =
         List.generate(_storeSnapshot!.docs.length, (index) => index + 1);
     storeIds.shuffle();
@@ -35,41 +50,7 @@ class RandomViewModel extends _$RandomViewModel {
       storePhotoUrl: storeData['photo_url'] ?? '',
       tags: tags,
     );
-    final state = RandomState(storeClass: storeClass);
-    return state;
-  }
-
-  /// ルーレットを回す
-  /// TODO #19:何故か２回変化する
-  Future<void> getStores() async {
-    _storeSnapshot ??=
-        await FirebaseFirestore.instance.collection('stores').get();
-
-    await Future.wait(
-      _storeSnapshot!.docs.map((doc) async {
-        final storeIds =
-            List.generate(_storeSnapshot!.docs.length, (index) => index + 1);
-        storeIds.shuffle();
-        storeIds.removeAt(0);
-        final storeId = storeIds.first;
-        final storeData = _storeSnapshot!.docs[storeId - 1];
-        final tags =
-            await _fetchTags(_storeSnapshot!.docs[storeId - 1].reference);
-        final StoreClass storeClass = StoreClass(
-          documentId: storeData['id'] ?? '',
-          storeName: storeData['name'] ?? '',
-          storeDetail: storeData['detail'] ?? '',
-          storeWeb: storeData['web'] ?? '',
-          storeTwitter: storeData['twitter'] ?? '',
-          storeInsta: storeData['insta'] ?? '',
-          storeTabelog: storeData['tabelog'] ?? '',
-          storePhotoUrl: storeData['photo_url'] ?? '',
-          tags: tags,
-        );
-        final data = state.requireValue;
-        state = AsyncData(data.copyWith(storeClass: storeClass));
-      }),
-    );
+    return storeClass;
   }
 
   /// 詳細ページへ
