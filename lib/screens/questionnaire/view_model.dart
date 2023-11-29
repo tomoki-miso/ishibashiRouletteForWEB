@@ -27,7 +27,6 @@ class QuestionnaireViewModel extends _$QuestionnaireViewModel {
     );
 
     ref.onDispose(() {
-      print('破棄されました');
       state.userNameController.dispose();
       state.departmentController.dispose();
     });
@@ -94,6 +93,4 @@ class QuestionnaireViewModel extends _$QuestionnaireViewModel {
       data.departmentController.clear();
     });
   }
-
-  
 }
