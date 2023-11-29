@@ -5,14 +5,9 @@ import 'package:ishibashi/screens/top/components/top_map_big_select_button.dart'
 import 'package:ishibashi/screens/top/components/top_random_big_select_button.dart';
 import 'package:ishibashi/screens/top/components/top_search_big_select_button.dart';
 
-class TopPage extends StatefulWidget {
+class TopPage extends StatelessWidget {
   const TopPage({super.key});
 
-  @override
-  State<TopPage> createState() => _TopPageState();
-}
-
-class _TopPageState extends State<TopPage> {
   @override
   Widget build(BuildContext context) => const Scaffold(
         appBar: TopAppBar(),
