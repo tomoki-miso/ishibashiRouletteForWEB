@@ -53,21 +53,21 @@ class StoreList extends ConsumerWidget {
                   ),
                 ),
 
-                //右側
+                /// 右側
                 Expanded(
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.only(left: 6),
                       child: Column(
                         children: [
-                          //名前
+                          /// 名前
                           Text(
                             name,
                             style: Styles.storeNameStyle,
                           ),
                           const Padding(padding: EdgeInsets.all(12)),
 
-                          //タグ
+                          /// タグ
                           Wrap(
                             spacing: 1,
                             runSpacing: 1,
@@ -83,7 +83,7 @@ class StoreList extends ConsumerWidget {
                           ),
                           const Padding(padding: EdgeInsets.all(12)),
 
-                          //営業時間
+                          /// 営業時間
                           const Padding(
                             padding: EdgeInsets.only(left: 20),
                             child: Align(

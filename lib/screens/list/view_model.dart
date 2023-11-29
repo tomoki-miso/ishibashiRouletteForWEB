@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:ishibashi/domain/store/store_class.dart';
 import 'package:ishibashi/repositories/stores/repository.dart';
 import 'package:ishibashi/screens/list/state.dart';
+import 'package:ishibashi/screens/store_details/page/store_list_detail.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -39,10 +41,9 @@ class ListViewModel extends _$ListViewModel {
           tags: tags,
         );
       }
-      return Future.value(const StoreClass(documentId: '1')); // 何らかのデフォルト値を返す
+      return Future.value(const StoreClass(documentId: '1'));
     }).toList();
 
-    // 全てのFutureの完了を待ってStoreClassのリストに変換
     final List<StoreClass> storeList = await Future.wait(futureStoreList);
 
     final state = ListState(storeClassList: storeList);
@@ -61,4 +62,16 @@ class ListViewModel extends _$ListViewModel {
       return [];
     }
   }
+
+  /// detailPageに飛ばす
+  Future<void> navigateToStorePage(
+    BuildContext context,
+    String documentId,
+  ) async =>
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => StoreListPage(documentId: documentId),
+        ),
+      );
 }
