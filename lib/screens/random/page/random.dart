@@ -42,18 +42,18 @@ class RandomPage extends ConsumerWidget {
 
             /// 画像部分
             RandomStoreImagePart(
-              storePhotoUrl: data.storeClass.storePhotoUrl??'',
+              storePhotoUrl: data.storeClass.storePhotoUrl ?? '',
             ),
             const SizedBox(height: 10),
 
             /// タグと紹介
-            RandomStoreTagsPart(formattedTags: data.storeClass.tags??[]),
+            RandomStoreTagsPart(formattedTags: data.storeClass.tags ?? []),
             RandomStoreDetailPart(
               storeDetail: data.storeClass.storeDetail,
             ),
 
             /// くわしくみる
-            const StoreButton(),
+            StoreButton(documentId: data.storeClass.documentId),
 
             ///　ルーレットを回す
             const RouletteButton(),

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ishibashi/components/original_app_bar.dart';
 import 'package:ishibashi/components/store_list.dart';
-import 'package:ishibashi/screens/store_details/page/store_list_detail.dart';
+import 'package:ishibashi/screens/store_details/page/store_detail.dart';
 
 class KeywordSearchPage extends StatefulWidget {
   const KeywordSearchPage({super.key});
@@ -20,7 +20,7 @@ class _KeywordSearchPageState extends State<KeywordSearchPage> {
     await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => StoreListPage(documentId: documentId),
+        builder: (context) => StoreDetailPage(documentId: documentId),
       ),
     );
   }

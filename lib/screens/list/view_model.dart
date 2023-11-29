@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:ishibashi/domain/store/store_class.dart';
 import 'package:ishibashi/repositories/stores/repository.dart';
 import 'package:ishibashi/screens/list/state.dart';
-import 'package:ishibashi/screens/store_details/page/store_list_detail.dart';
+import 'package:ishibashi/screens/store_details/page/store_detail.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -71,7 +71,7 @@ class ListViewModel extends _$ListViewModel {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => StoreListPage(documentId: documentId),
+          builder: (context) => StoreDetailPage(documentId: documentId),
         ),
       );
 }

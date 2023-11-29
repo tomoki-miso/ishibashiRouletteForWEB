@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:ishibashi/domain/store/store_class.dart';
 import 'package:ishibashi/screens/random/state.dart';
+import 'package:ishibashi/screens/store_details/page/store_detail.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'view_model.g.dart';
@@ -31,12 +33,14 @@ class RandomViewModel extends _$RandomViewModel {
       storeInsta: storeData['insta'] ?? '',
       storeTabelog: storeData['tabelog'] ?? '',
       storePhotoUrl: storeData['photo_url'] ?? '',
-      tags: tags, 
+      tags: tags,
     );
     final state = RandomState(storeClass: storeClass);
     return state;
   }
 
+  /// ルーレットを回す
+  /// TODO #19:何故か２回変化する
   Future<void> getStores() async {
     _storeSnapshot ??=
         await FirebaseFirestore.instance.collection('stores').get();
@@ -67,6 +71,18 @@ class RandomViewModel extends _$RandomViewModel {
       }),
     );
   }
+
+  /// 詳細ページへ
+  Future<void> navigateToStorePage(
+    BuildContext context,
+    String documentId,
+  ) async =>
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => StoreDetailPage(documentId: documentId),
+        ),
+      );
 
   Future<List<String>> _fetchTags(DocumentReference storeReference) async {
     final storeSnapshot = await storeReference.get();
