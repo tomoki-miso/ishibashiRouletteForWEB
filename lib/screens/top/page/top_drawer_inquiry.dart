@@ -71,10 +71,11 @@ class _TopDrawerInquiryState extends State<TopDrawerInquiryPage> {
                         ),
                         onPressed: () async {
                           const url = 'https://twitter.com/pochipochitudoi';
-                          if (await canLaunchUrl(url as Uri)) {
+                          final Uri uri = Uri.parse(url);
+                          if (await canLaunchUrl(uri)) {
                             await launchUrlString(url);
                           } else {
-                            throw 'Could not launch $url';
+                            throw 'Could not launch $uri';
                           }
                         },
                         child: const Row(
@@ -101,11 +102,12 @@ class _TopDrawerInquiryState extends State<TopDrawerInquiryPage> {
                                 const String subject = 'お問い合わせ'; // 任意の件名を指定
                                 final String emailLaunchUrl =
                                     'mailto:${Uri.encodeComponent(emailAddress)}?subject=${Uri.encodeComponent(subject)}';
+                                Uri uri = Uri.parse(emailLaunchUrl);
 
-                                if (await canLaunchUrl(emailLaunchUrl as Uri)) {
+                                if (await canLaunchUrl(uri)) {
                                   await launchUrlString(emailLaunchUrl);
                                 } else {
-                                  throw 'Could not launch $emailLaunchUrl';
+                                  throw 'Could not launch $uri';
                                 }
                               }
                             : null, // Disable the button if no internet connection
