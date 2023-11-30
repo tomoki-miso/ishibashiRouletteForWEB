@@ -4,8 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/base.dart';
+import 'package:ishibashi/features/auth/page/sign_in_confirm.dart';
 import 'package:ishibashi/firebase/firebase_options.dart';
-import 'package:ishibashi/screens/auth/page/sign_in_confirm.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

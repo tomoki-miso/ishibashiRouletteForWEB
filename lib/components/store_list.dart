@@ -31,6 +31,7 @@ class StoreList extends ConsumerWidget {
             borderRadius: BorderRadius.all(Radius.circular(50)),
           ),
           child: InkWell(
+            borderRadius: const BorderRadius.all(Radius.circular(50)),
             onTap: onTap,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,7 +49,10 @@ class StoreList extends ConsumerWidget {
                               imageUrl: imageUrl,
                               fit: BoxFit.cover,
                             )
-                          : Image.asset('assets/images/icon.png'),
+                          : Image.asset(
+                              'assets/images/icon.png',
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
                 ),
