@@ -28,4 +28,6 @@ class StoreClass with _$StoreClass {
   }) = _StoreClass;
   factory StoreClass.fromJson(Map<String, dynamic> json) =>
       _$StoreClassFromJson(json);
+
+  static String collectionName = 'stores';
 }

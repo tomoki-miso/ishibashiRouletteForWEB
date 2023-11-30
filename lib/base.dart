@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ishibashi/screens/coupon.dart';
 import 'package:ishibashi/screens/list/page/list.dart';
-import 'package:ishibashi/screens/map.dart';
+import 'package:ishibashi/screens/map/page/map.dart';
 import 'package:ishibashi/screens/random/page/random.dart';
 import 'package:ishibashi/screens/top/page/top.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
