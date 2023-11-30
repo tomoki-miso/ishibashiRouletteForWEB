@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class TopDrawerInquiryPage extends StatefulWidget {
-  TopDrawerInquiryPage({super.key});
+  const TopDrawerInquiryPage({super.key});
 
   @override
   State<TopDrawerInquiryPage> createState() => _TopDrawerInquiryState();
@@ -18,9 +18,9 @@ class _TopDrawerInquiryState extends State<TopDrawerInquiryPage> {
   bool connectionStatus = false;
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
-    checkInternetConnection();
+    await checkInternetConnection();
   }
 
   Future<void> checkInternetConnection() async {
@@ -102,7 +102,7 @@ class _TopDrawerInquiryState extends State<TopDrawerInquiryPage> {
                                 const String subject = 'お問い合わせ'; // 任意の件名を指定
                                 final String emailLaunchUrl =
                                     'mailto:${Uri.encodeComponent(emailAddress)}?subject=${Uri.encodeComponent(subject)}';
-                                Uri uri = Uri.parse(emailLaunchUrl);
+                                final Uri uri = Uri.parse(emailLaunchUrl);
 
                                 if (await canLaunchUrl(uri)) {
                                   await launchUrlString(emailLaunchUrl);

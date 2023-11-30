@@ -23,7 +23,7 @@ class RouletteButton extends ConsumerWidget {
           width: MediaQuery.of(context).size.width * 0.8,
           height: MediaQuery.of(context).size.height * 0.07,
           text: 'ルーレットをまわす',
-          style: Styles.RandomRoulette,
+          style: Styles.randomRoulette,
         ),
       );
 }

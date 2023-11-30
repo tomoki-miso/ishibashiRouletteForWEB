@@ -33,13 +33,13 @@ class Styles {
     overflow: TextOverflow.clip,
   );
 
-  static const DrawerTitle = TextStyle(
+  static const drawerTitle = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.bold,
     color: ColorName.black2,
   );
 
-  static const DrawerSubTitle = TextStyle(
+  static const drawerSubTitle = TextStyle(
     fontSize: 14,
     color: ColorName.black3,
   );
@@ -50,12 +50,12 @@ class Styles {
     color: ColorName.black2,
   );
 
-  static const RandomStore = TextStyle(
+  static const randomStore = TextStyle(
     fontSize: 17,
     color: ColorName.whiteBase,
   );
 
-  static const RandomRoulette = TextStyle(
+  static const randomRoulette = TextStyle(
     fontSize: 16,
     color: ColorName.whiteBase,
     fontWeight: FontWeight.bold,

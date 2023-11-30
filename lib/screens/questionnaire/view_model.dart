@@ -1,11 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ishibashi/base.dart';
-import 'package:ishibashi/repositories/user_info/repository.dart';
 import 'package:ishibashi/domain/user_info/domain_user_info.dart';
+import 'package:ishibashi/repositories/user_info/repository.dart';
 import 'package:ishibashi/screens/questionnaire/page/next_questionaire.dart';
 import 'package:ishibashi/screens/questionnaire/state.dart';
-
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'view_model.g.dart';
@@ -58,7 +57,8 @@ class QuestionnaireViewModel extends _$QuestionnaireViewModel {
   Future<void> inputDepartment() async {
     final data = state.requireValue;
     state = AsyncData(
-        data.copyWith(inputedDepartment: data.departmentController.text));
+      data.copyWith(inputedDepartment: data.departmentController.text),
+    );
   }
 
   Future<void> navigateToBasePage(BuildContext context) async {

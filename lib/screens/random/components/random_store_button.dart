@@ -24,6 +24,6 @@ class StoreButton extends ConsumerWidget {
         width: MediaQuery.of(context).size.width * 0.65,
         height: MediaQuery.of(context).size.height * 0.06,
         text: 'くわしく見る',
-        style: Styles.RandomRoulette,
+        style: Styles.randomRoulette,
       );
 }

@@ -25,7 +25,8 @@ class _TopDrawerFormPageState extends State<TopDrawerFormPage> {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(
         Uri.parse(
-            'https://docs.google.com/forms/d/e/1FAIpQLSefFYvzLlGMjzQigr-gleix11L-wSSJp-XT1u20SGFI3Gs_wA/viewform?usp=sf_link'),
+          'https://docs.google.com/forms/d/e/1FAIpQLSefFYvzLlGMjzQigr-gleix11L-wSSJp-XT1u20SGFI3Gs_wA/viewform?usp=sf_link',
+        ),
       );
   }
 

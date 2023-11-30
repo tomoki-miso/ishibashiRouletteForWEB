@@ -21,13 +21,13 @@ class TopDrawerPart extends StatelessWidget {
               ),
               child: Text(
                 'Information',
-                style: Styles.DrawerTitle,
+                style: Styles.drawerTitle,
               ),
             ),
             ListTile(
               title: const Text(
                 'アプリの使い方',
-                style: Styles.DrawerSubTitle,
+                style: Styles.drawerSubTitle,
               ),
               onTap: () async {
                 await Navigator.push(
@@ -41,13 +41,13 @@ class TopDrawerPart extends StatelessWidget {
             ListTile(
               title: const Text(
                 'お問い合わせ',
-                style: Styles.DrawerSubTitle,
+                style: Styles.drawerSubTitle,
               ),
               onTap: () async {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => TopDrawerInquiryPage(),
+                    builder: (context) => const TopDrawerInquiryPage(),
                   ),
                 );
               },
@@ -55,7 +55,7 @@ class TopDrawerPart extends StatelessWidget {
             ListTile(
               title: const Text(
                 'ご意見・お問い合わせ',
-                style: Styles.DrawerSubTitle,
+                style: Styles.drawerSubTitle,
               ),
               onTap: () async {
                 await Navigator.push(
@@ -69,7 +69,7 @@ class TopDrawerPart extends StatelessWidget {
             ListTile(
               title: const Text(
                 'ログアウト',
-                style: Styles.DrawerSubTitle,
+                style: Styles.drawerSubTitle,
               ),
               onTap: () async {
                 await showCupertinoDialog(
@@ -81,7 +81,7 @@ class TopDrawerPart extends StatelessWidget {
             ListTile(
               title: const Text(
                 '退会',
-                style: Styles.DrawerSubTitle,
+                style: Styles.drawerSubTitle,
               ),
               onTap: () async {
                 await showCupertinoDialog(

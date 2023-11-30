@@ -60,7 +60,8 @@ class StoreDetailPage extends ConsumerWidget {
               //タグと紹介
               StoreDetailTagsPart(formattedTags: data.storeClass.tags ?? []),
               StoreDetailTextPart(
-                  storeDetail: data.storeClass.storeDetail ?? ''),
+                storeDetail: data.storeClass.storeDetail ?? '',
+              ),
               const Padding(padding: EdgeInsets.all(10)),
 
               //ジャンプ部分

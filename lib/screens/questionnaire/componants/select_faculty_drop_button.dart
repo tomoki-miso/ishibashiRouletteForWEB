@@ -25,11 +25,10 @@ class SelectFacultyDropButton extends ConsumerWidget {
           await ref
               .read(questionnaireViewModelProvider.notifier)
               .selectFaculty(faculty);
-          print(faculty);
         },
       ),
-      error: (error, stackTrace) => Text('エラー'),
-      loading: () => Text('loading'),
+      error: (error, stackTrace) => const Text('エラー'),
+      loading: () => const Text('loading'),
     );
   }
 }

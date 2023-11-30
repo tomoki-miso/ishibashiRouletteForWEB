@@ -21,7 +21,7 @@ class BusinessDaySearchSelectDays extends ConsumerWidget {
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: Container(
         alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Wrap(
           runSpacing: 8,
           spacing: 8,

@@ -25,11 +25,10 @@ class SelectGenderDropButton extends ConsumerWidget {
           await ref
               .read(questionnaireViewModelProvider.notifier)
               .selectGender(gender);
-          print(gender);
         },
       ),
-      error: (error, stackTrace) => Text('エラー'),
-      loading: () => Text('loading'),
+      error: (error, stackTrace) => const Text('エラー'),
+      loading: () => const Text('loading'),
     );
   }
 }

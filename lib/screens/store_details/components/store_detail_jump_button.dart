@@ -57,9 +57,11 @@ class StoreDetailsJumpButton extends StatelessWidget {
               text: TextSpan(
                 children: [
                   WidgetSpan(
-                      child: Padding(
-                          padding: const EdgeInsets.only(right: 5),
-                          child: iconWidget)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: iconWidget,
+                    ),
+                  ),
                   TextSpan(text: text, style: const TextStyle(fontSize: 14)),
                 ],
               ),

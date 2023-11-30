@@ -13,7 +13,7 @@ class BusinessDayButton extends StatelessWidget {
         onTap: () async {
           await Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => BusinessDaySearchPage(),
+              builder: (context) => const BusinessDaySearchPage(),
             ),
           );
         },

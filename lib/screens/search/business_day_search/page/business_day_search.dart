@@ -29,7 +29,7 @@ class BusinessDaySearchPage extends ConsumerWidget {
         body: Column(
           children: [
             BusinessDaySearchSelectDays(),
-            BusinessDaySearchResultList()
+            BusinessDaySearchResultList(),
           ],
         ),
       ),
