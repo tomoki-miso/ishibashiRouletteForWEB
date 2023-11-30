@@ -4,7 +4,7 @@ import 'package:ishibashi/screens/search_confirm/component/search_confirm_busine
 import 'package:ishibashi/screens/search_confirm/component/search_confirm_keyword_button.dart';
 
 class SearchConfirmPage extends StatelessWidget {
-  const SearchConfirmPage({Key? key}) : super(key: key);
+  const SearchConfirmPage({super.key});
 
   @override
   Widget build(BuildContext context) => const Scaffold(

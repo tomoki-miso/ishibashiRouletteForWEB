@@ -14,16 +14,20 @@ class StoreClass with _$StoreClass {
 
   // プロパティを指定
   const factory StoreClass({
-    required String DocumentId,
-    required String StoreName,
-    required String StoreDetail,
-    required String StoreWeb,
-    required String StoreTwitter,
-    required String StoreInsta,
-    required String StoreTabelog,
-    required String StorePhotoUrl,
-    required List<String> Tags,
-    @Default(false) bool isPremium, // デフォルト値は「@Default([デフォルト値])」の形式で指定可能
+    required String documentId,
+    String? storeName,
+    String? storeDetail,
+    String? storeWeb,
+    String? storeTwitter,
+    String? storeInsta,
+    String? storeTabelog,
+    String? storePhotoUrl,
+    String? openTime,
+    String? closeTime,
+    List<String>? tags,
   }) = _StoreClass;
-  factory StoreClass.fromJson(Map<String, dynamic> json) => _$StoreClassFromJson(json);
+  factory StoreClass.fromJson(Map<String, dynamic> json) =>
+      _$StoreClassFromJson(json);
+
+  static String collectionName = 'stores';
 }

@@ -9,12 +9,12 @@ class StoreList extends ConsumerWidget {
     required this.onTap,
     required this.tags,
     required this.imageUrl,
+    required this.name,
     this.openTime,
     this.closeTime,
     super.key,
-    this.name,
   });
-  final String? name;
+  final String name;
   final String imageUrl;
   final String? openTime;
   final String? closeTime;
@@ -28,7 +28,8 @@ class StoreList extends ConsumerWidget {
           elevation: 8,
           color: ColorName.whiteBase,
           shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(50))),
+            borderRadius: BorderRadius.all(Radius.circular(50)),
+          ),
           child: InkWell(
             onTap: onTap,
             child: Row(
@@ -52,61 +53,52 @@ class StoreList extends ConsumerWidget {
                   ),
                 ),
 
-                //右側
+                /// 右側
                 Expanded(
-                  child: SizedBox(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 6),
-                        child: Column(
-                          children: [
-                            //名前
-                            Text(
-                              name!,
-                              style: Styles.storeNameStyle,
-                            ),
-                            const Padding(padding: EdgeInsets.all(12)),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 6),
+                      child: Column(
+                        children: [
+                          /// 名前
+                          Text(
+                            name,
+                            style: Styles.storeNameStyle,
+                          ),
+                          const Padding(padding: EdgeInsets.all(12)),
 
-                            //タグ
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: tags.isNotEmpty
-                                  ? tags.take(3).map((formattedTag) {
-                                      final isLastTag =
-                                          formattedTag == tags.last;
-                                      return Container(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 1,
-                                        ),
-                                        margin: const EdgeInsets.all(1),
-                                        child: Text(
-                                          '#$formattedTag${isLastTag ? '' : ','}',
-                                          style: Styles.tagsTextStyle,
-                                          overflow: TextOverflow.clip,
-                                        ),
-                                      );
-                                    }).toList()
-                                  : [], // タグがない場合は空のリストを使用
-                            ),
-                            const Padding(padding: EdgeInsets.all(12)),
+                          /// タグ
+                          Wrap(
+                            spacing: 1,
+                            runSpacing: 1,
+                            children: tags.isNotEmpty
+                                ? tags.take(3).map((formattedTag) {
+                                    final isLastTag = formattedTag == tags.last;
+                                    return Text(
+                                      '#$formattedTag${isLastTag ? '' : ','}',
+                                      style: Styles.tagsTextStyle,
+                                    );
+                                  }).toList()
+                                : [],
+                          ),
+                          const Padding(padding: EdgeInsets.all(12)),
 
-                            //営業時間
-                            const Padding(
-                              padding: EdgeInsets.only(left: 20),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '営業時間',
-                                  style: Styles.subTitleStyle,
-                                ),
+                          /// 営業時間
+                          const Padding(
+                            padding: EdgeInsets.only(left: 20),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                '営業時間',
+                                style: Styles.subTitleStyle,
                               ),
                             ),
-                            Text(
-                              '$openTime〜$closeTime',
-                              style: Styles.businnesHours,
-                            ),
-                          ],
-                        ),
+                          ),
+                          Text(
+                            '$openTime〜$closeTime',
+                            style: Styles.businnesHours,
+                          ),
+                        ],
                       ),
                     ),
                   ),

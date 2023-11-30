@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ishibashi/components/big_select_button.dart';
-import 'package:ishibashi/screens/search/page/keyword_search.dart';
+import 'package:ishibashi/screens/search/keyword_search/page/keyword_search.dart';
 import 'package:ishibashi/style/colors.dart';
 
 class KeyWordButton extends StatelessWidget {
-  const KeyWordButton({Key? key});
+  const KeyWordButton({super.key});
 
   @override
   Widget build(BuildContext context) => BigSelectButton(

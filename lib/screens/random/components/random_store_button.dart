@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/primary_button.dart';
-import 'package:ishibashi/screens/store_details/page/store_rondom_detail.dart';
+import 'package:ishibashi/screens/random/view_model.dart';
 import 'package:ishibashi/style/colors.dart';
 import 'package:ishibashi/style/styles.dart';
 
-class StoreButton extends StatelessWidget {
+class StoreButton extends ConsumerWidget {
   const StoreButton({
+    required this.documentId,
     super.key,
   });
 
+  final String documentId;
+
   @override
-  Widget build(BuildContext context) => PrimaryButton(
+  Widget build(BuildContext context, WidgetRef ref) => PrimaryButton(
         backgroundColor: ColorName.orangeBase,
         onPressed: () async {
-          await Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const StorePage(),
-            ),
-          );
+          await ref
+              .read(randomViewModelProvider.notifier)
+              .navigateToStorePage(context, documentId);
         },
         width: MediaQuery.of(context).size.width * 0.65,
         height: MediaQuery.of(context).size.height * 0.06,

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:ishibashi/base.dart';
 import 'package:ishibashi/firebase/firebase_options.dart';
 import 'package:ishibashi/screens/questionnaire/page/questionnaire.dart';
 
@@ -33,10 +34,17 @@ Future<void> signInWiithGoogle(BuildContext context) async {
   try {
     configureGoogleSignIn();
     final GoogleSignInAccount? signInAccount = await googleSignIn?.signIn();
+    final User? currentUser = FirebaseAuth.instance.currentUser;
 
-    if (signInAccount != null) {
+    if (currentUser != null) {
+      await Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const BasePage(), // 遷移先の画面を指定
+        ),
+      );
+    } else {
       final GoogleSignInAuthentication auth =
-          await signInAccount.authentication;
+          await signInAccount!.authentication;
       final credential = GoogleAuthProvider.credential(
         idToken: auth.idToken,
         accessToken: auth.accessToken,
@@ -50,12 +58,8 @@ Future<void> signInWiithGoogle(BuildContext context) async {
           builder: (context) => const QuestionnairePage(), // 遷移先の画面を指定
         ),
       );
-    } else {
-      // サインインのキャンセルやエラーの処理
     }
   } catch (e) {
-    if (kDebugMode) {
-      print("サインイン中にエラーが発生しました: $e");
-    }
+    debugPrint('サインイン中にエラーが発生しました: $e');
   }
 }

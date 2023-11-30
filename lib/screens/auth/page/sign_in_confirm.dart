@@ -1,13 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:ishibashi/screens/auth/page/email_sign_in.dart';
 import 'package:ishibashi/screens/auth/signin/sign_in_with_apple.dart';
 import 'package:ishibashi/screens/auth/signin/sign_in_with_google.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 class SignInConfirmPage extends StatelessWidget {
-  const SignInConfirmPage();
+  const SignInConfirmPage({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
