@@ -24,12 +24,11 @@ class RandomPage extends ConsumerWidget {
         appBar: const OriginalAppBar(),
         body: Column(
           children: [
-            const Padding(padding: EdgeInsets.all(4)),
+            const Padding(padding: EdgeInsets.all(14)),
 
             /// 名前
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.8,
-              height: MediaQuery.of(context).size.width * 0.09,
               child: Text(
                 data.storeClass.storeName ?? '',
                 textAlign: TextAlign.center,
@@ -38,7 +37,7 @@ class RandomPage extends ConsumerWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 12),
 
             /// 画像部分
             RandomStoreImagePart(
@@ -54,6 +53,7 @@ class RandomPage extends ConsumerWidget {
 
             /// くわしくみる
             StoreButton(documentId: data.storeClass.documentId),
+            const SizedBox(height: 2),
 
             ///　ルーレットを回す
             const RouletteButton(),
