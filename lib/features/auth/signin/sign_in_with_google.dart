@@ -13,16 +13,12 @@ void configureGoogleSignIn() {
   if (Platform.isIOS) {
     googleSignIn = GoogleSignIn(
       clientId: DefaultFirebaseOptions.currentPlatform.iosClientId,
-      scopes: [
-        'email',
-      ],
+      scopes: [],
     );
   } else if (Platform.isAndroid) {
     googleSignIn = GoogleSignIn(
       clientId: DefaultFirebaseOptions.currentPlatform.androidClientId,
-      scopes: [
-        'email',
-      ],
+      scopes: [],
     );
   }
 }
