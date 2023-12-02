@@ -18,6 +18,10 @@ _$StoreClassImpl _$$StoreClassImplFromJson(Map<String, dynamic> json) =>
       storePhotoUrl: json['storePhotoUrl'] as String?,
       openTime: json['openTime'] as String?,
       closeTime: json['closeTime'] as String?,
+      openTimeSecond: json['openTimeSecond'] as String?,
+      closeTimeSecond: json['closeTimeSecond'] as String?,
+      remarksTime: json['remarksTime'] as String?,
+      remarksDay: json['remarksDay'] as String?,
       tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
@@ -33,5 +37,9 @@ Map<String, dynamic> _$$StoreClassImplToJson(_$StoreClassImpl instance) =>
       'storePhotoUrl': instance.storePhotoUrl,
       'openTime': instance.openTime,
       'closeTime': instance.closeTime,
+      'openTimeSecond': instance.openTimeSecond,
+      'closeTimeSecond': instance.closeTimeSecond,
+      'remarksTime': instance.remarksTime,
+      'remarksDay': instance.remarksDay,
       'tags': instance.tags,
     };

@@ -19,18 +19,21 @@ class ListPage extends ConsumerWidget {
           child: ListView.builder(
             itemCount: data.storeClassList.length,
             itemBuilder: (context, index) {
-              final store = data.storeClassList[index];
+              final state = data.storeClassList[index];
               return StoreList(
                 onTap: () async {
                   await ref
                       .read(listViewModelProvider.notifier)
-                      .navigateToStorePage(context, store.documentId);
+                      .navigateToStorePage(context, state.documentId);
                 },
-                name: store.storeName,
-                imageUrl: store.storePhotoUrl,
-                tags: store.tags,
-                openTime: store.openTime,
-                closeTime: store.closeTime,
+                name: state.storeName,
+                imageUrl: state.storePhotoUrl,
+                tags: state.tags,
+                openTime: state.openTime,
+                closeTime: state.closeTime,
+                openTimeSecond: state.openTimeSecond,
+                closeTimeSecond: state.closeTimeSecond,
+                remarksTime: state.remarksTime,
               );
             },
           ),

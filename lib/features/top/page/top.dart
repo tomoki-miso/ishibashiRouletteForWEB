@@ -17,9 +17,9 @@ class TopPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               RandomBigSelectbutton(),
-              Padding(padding: EdgeInsets.all(3)),
+              Padding(padding: EdgeInsets.all(2)),
               MapBigSelectbutton(),
-              Padding(padding: EdgeInsets.all(3)),
+              Padding(padding: EdgeInsets.all(2)),
               SearchBigSelectbutton(),
             ],
           ),
