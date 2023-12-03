@@ -35,6 +35,7 @@ mixin _$StoreClass {
   String? get remarksTime => throw _privateConstructorUsedError;
   String? get remarksDay => throw _privateConstructorUsedError;
   List<String>? get tags => throw _privateConstructorUsedError;
+  List<String>? get businessDays => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -63,7 +64,8 @@ abstract class $StoreClassCopyWith<$Res> {
       String? closeTimeSecond,
       String? remarksTime,
       String? remarksDay,
-      List<String>? tags});
+      List<String>? tags,
+      List<String>? businessDays});
 }
 
 /// @nodoc
@@ -94,6 +96,7 @@ class _$StoreClassCopyWithImpl<$Res, $Val extends StoreClass>
     Object? remarksTime = freezed,
     Object? remarksDay = freezed,
     Object? tags = freezed,
+    Object? businessDays = freezed,
   }) {
     return _then(_value.copyWith(
       documentId: null == documentId
@@ -156,6 +159,10 @@ class _$StoreClassCopyWithImpl<$Res, $Val extends StoreClass>
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      businessDays: freezed == businessDays
+          ? _value.businessDays
+          : businessDays // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ) as $Val);
   }
 }
@@ -183,7 +190,8 @@ abstract class _$$StoreClassImplCopyWith<$Res>
       String? closeTimeSecond,
       String? remarksTime,
       String? remarksDay,
-      List<String>? tags});
+      List<String>? tags,
+      List<String>? businessDays});
 }
 
 /// @nodoc
@@ -212,6 +220,7 @@ class __$$StoreClassImplCopyWithImpl<$Res>
     Object? remarksTime = freezed,
     Object? remarksDay = freezed,
     Object? tags = freezed,
+    Object? businessDays = freezed,
   }) {
     return _then(_$StoreClassImpl(
       documentId: null == documentId
@@ -274,6 +283,10 @@ class __$$StoreClassImplCopyWithImpl<$Res>
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      businessDays: freezed == businessDays
+          ? _value._businessDays
+          : businessDays // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
@@ -296,8 +309,10 @@ class _$StoreClassImpl implements _StoreClass {
       this.closeTimeSecond,
       this.remarksTime,
       this.remarksDay,
-      final List<String>? tags})
-      : _tags = tags;
+      final List<String>? tags,
+      final List<String>? businessDays})
+      : _tags = tags,
+        _businessDays = businessDays;
 
   factory _$StoreClassImpl.fromJson(Map<String, dynamic> json) =>
       _$$StoreClassImplFromJson(json);
@@ -340,9 +355,19 @@ class _$StoreClassImpl implements _StoreClass {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<String>? _businessDays;
+  @override
+  List<String>? get businessDays {
+    final value = _businessDays;
+    if (value == null) return null;
+    if (_businessDays is EqualUnmodifiableListView) return _businessDays;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'StoreClass(documentId: $documentId, storeName: $storeName, storeDetail: $storeDetail, storeWeb: $storeWeb, storeTwitter: $storeTwitter, storeInsta: $storeInsta, storeTabelog: $storeTabelog, storePhotoUrl: $storePhotoUrl, openTime: $openTime, closeTime: $closeTime, openTimeSecond: $openTimeSecond, closeTimeSecond: $closeTimeSecond, remarksTime: $remarksTime, remarksDay: $remarksDay, tags: $tags)';
+    return 'StoreClass(documentId: $documentId, storeName: $storeName, storeDetail: $storeDetail, storeWeb: $storeWeb, storeTwitter: $storeTwitter, storeInsta: $storeInsta, storeTabelog: $storeTabelog, storePhotoUrl: $storePhotoUrl, openTime: $openTime, closeTime: $closeTime, openTimeSecond: $openTimeSecond, closeTimeSecond: $closeTimeSecond, remarksTime: $remarksTime, remarksDay: $remarksDay, tags: $tags, businessDays: $businessDays)';
   }
 
   @override
@@ -378,7 +403,9 @@ class _$StoreClassImpl implements _StoreClass {
                 other.remarksTime == remarksTime) &&
             (identical(other.remarksDay, remarksDay) ||
                 other.remarksDay == remarksDay) &&
-            const DeepCollectionEquality().equals(other._tags, _tags));
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
+            const DeepCollectionEquality()
+                .equals(other._businessDays, _businessDays));
   }
 
   @JsonKey(ignore: true)
@@ -399,7 +426,8 @@ class _$StoreClassImpl implements _StoreClass {
       closeTimeSecond,
       remarksTime,
       remarksDay,
-      const DeepCollectionEquality().hash(_tags));
+      const DeepCollectionEquality().hash(_tags),
+      const DeepCollectionEquality().hash(_businessDays));
 
   @JsonKey(ignore: true)
   @override
@@ -431,7 +459,8 @@ abstract class _StoreClass implements StoreClass {
       final String? closeTimeSecond,
       final String? remarksTime,
       final String? remarksDay,
-      final List<String>? tags}) = _$StoreClassImpl;
+      final List<String>? tags,
+      final List<String>? businessDays}) = _$StoreClassImpl;
 
   factory _StoreClass.fromJson(Map<String, dynamic> json) =
       _$StoreClassImpl.fromJson;
@@ -466,6 +495,8 @@ abstract class _StoreClass implements StoreClass {
   String? get remarksDay;
   @override
   List<String>? get tags;
+  @override
+  List<String>? get businessDays;
   @override
   @JsonKey(ignore: true)
   _$$StoreClassImplCopyWith<_$StoreClassImpl> get copyWith =>

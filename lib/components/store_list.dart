@@ -10,13 +10,14 @@ class StoreList extends ConsumerWidget {
     required this.tags,
     required this.imageUrl,
     required this.name,
-    this.isBusinessDay = true,
+    this.isBusinessTime = true,
     this.openTime,
     this.closeTime,
     this.openTimeSecond,
     this.closeTimeSecond,
     this.remarksTime,
     this.remarksDay,
+    this.businessDays,
     super.key,
   });
   final String name;
@@ -29,10 +30,10 @@ class StoreList extends ConsumerWidget {
   final String? closeTimeSecond;
   final VoidCallback? onTap;
   final List<dynamic> tags;
-  final bool isBusinessDay;
+  final List<dynamic>? businessDays;
+  final bool isBusinessTime;
   bool get isVisibleTime => closeTime != '' && openTime != '';
   bool get isVisibleTimeSecond => closeTimeSecond != '' || openTimeSecond != '';
-  bool get isVisibleRemarksTime => remarksTime != '';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => Padding(
@@ -99,7 +100,7 @@ class StoreList extends ConsumerWidget {
                                 : [],
                           ),
                           const Padding(padding: EdgeInsets.all(12)),
-                          if (isBusinessDay)
+                          if (isBusinessTime)
                             Column(
                               children: [
                                 const Padding(
@@ -136,10 +137,16 @@ class StoreList extends ConsumerWidget {
                                     style: Styles.businnesHours,
                                   ),
                                 ),
-                                Text(
-                                  remarksTime ?? '',
-                                  style: Styles.businnesHours,
-                                ),
+                                if (remarksTime != '')
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: Text(
+                                      '※$remarksTime',
+                                      style: const TextStyle(fontSize: 10),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
                               ],
                             )
                           else
@@ -150,15 +157,38 @@ class StoreList extends ConsumerWidget {
                                   child: Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                      '営業時間',
+                                      '営業日',
                                       style: Styles.subTitleStyle,
                                     ),
                                   ),
                                 ),
-                                Text(
-                                  '$openTime〜$closeTime',
-                                  style: Styles.businnesHours,
+                                const SizedBox(height: 4),
+                                Wrap(
+                                  spacing: 1,
+                                  runSpacing: 1,
+                                  children: businessDays!.isNotEmpty
+                                      ? businessDays!
+                                          .map((formattedBusinessDays) {
+                                          final isLastDay =
+                                              formattedBusinessDays ==
+                                                  tags.last;
+                                          return Text(
+                                            '$formattedBusinessDays${isLastDay ? '' : ','}',
+                                            style: Styles.tagsTextStyle,
+                                          );
+                                        }).toList()
+                                      : [],
                                 ),
+                                if (remarksDay != '')
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: Text(
+                                      '※$remarksDay',
+                                      style: const TextStyle(fontSize: 10),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
                               ],
                             ),
                         ],

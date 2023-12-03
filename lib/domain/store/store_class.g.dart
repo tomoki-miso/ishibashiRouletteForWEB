@@ -23,6 +23,9 @@ _$StoreClassImpl _$$StoreClassImplFromJson(Map<String, dynamic> json) =>
       remarksTime: json['remarksTime'] as String?,
       remarksDay: json['remarksDay'] as String?,
       tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      businessDays: (json['businessDays'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$StoreClassImplToJson(_$StoreClassImpl instance) =>
@@ -42,4 +45,5 @@ Map<String, dynamic> _$$StoreClassImplToJson(_$StoreClassImpl instance) =>
       'remarksTime': instance.remarksTime,
       'remarksDay': instance.remarksDay,
       'tags': instance.tags,
+      'businessDays': instance.businessDays,
     };
