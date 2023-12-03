@@ -62,10 +62,11 @@ class QuestionnaireViewModel extends _$QuestionnaireViewModel {
   }
 
   Future<void> navigateToBasePage(BuildContext context) async {
-    await saveUserInfo();
-    await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const BasePage()),
+    await saveUserInfo().then(
+      (value) => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const BasePage()),
+      ),
     );
   }
 
@@ -78,7 +79,7 @@ class QuestionnaireViewModel extends _$QuestionnaireViewModel {
 
   Future<void> saveUserInfo() async {
     final data = state.requireValue;
-    final DomainUserInfo userInfo = DomainUserInfo(
+    final UserInfoClass userInfo = UserInfoClass(
       userId: FirebaseAuth.instance.currentUser!.uid,
       userName: data.inputedUserName,
       gender: data.selectedGender,

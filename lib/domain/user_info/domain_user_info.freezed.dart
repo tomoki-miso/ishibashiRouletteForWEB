@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-DomainUserInfo _$DomainUserInfoFromJson(Map<String, dynamic> json) {
-  return _UserInfo.fromJson(json);
+UserInfoClass _$UserInfoClassFromJson(Map<String, dynamic> json) {
+  return _UserInfoClass.fromJson(json);
 }
 
 /// @nodoc
-mixin _$DomainUserInfo {
+mixin _$UserInfoClass {
   String get userId => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
   String get occupation => throw _privateConstructorUsedError;
@@ -31,15 +31,15 @@ mixin _$DomainUserInfo {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DomainUserInfoCopyWith<DomainUserInfo> get copyWith =>
+  $UserInfoClassCopyWith<UserInfoClass> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DomainUserInfoCopyWith<$Res> {
-  factory $DomainUserInfoCopyWith(
-          DomainUserInfo value, $Res Function(DomainUserInfo) then) =
-      _$DomainUserInfoCopyWithImpl<$Res, DomainUserInfo>;
+abstract class $UserInfoClassCopyWith<$Res> {
+  factory $UserInfoClassCopyWith(
+          UserInfoClass value, $Res Function(UserInfoClass) then) =
+      _$UserInfoClassCopyWithImpl<$Res, UserInfoClass>;
   @useResult
   $Res call(
       {String userId,
@@ -53,9 +53,9 @@ abstract class $DomainUserInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DomainUserInfoCopyWithImpl<$Res, $Val extends DomainUserInfo>
-    implements $DomainUserInfoCopyWith<$Res> {
-  _$DomainUserInfoCopyWithImpl(this._value, this._then);
+class _$UserInfoClassCopyWithImpl<$Res, $Val extends UserInfoClass>
+    implements $UserInfoClassCopyWith<$Res> {
+  _$UserInfoClassCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -112,11 +112,11 @@ class _$DomainUserInfoCopyWithImpl<$Res, $Val extends DomainUserInfo>
 }
 
 /// @nodoc
-abstract class _$$UserInfoImplCopyWith<$Res>
-    implements $DomainUserInfoCopyWith<$Res> {
-  factory _$$UserInfoImplCopyWith(
-          _$UserInfoImpl value, $Res Function(_$UserInfoImpl) then) =
-      __$$UserInfoImplCopyWithImpl<$Res>;
+abstract class _$$UserInfoClassImplCopyWith<$Res>
+    implements $UserInfoClassCopyWith<$Res> {
+  factory _$$UserInfoClassImplCopyWith(
+          _$UserInfoClassImpl value, $Res Function(_$UserInfoClassImpl) then) =
+      __$$UserInfoClassImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -131,11 +131,11 @@ abstract class _$$UserInfoImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$UserInfoImplCopyWithImpl<$Res>
-    extends _$DomainUserInfoCopyWithImpl<$Res, _$UserInfoImpl>
-    implements _$$UserInfoImplCopyWith<$Res> {
-  __$$UserInfoImplCopyWithImpl(
-      _$UserInfoImpl _value, $Res Function(_$UserInfoImpl) _then)
+class __$$UserInfoClassImplCopyWithImpl<$Res>
+    extends _$UserInfoClassCopyWithImpl<$Res, _$UserInfoClassImpl>
+    implements _$$UserInfoClassImplCopyWith<$Res> {
+  __$$UserInfoClassImplCopyWithImpl(
+      _$UserInfoClassImpl _value, $Res Function(_$UserInfoClassImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -150,7 +150,7 @@ class __$$UserInfoImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$UserInfoImpl(
+    return _then(_$UserInfoClassImpl(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -189,8 +189,8 @@ class __$$UserInfoImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$UserInfoImpl implements _UserInfo {
-  const _$UserInfoImpl(
+class _$UserInfoClassImpl implements _UserInfoClass {
+  const _$UserInfoClassImpl(
       {required this.userId,
       required this.gender,
       required this.occupation,
@@ -200,8 +200,8 @@ class _$UserInfoImpl implements _UserInfo {
       this.createdAt,
       this.updatedAt});
 
-  factory _$UserInfoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserInfoImplFromJson(json);
+  factory _$UserInfoClassImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserInfoClassImplFromJson(json);
 
   @override
   final String userId;
@@ -222,14 +222,14 @@ class _$UserInfoImpl implements _UserInfo {
 
   @override
   String toString() {
-    return 'DomainUserInfo(userId: $userId, gender: $gender, occupation: $occupation, userName: $userName, faculty: $faculty, department: $department, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserInfoClass(userId: $userId, gender: $gender, occupation: $occupation, userName: $userName, faculty: $faculty, department: $department, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserInfoImpl &&
+            other is _$UserInfoClassImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.occupation, occupation) ||
@@ -253,19 +253,19 @@ class _$UserInfoImpl implements _UserInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$UserInfoImplCopyWith<_$UserInfoImpl> get copyWith =>
-      __$$UserInfoImplCopyWithImpl<_$UserInfoImpl>(this, _$identity);
+  _$$UserInfoClassImplCopyWith<_$UserInfoClassImpl> get copyWith =>
+      __$$UserInfoClassImplCopyWithImpl<_$UserInfoClassImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserInfoImplToJson(
+    return _$$UserInfoClassImplToJson(
       this,
     );
   }
 }
 
-abstract class _UserInfo implements DomainUserInfo {
-  const factory _UserInfo(
+abstract class _UserInfoClass implements UserInfoClass {
+  const factory _UserInfoClass(
       {required final String userId,
       required final String gender,
       required final String occupation,
@@ -273,10 +273,10 @@ abstract class _UserInfo implements DomainUserInfo {
       final String? faculty,
       final String? department,
       final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$UserInfoImpl;
+      final DateTime? updatedAt}) = _$UserInfoClassImpl;
 
-  factory _UserInfo.fromJson(Map<String, dynamic> json) =
-      _$UserInfoImpl.fromJson;
+  factory _UserInfoClass.fromJson(Map<String, dynamic> json) =
+      _$UserInfoClassImpl.fromJson;
 
   @override
   String get userId;
@@ -296,6 +296,6 @@ abstract class _UserInfo implements DomainUserInfo {
   DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$$UserInfoImplCopyWith<_$UserInfoImpl> get copyWith =>
+  _$$UserInfoClassImplCopyWith<_$UserInfoClassImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
