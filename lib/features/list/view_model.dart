@@ -40,7 +40,6 @@ class ListViewModel extends _$ListViewModel {
           closeTime: storeData['formattedCloseTime'] ?? '',
           openTimeSecond: storeData['formattedOpenTimeSecond'] ?? '',
           closeTimeSecond: storeData['formattedCloseTimeSecond'] ?? '',
-          remarksDay: storeData['remarksDay'] ?? '',
           remarksTime: storeData['remarksTime'] ?? '',
           tags: tags,
         );
