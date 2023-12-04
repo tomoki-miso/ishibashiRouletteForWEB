@@ -20,6 +20,7 @@ class StoreClass with _$StoreClass {
     String? storeWeb,
     String? storeTwitter,
     String? storeInsta,
+    String? storeInstaPosts,
     String? storeTabelog,
     String? storePhotoUrl,
     String? openTime,

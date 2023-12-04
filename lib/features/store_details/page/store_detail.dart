@@ -29,7 +29,7 @@ class StoreDetailPage extends ConsumerWidget {
             children: [
               const Padding(padding: EdgeInsets.all(14)),
 
-              //名前
+              /// 名前
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
@@ -40,16 +40,17 @@ class StoreDetailPage extends ConsumerWidget {
               ),
               const Padding(padding: EdgeInsets.all(10)),
 
-              //画像部分
+              /// 画像部分
               StoreDetailImagePart(
                 storePhotoUrl: data.storeClass.storePhotoUrl ?? '',
               ),
               const Padding(padding: EdgeInsets.all(10)),
 
-              //タグと紹介
+              /// タグ
               TagsContainerPart(formattedTags: data.storeClass.tags ?? []),
               const SizedBox(height: 12),
 
+              /// 営業時間、営業日
               StoreDetailStoreDayTimePart(
                 openTime: data.storeClass.openTime,
                 closeTime: data.storeClass.closeTime,
@@ -59,6 +60,8 @@ class StoreDetailPage extends ConsumerWidget {
                 businessDays: data.storeClass.businessDays,
                 remarksDay: data.storeClass.remarksDay,
               ),
+
+              /// 紹介文章
               StoreDetailTextPart(
                 storeDetail: data.storeClass.storeDetail ?? '',
               ),
@@ -70,7 +73,9 @@ class StoreDetailPage extends ConsumerWidget {
                 storeTabelog: data.storeClass.storeTabelog ?? '',
                 storeTwitter: data.storeClass.storeTwitter ?? '',
                 storeInsta: data.storeClass.storeInsta ?? '',
+                storeInstaPosts: data.storeClass.storeInstaPosts ?? '',
               ),
+              const SizedBox(height: 25),
             ],
           ),
         ),

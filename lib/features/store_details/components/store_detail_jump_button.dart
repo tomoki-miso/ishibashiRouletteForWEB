@@ -45,25 +45,22 @@ class StoreDetailsJumpButton extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(bottom: 12),
         child: PrimaryButton(
-          height: MediaQuery.of(context).size.height * 0.06,
+          height: MediaQuery.of(context).size.height * 0.058,
           width: MediaQuery.of(context).size.width * 0.9,
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
           isWithWidget: true,
           onPressed: onPressed,
-          childWidget: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 70),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                iconWidget,
-                const SizedBox(width: 4),
-                Text(
-                  text,
-                  style: const TextStyle(fontSize: 14),
-                ),
-              ],
-            ),
+          childWidget: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              iconWidget,
+              const SizedBox(width: 4),
+              Text(
+                text,
+                style: const TextStyle(fontSize: 14),
+              ),
+            ],
           ),
         ),
       );

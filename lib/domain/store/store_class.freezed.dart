@@ -26,6 +26,7 @@ mixin _$StoreClass {
   String? get storeWeb => throw _privateConstructorUsedError;
   String? get storeTwitter => throw _privateConstructorUsedError;
   String? get storeInsta => throw _privateConstructorUsedError;
+  String? get storeInstaPosts => throw _privateConstructorUsedError;
   String? get storeTabelog => throw _privateConstructorUsedError;
   String? get storePhotoUrl => throw _privateConstructorUsedError;
   String? get openTime => throw _privateConstructorUsedError;
@@ -56,6 +57,7 @@ abstract class $StoreClassCopyWith<$Res> {
       String? storeWeb,
       String? storeTwitter,
       String? storeInsta,
+      String? storeInstaPosts,
       String? storeTabelog,
       String? storePhotoUrl,
       String? openTime,
@@ -87,6 +89,7 @@ class _$StoreClassCopyWithImpl<$Res, $Val extends StoreClass>
     Object? storeWeb = freezed,
     Object? storeTwitter = freezed,
     Object? storeInsta = freezed,
+    Object? storeInstaPosts = freezed,
     Object? storeTabelog = freezed,
     Object? storePhotoUrl = freezed,
     Object? openTime = freezed,
@@ -122,6 +125,10 @@ class _$StoreClassCopyWithImpl<$Res, $Val extends StoreClass>
       storeInsta: freezed == storeInsta
           ? _value.storeInsta
           : storeInsta // ignore: cast_nullable_to_non_nullable
+              as String?,
+      storeInstaPosts: freezed == storeInstaPosts
+          ? _value.storeInstaPosts
+          : storeInstaPosts // ignore: cast_nullable_to_non_nullable
               as String?,
       storeTabelog: freezed == storeTabelog
           ? _value.storeTabelog
@@ -182,6 +189,7 @@ abstract class _$$StoreClassImplCopyWith<$Res>
       String? storeWeb,
       String? storeTwitter,
       String? storeInsta,
+      String? storeInstaPosts,
       String? storeTabelog,
       String? storePhotoUrl,
       String? openTime,
@@ -211,6 +219,7 @@ class __$$StoreClassImplCopyWithImpl<$Res>
     Object? storeWeb = freezed,
     Object? storeTwitter = freezed,
     Object? storeInsta = freezed,
+    Object? storeInstaPosts = freezed,
     Object? storeTabelog = freezed,
     Object? storePhotoUrl = freezed,
     Object? openTime = freezed,
@@ -246,6 +255,10 @@ class __$$StoreClassImplCopyWithImpl<$Res>
       storeInsta: freezed == storeInsta
           ? _value.storeInsta
           : storeInsta // ignore: cast_nullable_to_non_nullable
+              as String?,
+      storeInstaPosts: freezed == storeInstaPosts
+          ? _value.storeInstaPosts
+          : storeInstaPosts // ignore: cast_nullable_to_non_nullable
               as String?,
       storeTabelog: freezed == storeTabelog
           ? _value.storeTabelog
@@ -301,6 +314,7 @@ class _$StoreClassImpl implements _StoreClass {
       this.storeWeb,
       this.storeTwitter,
       this.storeInsta,
+      this.storeInstaPosts,
       this.storeTabelog,
       this.storePhotoUrl,
       this.openTime,
@@ -329,6 +343,8 @@ class _$StoreClassImpl implements _StoreClass {
   final String? storeTwitter;
   @override
   final String? storeInsta;
+  @override
+  final String? storeInstaPosts;
   @override
   final String? storeTabelog;
   @override
@@ -367,7 +383,7 @@ class _$StoreClassImpl implements _StoreClass {
 
   @override
   String toString() {
-    return 'StoreClass(documentId: $documentId, storeName: $storeName, storeDetail: $storeDetail, storeWeb: $storeWeb, storeTwitter: $storeTwitter, storeInsta: $storeInsta, storeTabelog: $storeTabelog, storePhotoUrl: $storePhotoUrl, openTime: $openTime, closeTime: $closeTime, openTimeSecond: $openTimeSecond, closeTimeSecond: $closeTimeSecond, remarksTime: $remarksTime, remarksDay: $remarksDay, tags: $tags, businessDays: $businessDays)';
+    return 'StoreClass(documentId: $documentId, storeName: $storeName, storeDetail: $storeDetail, storeWeb: $storeWeb, storeTwitter: $storeTwitter, storeInsta: $storeInsta, storeInstaPosts: $storeInstaPosts, storeTabelog: $storeTabelog, storePhotoUrl: $storePhotoUrl, openTime: $openTime, closeTime: $closeTime, openTimeSecond: $openTimeSecond, closeTimeSecond: $closeTimeSecond, remarksTime: $remarksTime, remarksDay: $remarksDay, tags: $tags, businessDays: $businessDays)';
   }
 
   @override
@@ -387,6 +403,8 @@ class _$StoreClassImpl implements _StoreClass {
                 other.storeTwitter == storeTwitter) &&
             (identical(other.storeInsta, storeInsta) ||
                 other.storeInsta == storeInsta) &&
+            (identical(other.storeInstaPosts, storeInstaPosts) ||
+                other.storeInstaPosts == storeInstaPosts) &&
             (identical(other.storeTabelog, storeTabelog) ||
                 other.storeTabelog == storeTabelog) &&
             (identical(other.storePhotoUrl, storePhotoUrl) ||
@@ -418,6 +436,7 @@ class _$StoreClassImpl implements _StoreClass {
       storeWeb,
       storeTwitter,
       storeInsta,
+      storeInstaPosts,
       storeTabelog,
       storePhotoUrl,
       openTime,
@@ -451,6 +470,7 @@ abstract class _StoreClass implements StoreClass {
       final String? storeWeb,
       final String? storeTwitter,
       final String? storeInsta,
+      final String? storeInstaPosts,
       final String? storeTabelog,
       final String? storePhotoUrl,
       final String? openTime,
@@ -477,6 +497,8 @@ abstract class _StoreClass implements StoreClass {
   String? get storeTwitter;
   @override
   String? get storeInsta;
+  @override
+  String? get storeInstaPosts;
   @override
   String? get storeTabelog;
   @override

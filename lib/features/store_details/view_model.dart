@@ -27,6 +27,7 @@ class ListDetailViewModel extends _$ListDetailViewModel {
       storeWeb: storeData['web'] ?? '',
       storeTwitter: storeData['twitter'] ?? '',
       storeInsta: storeData['insta'] ?? '',
+      storeInstaPosts: storeData['instaPosts'] ?? '',
       storeTabelog: storeData['tabelog'] ?? '',
       storePhotoUrl: storeData['photo_url'] ?? '',
       openTime: storeData['formattedOpenTime'] ?? '',
