@@ -10,7 +10,7 @@ class Styles {
   );
 
   static const storeDetailStyle = TextStyle(
-    fontSize: 12,
+    fontSize: 14,
     color: ColorName.black3,
   );
 
@@ -24,6 +24,12 @@ class Styles {
     fontSize: 14,
     fontWeight: FontWeight.bold,
     color: Colors.black,
+  );
+
+  static const detailBusinnesHours = TextStyle(
+    color: ColorName.black3,
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
   );
 
   static const tagsTextStyle = TextStyle(

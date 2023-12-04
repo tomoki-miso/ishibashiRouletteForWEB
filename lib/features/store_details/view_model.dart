@@ -18,6 +18,7 @@ class ListDetailViewModel extends _$ListDetailViewModel {
 
     final storeData = storeSnapshot.data()!;
     final tags = await _fetchTags(storeSnapshot.reference);
+    final businessDays = await _fetchBusinessDays(storeSnapshot.reference);
 
     final StoreClass storeClass = StoreClass(
       documentId: storeData['id'] ?? '',
@@ -28,6 +29,13 @@ class ListDetailViewModel extends _$ListDetailViewModel {
       storeInsta: storeData['insta'] ?? '',
       storeTabelog: storeData['tabelog'] ?? '',
       storePhotoUrl: storeData['photo_url'] ?? '',
+      openTime: storeData['formattedOpenTime'] ?? '',
+      closeTime: storeData['formattedCloseTime'] ?? '',
+      openTimeSecond: storeData['formattedOpenTimeSecond'] ?? '',
+      closeTimeSecond: storeData['formattedCloseTimeSecond'] ?? '',
+      remarksTime: storeData['remarksTime'] ?? '',
+      remarksDay: storeData['remarksDay'] ?? '',
+      businessDays: businessDays,
       tags: tags,
     );
 
@@ -43,6 +51,21 @@ class ListDetailViewModel extends _$ListDetailViewModel {
       final tags = storeData['tags'] as List<dynamic>;
       final formattedTags = tags.map((tag) => tag.toString()).toList();
       return formattedTags;
+    } else {
+      return [];
+    }
+  }
+
+  Future<List<String>> _fetchBusinessDays(
+    DocumentReference storeReference,
+  ) async {
+    final storeSnapshot = await storeReference.get();
+    final storeData = storeSnapshot.data() as Map<String, dynamic>?;
+
+    if (storeData != null && storeData.containsKey('daysOfWeek')) {
+      final days = storeData['daysOfWeek'] as List<dynamic>;
+      final formattedBusinessDays = days.map((day) => day.toString()).toList();
+      return formattedBusinessDays;
     } else {
       return [];
     }

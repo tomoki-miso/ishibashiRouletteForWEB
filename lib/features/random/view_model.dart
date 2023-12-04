@@ -39,6 +39,7 @@ class RandomViewModel extends _$RandomViewModel {
     final storeId = storeIds.first;
     final storeData = _storeSnapshot!.docs[storeId - 1];
     final tags = await _fetchTags(_storeSnapshot!.docs[storeId - 1].reference);
+
     final StoreClass storeClass = StoreClass(
       documentId: storeData['id'] ?? '',
       storeName: storeData['name'] ?? '',
@@ -48,6 +49,11 @@ class RandomViewModel extends _$RandomViewModel {
       storeInsta: storeData['insta'] ?? '',
       storeTabelog: storeData['tabelog'] ?? '',
       storePhotoUrl: storeData['photo_url'] ?? '',
+      openTime: storeData['formattedOpenTime'] ?? '',
+      closeTime: storeData['formattedCloseTime'] ?? '',
+      openTimeSecond: storeData['formattedOpenTimeSecond'] ?? '',
+      closeTimeSecond: storeData['formattedCloseTimeSecond'] ?? '',
+      remarksTime: storeData['remarksTime'] ?? '',
       tags: tags,
     );
     return storeClass;

@@ -100,6 +100,8 @@ class StoreList extends ConsumerWidget {
                                 : [],
                           ),
                           const Padding(padding: EdgeInsets.all(12)),
+
+                          /// 営業時間
                           if (isBusinessTime)
                             Column(
                               children: [
@@ -149,6 +151,8 @@ class StoreList extends ConsumerWidget {
                                   ),
                               ],
                             )
+
+                          /// 営業日
                           else
                             Column(
                               children: [
@@ -171,7 +175,7 @@ class StoreList extends ConsumerWidget {
                                           .map((formattedBusinessDays) {
                                           final isLastDay =
                                               formattedBusinessDays ==
-                                                  tags.last;
+                                                  businessDays!.last;
                                           return Text(
                                             '$formattedBusinessDays${isLastDay ? '' : ','}',
                                             style: Styles.tagsTextStyle,
