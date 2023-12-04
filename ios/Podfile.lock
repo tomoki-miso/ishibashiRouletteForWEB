@@ -628,6 +628,12 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - AppAuth (1.6.2):
+    - AppAuth/Core (= 1.6.2)
+    - AppAuth/ExternalUserAgent (= 1.6.2)
+  - AppAuth/Core (1.6.2)
+  - AppAuth/ExternalUserAgent (1.6.2):
+    - AppAuth/Core
   - BoringSSL-GRPC (0.0.24):
     - BoringSSL-GRPC/Implementation (= 0.0.24)
     - BoringSSL-GRPC/Interface (= 0.0.24)
@@ -635,25 +641,74 @@ PODS:
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
   - cloud_firestore (4.11.0):
-    - Firebase/Firestore (= 10.15.0)
+    - Firebase/Firestore (= 10.18.0)
     - firebase_core
     - Flutter
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - Firebase/CoreOnly (10.15.0):
-    - FirebaseCore (= 10.15.0)
-  - Firebase/Firestore (10.15.0):
+  - Firebase/Analytics (10.18.0):
+    - Firebase/Core
+  - Firebase/Auth (10.18.0):
     - Firebase/CoreOnly
-    - FirebaseFirestore (~> 10.15.0)
-  - firebase_core (2.19.0):
-    - Firebase/CoreOnly (= 10.15.0)
+    - FirebaseAuth (~> 10.18.0)
+  - Firebase/Core (10.18.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (~> 10.18.0)
+  - Firebase/CoreOnly (10.18.0):
+    - FirebaseCore (= 10.18.0)
+  - Firebase/Firestore (10.18.0):
+    - Firebase/CoreOnly
+    - FirebaseFirestore (~> 10.18.0)
+  - firebase_analytics (10.7.1):
+    - Firebase/Analytics (= 10.18.0)
+    - firebase_core
     - Flutter
-  - FirebaseCore (10.15.0):
-    - FirebaseCoreInternal (~> 10.0)
+  - firebase_auth (4.13.0):
+    - Firebase/Auth (= 10.18.0)
+    - firebase_core
+    - Flutter
+  - firebase_core (2.23.0):
+    - Firebase/CoreOnly (= 10.18.0)
+    - Flutter
+  - FirebaseAnalytics (10.18.0):
+    - FirebaseAnalytics/AdIdSupport (= 10.18.0)
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseAnalytics/AdIdSupport (10.18.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleAppMeasurement (= 10.18.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseAppCheckInterop (10.18.0)
+  - FirebaseAuth (10.18.0):
+    - FirebaseAppCheckInterop (~> 10.17)
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/Environment (~> 7.8)
-    - GoogleUtilities/Logger (~> 7.8)
-  - FirebaseCoreInternal (10.15.0):
+    - GTMSessionFetcher/Core (< 4.0, >= 2.1)
+    - RecaptchaInterop (~> 100.0)
+  - FirebaseCore (10.18.0):
+    - FirebaseCoreInternal (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.12)
+    - GoogleUtilities/Logger (~> 7.12)
+  - FirebaseCoreExtension (10.18.0):
+    - FirebaseCore (~> 10.0)
+  - FirebaseCoreInternal (10.18.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseFirestore (10.15.0):
+  - FirebaseFirestore (10.18.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseCoreExtension (~> 10.0)
+    - FirebaseFirestoreInternal (~> 10.17)
+    - FirebaseSharedSwift (~> 10.0)
+  - FirebaseFirestoreInternal (10.18.0):
     - abseil/algorithm (~> 1.20220623.0)
     - abseil/base (~> 1.20220623.0)
     - abseil/container/flat_hash_map (~> 1.20220623.0)
@@ -662,10 +717,17 @@ PODS:
     - abseil/strings/strings (~> 1.20220623.0)
     - abseil/time (~> 1.20220623.0)
     - abseil/types (~> 1.20220623.0)
+    - FirebaseAppCheckInterop (~> 10.17)
     - FirebaseCore (~> 10.0)
-    - "gRPC-C++ (~> 1.50.1)"
+    - "gRPC-C++ (~> 1.49.1)"
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseInstallations (10.18.0):
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - PromisesObjC (~> 2.1)
+  - FirebaseSharedSwift (10.18.0)
   - Flutter (1.0.0)
   - flutter_localization (0.0.1):
     - Flutter
@@ -677,20 +739,61 @@ PODS:
   - google_maps_flutter_ios (0.0.1):
     - Flutter
     - GoogleMaps (< 8.0)
+  - google_sign_in_ios (0.0.1):
+    - Flutter
+    - GoogleSignIn (~> 6.2)
+  - GoogleAppMeasurement (10.18.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.18.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/AdIdSupport (10.18.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.18.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.18.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
   - GoogleMaps (5.2.0):
     - GoogleMaps/Maps (= 5.2.0)
   - GoogleMaps/Base (5.2.0)
   - GoogleMaps/Maps (5.2.0):
     - GoogleMaps/Base
-  - GoogleUtilities/Environment (7.11.5):
-    - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/Logger (7.11.5):
+  - GoogleSignIn (6.2.4):
+    - AppAuth (~> 1.5)
+    - GTMAppAuth (~> 1.3)
+    - GTMSessionFetcher/Core (< 3.0, >= 1.1)
+  - GoogleUtilities/AppDelegateSwizzler (7.12.0):
     - GoogleUtilities/Environment
-  - "GoogleUtilities/NSData+zlib (7.11.5)"
-  - "gRPC-C++ (1.50.1)":
-    - "gRPC-C++/Implementation (= 1.50.1)"
-    - "gRPC-C++/Interface (= 1.50.1)"
-  - "gRPC-C++/Implementation (1.50.1)":
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (7.12.0):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Logger (7.12.0):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (7.12.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (7.12.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (7.12.0)"
+  - GoogleUtilities/Reachability (7.12.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (7.12.0):
+    - GoogleUtilities/Logger
+  - "gRPC-C++ (1.49.1)":
+    - "gRPC-C++/Implementation (= 1.49.1)"
+    - "gRPC-C++/Interface (= 1.49.1)"
+  - "gRPC-C++/Implementation (1.49.1)":
     - abseil/base/base (= 1.20220623.0)
     - abseil/base/core_headers (= 1.20220623.0)
     - abseil/cleanup/cleanup (= 1.20220623.0)
@@ -715,13 +818,13 @@ PODS:
     - abseil/types/span (= 1.20220623.0)
     - abseil/types/variant (= 1.20220623.0)
     - abseil/utility/utility (= 1.20220623.0)
-    - "gRPC-C++/Interface (= 1.50.1)"
-    - gRPC-Core (= 1.50.1)
-  - "gRPC-C++/Interface (1.50.1)"
-  - gRPC-Core (1.50.1):
-    - gRPC-Core/Implementation (= 1.50.1)
-    - gRPC-Core/Interface (= 1.50.1)
-  - gRPC-Core/Implementation (1.50.1):
+    - "gRPC-C++/Interface (= 1.49.1)"
+    - gRPC-Core (= 1.49.1)
+  - "gRPC-C++/Interface (1.49.1)"
+  - gRPC-Core (1.49.1):
+    - gRPC-Core/Implementation (= 1.49.1)
+    - gRPC-Core/Interface (= 1.49.1)
+  - gRPC-Core/Implementation (1.49.1):
     - abseil/base/base (= 1.20220623.0)
     - abseil/base/core_headers (= 1.20220623.0)
     - abseil/container/flat_hash_map (= 1.20220623.0)
@@ -746,21 +849,28 @@ PODS:
     - abseil/types/variant (= 1.20220623.0)
     - abseil/utility/utility (= 1.20220623.0)
     - BoringSSL-GRPC (= 0.0.24)
-    - gRPC-Core/Interface (= 1.50.1)
-  - gRPC-Core/Interface (1.50.1)
+    - gRPC-Core/Interface (= 1.49.1)
+  - gRPC-Core/Interface (1.49.1)
+  - GTMAppAuth (1.3.1):
+    - AppAuth/Core (~> 1.6)
+    - GTMSessionFetcher/Core (< 3.0, >= 1.5)
+  - GTMSessionFetcher/Core (2.3.0)
   - leveldb-library (1.22.2)
-  - nanopb (2.30909.0):
-    - nanopb/decode (= 2.30909.0)
-    - nanopb/encode (= 2.30909.0)
-  - nanopb/decode (2.30909.0)
-  - nanopb/encode (2.30909.0)
+  - nanopb (2.30909.1):
+    - nanopb/decode (= 2.30909.1)
+    - nanopb/encode (= 2.30909.1)
+  - nanopb/decode (2.30909.1)
+  - nanopb/encode (2.30909.1)
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
   - PromisesObjC (2.3.1)
+  - RecaptchaInterop (100.0.0)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - sign_in_with_apple (0.0.1):
+    - Flutter
   - sqflite (0.0.3):
     - Flutter
     - FMDB (>= 2.7.5)
@@ -771,13 +881,17 @@ PODS:
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
+  - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
+  - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
   - flutter_localization (from `.symlinks/plugins/flutter_localization/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
   - google_maps_flutter_ios (from `.symlinks/plugins/google_maps_flutter_ios/ios`)
+  - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
@@ -785,23 +899,40 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
+    - AppAuth
     - BoringSSL-GRPC
     - Firebase
+    - FirebaseAnalytics
+    - FirebaseAppCheckInterop
+    - FirebaseAuth
     - FirebaseCore
+    - FirebaseCoreExtension
     - FirebaseCoreInternal
     - FirebaseFirestore
+    - FirebaseFirestoreInternal
+    - FirebaseInstallations
+    - FirebaseSharedSwift
     - FMDB
+    - GoogleAppMeasurement
     - GoogleMaps
+    - GoogleSignIn
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
+    - GTMAppAuth
+    - GTMSessionFetcher
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - RecaptchaInterop
 
 EXTERNAL SOURCES:
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
+  firebase_analytics:
+    :path: ".symlinks/plugins/firebase_analytics/ios"
+  firebase_auth:
+    :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   Flutter:
@@ -812,10 +943,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/geolocator_apple/ios"
   google_maps_flutter_ios:
     :path: ".symlinks/plugins/google_maps_flutter_ios/ios"
+  google_sign_in_ios:
+    :path: ".symlinks/plugins/google_sign_in_ios/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+  sign_in_with_apple:
+    :path: ".symlinks/plugins/sign_in_with_apple/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
   url_launcher_ios:
@@ -825,31 +960,48 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
+  AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-  cloud_firestore: 0b05c34e8b36cde7026bed89616962c4e03aa307
-  Firebase: 66043bd4579e5b73811f96829c694c7af8d67435
-  firebase_core: fd674fcc642742ef7289acea60bd21a1a021bd98
-  FirebaseCore: 2cec518b43635f96afe7ac3a9c513e47558abd2e
-  FirebaseCoreInternal: 2f4bee5ed00301b5e56da0849268797a2dd31fb4
-  FirebaseFirestore: b4c0eaaf24efda5732ec21d9e6c788d083118ca6
+  cloud_firestore: 696e0d4b2f14147ff3504f5afcd784fe145a8f87
+  Firebase: 414ad272f8d02dfbf12662a9d43f4bba9bec2a06
+  firebase_analytics: 3e5dba777bb51d1e0358b5a37adefa69746a94bd
+  firebase_auth: 8b031e520999a7235c76356ed702e8ea883afeaa
+  firebase_core: 29d66baf806970cda37c93621b27cd369b27db1b
+  FirebaseAnalytics: 4d310b35c48eaa4a058ddc04bdca6bdb5dc0fe80
+  FirebaseAppCheckInterop: 3cd914842ba46f4304050874cd284de82f154ffd
+  FirebaseAuth: 12314b438fa76048540c8fb86d6cfc9e08595176
+  FirebaseCore: 2322423314d92f946219c8791674d2f3345b598f
+  FirebaseCoreExtension: 62b201498aa10535801cdf3448c7f4db5e24ed80
+  FirebaseCoreInternal: 8eb002e564b533bdcf1ba011f33f2b5c10e2ed4a
+  FirebaseFirestore: 171bcbb57a1a348dd171a0d5e382c03ef85a77bb
+  FirebaseFirestoreInternal: 3d5d03f2447caae64311d2cda92abbf4ec5241be
+  FirebaseInstallations: e842042ec6ac1fd2e37d7706363ebe7f662afea4
+  FirebaseSharedSwift: 62e248642c0582324d0390706cadd314687c116b
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_localization: f43b18844a2b3d2c71fd64f04ffd6b1e64dd54d4
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   geolocator_apple: cc556e6844d508c95df1e87e3ea6fa4e58c50401
   google_maps_flutter_ios: abdac20d6ce8931f6ebc5f46616df241bfaa2cfd
+  google_sign_in_ios: 1256ff9d941db546373826966720b0c24804bcdd
+  GoogleAppMeasurement: 70ce9aa438cff1cfb31ea3e660bcc67734cb716e
   GoogleMaps: 025272d5876d3b32604e5c080dc25eaf68764693
-  GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
-  "gRPC-C++": 0968bace703459fd3e5dcb0b2bed4c573dbff046
-  gRPC-Core: 17108291d84332196d3c8466b48f016fc17d816d
+  GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
+  GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
+  "gRPC-C++": 2df8cba576898bdacd29f0266d5236fa0e26ba6a
+  gRPC-Core: a21a60aefc08c68c247b439a9ef97174b0c54f96
+  GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
+  GTMSessionFetcher: 3a63d75eecd6aa32c2fc79f578064e1214dfdec2
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
-  nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
+  nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
+  RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
+  sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
   webview_flutter_wkwebview: 2e2d318f21a5e036e2c3f26171342e95908bd60a
 
 PODFILE CHECKSUM: 123274967fccfce20170230c6c26beeefb8d7f56
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.14.3

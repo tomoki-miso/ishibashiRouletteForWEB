@@ -9,7 +9,7 @@ class BigSelectButton extends StatelessWidget {
     super.key,
     this.style,
     this.circularSize,
-    this.backgroundColor = ColorName.primaryBase, //デフォルトカラー
+    this.backgroundColor,
     this.foregroundColor,
     this.side = BorderSide.none,
     this.isWithWidget = false,
@@ -69,7 +69,7 @@ class BigSelectButton extends StatelessWidget {
                             text!,
                             style: const TextStyle(
                               fontSize: 20,
-                              color: Colors.white,
+                              color: ColorName.whiteBase,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -81,11 +81,11 @@ class BigSelectButton extends StatelessWidget {
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width * 0.2,
                     height: MediaQuery.of(context).size.height * 0.25,
-                    color: Colors.white.withOpacity(0.5),
+                    color: ColorName.whiteBase.withOpacity(0.5),
                     child: const Icon(
                       Icons.chevron_right_sharp,
                       size: 100,
-                      color: Colors.white,
+                      color: ColorName.whiteBase,
                     ),
                   ),
                 ],

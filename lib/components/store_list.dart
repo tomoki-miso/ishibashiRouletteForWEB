@@ -8,14 +8,16 @@ class StoreList extends ConsumerWidget {
   const StoreList({
     required this.onTap,
     required this.tags,
-    super.key,
     required this.imageUrl,
-    this.name,
+    required this.name,
+    this.openTime,
+    this.closeTime,
+    super.key,
   });
-  final String? name;
+  final String name;
   final String imageUrl;
-
-  // final String? detail;
+  final String? openTime;
+  final String? closeTime;
   final VoidCallback? onTap;
   final List<dynamic> tags;
 
@@ -26,8 +28,10 @@ class StoreList extends ConsumerWidget {
           elevation: 8,
           color: ColorName.whiteBase,
           shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(50))),
+            borderRadius: BorderRadius.all(Radius.circular(50)),
+          ),
           child: InkWell(
+            borderRadius: const BorderRadius.all(Radius.circular(50)),
             onTap: onTap,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,69 +49,60 @@ class StoreList extends ConsumerWidget {
                               imageUrl: imageUrl,
                               fit: BoxFit.cover,
                             )
-                          : CachedNetworkImage(
-                              imageUrl:
-                                  'https://placehold.jp/150x150.png', //NoTFound的な画像を足す？
+                          : Image.asset(
+                              'assets/images/icon.png',
                               fit: BoxFit.cover,
                             ),
                     ),
                   ),
                 ),
 
-                //右側
+                /// 右側
                 Expanded(
-                  child: SizedBox(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 6),
-                        child: Column(
-                          children: [
-                            //名前
-                            Text(
-                              name!,
-                              style: Styles.storeNameStyle,
-                            ),
-                            const Padding(padding: EdgeInsets.all(12)),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 6),
+                      child: Column(
+                        children: [
+                          /// 名前
+                          Text(
+                            name,
+                            style: Styles.storeNameStyle,
+                          ),
+                          const Padding(padding: EdgeInsets.all(12)),
 
-                            //タグ
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: tags.isNotEmpty
-                                  ? tags.take(3).map((formattedTag) {
-                                      final isLastTag =
-                                          formattedTag == tags.last;
-                                      return Container(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 1,
-                                        ),
-                                        margin: const EdgeInsets.all(1),
-                                        child: Text(
-                                          '#$formattedTag${isLastTag ? '' : ','}',
-                                          style: Styles.tagsTextStyle,
-                                        ),
-                                      );
-                                    }).toList()
-                                  : [], // タグがない場合は空のリストを使用
-                            ),
-                            const Padding(padding: EdgeInsets.all(12)),
+                          /// タグ
+                          Wrap(
+                            spacing: 1,
+                            runSpacing: 1,
+                            children: tags.isNotEmpty
+                                ? tags.take(3).map((formattedTag) {
+                                    final isLastTag = formattedTag == tags.last;
+                                    return Text(
+                                      '#$formattedTag${isLastTag ? '' : ','}',
+                                      style: Styles.tagsTextStyle,
+                                    );
+                                  }).toList()
+                                : [],
+                          ),
+                          const Padding(padding: EdgeInsets.all(12)),
 
-                            //営業時間
-                            const Padding(
-                              padding: EdgeInsets.only(left: 20),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '営業時間',
-                                  style: Styles.subTitleStyle,
-                                ),
+                          /// 営業時間
+                          const Padding(
+                            padding: EdgeInsets.only(left: 20),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                '営業時間',
+                                style: Styles.subTitleStyle,
                               ),
                             ),
-                            const Text(
-                              '18:00〜24:00',
-                              style: Styles.businnesHours,
-                            ),
-                          ],
-                        ),
+                          ),
+                          Text(
+                            '$openTime〜$closeTime',
+                            style: Styles.businnesHours,
+                          ),
+                        ],
                       ),
                     ),
                   ),

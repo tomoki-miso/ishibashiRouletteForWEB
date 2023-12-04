@@ -9,7 +9,7 @@ class PrimaryButton extends StatelessWidget {
     this.height,
     this.width,
     this.circularSize,
-    this.backgroundColor = ColorName.primaryBase, //デフォルトカラー
+    this.backgroundColor = ColorName.base,
     this.foregroundColor,
     this.side = BorderSide.none,
     this.isWithWidget = false,

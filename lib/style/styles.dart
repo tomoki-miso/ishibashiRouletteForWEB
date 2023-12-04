@@ -5,19 +5,19 @@ class Styles {
   static const storeNameStyle = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.bold,
-    color: Colors.black,
+    color: ColorName.black2,
     overflow: TextOverflow.ellipsis,
   );
 
   static const storeDetailStyle = TextStyle(
-    fontSize: 16,
-    color: Colors.black,
+    fontSize: 12,
+    color: ColorName.black3,
   );
 
   static const subTitleStyle = TextStyle(
     fontSize: 10,
     fontWeight: FontWeight.bold,
-    color: Colors.black,
+    color: ColorName.black3,
   );
 
   static const businnesHours = TextStyle(
@@ -29,23 +29,35 @@ class Styles {
   static const tagsTextStyle = TextStyle(
     fontSize: 11,
     fontWeight: FontWeight.bold,
-    color: Colors.black,
+    color: ColorName.black2,
     overflow: TextOverflow.clip,
   );
 
-  static const DrawerTitle = TextStyle(
+  static const drawerTitle = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.bold,
-    color: ColorName.blackSecondary,
+    color: ColorName.black2,
   );
 
-  static const DrawerSubTitle = TextStyle(
+  static const drawerSubTitle = TextStyle(
     fontSize: 14,
-    color: ColorName.blackSecondary,
+    color: ColorName.black3,
   );
 
   static const detailStoreName = TextStyle(
-    fontSize: 32,
+    fontSize: 26,
+    fontWeight: FontWeight.bold,
+    color: ColorName.black2,
+  );
+
+  static const randomStore = TextStyle(
+    fontSize: 17,
+    color: ColorName.whiteBase,
+  );
+
+  static const randomRoulette = TextStyle(
+    fontSize: 16,
+    color: ColorName.whiteBase,
     fontWeight: FontWeight.bold,
   );
 }
