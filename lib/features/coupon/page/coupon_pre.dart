@@ -3,8 +3,8 @@ import 'package:ishibashi/components/original_app_bar.dart';
 import 'package:ishibashi/style/colors.dart';
 import 'package:lottie/lottie.dart';
 
-class CouponPage extends StatelessWidget {
-  const CouponPage({super.key});
+class CouponPrePage extends StatelessWidget {
+  const CouponPrePage({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -20,12 +20,12 @@ class CouponPage extends StatelessWidget {
               ),
               const Padding(padding: EdgeInsets.all(4)),
               const Text(
-                '絶賛開発中！\nアップデートをお楽しみに！',
+                '絶賛制作中！\nアップデートをお楽しみに！',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: ColorName.greyBase,
+                  color: ColorName.black2,
                 ),
               ),
             ],

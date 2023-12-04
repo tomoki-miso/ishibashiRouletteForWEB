@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ishibashi/components/original_app_bar.dart';
 import 'package:ishibashi/components/primary_button.dart';
-import 'package:ishibashi/screens/coupon/component/coupon_appbar.dart';
-import 'package:ishibashi/screens/coupon/page/coupon_display.dart';
+import 'package:ishibashi/features/coupon/page/coupon_display.dart';
 import 'package:ishibashi/style/colors.dart';
 import 'package:lottie/lottie.dart';
 
@@ -11,7 +11,7 @@ class CouponPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => Scaffold(
-        appBar: const CouponAppbar(),
+        appBar: const OriginalAppBar(),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -21,7 +21,7 @@ class CouponPage extends ConsumerWidget {
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: ColorName.blackSecondary,
+                  color: ColorName.black2,
                 ),
               ),
               const Padding(padding: EdgeInsets.all(22)),

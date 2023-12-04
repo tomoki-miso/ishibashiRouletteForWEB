@@ -19,9 +19,8 @@ class CouponDisplayPage extends ConsumerWidget {
                 width: MediaQuery.of(context).size.width * 0.92,
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 decoration: BoxDecoration(
-                  color: ColorName.primarySecondary,
-                  border:
-                      Border.all(color: ColorName.greySecondary, width: 5),
+                  color: ColorName.black2,
+                  border: Border.all(color: ColorName.greyBase, width: 5),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -50,7 +49,7 @@ class CouponDisplayPage extends ConsumerWidget {
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
-                        color: ColorName.blackBase,
+                        color: ColorName.black2,
                       ),
                     ),
                     const Padding(padding: EdgeInsets.all(1)),
@@ -61,7 +60,7 @@ class CouponDisplayPage extends ConsumerWidget {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: ColorName.blackBase,
+                            color: ColorName.black2,
                           ),
                         ),
                       ],
@@ -72,12 +71,12 @@ class CouponDisplayPage extends ConsumerWidget {
                         horizontal: 16,
                       ),
                       child: Text(
-                        '条件:別途1品以上のフード購入aaaa'*5,
+                        '条件:別途1品以上のフード購入aaaa' * 5,
                         maxLines: 3,
                         textAlign: TextAlign.start,
                         style: const TextStyle(
                           fontSize: 15,
-                          color: ColorName.blackSecondary,
+                          color: ColorName.black2,
                         ),
                       ),
                     ),

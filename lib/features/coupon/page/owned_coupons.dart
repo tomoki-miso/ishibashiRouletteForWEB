@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/original_app_bar.dart';
-import 'package:ishibashi/screens/coupon/page/use_coupon.dart';
+import 'package:ishibashi/features/coupon/page/use_coupon.dart';
 import 'package:ishibashi/style/colors.dart';
 
 class OwnedCouponsPage extends ConsumerWidget {
@@ -14,7 +14,7 @@ class OwnedCouponsPage extends ConsumerWidget {
           children: [
             for (int i = 0; i < 10; i++)
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 8),
                 child: InkWell(
                   onTap: () async {
                     await Navigator.push(
@@ -28,7 +28,7 @@ class OwnedCouponsPage extends ConsumerWidget {
                     width: MediaQuery.of(context).size.width * 0.5,
                     height: MediaQuery.of(context).size.height * 0.3,
                     decoration: const BoxDecoration(
-                      color: ColorName.primarySecondary,
+                      color: ColorName.orangeBase,
                     ),
                     child: Center(
                       child: Column(
@@ -42,8 +42,7 @@ class OwnedCouponsPage extends ConsumerWidget {
                                     Image.asset('assets/images/iconKari.png'),
                               ),
                               SizedBox(
-                                width: MediaQuery.of(context).size.width *
-                                    0.6, //後で変更する
+                                width: MediaQuery.of(context).size.width * 0.6,
                                 child: Text(
                                   'いしばしや' * 8,
                                   overflow: TextOverflow.ellipsis,
@@ -52,7 +51,7 @@ class OwnedCouponsPage extends ConsumerWidget {
                                   style: const TextStyle(
                                     fontSize: 26,
                                     fontWeight: FontWeight.bold,
-                                    color: ColorName.blackSecondary,
+                                    color: ColorName.orangeBase,
                                   ),
                                 ),
                               ),
@@ -65,7 +64,7 @@ class OwnedCouponsPage extends ConsumerWidget {
                     ),
                   ),
                 ),
-              )
+              ),
           ],
         ),
       );
