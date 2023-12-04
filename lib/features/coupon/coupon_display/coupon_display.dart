@@ -19,9 +19,9 @@ class CouponDisplayPage extends ConsumerWidget {
                 width: MediaQuery.of(context).size.width * 0.92,
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 decoration: BoxDecoration(
-                  color: ColorName.black2,
+                  color: ColorName.backGroundYellow,
                   border: Border.all(color: ColorName.greyBase, width: 5),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 child: Column(
                   children: [
@@ -87,8 +87,8 @@ class CouponDisplayPage extends ConsumerWidget {
               PrimaryButton(
                 onPressed: () {},
                 text: '保存する',
-                width: MediaQuery.of(context).size.width * 0.86,
-                height: MediaQuery.of(context).size.height * 0.08,
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height * 0.07,
               ),
             ],
           ),

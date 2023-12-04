@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ishibashi/features/coupon/page/coupon.dart';
+import 'package:ishibashi/features/coupon/coupon/coupon.dart';
 import 'package:ishibashi/style/colors.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 

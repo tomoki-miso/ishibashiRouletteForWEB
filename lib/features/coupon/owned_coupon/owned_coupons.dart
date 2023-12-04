@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/original_app_bar.dart';
-import 'package:ishibashi/features/coupon/page/use_coupon.dart';
+import 'package:ishibashi/features/coupon/use_coupon/use_coupon.dart';
 import 'package:ishibashi/style/colors.dart';
 
 class OwnedCouponsPage extends ConsumerWidget {
