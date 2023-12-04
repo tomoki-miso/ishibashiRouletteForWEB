@@ -44,6 +44,8 @@
 		<true />
 		<key>NSLocationWhenInUseUsageDescription</key>
 		<string>位置情報に基づいてお店を探すことができます。</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>位置情報に基づいてお店を探すことができます</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true />
 		<key>UILaunchStoryboardName</key>
