@@ -46,7 +46,9 @@ class CouponPage extends ConsumerWidget {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const CouponDisplayPage(),
+                      builder: (context) => const CouponDisplayPage(
+                        couponId: '1',
+                      ),
                     ),
                   );
                 },
