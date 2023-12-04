@@ -5,28 +5,28 @@ import 'package:ishibashi/features/store_details/components/store_detail_jump_bu
 import 'package:ishibashi/style/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TwitterJumpButton extends ConsumerWidget {
-  const TwitterJumpButton({
-    required this.storeTwitter,
+class InstaJumpPostsButton extends ConsumerWidget {
+  const InstaJumpPostsButton({
+    required this.storeInstaPosts,
     super.key,
   });
 
-  final String storeTwitter;
+  final String storeInstaPosts;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Widget buttonWidget;
-    if (storeTwitter.isNotEmpty) {
+    if (storeInstaPosts.isNotEmpty) {
       buttonWidget = StoreDetailsJumpButton(
-        backgroundColor: ColorName.black2,
+        backgroundColor: ColorName.instaPink,
         onPressed: () async {
-          final xUrl = Uri.parse(storeTwitter);
+          final xUrl = Uri.parse(storeInstaPosts);
           await launchUrl(xUrl);
         },
         iconWidget: const FaIcon(
-          FontAwesomeIcons.twitter,
+          FontAwesomeIcons.instagram,
         ),
-        text: '公式X(旧Twitter)',
+        text: 'Instagramで投稿をみる',
       );
     } else {
       buttonWidget = Container();

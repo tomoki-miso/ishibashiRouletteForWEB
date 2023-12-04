@@ -35,6 +35,7 @@ class BusinessDaySearchViewModel extends _$BusinessDaySearchViewModel {
         final storeData = document.data();
 
         final tags = await _fetchTags(document.reference);
+        final businessDays = await _fetchBusinessDays(document.reference);
         return StoreClass(
           documentId: storeData['id'] ?? '',
           storeName: storeData['name'] ?? '',
@@ -46,7 +47,9 @@ class BusinessDaySearchViewModel extends _$BusinessDaySearchViewModel {
           storePhotoUrl: storeData['photo_url'] ?? '',
           openTime: storeData['formattedOpenTime'] ?? '',
           closeTime: storeData['formattedCloseTime'] ?? '',
+          businessDays: businessDays,
           tags: tags,
+          remarksDay: storeData['remarksDay'],
         );
       }).toList();
 
@@ -67,6 +70,21 @@ class BusinessDaySearchViewModel extends _$BusinessDaySearchViewModel {
       final tags = storeData['tags'] as List<dynamic>;
       final formattedTags = tags.map((tag) => tag.toString()).toList();
       return formattedTags;
+    } else {
+      return [];
+    }
+  }
+
+  Future<List<String>> _fetchBusinessDays(
+    DocumentReference storeReference,
+  ) async {
+    final storeSnapshot = await storeReference.get();
+    final storeData = storeSnapshot.data() as Map<String, dynamic>?;
+
+    if (storeData != null && storeData.containsKey('daysOfWeek')) {
+      final days = storeData['daysOfWeek'] as List<dynamic>;
+      final formattedBusinessDays = days.map((day) => day.toString()).toList();
+      return formattedBusinessDays;
     } else {
       return [];
     }

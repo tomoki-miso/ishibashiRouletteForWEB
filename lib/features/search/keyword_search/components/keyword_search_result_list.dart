@@ -26,6 +26,9 @@ class KeywordSearchResultList extends ConsumerWidget {
             tags: store.tags,
             openTime: store.openTime,
             closeTime: store.closeTime,
+            openTimeSecond: store.openTimeSecond,
+            closeTimeSecond: store.closeTimeSecond,
+            remarksTime: store.remarksTime,
           );
         },
       ),

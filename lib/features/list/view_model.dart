@@ -38,6 +38,9 @@ class ListViewModel extends _$ListViewModel {
           storePhotoUrl: storeData['photo_url'] ?? '',
           openTime: storeData['formattedOpenTime'] ?? '',
           closeTime: storeData['formattedCloseTime'] ?? '',
+          openTimeSecond: storeData['formattedOpenTimeSecond'] ?? '',
+          closeTimeSecond: storeData['formattedCloseTimeSecond'] ?? '',
+          remarksTime: storeData['remarksTime'] ?? '',
           tags: tags,
         );
       }

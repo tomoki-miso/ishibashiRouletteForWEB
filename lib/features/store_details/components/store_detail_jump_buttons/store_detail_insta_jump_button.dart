@@ -26,7 +26,7 @@ class InstaJumpButton extends ConsumerWidget {
         iconWidget: const FaIcon(
           FontAwesomeIcons.instagram,
         ),
-        text: 'Instagram',
+        text: '公式Instagram',
       );
     } else {
       buttonWidget = Container();

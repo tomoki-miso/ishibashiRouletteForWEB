@@ -40,6 +40,9 @@ class BusinessDaySearchResultList extends ConsumerWidget {
                       tags: store.tags,
                       openTime: store.openTime,
                       closeTime: store.closeTime,
+                      isBusinessTime: false,
+                      businessDays: store.businessDays,
+                      remarksDay: store.remarksDay,
                     );
                   },
                 ),

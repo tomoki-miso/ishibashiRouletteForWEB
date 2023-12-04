@@ -17,23 +17,24 @@ class OriginalAppBar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: Colors.white,
         centerTitle: false,
         actions: [
-          IconButton(
-            onPressed: () async {
-              await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SearchConfirmPage(),
-                ),
-              );
-            },
-            icon: withIcon
-                ? const FaIcon(
-                    FontAwesomeIcons.magnifyingGlass,
-                    color: ColorName.greyBase,
-                    size: 30,
-                  )
-                : const SizedBox(),
-          ),
+          if (withIcon)
+            IconButton(
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SearchConfirmPage(),
+                  ),
+                );
+              },
+              icon: const FaIcon(
+                FontAwesomeIcons.magnifyingGlass,
+                color: ColorName.greyBase,
+                size: 30,
+              ),
+            )
+          else
+            const SizedBox(),
         ],
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(

@@ -6,8 +6,8 @@ part of 'domain_user_info.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserInfoImpl _$$UserInfoImplFromJson(Map<String, dynamic> json) =>
-    _$UserInfoImpl(
+_$UserInfoClassImpl _$$UserInfoClassImplFromJson(Map<String, dynamic> json) =>
+    _$UserInfoClassImpl(
       userId: json['userId'] as String,
       gender: json['gender'] as String,
       occupation: json['occupation'] as String,
@@ -22,7 +22,7 @@ _$UserInfoImpl _$$UserInfoImplFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$UserInfoImplToJson(_$UserInfoImpl instance) =>
+Map<String, dynamic> _$$UserInfoClassImplToJson(_$UserInfoClassImpl instance) =>
     <String, dynamic>{
       'userId': instance.userId,
       'gender': instance.gender,

@@ -10,16 +10,30 @@ class StoreList extends ConsumerWidget {
     required this.tags,
     required this.imageUrl,
     required this.name,
+    this.isBusinessTime = true,
     this.openTime,
     this.closeTime,
+    this.openTimeSecond,
+    this.closeTimeSecond,
+    this.remarksTime,
+    this.remarksDay,
+    this.businessDays,
     super.key,
   });
   final String name;
   final String imageUrl;
+  final String? remarksTime;
+  final String? remarksDay;
   final String? openTime;
   final String? closeTime;
+  final String? openTimeSecond;
+  final String? closeTimeSecond;
   final VoidCallback? onTap;
   final List<dynamic> tags;
+  final List<dynamic>? businessDays;
+  final bool isBusinessTime;
+  bool get isVisibleTime => closeTime != '' && openTime != '';
+  bool get isVisibleTimeSecond => closeTimeSecond != '' || openTimeSecond != '';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => Padding(
@@ -88,20 +102,99 @@ class StoreList extends ConsumerWidget {
                           const Padding(padding: EdgeInsets.all(12)),
 
                           /// 営業時間
-                          const Padding(
-                            padding: EdgeInsets.only(left: 20),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                '営業時間',
-                                style: Styles.subTitleStyle,
-                              ),
+                          if (isBusinessTime)
+                            Column(
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 20),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      '営業時間',
+                                      style: Styles.subTitleStyle,
+                                    ),
+                                  ),
+                                ),
+                                if (isVisibleTime)
+                                  Text(
+                                    '$openTime〜$closeTime',
+                                    style: Styles.businnesHours,
+                                  )
+                                else
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 8),
+                                    child: Text(
+                                      '営業時間の情報がありません',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 10,
+                                        color: ColorName.black3,
+                                      ),
+                                    ),
+                                  ),
+                                Visibility(
+                                  visible: isVisibleTimeSecond,
+                                  child: Text(
+                                    '$openTimeSecond〜$closeTimeSecond',
+                                    style: Styles.businnesHours,
+                                  ),
+                                ),
+                                if (remarksTime != '')
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: Text(
+                                      '※$remarksTime',
+                                      style: const TextStyle(fontSize: 10),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                              ],
+                            )
+
+                          /// 営業日
+                          else
+                            Column(
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 20),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      '営業日',
+                                      style: Styles.subTitleStyle,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Wrap(
+                                  spacing: 1,
+                                  runSpacing: 1,
+                                  children: businessDays!.isNotEmpty
+                                      ? businessDays!
+                                          .map((formattedBusinessDays) {
+                                          final isLastDay =
+                                              formattedBusinessDays ==
+                                                  businessDays!.last;
+                                          return Text(
+                                            '$formattedBusinessDays${isLastDay ? '' : ','}',
+                                            style: Styles.tagsTextStyle,
+                                          );
+                                        }).toList()
+                                      : [],
+                                ),
+                                if (remarksDay != '')
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: Text(
+                                      '※$remarksDay',
+                                      style: const TextStyle(fontSize: 10),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                              ],
                             ),
-                          ),
-                          Text(
-                            '$openTime〜$closeTime',
-                            style: Styles.businnesHours,
-                          ),
                         ],
                       ),
                     ),

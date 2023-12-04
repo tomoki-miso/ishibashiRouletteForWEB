@@ -20,11 +20,17 @@ class StoreClass with _$StoreClass {
     String? storeWeb,
     String? storeTwitter,
     String? storeInsta,
+    String? storeInstaPosts,
     String? storeTabelog,
     String? storePhotoUrl,
     String? openTime,
     String? closeTime,
+    String? openTimeSecond,
+    String? closeTimeSecond,
+    String? remarksTime,
+    String? remarksDay,
     List<String>? tags,
+    List<String>? businessDays,
   }) = _StoreClass;
   factory StoreClass.fromJson(Map<String, dynamic> json) =>
       _$StoreClassFromJson(json);
