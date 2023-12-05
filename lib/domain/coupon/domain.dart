@@ -20,7 +20,7 @@ class Coupon with _$Coupon {
     required String couponDetail,
     required String couponImage,
     required String expiration,
-    int? remainingAmount,
+    required num remainingAmount,
   }) = _Coupon;
   factory Coupon.fromJson(Map<String, dynamic> json) => _$CouponFromJson(json);
 

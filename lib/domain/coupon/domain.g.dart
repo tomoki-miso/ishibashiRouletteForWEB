@@ -14,7 +14,7 @@ _$CouponImpl _$$CouponImplFromJson(Map<String, dynamic> json) => _$CouponImpl(
       couponDetail: json['couponDetail'] as String,
       couponImage: json['couponImage'] as String,
       expiration: json['expiration'] as String,
-      remainingAmount: json['remainingAmount'] as int?,
+      remainingAmount: json['remainingAmount'] as num,
     );
 
 Map<String, dynamic> _$$CouponImplToJson(_$CouponImpl instance) =>

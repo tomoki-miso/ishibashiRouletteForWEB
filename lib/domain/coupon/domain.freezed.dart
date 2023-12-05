@@ -27,7 +27,7 @@ mixin _$Coupon {
   String get couponDetail => throw _privateConstructorUsedError;
   String get couponImage => throw _privateConstructorUsedError;
   String get expiration => throw _privateConstructorUsedError;
-  int? get remainingAmount => throw _privateConstructorUsedError;
+  num get remainingAmount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,7 +47,7 @@ abstract class $CouponCopyWith<$Res> {
       String couponDetail,
       String couponImage,
       String expiration,
-      int? remainingAmount});
+      num remainingAmount});
 }
 
 /// @nodoc
@@ -70,7 +70,7 @@ class _$CouponCopyWithImpl<$Res, $Val extends Coupon>
     Object? couponDetail = null,
     Object? couponImage = null,
     Object? expiration = null,
-    Object? remainingAmount = freezed,
+    Object? remainingAmount = null,
   }) {
     return _then(_value.copyWith(
       couponId: null == couponId
@@ -101,10 +101,10 @@ class _$CouponCopyWithImpl<$Res, $Val extends Coupon>
           ? _value.expiration
           : expiration // ignore: cast_nullable_to_non_nullable
               as String,
-      remainingAmount: freezed == remainingAmount
+      remainingAmount: null == remainingAmount
           ? _value.remainingAmount
           : remainingAmount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as num,
     ) as $Val);
   }
 }
@@ -124,7 +124,7 @@ abstract class _$$CouponImplCopyWith<$Res> implements $CouponCopyWith<$Res> {
       String couponDetail,
       String couponImage,
       String expiration,
-      int? remainingAmount});
+      num remainingAmount});
 }
 
 /// @nodoc
@@ -145,7 +145,7 @@ class __$$CouponImplCopyWithImpl<$Res>
     Object? couponDetail = null,
     Object? couponImage = null,
     Object? expiration = null,
-    Object? remainingAmount = freezed,
+    Object? remainingAmount = null,
   }) {
     return _then(_$CouponImpl(
       couponId: null == couponId
@@ -176,10 +176,10 @@ class __$$CouponImplCopyWithImpl<$Res>
           ? _value.expiration
           : expiration // ignore: cast_nullable_to_non_nullable
               as String,
-      remainingAmount: freezed == remainingAmount
+      remainingAmount: null == remainingAmount
           ? _value.remainingAmount
           : remainingAmount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as num,
     ));
   }
 }
@@ -195,7 +195,7 @@ class _$CouponImpl implements _Coupon {
       required this.couponDetail,
       required this.couponImage,
       required this.expiration,
-      this.remainingAmount});
+      required this.remainingAmount});
 
   factory _$CouponImpl.fromJson(Map<String, dynamic> json) =>
       _$$CouponImplFromJson(json);
@@ -215,7 +215,7 @@ class _$CouponImpl implements _Coupon {
   @override
   final String expiration;
   @override
-  final int? remainingAmount;
+  final num remainingAmount;
 
   @override
   String toString() {
@@ -272,7 +272,7 @@ abstract class _Coupon implements Coupon {
       required final String couponDetail,
       required final String couponImage,
       required final String expiration,
-      final int? remainingAmount}) = _$CouponImpl;
+      required final num remainingAmount}) = _$CouponImpl;
 
   factory _Coupon.fromJson(Map<String, dynamic> json) = _$CouponImpl.fromJson;
 
@@ -291,7 +291,7 @@ abstract class _Coupon implements Coupon {
   @override
   String get expiration;
   @override
-  int? get remainingAmount;
+  num get remainingAmount;
   @override
   @JsonKey(ignore: true)
   _$$CouponImplCopyWith<_$CouponImpl> get copyWith =>

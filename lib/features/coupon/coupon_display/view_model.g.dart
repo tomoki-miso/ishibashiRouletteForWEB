@@ -7,7 +7,7 @@ part of 'view_model.dart';
 // **************************************************************************
 
 String _$couponDisplayViewModelHash() =>
-    r'351c0cee851b6ea5a795b7dc20f8d9de425c06cb';
+    r'20482818910fe5e523d1be2504c3d6ab1fd9bd96';
 
 /// Copied from Dart SDK
 class _SystemHash {

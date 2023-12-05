@@ -41,6 +41,7 @@ class CouponDisplayViewModel extends _$CouponDisplayViewModel {
       couponDetail: couponData['detail'],
       expiration: formattedExpiration,
       couponImage: couponData['couponImage'],
+      remainingAmount: couponData['remainingAmount'],
     );
 
     final state = CouponDisplayState(coupon: coupon);
@@ -58,8 +59,13 @@ class CouponDisplayViewModel extends _$CouponDisplayViewModel {
       couponDetail: data.couponDetail,
       expiration: data.expiration,
       couponImage: data.couponImage,
+      remainingAmount: data.remainingAmount,
     );
 
     await coupoRepo.saveCoupon(gotCoupon, currentUser.userId);
+    await coupoRepo.reduceCouponAmount(
+      couponId: gotCoupon.couponId,
+      coupon: gotCoupon,
+    );
   }
 }

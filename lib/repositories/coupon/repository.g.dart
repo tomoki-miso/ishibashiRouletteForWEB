@@ -6,7 +6,22 @@ part of 'repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$couponRepoHash() => r'5616892490f00889415d696622ae8629977b13ca';
+String _$couponFirestoreHash() => r'eb35296c53c291078de6495c2e992d235ebe1eea';
+
+/// See also [couponFirestore].
+@ProviderFor(couponFirestore)
+final couponFirestoreProvider = Provider<CollectionReference<Coupon>>.internal(
+  couponFirestore,
+  name: r'couponFirestoreProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$couponFirestoreHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef CouponFirestoreRef = ProviderRef<CollectionReference<Coupon>>;
+String _$couponRepoHash() => r'072d102f9c5162c0263d12a44189dcc8c96fa017';
 
 /// See also [CouponRepo].
 @ProviderFor(CouponRepo)
