@@ -8,22 +8,23 @@ part of 'domain.dart';
 
 _$CouponImpl _$$CouponImplFromJson(Map<String, dynamic> json) => _$CouponImpl(
       couponId: json['couponId'] as String,
+      storeId: json['storeId'] as String,
       storeName: json['storeName'] as String,
       couponName: json['couponName'] as String,
       couponDetail: json['couponDetail'] as String,
-      expiration: DateTime.parse(json['expiration'] as String),
+      couponImage: json['couponImage'] as String,
+      expiration: json['expiration'] as String,
       remainingAmount: json['remainingAmount'] as int,
-      users:
-          (json['users'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$$CouponImplToJson(_$CouponImpl instance) =>
     <String, dynamic>{
       'couponId': instance.couponId,
+      'storeId': instance.storeId,
       'storeName': instance.storeName,
       'couponName': instance.couponName,
       'couponDetail': instance.couponDetail,
-      'expiration': instance.expiration.toIso8601String(),
+      'couponImage': instance.couponImage,
+      'expiration': instance.expiration,
       'remainingAmount': instance.remainingAmount,
-      'users': instance.users,
     };

@@ -1,6 +1,5 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 import 'package:ishibashi/domain/coupon/domain.dart';
 import 'package:ishibashi/features/coupon/coupon_display/state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,34 +16,31 @@ class CouponDisplayViewModel extends _$CouponDisplayViewModel {
         .get();
 
     final couponData = storeSnapshot.data()!;
-    final businessDays = await _fetchBusinessDays(storeSnapshot.reference);
+
+    /// 型変換
+    final Timestamp expirationTimestamp = couponData[
+        'expiration']; // 仮にcouponData['expiration']がFirebaseのTimestamp型として取得されると仮定しています
+
+    final DateTime expirationDateTime = expirationTimestamp.toDate();
+    final String formattedExpiration =
+        DateFormat('yyyy年 M/dd HH:mm').format(expirationDateTime);
 
     final Coupon coupon = Coupon(
+      storeId: couponData['storeId'],
       couponId: couponData['couponId'],
       couponName: couponData['couponName'],
       storeName: couponData['storeName'],
       couponDetail: couponData['detail'],
-      expiration: couponData['expiration'],
+      expiration: formattedExpiration,
       remainingAmount: couponData['remainingAmount'],
-      users: couponData['users'],
+      couponImage: couponData['couponImage'],
     );
 
     final state = CouponDisplayState(coupon: coupon);
     return state;
   }
 
-  Future<List<String>> _fetchBusinessDays(
-    DocumentReference storeReference,
-  ) async {
-    final storeSnapshot = await storeReference.get();
-    final couponData = storeSnapshot.data() as Map<String, dynamic>?;
-
-    if (couponData != null && couponData.containsKey('daysOfWeek')) {
-      final days = couponData['daysOfWeek'] as List<dynamic>;
-      final formattedBusinessDays = days.map((day) => day.toString()).toList();
-      return formattedBusinessDays;
-    } else {
-      return [];
-    }
+  Future<void> saveCoupon() async {
+    
   }
 }

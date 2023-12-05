@@ -23,6 +23,8 @@ class CouponDisplayPage extends ConsumerWidget {
       loading: () => const Center(child: CircularProgressIndicator()),
       data: (data) {
         final couponData = data.coupon;
+        final expiration = couponData.expiration;
+        final detail = couponData.couponDetail;
         return Scaffold(
           appBar: const OriginalAppBar(),
           body: Center(
@@ -52,7 +54,7 @@ class CouponDisplayPage extends ConsumerWidget {
                       ),
                       const Padding(padding: EdgeInsets.all(2)),
                       CachedNetworkImage(
-                        imageUrl: 'https://placehold.jp/150x150.png',
+                        imageUrl: couponData.couponImage,
                         width: MediaQuery.of(context).size.width * 0.8,
                         height: MediaQuery.of(context).size.width * 0.6,
                         fit: BoxFit.cover,
@@ -67,11 +69,11 @@ class CouponDisplayPage extends ConsumerWidget {
                         ),
                       ),
                       const Padding(padding: EdgeInsets.all(1)),
-                      const Wrap(
+                      Wrap(
                         children: [
                           Text(
-                            '有効期限：2023/11/30',
-                            style: TextStyle(
+                            '有効期限:$expiration',
+                            style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: ColorName.black2,
@@ -85,8 +87,9 @@ class CouponDisplayPage extends ConsumerWidget {
                           horizontal: 16,
                         ),
                         child: Text(
-                          couponData.couponDetail,
+                          '条件：$detail' * 10,
                           maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.start,
                           style: const TextStyle(
                             fontSize: 15,

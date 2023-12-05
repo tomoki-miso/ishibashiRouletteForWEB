@@ -14,12 +14,13 @@ class Coupon with _$Coupon {
   // プロパティを指定
   const factory Coupon({
     required String couponId,
+    required String storeId,
     required String storeName,
     required String couponName,
     required String couponDetail,
-    required DateTime expiration,
+    required String couponImage,
+    required String expiration,
     required int remainingAmount,
-    List<String>? users,
   }) = _Coupon;
   factory Coupon.fromJson(Map<String, dynamic> json) => _$CouponFromJson(json);
 
