@@ -9,9 +9,9 @@ part of 'domain_user_info.dart';
 _$UserInfoClassImpl _$$UserInfoClassImplFromJson(Map<String, dynamic> json) =>
     _$UserInfoClassImpl(
       userId: json['userId'] as String,
-      gender: json['gender'] as String,
-      occupation: json['occupation'] as String,
-      userName: json['userName'] as String,
+      userName: json['userName'] as String?,
+      gender: json['gender'] as String?,
+      occupation: json['occupation'] as String?,
       faculty: json['faculty'] as String?,
       department: json['department'] as String?,
       createdAt: json['createdAt'] == null
@@ -25,9 +25,9 @@ _$UserInfoClassImpl _$$UserInfoClassImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$UserInfoClassImplToJson(_$UserInfoClassImpl instance) =>
     <String, dynamic>{
       'userId': instance.userId,
+      'userName': instance.userName,
       'gender': instance.gender,
       'occupation': instance.occupation,
-      'userName': instance.userName,
       'faculty': instance.faculty,
       'department': instance.department,
       'createdAt': instance.createdAt?.toIso8601String(),

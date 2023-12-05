@@ -21,9 +21,9 @@ UserInfoClass _$UserInfoClassFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserInfoClass {
   String get userId => throw _privateConstructorUsedError;
-  String get gender => throw _privateConstructorUsedError;
-  String get occupation => throw _privateConstructorUsedError;
-  String get userName => throw _privateConstructorUsedError;
+  String? get userName => throw _privateConstructorUsedError;
+  String? get gender => throw _privateConstructorUsedError;
+  String? get occupation => throw _privateConstructorUsedError;
   String? get faculty => throw _privateConstructorUsedError;
   String? get department => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -43,9 +43,9 @@ abstract class $UserInfoClassCopyWith<$Res> {
   @useResult
   $Res call(
       {String userId,
-      String gender,
-      String occupation,
-      String userName,
+      String? userName,
+      String? gender,
+      String? occupation,
       String? faculty,
       String? department,
       DateTime? createdAt,
@@ -66,9 +66,9 @@ class _$UserInfoClassCopyWithImpl<$Res, $Val extends UserInfoClass>
   @override
   $Res call({
     Object? userId = null,
-    Object? gender = null,
-    Object? occupation = null,
-    Object? userName = null,
+    Object? userName = freezed,
+    Object? gender = freezed,
+    Object? occupation = freezed,
     Object? faculty = freezed,
     Object? department = freezed,
     Object? createdAt = freezed,
@@ -79,18 +79,18 @@ class _$UserInfoClassCopyWithImpl<$Res, $Val extends UserInfoClass>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      gender: null == gender
-          ? _value.gender
-          : gender // ignore: cast_nullable_to_non_nullable
-              as String,
-      occupation: null == occupation
-          ? _value.occupation
-          : occupation // ignore: cast_nullable_to_non_nullable
-              as String,
-      userName: null == userName
+      userName: freezed == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      occupation: freezed == occupation
+          ? _value.occupation
+          : occupation // ignore: cast_nullable_to_non_nullable
+              as String?,
       faculty: freezed == faculty
           ? _value.faculty
           : faculty // ignore: cast_nullable_to_non_nullable
@@ -121,9 +121,9 @@ abstract class _$$UserInfoClassImplCopyWith<$Res>
   @useResult
   $Res call(
       {String userId,
-      String gender,
-      String occupation,
-      String userName,
+      String? userName,
+      String? gender,
+      String? occupation,
       String? faculty,
       String? department,
       DateTime? createdAt,
@@ -142,9 +142,9 @@ class __$$UserInfoClassImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
-    Object? gender = null,
-    Object? occupation = null,
-    Object? userName = null,
+    Object? userName = freezed,
+    Object? gender = freezed,
+    Object? occupation = freezed,
     Object? faculty = freezed,
     Object? department = freezed,
     Object? createdAt = freezed,
@@ -155,18 +155,18 @@ class __$$UserInfoClassImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      gender: null == gender
-          ? _value.gender
-          : gender // ignore: cast_nullable_to_non_nullable
-              as String,
-      occupation: null == occupation
-          ? _value.occupation
-          : occupation // ignore: cast_nullable_to_non_nullable
-              as String,
-      userName: null == userName
+      userName: freezed == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      occupation: freezed == occupation
+          ? _value.occupation
+          : occupation // ignore: cast_nullable_to_non_nullable
+              as String?,
       faculty: freezed == faculty
           ? _value.faculty
           : faculty // ignore: cast_nullable_to_non_nullable
@@ -192,9 +192,9 @@ class __$$UserInfoClassImplCopyWithImpl<$Res>
 class _$UserInfoClassImpl implements _UserInfoClass {
   const _$UserInfoClassImpl(
       {required this.userId,
-      required this.gender,
-      required this.occupation,
-      required this.userName,
+      this.userName,
+      this.gender,
+      this.occupation,
       this.faculty,
       this.department,
       this.createdAt,
@@ -206,11 +206,11 @@ class _$UserInfoClassImpl implements _UserInfoClass {
   @override
   final String userId;
   @override
-  final String gender;
+  final String? userName;
   @override
-  final String occupation;
+  final String? gender;
   @override
-  final String userName;
+  final String? occupation;
   @override
   final String? faculty;
   @override
@@ -222,7 +222,7 @@ class _$UserInfoClassImpl implements _UserInfoClass {
 
   @override
   String toString() {
-    return 'UserInfoClass(userId: $userId, gender: $gender, occupation: $occupation, userName: $userName, faculty: $faculty, department: $department, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserInfoClass(userId: $userId, userName: $userName, gender: $gender, occupation: $occupation, faculty: $faculty, department: $department, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -231,11 +231,11 @@ class _$UserInfoClassImpl implements _UserInfoClass {
         (other.runtimeType == runtimeType &&
             other is _$UserInfoClassImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.occupation, occupation) ||
                 other.occupation == occupation) &&
-            (identical(other.userName, userName) ||
-                other.userName == userName) &&
             (identical(other.faculty, faculty) || other.faculty == faculty) &&
             (identical(other.department, department) ||
                 other.department == department) &&
@@ -247,8 +247,8 @@ class _$UserInfoClassImpl implements _UserInfoClass {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, gender, occupation,
-      userName, faculty, department, createdAt, updatedAt);
+  int get hashCode => Object.hash(runtimeType, userId, userName, gender,
+      occupation, faculty, department, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -267,9 +267,9 @@ class _$UserInfoClassImpl implements _UserInfoClass {
 abstract class _UserInfoClass implements UserInfoClass {
   const factory _UserInfoClass(
       {required final String userId,
-      required final String gender,
-      required final String occupation,
-      required final String userName,
+      final String? userName,
+      final String? gender,
+      final String? occupation,
       final String? faculty,
       final String? department,
       final DateTime? createdAt,
@@ -281,11 +281,11 @@ abstract class _UserInfoClass implements UserInfoClass {
   @override
   String get userId;
   @override
-  String get gender;
+  String? get userName;
   @override
-  String get occupation;
+  String? get gender;
   @override
-  String get userName;
+  String? get occupation;
   @override
   String? get faculty;
   @override

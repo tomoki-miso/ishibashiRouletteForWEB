@@ -6,7 +6,23 @@ part of 'repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userInfoRepoHash() => r'89b25aae364fe2b6f3b9b4fb6ba3f75a398de882';
+String _$appUserFirestoreHash() => r'797d72ec23d32ad763ef5bfc3a8f58a3a4185fae';
+
+/// See also [appUserFirestore].
+@ProviderFor(appUserFirestore)
+final appUserFirestoreProvider =
+    Provider<CollectionReference<UserInfoClass>>.internal(
+  appUserFirestore,
+  name: r'appUserFirestoreProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$appUserFirestoreHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef AppUserFirestoreRef = ProviderRef<CollectionReference<UserInfoClass>>;
+String _$userInfoRepoHash() => r'46fb0ff9b788cf876bf978ba68eb0193965ec23a';
 
 /// See also [UserInfoRepo].
 @ProviderFor(UserInfoRepo)

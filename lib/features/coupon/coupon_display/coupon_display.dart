@@ -102,7 +102,11 @@ class CouponDisplayPage extends ConsumerWidget {
                 ),
                 const Padding(padding: EdgeInsets.all(4)),
                 PrimaryButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    ref
+                        .read(couponDisplayViewModelProvider(couponId).notifier)
+                        .saveCoupon();
+                  },
                   text: '保存する',
                   width: MediaQuery.of(context).size.width * 0.9,
                   height: MediaQuery.of(context).size.height * 0.07,

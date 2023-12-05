@@ -12,9 +12,9 @@ class UserInfoClass with _$UserInfoClass {
   // プロパティを指定
   const factory UserInfoClass({
     required String userId,
-    required String gender,
-    required String occupation,
-    required String userName,
+    String? userName,
+    String? gender,
+    String? occupation,
     String? faculty,
     String? department,
     DateTime? createdAt,
