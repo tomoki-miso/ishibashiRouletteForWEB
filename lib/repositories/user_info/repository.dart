@@ -6,7 +6,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'repository.g.dart';
 
 @Riverpod(keepAlive: true)
-CollectionReference<UserInfoClass> appUserFirestore(AppUserFirestoreRef ref) =>
+CollectionReference<UserInfoClass> userInfoFirestore(
+        UserInfoFirestoreRef ref) =>
     ref
         .read(firestoreProvider)
         .collection('user_info')
@@ -17,11 +18,14 @@ CollectionReference<UserInfoClass> appUserFirestore(AppUserFirestoreRef ref) =>
         );
 
 @Riverpod(keepAlive: true)
-class UserInfoRepo extends _$UserInfoRepo {
-  FirebaseFirestore get db => ref.read(firestoreProvider);
-  String get uid => ref.read(firebaseAuthProvider).currentUser!.uid;
+class UserInfoClassRepo extends _$UserInfoClassRepo {
   CollectionReference<UserInfoClass> get collection =>
-      ref.read(appUserFirestoreProvider);
+      ref.read(userInfoFirestoreProvider);
+
+  FirebaseFirestore get db => ref.read(firestoreProvider);
+
+  String get uid => ref.read(firebaseAuthProvider).currentUser!.uid;
+
   @override
   void build() {}
 

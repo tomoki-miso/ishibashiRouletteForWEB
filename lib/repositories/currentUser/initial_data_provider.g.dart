@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'repository.dart';
+part of 'initial_data_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentUserHash() => r'751b696e962c262414048edcb7c73f190574ae1a';
+String _$currentUserHash() => r'480d6edb71d4254fb29b730f4f1c8c73682e0796';
 
 /// See also [currentUser].
 @ProviderFor(currentUser)

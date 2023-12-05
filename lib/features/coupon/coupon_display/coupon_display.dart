@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/original_app_bar.dart';
 import 'package:ishibashi/components/primary_button.dart';
 import 'package:ishibashi/features/coupon/coupon_display/view_model.dart';
+import 'package:ishibashi/features/coupon/coupon_pre/coupon_pre.dart';
 import 'package:ishibashi/style/colors.dart';
 
 class CouponDisplayPage extends ConsumerWidget {
@@ -103,9 +104,17 @@ class CouponDisplayPage extends ConsumerWidget {
                 const Padding(padding: EdgeInsets.all(4)),
                 PrimaryButton(
                   onPressed: () async {
-                    ref
+                    await ref
                         .read(couponDisplayViewModelProvider(couponId).notifier)
-                        .saveCoupon();
+                        .saveCoupon()
+                        .then(
+                          (value) => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CouponPrePage(),
+                            ),
+                          ),
+                        );
                   },
                   text: '保存する',
                   width: MediaQuery.of(context).size.width * 0.9,

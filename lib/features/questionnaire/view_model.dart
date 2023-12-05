@@ -11,7 +11,8 @@ part 'view_model.g.dart';
 
 @riverpod
 class QuestionnaireViewModel extends _$QuestionnaireViewModel {
-  UserInfoRepo get userInfoRepo => ref.read(userInfoRepoProvider.notifier);
+  UserInfoClassRepo get userInfoRepo =>
+      ref.read(userInfoClassRepoProvider.notifier);
 
   @override
   FutureOr<QuestionnaireState> build() async {

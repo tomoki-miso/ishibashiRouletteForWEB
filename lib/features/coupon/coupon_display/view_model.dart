@@ -5,7 +5,7 @@ import 'package:ishibashi/domain/coupon/domain.dart';
 import 'package:ishibashi/domain/user_info/domain_user_info.dart';
 import 'package:ishibashi/features/coupon/coupon_display/state.dart';
 import 'package:ishibashi/repositories/coupon/repository.dart';
-import 'package:ishibashi/repositories/currentUser/repository.dart';
+import 'package:ishibashi/repositories/currentUser/initial_data_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'view_model.g.dart';
@@ -60,6 +60,6 @@ class CouponDisplayViewModel extends _$CouponDisplayViewModel {
       couponImage: data.couponImage,
     );
 
-    await coupoRepo.saveCoupon(gotCoupon, currentUser);
+    await coupoRepo.saveCoupon(gotCoupon, currentUser.userId);
   }
 }
