@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/primary_button.dart';
-import 'package:ishibashi/features/coupon/components/coupon_app_bar.dart';
+import 'package:ishibashi/features/coupon/componet/coupon_app_bar.dart';
+import 'package:ishibashi/features/coupon/coupon/view_model.dart';
 import 'package:ishibashi/features/coupon/coupon_display/coupon_display.dart';
 import 'package:ishibashi/style/colors.dart';
 import 'package:lottie/lottie.dart';
@@ -10,7 +11,12 @@ class CouponPage extends ConsumerWidget {
   const CouponPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => Scaffold(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(couponViewModelProvider);
+    return state.when(
+      error: (error, stackTrace) => Container(),
+      loading: () => const Center(child: CircularProgressIndicator()),
+      data: (data) => Scaffold(
         appBar: const CouponAppBar(),
         body: Center(
           child: Column(
@@ -46,8 +52,8 @@ class CouponPage extends ConsumerWidget {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const CouponDisplayPage(
-                        couponId: '1',
+                      builder: (context) => CouponDisplayPage(
+                        couponId: data.couponId,
                       ),
                     ),
                   );
@@ -58,5 +64,7 @@ class CouponPage extends ConsumerWidget {
             ],
           ),
         ),
-      );
+      ),
+    );
+  }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/original_app_bar.dart';
 import 'package:ishibashi/components/primary_button.dart';
-import 'package:ishibashi/features/coupon/components/coupon_info.dart';
+import 'package:ishibashi/features/coupon/componet/coupon_info.dart';
 import 'package:ishibashi/features/coupon/coupon_display/view_model.dart';
 
 class CouponDisplayPage extends ConsumerWidget {

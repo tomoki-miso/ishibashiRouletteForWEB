@@ -21,7 +21,7 @@ final couponFirestoreProvider = Provider<CollectionReference<Coupon>>.internal(
 );
 
 typedef CouponFirestoreRef = ProviderRef<CollectionReference<Coupon>>;
-String _$couponRepoHash() => r'831c7252325f41c21313ab21a84a8f6475be4077';
+String _$couponRepoHash() => r'f13b4b322cf4bb314becb2962035687b3ca6e7ef';
 
 /// See also [CouponRepo].
 @ProviderFor(CouponRepo)
