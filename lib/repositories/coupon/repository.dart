@@ -41,7 +41,7 @@ class CouponRepo extends _$CouponRepo {
         .collection('coupons')
         .doc(couponId);
 
-    await userDocRef.update({'isAvailable': false});
+    await userDocRef.delete();
   }
 
   Future<void> reduceCouponAmount({
