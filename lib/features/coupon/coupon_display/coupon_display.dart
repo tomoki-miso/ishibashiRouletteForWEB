@@ -1,11 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/original_app_bar.dart';
 import 'package:ishibashi/components/primary_button.dart';
+import 'package:ishibashi/features/coupon/components/coupon_info.dart';
 import 'package:ishibashi/features/coupon/coupon_display/view_model.dart';
 import 'package:ishibashi/features/coupon/coupon_pre/coupon_pre.dart';
-import 'package:ishibashi/style/colors.dart';
 
 class CouponDisplayPage extends ConsumerWidget {
   const CouponDisplayPage({
@@ -34,75 +33,12 @@ class CouponDisplayPage extends ConsumerWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.92,
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      decoration: BoxDecoration(
-                        color: ColorName.backGroundYellow,
-                        border: Border.all(color: ColorName.greyBase, width: 5),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        children: [
-                          Wrap(
-                            children: [
-                              Text(
-                                couponData.storeName ?? '',
-                                style: const TextStyle(
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Padding(padding: EdgeInsets.all(2)),
-                          CachedNetworkImage(
-                            imageUrl: couponData.couponImage ??
-                                '', // TODO:クーポン用仮画像の用意
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.width * 0.6,
-                            fit: BoxFit.cover,
-                          ),
-                          const Padding(padding: EdgeInsets.all(2)),
-                          Text(
-                            couponData.couponName ?? '',
-                            style: const TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: ColorName.black2,
-                            ),
-                          ),
-                          const Padding(padding: EdgeInsets.all(1)),
-                          Wrap(
-                            children: [
-                              Text(
-                                '有効期限:$expiration',
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: ColorName.black2,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Padding(padding: EdgeInsets.all(4)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
-                            child: Text(
-                              '条件：$detail' * 10,
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.start,
-                              style: const TextStyle(
-                                fontSize: 15,
-                                color: ColorName.black2,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    CouponInfo(
+                      couponName: couponData.couponName,
+                      storeName: couponData.couponName,
+                      couponImage: couponData.couponImage,
+                      detail: detail,
+                      expiration: expiration,
                     ),
                     const Padding(padding: EdgeInsets.all(4)),
                     PrimaryButton(

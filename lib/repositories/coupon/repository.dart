@@ -28,7 +28,10 @@ class CouponRepo extends _$CouponRepo {
         .collection('user_info')
         .doc(ref.read(firebaseAuthProvider).currentUser!.uid);
 
-    await userDocRef.collection('coupons').add(coupon.toJson());
+    await userDocRef
+        .collection('coupons')
+        .doc(coupon.couponId)
+        .set(coupon.toJson());
   }
 
   Future<void> reduceCouponAmount({

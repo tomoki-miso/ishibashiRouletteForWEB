@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ishibashi/features/coupon/use_coupon/use_coupon.dart';
 import 'package:ishibashi/style/colors.dart';
 
 class CouponList extends StatelessWidget {
   const CouponList({
+    required this.couponId,
     required this.couponName,
     required this.storeName,
     required this.couponImage,
@@ -11,6 +13,7 @@ class CouponList extends StatelessWidget {
     super.key,
   });
 
+  final String couponId;
   final String? couponName;
   final String? storeName;
   final String? expiration;
@@ -24,7 +27,7 @@ class CouponList extends StatelessWidget {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const UseCouponPage(),
+                builder: (context) => UseCouponPage(couponId: couponId),
               ),
             );
           },
@@ -41,8 +44,8 @@ class CouponList extends StatelessWidget {
                     children: [
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.15,
-                        child: Image.network(
-                          couponImage ?? '',
+                        child: CachedNetworkImage(
+                          imageUrl: couponImage ?? '',
                           fit: BoxFit.cover,
                         ),
                       ),
