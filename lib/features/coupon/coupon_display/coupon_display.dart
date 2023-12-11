@@ -26,103 +26,118 @@ class CouponDisplayPage extends ConsumerWidget {
         final couponData = data.coupon;
         final expiration = couponData.expiration;
         final detail = couponData.couponDetail;
-        return Scaffold(
-          appBar: const OriginalAppBar(),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.92,
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  decoration: BoxDecoration(
-                    color: ColorName.backGroundYellow,
-                    border: Border.all(color: ColorName.greyBase, width: 5),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Column(
-                    children: [
-                      Wrap(
+        return Stack(
+          children: [
+            Scaffold(
+              appBar: const OriginalAppBar(),
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.92,
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      decoration: BoxDecoration(
+                        color: ColorName.backGroundYellow,
+                        border: Border.all(color: ColorName.greyBase, width: 5),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Column(
                         children: [
+                          Wrap(
+                            children: [
+                              Text(
+                                couponData.storeName,
+                                style: const TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Padding(padding: EdgeInsets.all(2)),
+                          CachedNetworkImage(
+                            imageUrl: couponData.couponImage,
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            height: MediaQuery.of(context).size.width * 0.6,
+                            fit: BoxFit.cover,
+                          ),
+                          const Padding(padding: EdgeInsets.all(2)),
                           Text(
-                            couponData.storeName,
+                            couponData.couponName,
                             style: const TextStyle(
                               fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Padding(padding: EdgeInsets.all(2)),
-                      CachedNetworkImage(
-                        imageUrl: couponData.couponImage,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        height: MediaQuery.of(context).size.width * 0.6,
-                        fit: BoxFit.cover,
-                      ),
-                      const Padding(padding: EdgeInsets.all(2)),
-                      Text(
-                        couponData.couponName,
-                        style: const TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: ColorName.black2,
-                        ),
-                      ),
-                      const Padding(padding: EdgeInsets.all(1)),
-                      Wrap(
-                        children: [
-                          Text(
-                            '有効期限:$expiration',
-                            style: const TextStyle(
-                              fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: ColorName.black2,
                             ),
                           ),
-                        ],
-                      ),
-                      const Padding(padding: EdgeInsets.all(4)),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                        ),
-                        child: Text(
-                          '条件：$detail' * 10,
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.start,
-                          style: const TextStyle(
-                            fontSize: 15,
-                            color: ColorName.black2,
+                          const Padding(padding: EdgeInsets.all(1)),
+                          Wrap(
+                            children: [
+                              Text(
+                                '有効期限:$expiration',
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: ColorName.black2,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const Padding(padding: EdgeInsets.all(4)),
-                PrimaryButton(
-                  onPressed: () async {
-                    await ref
-                        .read(couponDisplayViewModelProvider(couponId).notifier)
-                        .saveCoupon()
-                        .then(
-                          (value) => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const CouponPrePage(),
+                          const Padding(padding: EdgeInsets.all(4)),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                            ),
+                            child: Text(
+                              '条件：$detail' * 10,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.start,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                color: ColorName.black2,
+                              ),
                             ),
                           ),
-                        );
-                  },
-                  text: '保存する',
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.07,
+                        ],
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(4)),
+                    PrimaryButton(
+                      onPressed: () async {
+                        await ref
+                            .read(
+                              couponDisplayViewModelProvider(couponId).notifier,
+                            )
+                            .saveCoupon()
+                            .then(
+                              (value) => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const CouponPrePage(),
+                                ),
+                              ),
+                            );
+                      },
+                      text: '保存する',
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.height * 0.07,
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
+            if (data.isLoading)
+              Container(
+                height: double.infinity,
+                width: double.infinity,
+                color: Colors.black.withOpacity(0.3),
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              )
+          ],
         );
       },
     );

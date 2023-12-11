@@ -12,5 +12,6 @@ class CouponDisplayState with _$CouponDisplayState {
   // プロパティを指定
   const factory CouponDisplayState({
     required Coupon coupon,
+    @Default(false) bool isLoading,
   }) = _CouponDisplayState;
 }

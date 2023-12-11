@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:intl/intl.dart';
 import 'package:ishibashi/domain/coupon/domain.dart';
-import 'package:ishibashi/domain/user_info/domain_user_info.dart';
 import 'package:ishibashi/features/coupon/coupon_display/state.dart';
 import 'package:ishibashi/repositories/coupon/repository.dart';
-import 'package:ishibashi/repositories/currentUser/initial_data_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'view_model.g.dart';
@@ -13,8 +11,6 @@ part 'view_model.g.dart';
 @riverpod
 class CouponDisplayViewModel extends _$CouponDisplayViewModel {
   CouponRepo get coupoRepo => ref.read(couponRepoProvider.notifier);
-
-  UserInfoClass get currentUser => ref.read(currentUserProvider).requireValue;
 
   @override
   FutureOr<CouponDisplayState> build(String couponId) async {
@@ -53,7 +49,7 @@ class CouponDisplayViewModel extends _$CouponDisplayViewModel {
 
     final Coupon gotCoupon = Coupon(
       storeId: data.storeId,
-      couponId: data.storeId,
+      couponId: data.couponId,
       couponName: data.couponName,
       storeName: data.storeName,
       couponDetail: data.couponDetail,
@@ -61,11 +57,22 @@ class CouponDisplayViewModel extends _$CouponDisplayViewModel {
       couponImage: data.couponImage,
       remainingAmount: data.remainingAmount,
     );
-
-    await coupoRepo.saveCoupon(gotCoupon, currentUser.userId);
-    await coupoRepo.reduceCouponAmount(
-      couponId: gotCoupon.couponId,
-      coupon: gotCoupon,
-    );
+    try {
+      // ローディング開始
+      _updateLoading(true);
+      await coupoRepo.saveCoupon(gotCoupon);
+      await coupoRepo.reduceCouponAmount(
+        couponId: gotCoupon.couponId,
+        coupon: gotCoupon,
+      );
+    } catch (e) {
+      rethrow;
+    } finally {
+      //　ここでローディング止める
+      _updateLoading(false);
+    }
   }
+
+  void _updateLoading(bool isLoading) =>
+      state = AsyncData(state.requireValue.copyWith(isLoading: isLoading));
 }
