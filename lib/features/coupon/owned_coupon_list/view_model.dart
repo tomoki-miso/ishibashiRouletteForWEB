@@ -14,6 +14,14 @@ class OwnedCouponListViewModel extends _$OwnedCouponListViewModel {
 
   @override
   FutureOr<OwnedCouponListState> build() async {
+    final List<OwnedCoupon> couponList = await _getCouponList();
+
+    return OwnedCouponListState(couponList: couponList);
+  }
+
+  ///リストを取得
+
+  Future<List<OwnedCoupon>> _getCouponList() async {
     final storeSnapshot = await FirebaseFirestore.instance
         .collection('user_info')
         .doc(ref.read(firebaseAuthProvider).currentUser!.uid)
@@ -24,7 +32,6 @@ class OwnedCouponListViewModel extends _$OwnedCouponListViewModel {
         storeSnapshot.docs.map((document) async {
       final couponData = document.data();
 
-      /// 型変換は不要？
       return OwnedCoupon(
         storeId: couponData['storeId'],
         couponId: couponData['couponId'],
@@ -35,12 +42,10 @@ class OwnedCouponListViewModel extends _$OwnedCouponListViewModel {
         couponImage: couponData['couponImage'],
       );
     }).toList();
-
-    final List<OwnedCoupon> couponList = await Future.wait(futureStoreList);
-
-    return OwnedCouponListState(couponList: couponList);
+    return Future.wait(futureStoreList);
   }
 
+  /// 有効期限のチェック
   Future<bool> checkExpiration(int index) async {
     final data = state.requireValue.couponList[index];
     final String dateString = data.expiration;
@@ -59,4 +64,25 @@ class OwnedCouponListViewModel extends _$OwnedCouponListViewModel {
 
     return expiration.isAfter(nowtime);
   }
+
+  /// クーポンを消す
+  Future<void> deleteCoupon(String couponId) async {
+    try {
+      // ローディング開始
+      _updateLoading(true);
+      await coupoRepo.deleteCoupon(couponId);
+
+      final updatedCouponList = await _getCouponList();
+      state =
+          AsyncData(state.requireValue.copyWith(couponList: updatedCouponList));
+    } catch (e) {
+      rethrow;
+    } finally {
+      //　ここでローディング止める
+      _updateLoading(false);
+    }
+  }
+
+  void _updateLoading(bool isLoading) =>
+      state = AsyncData(state.requireValue.copyWith(isLoading: isLoading));
 }

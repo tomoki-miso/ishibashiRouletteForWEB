@@ -11,5 +11,6 @@ class OwnedCouponListState with _$OwnedCouponListState {
   // プロパティを指定
   const factory OwnedCouponListState({
     required List couponList,
+    @Default(false) bool isLoading,
   }) = _OwnedCouponListState;
 }

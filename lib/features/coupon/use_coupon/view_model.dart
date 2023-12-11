@@ -40,7 +40,7 @@ class UseCouponViewModel extends _$UseCouponViewModel {
     try {
       // ローディング開始
       _updateLoading(true);
-      await coupoRepo.useCoupon(couponId);
+      await coupoRepo.deleteCoupon(couponId);
     } catch (e) {
       rethrow;
     } finally {

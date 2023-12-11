@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$OwnedCouponListState {
   List<dynamic> get couponList => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OwnedCouponListStateCopyWith<OwnedCouponListState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $OwnedCouponListStateCopyWith<$Res> {
           $Res Function(OwnedCouponListState) then) =
       _$OwnedCouponListStateCopyWithImpl<$Res, OwnedCouponListState>;
   @useResult
-  $Res call({List<dynamic> couponList});
+  $Res call({List<dynamic> couponList, bool isLoading});
 }
 
 /// @nodoc
@@ -47,12 +48,17 @@ class _$OwnedCouponListStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? couponList = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       couponList: null == couponList
           ? _value.couponList
           : couponList // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -65,7 +71,7 @@ abstract class _$$OwnedCouponListStateImplCopyWith<$Res>
       __$$OwnedCouponListStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<dynamic> couponList});
+  $Res call({List<dynamic> couponList, bool isLoading});
 }
 
 /// @nodoc
@@ -80,12 +86,17 @@ class __$$OwnedCouponListStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? couponList = null,
+    Object? isLoading = null,
   }) {
     return _then(_$OwnedCouponListStateImpl(
       couponList: null == couponList
           ? _value._couponList
           : couponList // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -93,7 +104,8 @@ class __$$OwnedCouponListStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$OwnedCouponListStateImpl implements _OwnedCouponListState {
-  const _$OwnedCouponListStateImpl({required final List<dynamic> couponList})
+  const _$OwnedCouponListStateImpl(
+      {required final List<dynamic> couponList, this.isLoading = false})
       : _couponList = couponList;
 
   final List<dynamic> _couponList;
@@ -105,8 +117,12 @@ class _$OwnedCouponListStateImpl implements _OwnedCouponListState {
   }
 
   @override
+  @JsonKey()
+  final bool isLoading;
+
+  @override
   String toString() {
-    return 'OwnedCouponListState(couponList: $couponList)';
+    return 'OwnedCouponListState(couponList: $couponList, isLoading: $isLoading)';
   }
 
   @override
@@ -115,12 +131,14 @@ class _$OwnedCouponListStateImpl implements _OwnedCouponListState {
         (other.runtimeType == runtimeType &&
             other is _$OwnedCouponListStateImpl &&
             const DeepCollectionEquality()
-                .equals(other._couponList, _couponList));
+                .equals(other._couponList, _couponList) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_couponList));
+      runtimeType, const DeepCollectionEquality().hash(_couponList), isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -133,10 +151,13 @@ class _$OwnedCouponListStateImpl implements _OwnedCouponListState {
 
 abstract class _OwnedCouponListState implements OwnedCouponListState {
   const factory _OwnedCouponListState(
-      {required final List<dynamic> couponList}) = _$OwnedCouponListStateImpl;
+      {required final List<dynamic> couponList,
+      final bool isLoading}) = _$OwnedCouponListStateImpl;
 
   @override
   List<dynamic> get couponList;
+  @override
+  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$OwnedCouponListStateImplCopyWith<_$OwnedCouponListStateImpl>

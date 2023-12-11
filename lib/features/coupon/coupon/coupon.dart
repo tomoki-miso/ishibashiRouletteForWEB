@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/primary_button.dart';
-import 'package:ishibashi/features/coupon/componet/coupon_app_bar.dart';
+import 'package:ishibashi/features/coupon/components/coupon_app_bar.dart';
 import 'package:ishibashi/features/coupon/coupon/view_model.dart';
 import 'package:ishibashi/features/coupon/coupon_display/coupon_display.dart';
 import 'package:ishibashi/style/colors.dart';
