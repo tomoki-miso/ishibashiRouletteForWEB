@@ -49,8 +49,7 @@ class ListViewModel extends _$ListViewModel {
 
     final List<StoreClass> storeList = await Future.wait(futureStoreList);
 
-    final state = ListState(storeClassList: storeList);
-    return state;
+    return ListState(storeClassList: storeList);
   }
 
   Future<List<String>> _fetchTags(DocumentReference storeReference) async {
