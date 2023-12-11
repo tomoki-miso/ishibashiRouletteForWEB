@@ -45,21 +45,24 @@ class CouponPage extends ConsumerWidget {
                 ),
               ),
               const Padding(padding: EdgeInsets.all(10)),
-              PrimaryButton(
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: MediaQuery.of(context).size.height * 0.08,
-                onPressed: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CouponDisplayPage(
-                        couponId: data.couponId,
+              if (data.couponId.isNotEmpty)
+                PrimaryButton(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  onPressed: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CouponDisplayPage(
+                          couponId: data.couponId,
+                        ),
                       ),
-                    ),
-                  );
-                },
-                text: 'クーポンガチャを回す',
-              ),
+                    );
+                  },
+                  text: 'クーポンガチャを回す',
+                )
+              else
+                const Text('クーポンはすべて取得済みです'),
               const Padding(padding: EdgeInsets.all(10)),
             ],
           ),
