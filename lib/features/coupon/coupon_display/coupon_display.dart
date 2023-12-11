@@ -24,36 +24,43 @@ class CouponDisplayPage extends ConsumerWidget {
         final couponData = data.coupon;
         return Stack(
           children: [
-            Scaffold(
-              appBar: const OriginalAppBar(),
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CouponInfo(
-                      couponName: couponData.couponName,
-                      storeName: couponData.couponName,
-                      couponImage: couponData.couponImage,
-                      detail: couponData.couponDetail,
-                      expiration: couponData.expiration,
-                    ),
-                    const Padding(padding: EdgeInsets.all(4)),
-                    PrimaryButton(
-                      onPressed: () async {
-                        await ref
-                            .read(
-                              couponDisplayViewModelProvider(couponId).notifier,
-                            )
-                            .saveCoupon()
-                            .then(
-                              (value) => Navigator.pop(context),
-                            );
-                      },
-                      text: '保存する',
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: MediaQuery.of(context).size.height * 0.07,
-                    ),
-                  ],
+            WillPopScope(
+              onWillPop: () async => false,
+              child: Scaffold(
+                appBar: const OriginalAppBar(
+                  withIcon: false,
+                  automaticallyImplyLeading: false,
+                ),
+                body: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CouponInfo(
+                        couponName: couponData.couponName,
+                        storeName: couponData.couponName,
+                        couponImage: couponData.couponImage,
+                        detail: couponData.couponDetail,
+                        expiration: couponData.expiration,
+                      ),
+                      const Padding(padding: EdgeInsets.all(4)),
+                      PrimaryButton(
+                        onPressed: () async {
+                          await ref
+                              .read(
+                                couponDisplayViewModelProvider(couponId)
+                                    .notifier,
+                              )
+                              .saveCoupon()
+                              .then(
+                                (value) => Navigator.pop(context),
+                              );
+                        },
+                        text: '保存する',
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        height: MediaQuery.of(context).size.height * 0.07,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

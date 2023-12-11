@@ -14,22 +14,33 @@ class OwnedCouponsPage extends ConsumerWidget {
     return state.when(
       error: (error, stackTrace) => Container(),
       loading: () => const Center(child: CircularProgressIndicator()),
-      data: (data) => Scaffold(
-        appBar: const OriginalAppBar(),
-        body: ListView.builder(
-          itemCount: data.couponList.length,
-          itemBuilder: (context, index) {
-            final controller = data.couponList[index];
-            return CouponList(
-              couponId: controller.couponId,
-              couponName: controller.couponName,
-              storeName: controller.storeName,
-              couponImage: controller.couponImage,
-              expiration: controller.expiration,
-            );
-          },
-        ),
-      ),
+      data: (data) {
+        if (data.couponList.isEmpty) {
+          return const Scaffold(
+            appBar: OriginalAppBar(),
+            body: Center(
+              child: Text('クーポンを所有していません'),
+            ),
+          );
+        } else {
+          return Scaffold(
+            appBar: const OriginalAppBar(),
+            body: ListView.builder(
+              itemCount: data.couponList.length,
+              itemBuilder: (context, index) {
+                final controller = data.couponList[index];
+                return CouponList(
+                  couponId: controller.couponId,
+                  couponName: controller.couponName,
+                  storeName: controller.storeName,
+                  couponImage: controller.couponImage,
+                  expiration: controller.expiration,
+                );
+              },
+            ),
+          );
+        }
+      },
     );
   }
 }

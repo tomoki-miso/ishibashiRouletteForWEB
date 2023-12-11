@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ishibashi/components/original_app_bar.dart';
 import 'package:ishibashi/features/coupon/componet/coupon_info.dart';
-import 'package:ishibashi/features/coupon/coupon/coupon.dart';
 import 'package:ishibashi/features/coupon/use_coupon/view_model.dart';
 import 'package:ishibashi/style/colors.dart';
 import 'package:slide_to_act/slide_to_act.dart';
@@ -23,7 +23,7 @@ class UseCouponPage extends ConsumerWidget {
       data: (data) {
         final controller = data.coupon;
         return Scaffold(
-          appBar: AppBar(),
+          appBar: const OriginalAppBar(),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -69,23 +69,21 @@ class UseCouponPage extends ConsumerWidget {
 
                             await _key.currentState!.reset();
                           } else {
-                            await ref
-                                .watch(
-                                  useCouponViewModelProvider(couponId).notifier,
-                                )
-                                .useCoupon();
                             const snackBar = SnackBar(
                               content: Text('クーポンを使用しました'),
                               duration: Duration(seconds: 2),
                             );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const CouponPage(),
-                              ),
-                            );
+                            await ref
+                                .watch(
+                                  useCouponViewModelProvider(couponId).notifier,
+                                )
+                                .useCoupon()
+                                .then(
+                                  (value) => ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar),
+                                )
+                                .then((value) => Navigator.pop(context))
+                                .then((value) => Navigator.pop(context));
                           }
                         },
                       );
