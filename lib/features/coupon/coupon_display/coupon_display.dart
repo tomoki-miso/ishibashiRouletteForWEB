@@ -4,7 +4,6 @@ import 'package:ishibashi/components/original_app_bar.dart';
 import 'package:ishibashi/components/primary_button.dart';
 import 'package:ishibashi/features/coupon/components/coupon_info.dart';
 import 'package:ishibashi/features/coupon/coupon_display/view_model.dart';
-import 'package:ishibashi/features/coupon/coupon_pre/coupon_pre.dart';
 
 class CouponDisplayPage extends ConsumerWidget {
   const CouponDisplayPage({
@@ -47,12 +46,7 @@ class CouponDisplayPage extends ConsumerWidget {
                             )
                             .saveCoupon()
                             .then(
-                              (value) => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const CouponPrePage(),
-                                ),
-                              ),
+                              (value) => Navigator.pop(context),
                             );
                       },
                       text: '保存する',
