@@ -23,8 +23,6 @@ class CouponDisplayPage extends ConsumerWidget {
       loading: () => const Center(child: CircularProgressIndicator()),
       data: (data) {
         final couponData = data.coupon;
-        final expiration = couponData.expiration;
-        final detail = couponData.couponDetail;
         return Stack(
           children: [
             Scaffold(
@@ -37,8 +35,8 @@ class CouponDisplayPage extends ConsumerWidget {
                       couponName: couponData.couponName,
                       storeName: couponData.couponName,
                       couponImage: couponData.couponImage,
-                      detail: detail,
-                      expiration: expiration,
+                      detail: couponData.couponDetail,
+                      expiration: couponData.expiration,
                     ),
                     const Padding(padding: EdgeInsets.all(4)),
                     PrimaryButton(

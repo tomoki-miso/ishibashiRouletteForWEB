@@ -26,6 +26,7 @@ class UseCouponPage extends ConsumerWidget {
           appBar: AppBar(),
           body: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CouponInfo(
                   couponName: controller.couponName,
@@ -34,6 +35,7 @@ class UseCouponPage extends ConsumerWidget {
                   detail: controller.couponDetail,
                   expiration: controller.expiration,
                 ),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: Builder(
@@ -49,11 +51,11 @@ class UseCouponPage extends ConsumerWidget {
                             const Duration(milliseconds: 400), //アニメーションの長さ
                         text: 'スワイプしてクーポンをつかう',
                         textStyle: const TextStyle(
-                          fontSize: 14,
-                          color: ColorName.orangeBase,
+                          fontSize: 12,
+                          color: ColorName.black2,
                           fontWeight: FontWeight.bold,
                         ),
-                        innerColor: ColorName.orangeBase,
+                        innerColor: ColorName.backGroundYellow,
                         outerColor: ColorName.orangeBase,
                         borderRadius: 10,
                         onSubmit: () async {
@@ -67,6 +69,11 @@ class UseCouponPage extends ConsumerWidget {
 
                             await _key.currentState!.reset();
                           } else {
+                            await ref
+                                .watch(
+                                  useCouponViewModelProvider(couponId).notifier,
+                                )
+                                .useCoupon();
                             const snackBar = SnackBar(
                               content: Text('クーポンを使用しました'),
                               duration: Duration(seconds: 2),

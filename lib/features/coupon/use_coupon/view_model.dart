@@ -28,12 +28,25 @@ class UseCouponViewModel extends _$UseCouponViewModel {
       couponId: couponData['couponId'],
       couponName: couponData['couponName'],
       storeName: couponData['storeName'],
-      couponDetail: couponData['detail'],
+      couponDetail: couponData['couponDetail'],
       expiration: couponData['expiration'],
       couponImage: couponData['couponImage'],
     );
 
     return UseCouponState(coupon: coupon);
+  }
+
+  Future<void> useCoupon() async {
+    try {
+      // ローディング開始
+      _updateLoading(true);
+      await coupoRepo.useCoupon(couponId);
+    } catch (e) {
+      rethrow;
+    } finally {
+      //　ここでローディング止める
+      _updateLoading(false);
+    }
   }
 
   void _updateLoading(bool isLoading) =>
