@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CouponState {
   String get couponId => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CouponStateCopyWith<CouponState> get copyWith =>
@@ -30,7 +29,7 @@ abstract class $CouponStateCopyWith<$Res> {
           CouponState value, $Res Function(CouponState) then) =
       _$CouponStateCopyWithImpl<$Res, CouponState>;
   @useResult
-  $Res call({String couponId, bool isLoading});
+  $Res call({String couponId});
 }
 
 /// @nodoc
@@ -47,17 +46,12 @@ class _$CouponStateCopyWithImpl<$Res, $Val extends CouponState>
   @override
   $Res call({
     Object? couponId = null,
-    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       couponId: null == couponId
           ? _value.couponId
           : couponId // ignore: cast_nullable_to_non_nullable
               as String,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -70,7 +64,7 @@ abstract class _$$CouponStateImplCopyWith<$Res>
       __$$CouponStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String couponId, bool isLoading});
+  $Res call({String couponId});
 }
 
 /// @nodoc
@@ -85,17 +79,12 @@ class __$$CouponStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? couponId = null,
-    Object? isLoading = null,
   }) {
     return _then(_$CouponStateImpl(
       couponId: null == couponId
           ? _value.couponId
           : couponId // ignore: cast_nullable_to_non_nullable
               as String,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -103,17 +92,14 @@ class __$$CouponStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CouponStateImpl implements _CouponState {
-  const _$CouponStateImpl({required this.couponId, this.isLoading = false});
+  const _$CouponStateImpl({required this.couponId});
 
   @override
   final String couponId;
-  @override
-  @JsonKey()
-  final bool isLoading;
 
   @override
   String toString() {
-    return 'CouponState(couponId: $couponId, isLoading: $isLoading)';
+    return 'CouponState(couponId: $couponId)';
   }
 
   @override
@@ -122,13 +108,11 @@ class _$CouponStateImpl implements _CouponState {
         (other.runtimeType == runtimeType &&
             other is _$CouponStateImpl &&
             (identical(other.couponId, couponId) ||
-                other.couponId == couponId) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.couponId == couponId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, couponId, isLoading);
+  int get hashCode => Object.hash(runtimeType, couponId);
 
   @JsonKey(ignore: true)
   @override
@@ -138,14 +122,11 @@ class _$CouponStateImpl implements _CouponState {
 }
 
 abstract class _CouponState implements CouponState {
-  const factory _CouponState(
-      {required final String couponId,
-      final bool isLoading}) = _$CouponStateImpl;
+  const factory _CouponState({required final String couponId}) =
+      _$CouponStateImpl;
 
   @override
   String get couponId;
-  @override
-  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$CouponStateImplCopyWith<_$CouponStateImpl> get copyWith =>

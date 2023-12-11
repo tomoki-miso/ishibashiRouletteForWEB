@@ -37,7 +37,7 @@ class CouponPage extends ConsumerWidget {
                 child: Lottie.asset('assets/lottie/coupon_lottie.json'),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.6,
+                width: MediaQuery.of(context).size.width * 0.8,
                 child: const Text(
                   'クーポンガチャは1日1回必ず挑戦できます。キャンペーンに参加することでさらにたくさん挑戦できるチャンスも⁉',
                   textAlign: TextAlign.center,

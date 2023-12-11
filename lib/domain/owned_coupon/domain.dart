@@ -20,7 +20,7 @@ class OwnedCoupon with _$OwnedCoupon {
     String? couponDetail,
     String? couponImage,
     String? expiration,
-    bool? isavailable,
+    bool? isAvailable,
   }) = _OwnedCoupon;
   factory OwnedCoupon.fromJson(Map<String, dynamic> json) =>
       _$OwnedCouponFromJson(json);

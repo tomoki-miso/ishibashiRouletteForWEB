@@ -40,4 +40,23 @@ class OwnedCouponListViewModel extends _$OwnedCouponListViewModel {
 
     return OwnedCouponListState(couponList: couponList);
   }
+
+  Future<bool> checkExpiration(int index) async {
+    final data = state.requireValue.couponList[index];
+    final String dateString = data.expiration;
+    final List<String> parts = dateString.split(' ');
+    final String year = parts[0].replaceAll('年', '');
+    final List<String> dateParts = parts[1].split('/');
+    final int month = int.parse(dateParts[0]);
+    final int day = int.parse(dateParts[1]);
+    final List<String> timeParts = parts[2].split(':');
+    final int hour = int.parse(timeParts[0]);
+    final int minute = int.parse(timeParts[1]);
+
+    final DateTime expiration =
+        DateTime(int.parse(year), month, day, hour, minute);
+    final DateTime nowtime = DateTime.now();
+
+    return expiration.isAfter(nowtime);
+  }
 }

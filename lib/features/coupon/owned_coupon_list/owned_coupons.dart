@@ -29,12 +29,25 @@ class OwnedCouponsPage extends ConsumerWidget {
               itemCount: data.couponList.length,
               itemBuilder: (context, index) {
                 final controller = data.couponList[index];
-                return CouponList(
-                  couponId: controller.couponId,
-                  couponName: controller.couponName,
-                  storeName: controller.storeName,
-                  couponImage: controller.couponImage,
-                  expiration: controller.expiration,
+                return FutureBuilder<bool>(
+                  future: ref
+                      .read(ownedCouponListViewModelProvider.notifier)
+                      .checkExpiration(index),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    } else {
+                      final isAvailable = snapshot.data ?? false;
+                      return CouponList(
+                        isAvailable: isAvailable,
+                        couponId: controller.couponId,
+                        couponName: controller.couponName,
+                        storeName: controller.storeName,
+                        couponImage: controller.couponImage,
+                        expiration: controller.expiration,
+                      );
+                    }
+                  },
                 );
               },
             ),

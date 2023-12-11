@@ -10,6 +10,7 @@ class CouponList extends StatelessWidget {
     required this.storeName,
     required this.couponImage,
     required this.expiration,
+    required this.isAvailable,
     super.key,
   });
 
@@ -18,19 +19,22 @@ class CouponList extends StatelessWidget {
   final String? storeName;
   final String? expiration;
   final String? couponImage;
+  final bool isAvailable;
 
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(bottom: 8),
         child: InkWell(
-          onTap: () async {
-            await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => UseCouponPage(couponId: couponId),
-              ),
-            );
-          },
+          onTap: isAvailable
+              ? () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UseCouponPage(couponId: couponId),
+                    ),
+                  );
+                }
+              : null,
           child: Container(
             width: MediaQuery.of(context).size.width * 0.5,
             height: MediaQuery.of(context).size.height * 0.3,

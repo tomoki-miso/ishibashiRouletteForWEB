@@ -15,7 +15,7 @@ _$OwnedCouponImpl _$$OwnedCouponImplFromJson(Map<String, dynamic> json) =>
       couponDetail: json['couponDetail'] as String?,
       couponImage: json['couponImage'] as String?,
       expiration: json['expiration'] as String?,
-      isavailable: json['isavailable'] as bool?,
+      isAvailable: json['isAvailable'] as bool?,
     );
 
 Map<String, dynamic> _$$OwnedCouponImplToJson(_$OwnedCouponImpl instance) =>
@@ -27,5 +27,5 @@ Map<String, dynamic> _$$OwnedCouponImplToJson(_$OwnedCouponImpl instance) =>
       'couponDetail': instance.couponDetail,
       'couponImage': instance.couponImage,
       'expiration': instance.expiration,
-      'isavailable': instance.isavailable,
+      'isAvailable': instance.isAvailable,
     };
