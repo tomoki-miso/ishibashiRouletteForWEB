@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ishibashi/components/original_app_bar.dart';
 import 'package:ishibashi/components/primary_button.dart';
+import 'package:ishibashi/features/coupon/componet/coupon_app_bar.dart';
 import 'package:ishibashi/features/coupon/coupon_display/coupon_display.dart';
 import 'package:ishibashi/style/colors.dart';
 import 'package:lottie/lottie.dart';
@@ -11,7 +11,7 @@ class CouponPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => Scaffold(
-        appBar: const OriginalAppBar(),
+        appBar: const CouponAppBar(),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

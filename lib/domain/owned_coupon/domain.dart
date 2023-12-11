@@ -8,11 +8,11 @@ part 'domain.g.dart';
 // freezedでコード生成するために「@freezed」を記述
 
 @freezed
-class Coupon with _$Coupon {
+class OwnedCoupon with _$OwnedCoupon {
   // withの後には「_$[class name]」の形式で記述
 
   // プロパティを指定
-  const factory Coupon({
+  const factory OwnedCoupon({
     required String couponId,
     String? storeId,
     String? storeName,
@@ -20,9 +20,8 @@ class Coupon with _$Coupon {
     String? couponDetail,
     String? couponImage,
     String? expiration,
-    @Default(0) num remainingAmount,
-  }) = _Coupon;
-  factory Coupon.fromJson(Map<String, dynamic> json) => _$CouponFromJson(json);
-
-  static String collectionName = 'coupon';
+    bool? isavailable,
+  }) = _OwnedCoupon;
+  factory OwnedCoupon.fromJson(Map<String, dynamic> json) =>
+      _$OwnedCouponFromJson(json);
 }

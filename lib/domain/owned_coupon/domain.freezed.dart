@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Coupon _$CouponFromJson(Map<String, dynamic> json) {
-  return _Coupon.fromJson(json);
+OwnedCoupon _$OwnedCouponFromJson(Map<String, dynamic> json) {
+  return _OwnedCoupon.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Coupon {
+mixin _$OwnedCoupon {
   String get couponId => throw _privateConstructorUsedError;
   String? get storeId => throw _privateConstructorUsedError;
   String? get storeName => throw _privateConstructorUsedError;
@@ -27,17 +27,19 @@ mixin _$Coupon {
   String? get couponDetail => throw _privateConstructorUsedError;
   String? get couponImage => throw _privateConstructorUsedError;
   String? get expiration => throw _privateConstructorUsedError;
-  num get remainingAmount => throw _privateConstructorUsedError;
+  bool? get isavailable => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $CouponCopyWith<Coupon> get copyWith => throw _privateConstructorUsedError;
+  $OwnedCouponCopyWith<OwnedCoupon> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CouponCopyWith<$Res> {
-  factory $CouponCopyWith(Coupon value, $Res Function(Coupon) then) =
-      _$CouponCopyWithImpl<$Res, Coupon>;
+abstract class $OwnedCouponCopyWith<$Res> {
+  factory $OwnedCouponCopyWith(
+          OwnedCoupon value, $Res Function(OwnedCoupon) then) =
+      _$OwnedCouponCopyWithImpl<$Res, OwnedCoupon>;
   @useResult
   $Res call(
       {String couponId,
@@ -47,13 +49,13 @@ abstract class $CouponCopyWith<$Res> {
       String? couponDetail,
       String? couponImage,
       String? expiration,
-      num remainingAmount});
+      bool? isavailable});
 }
 
 /// @nodoc
-class _$CouponCopyWithImpl<$Res, $Val extends Coupon>
-    implements $CouponCopyWith<$Res> {
-  _$CouponCopyWithImpl(this._value, this._then);
+class _$OwnedCouponCopyWithImpl<$Res, $Val extends OwnedCoupon>
+    implements $OwnedCouponCopyWith<$Res> {
+  _$OwnedCouponCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -70,7 +72,7 @@ class _$CouponCopyWithImpl<$Res, $Val extends Coupon>
     Object? couponDetail = freezed,
     Object? couponImage = freezed,
     Object? expiration = freezed,
-    Object? remainingAmount = null,
+    Object? isavailable = freezed,
   }) {
     return _then(_value.copyWith(
       couponId: null == couponId
@@ -101,19 +103,20 @@ class _$CouponCopyWithImpl<$Res, $Val extends Coupon>
           ? _value.expiration
           : expiration // ignore: cast_nullable_to_non_nullable
               as String?,
-      remainingAmount: null == remainingAmount
-          ? _value.remainingAmount
-          : remainingAmount // ignore: cast_nullable_to_non_nullable
-              as num,
+      isavailable: freezed == isavailable
+          ? _value.isavailable
+          : isavailable // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$CouponImplCopyWith<$Res> implements $CouponCopyWith<$Res> {
-  factory _$$CouponImplCopyWith(
-          _$CouponImpl value, $Res Function(_$CouponImpl) then) =
-      __$$CouponImplCopyWithImpl<$Res>;
+abstract class _$$OwnedCouponImplCopyWith<$Res>
+    implements $OwnedCouponCopyWith<$Res> {
+  factory _$$OwnedCouponImplCopyWith(
+          _$OwnedCouponImpl value, $Res Function(_$OwnedCouponImpl) then) =
+      __$$OwnedCouponImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -124,15 +127,15 @@ abstract class _$$CouponImplCopyWith<$Res> implements $CouponCopyWith<$Res> {
       String? couponDetail,
       String? couponImage,
       String? expiration,
-      num remainingAmount});
+      bool? isavailable});
 }
 
 /// @nodoc
-class __$$CouponImplCopyWithImpl<$Res>
-    extends _$CouponCopyWithImpl<$Res, _$CouponImpl>
-    implements _$$CouponImplCopyWith<$Res> {
-  __$$CouponImplCopyWithImpl(
-      _$CouponImpl _value, $Res Function(_$CouponImpl) _then)
+class __$$OwnedCouponImplCopyWithImpl<$Res>
+    extends _$OwnedCouponCopyWithImpl<$Res, _$OwnedCouponImpl>
+    implements _$$OwnedCouponImplCopyWith<$Res> {
+  __$$OwnedCouponImplCopyWithImpl(
+      _$OwnedCouponImpl _value, $Res Function(_$OwnedCouponImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -145,9 +148,9 @@ class __$$CouponImplCopyWithImpl<$Res>
     Object? couponDetail = freezed,
     Object? couponImage = freezed,
     Object? expiration = freezed,
-    Object? remainingAmount = null,
+    Object? isavailable = freezed,
   }) {
-    return _then(_$CouponImpl(
+    return _then(_$OwnedCouponImpl(
       couponId: null == couponId
           ? _value.couponId
           : couponId // ignore: cast_nullable_to_non_nullable
@@ -176,18 +179,18 @@ class __$$CouponImplCopyWithImpl<$Res>
           ? _value.expiration
           : expiration // ignore: cast_nullable_to_non_nullable
               as String?,
-      remainingAmount: null == remainingAmount
-          ? _value.remainingAmount
-          : remainingAmount // ignore: cast_nullable_to_non_nullable
-              as num,
+      isavailable: freezed == isavailable
+          ? _value.isavailable
+          : isavailable // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$CouponImpl implements _Coupon {
-  const _$CouponImpl(
+class _$OwnedCouponImpl implements _OwnedCoupon {
+  const _$OwnedCouponImpl(
       {required this.couponId,
       this.storeId,
       this.storeName,
@@ -195,10 +198,10 @@ class _$CouponImpl implements _Coupon {
       this.couponDetail,
       this.couponImage,
       this.expiration,
-      this.remainingAmount = 0});
+      this.isavailable});
 
-  factory _$CouponImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CouponImplFromJson(json);
+  factory _$OwnedCouponImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OwnedCouponImplFromJson(json);
 
   @override
   final String couponId;
@@ -215,19 +218,18 @@ class _$CouponImpl implements _Coupon {
   @override
   final String? expiration;
   @override
-  @JsonKey()
-  final num remainingAmount;
+  final bool? isavailable;
 
   @override
   String toString() {
-    return 'Coupon(couponId: $couponId, storeId: $storeId, storeName: $storeName, couponName: $couponName, couponDetail: $couponDetail, couponImage: $couponImage, expiration: $expiration, remainingAmount: $remainingAmount)';
+    return 'OwnedCoupon(couponId: $couponId, storeId: $storeId, storeName: $storeName, couponName: $couponName, couponDetail: $couponDetail, couponImage: $couponImage, expiration: $expiration, isavailable: $isavailable)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CouponImpl &&
+            other is _$OwnedCouponImpl &&
             (identical(other.couponId, couponId) ||
                 other.couponId == couponId) &&
             (identical(other.storeId, storeId) || other.storeId == storeId) &&
@@ -241,31 +243,31 @@ class _$CouponImpl implements _Coupon {
                 other.couponImage == couponImage) &&
             (identical(other.expiration, expiration) ||
                 other.expiration == expiration) &&
-            (identical(other.remainingAmount, remainingAmount) ||
-                other.remainingAmount == remainingAmount));
+            (identical(other.isavailable, isavailable) ||
+                other.isavailable == isavailable));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, couponId, storeId, storeName,
-      couponName, couponDetail, couponImage, expiration, remainingAmount);
+      couponName, couponDetail, couponImage, expiration, isavailable);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CouponImplCopyWith<_$CouponImpl> get copyWith =>
-      __$$CouponImplCopyWithImpl<_$CouponImpl>(this, _$identity);
+  _$$OwnedCouponImplCopyWith<_$OwnedCouponImpl> get copyWith =>
+      __$$OwnedCouponImplCopyWithImpl<_$OwnedCouponImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CouponImplToJson(
+    return _$$OwnedCouponImplToJson(
       this,
     );
   }
 }
 
-abstract class _Coupon implements Coupon {
-  const factory _Coupon(
+abstract class _OwnedCoupon implements OwnedCoupon {
+  const factory _OwnedCoupon(
       {required final String couponId,
       final String? storeId,
       final String? storeName,
@@ -273,9 +275,10 @@ abstract class _Coupon implements Coupon {
       final String? couponDetail,
       final String? couponImage,
       final String? expiration,
-      final num remainingAmount}) = _$CouponImpl;
+      final bool? isavailable}) = _$OwnedCouponImpl;
 
-  factory _Coupon.fromJson(Map<String, dynamic> json) = _$CouponImpl.fromJson;
+  factory _OwnedCoupon.fromJson(Map<String, dynamic> json) =
+      _$OwnedCouponImpl.fromJson;
 
   @override
   String get couponId;
@@ -292,9 +295,9 @@ abstract class _Coupon implements Coupon {
   @override
   String? get expiration;
   @override
-  num get remainingAmount;
+  bool? get isavailable;
   @override
   @JsonKey(ignore: true)
-  _$$CouponImplCopyWith<_$CouponImpl> get copyWith =>
+  _$$OwnedCouponImplCopyWith<_$OwnedCouponImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

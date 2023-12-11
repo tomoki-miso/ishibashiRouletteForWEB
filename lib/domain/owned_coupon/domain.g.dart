@@ -6,7 +6,8 @@ part of 'domain.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CouponImpl _$$CouponImplFromJson(Map<String, dynamic> json) => _$CouponImpl(
+_$OwnedCouponImpl _$$OwnedCouponImplFromJson(Map<String, dynamic> json) =>
+    _$OwnedCouponImpl(
       couponId: json['couponId'] as String,
       storeId: json['storeId'] as String?,
       storeName: json['storeName'] as String?,
@@ -14,10 +15,10 @@ _$CouponImpl _$$CouponImplFromJson(Map<String, dynamic> json) => _$CouponImpl(
       couponDetail: json['couponDetail'] as String?,
       couponImage: json['couponImage'] as String?,
       expiration: json['expiration'] as String?,
-      remainingAmount: json['remainingAmount'] as num? ?? 0,
+      isavailable: json['isavailable'] as bool?,
     );
 
-Map<String, dynamic> _$$CouponImplToJson(_$CouponImpl instance) =>
+Map<String, dynamic> _$$OwnedCouponImplToJson(_$OwnedCouponImpl instance) =>
     <String, dynamic>{
       'couponId': instance.couponId,
       'storeId': instance.storeId,
@@ -26,5 +27,5 @@ Map<String, dynamic> _$$CouponImplToJson(_$CouponImpl instance) =>
       'couponDetail': instance.couponDetail,
       'couponImage': instance.couponImage,
       'expiration': instance.expiration,
-      'remainingAmount': instance.remainingAmount,
+      'isavailable': instance.isavailable,
     };

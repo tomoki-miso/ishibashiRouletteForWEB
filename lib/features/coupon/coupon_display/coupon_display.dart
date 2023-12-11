@@ -47,7 +47,7 @@ class CouponDisplayPage extends ConsumerWidget {
                           Wrap(
                             children: [
                               Text(
-                                couponData.storeName,
+                                couponData.storeName ?? '',
                                 style: const TextStyle(
                                   fontSize: 32,
                                   fontWeight: FontWeight.bold,
@@ -57,14 +57,15 @@ class CouponDisplayPage extends ConsumerWidget {
                           ),
                           const Padding(padding: EdgeInsets.all(2)),
                           CachedNetworkImage(
-                            imageUrl: couponData.couponImage,
+                            imageUrl: couponData.couponImage ??
+                                '', // TODO:クーポン用仮画像の用意
                             width: MediaQuery.of(context).size.width * 0.8,
                             height: MediaQuery.of(context).size.width * 0.6,
                             fit: BoxFit.cover,
                           ),
                           const Padding(padding: EdgeInsets.all(2)),
                           Text(
-                            couponData.couponName,
+                            couponData.couponName ?? '',
                             style: const TextStyle(
                               fontSize: 32,
                               fontWeight: FontWeight.bold,
