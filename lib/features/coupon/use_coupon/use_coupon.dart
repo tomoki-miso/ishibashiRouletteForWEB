@@ -59,32 +59,22 @@ class UseCouponPage extends ConsumerWidget {
                         outerColor: ColorName.orangeBase,
                         borderRadius: 10,
                         onSubmit: () async {
-                          if (_key.currentState != null) {
-                            const snackBar = SnackBar(
-                              content: Text('クーポンを使用しました'),
-                              duration: Duration(seconds: 2),
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-
-                            await _key.currentState!.reset();
-                          } else {
-                            const snackBar = SnackBar(
-                              content: Text('クーポンを使用しました'),
-                              duration: Duration(seconds: 2),
-                            );
-                            await ref
-                                .watch(
-                                  useCouponViewModelProvider(couponId).notifier,
-                                )
-                                .useCoupon()
-                                .then(
-                                  (value) => ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar),
-                                )
-                                .then((value) => Navigator.pop(context))
-                                .then((value) => Navigator.pop(context));
-                          }
+                          await ref
+                              .watch(
+                                useCouponViewModelProvider(couponId).notifier,
+                              )
+                              .useCoupon()
+                              .then(
+                                (value) =>
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('クーポンを使用しました。'),
+                                    duration: Duration(seconds: 2),
+                                  ),
+                                ),
+                              )
+                              .then((value) => Navigator.pop(context))
+                              .then((value) => Navigator.pop(context));
                         },
                       );
                     },

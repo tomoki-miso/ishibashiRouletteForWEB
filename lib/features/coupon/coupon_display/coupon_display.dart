@@ -52,6 +52,15 @@ class CouponDisplayPage extends ConsumerWidget {
                               )
                               .saveCoupon()
                               .then(
+                                (value) =>
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('クーポンを保存しました。'),
+                                    duration: Duration(seconds: 2),
+                                  ),
+                                ),
+                              )
+                              .then(
                                 (value) => Navigator.pop(context),
                               );
                         },
