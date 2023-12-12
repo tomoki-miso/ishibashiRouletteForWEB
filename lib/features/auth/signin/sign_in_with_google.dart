@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -23,34 +24,44 @@ void configureGoogleSignIn() {
   }
 }
 
-Future<void> signInWiithGoogle(BuildContext context) async {
+Future<void> signInWithGoogle(BuildContext context) async {
   try {
     configureGoogleSignIn();
     final GoogleSignInAccount? signInAccount = await googleSignIn?.signIn();
     final User? currentUser = FirebaseAuth.instance.currentUser;
 
     if (currentUser != null) {
-      await Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const BasePage(), // 遷移先の画面を指定
-        ),
-      );
-    } else {
-      final GoogleSignInAuthentication auth =
-          await signInAccount!.authentication;
-      final credential = GoogleAuthProvider.credential(
-        idToken: auth.idToken,
-        accessToken: auth.accessToken,
-      );
+      final userDoc = await FirebaseFirestore.instance
+          .collection('user_info')
+          .doc(currentUser.uid)
+          .get();
 
-      await FirebaseAuth.instance.signInWithCredential(credential);
+      if (userDoc.exists) {
+        // Firestoreのドキュメントが存在する場合
+        await Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) =>
+                const BasePage(), // Firestoreのドキュメントが存在する場合の遷移先
+          ),
+        );
+      } else {
+        final GoogleSignInAuthentication auth =
+            await signInAccount!.authentication;
+        final credential = GoogleAuthProvider.credential(
+          idToken: auth.idToken,
+          accessToken: auth.accessToken,
+        );
 
-      // サインイン後の画面遷移
-      await Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const QuestionnairePage(), // 遷移先の画面を指定
-        ),
-      );
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+        // Firestoreのドキュメントが存在しない場合
+        await Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) =>
+                const QuestionnairePage(), // Firestoreのドキュメントが存在しない場合の遷移先
+          ),
+        );
+      }
     }
   } catch (e) {
     debugPrint('サインイン中にエラーが発生しました: $e');

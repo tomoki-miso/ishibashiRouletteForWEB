@@ -33,7 +33,7 @@ class SignInConfirmPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: SignInButton(
                   Buttons.google,
-                  onPressed: () async => signInWiithGoogle(context),
+                  onPressed: () async => signInWithGoogle(context),
                 ),
               ),
               if (Platform.isIOS)
