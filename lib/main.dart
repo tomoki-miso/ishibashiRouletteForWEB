@@ -7,7 +7,6 @@ import 'package:ishibashi/base.dart';
 import 'package:ishibashi/features/auth/page/sign_in_confirm.dart';
 import 'package:ishibashi/firebase/firebase_options.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -30,7 +29,10 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: '石橋ごはんルーレット',
-        theme: ThemeData(fontFamily: 'MPLUS'),
+        theme: ThemeData(
+          fontFamily: 'MPLUS',
+          useMaterial3: false,
+        ),
         home: const HomePage(),
       );
 }
