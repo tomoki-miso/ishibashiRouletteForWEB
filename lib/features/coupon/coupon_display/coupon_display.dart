@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ishibashi/components/loading.dart';
 import 'package:ishibashi/components/original_app_bar.dart';
-import 'package:ishibashi/components/primary_button.dart';
 import 'package:ishibashi/features/coupon/components/coupon_info.dart';
+import 'package:ishibashi/features/coupon/coupon_display/components/save_coupon_button.dart';
 import 'package:ishibashi/features/coupon/coupon_display/view_model.dart';
 
 class CouponDisplayPage extends ConsumerWidget {
@@ -24,8 +25,8 @@ class CouponDisplayPage extends ConsumerWidget {
         final couponData = data.coupon;
         return Stack(
           children: [
-            WillPopScope(
-              onWillPop: () async => false,
+            PopScope(
+              canPop: false,
               child: Scaffold(
                 appBar: const OriginalAppBar(
                   withIcon: false,
@@ -35,6 +36,7 @@ class CouponDisplayPage extends ConsumerWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      /// クーポンの情報
                       CouponInfo(
                         couponName: couponData.couponName,
                         storeName: couponData.couponName,
@@ -43,45 +45,15 @@ class CouponDisplayPage extends ConsumerWidget {
                         expiration: couponData.expiration,
                       ),
                       const Padding(padding: EdgeInsets.all(4)),
-                      PrimaryButton(
-                        onPressed: () async {
-                          await ref
-                              .read(
-                                couponDisplayViewModelProvider(couponId)
-                                    .notifier,
-                              )
-                              .saveCoupon()
-                              .then(
-                                (value) =>
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('クーポンを保存しました。'),
-                                    duration: Duration(seconds: 2),
-                                  ),
-                                ),
-                              )
-                              .then(
-                                (value) => Navigator.pop(context),
-                              );
-                        },
-                        text: '保存する',
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        height: MediaQuery.of(context).size.height * 0.07,
-                      ),
+
+                      /// ボタン
+                      SaveCouponButton(couponId: couponId),
                     ],
                   ),
                 ),
               ),
             ),
-            if (data.isLoading)
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                color: Colors.black.withOpacity(0.3),
-                child: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              )
+            if (data.isLoading) const Loading(),
           ],
         );
       },
