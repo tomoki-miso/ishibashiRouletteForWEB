@@ -28,6 +28,7 @@ mixin _$OwnedCoupon {
   String? get couponImage => throw _privateConstructorUsedError;
   String? get expiration => throw _privateConstructorUsedError;
   bool? get isAvailable => throw _privateConstructorUsedError;
+  DateTime? get couponGotAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +50,8 @@ abstract class $OwnedCouponCopyWith<$Res> {
       String? couponDetail,
       String? couponImage,
       String? expiration,
-      bool? isAvailable});
+      bool? isAvailable,
+      DateTime? couponGotAt});
 }
 
 /// @nodoc
@@ -73,6 +75,7 @@ class _$OwnedCouponCopyWithImpl<$Res, $Val extends OwnedCoupon>
     Object? couponImage = freezed,
     Object? expiration = freezed,
     Object? isAvailable = freezed,
+    Object? couponGotAt = freezed,
   }) {
     return _then(_value.copyWith(
       couponId: null == couponId
@@ -107,6 +110,10 @@ class _$OwnedCouponCopyWithImpl<$Res, $Val extends OwnedCoupon>
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
               as bool?,
+      couponGotAt: freezed == couponGotAt
+          ? _value.couponGotAt
+          : couponGotAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -127,7 +134,8 @@ abstract class _$$OwnedCouponImplCopyWith<$Res>
       String? couponDetail,
       String? couponImage,
       String? expiration,
-      bool? isAvailable});
+      bool? isAvailable,
+      DateTime? couponGotAt});
 }
 
 /// @nodoc
@@ -149,6 +157,7 @@ class __$$OwnedCouponImplCopyWithImpl<$Res>
     Object? couponImage = freezed,
     Object? expiration = freezed,
     Object? isAvailable = freezed,
+    Object? couponGotAt = freezed,
   }) {
     return _then(_$OwnedCouponImpl(
       couponId: null == couponId
@@ -183,6 +192,10 @@ class __$$OwnedCouponImplCopyWithImpl<$Res>
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
               as bool?,
+      couponGotAt: freezed == couponGotAt
+          ? _value.couponGotAt
+          : couponGotAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -198,7 +211,8 @@ class _$OwnedCouponImpl implements _OwnedCoupon {
       this.couponDetail,
       this.couponImage,
       this.expiration,
-      this.isAvailable});
+      this.isAvailable,
+      this.couponGotAt});
 
   factory _$OwnedCouponImpl.fromJson(Map<String, dynamic> json) =>
       _$$OwnedCouponImplFromJson(json);
@@ -219,10 +233,12 @@ class _$OwnedCouponImpl implements _OwnedCoupon {
   final String? expiration;
   @override
   final bool? isAvailable;
+  @override
+  final DateTime? couponGotAt;
 
   @override
   String toString() {
-    return 'OwnedCoupon(couponId: $couponId, storeId: $storeId, storeName: $storeName, couponName: $couponName, couponDetail: $couponDetail, couponImage: $couponImage, expiration: $expiration, isAvailable: $isAvailable)';
+    return 'OwnedCoupon(couponId: $couponId, storeId: $storeId, storeName: $storeName, couponName: $couponName, couponDetail: $couponDetail, couponImage: $couponImage, expiration: $expiration, isAvailable: $isAvailable, couponGotAt: $couponGotAt)';
   }
 
   @override
@@ -244,13 +260,24 @@ class _$OwnedCouponImpl implements _OwnedCoupon {
             (identical(other.expiration, expiration) ||
                 other.expiration == expiration) &&
             (identical(other.isAvailable, isAvailable) ||
-                other.isAvailable == isAvailable));
+                other.isAvailable == isAvailable) &&
+            (identical(other.couponGotAt, couponGotAt) ||
+                other.couponGotAt == couponGotAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, couponId, storeId, storeName,
-      couponName, couponDetail, couponImage, expiration, isAvailable);
+  int get hashCode => Object.hash(
+      runtimeType,
+      couponId,
+      storeId,
+      storeName,
+      couponName,
+      couponDetail,
+      couponImage,
+      expiration,
+      isAvailable,
+      couponGotAt);
 
   @JsonKey(ignore: true)
   @override
@@ -275,7 +302,8 @@ abstract class _OwnedCoupon implements OwnedCoupon {
       final String? couponDetail,
       final String? couponImage,
       final String? expiration,
-      final bool? isAvailable}) = _$OwnedCouponImpl;
+      final bool? isAvailable,
+      final DateTime? couponGotAt}) = _$OwnedCouponImpl;
 
   factory _OwnedCoupon.fromJson(Map<String, dynamic> json) =
       _$OwnedCouponImpl.fromJson;
@@ -296,6 +324,8 @@ abstract class _OwnedCoupon implements OwnedCoupon {
   String? get expiration;
   @override
   bool? get isAvailable;
+  @override
+  DateTime? get couponGotAt;
   @override
   @JsonKey(ignore: true)
   _$$OwnedCouponImplCopyWith<_$OwnedCouponImpl> get copyWith =>
