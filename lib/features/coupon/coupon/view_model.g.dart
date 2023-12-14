@@ -6,7 +6,7 @@ part of 'view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$couponViewModelHash() => r'b76b9244deffe099f079bae2b7d27990265a197e';
+String _$couponViewModelHash() => r'75b191c77ef4fe78de8ead5bf1742828ddf35e1a';
 
 /// See also [CouponViewModel].
 @ProviderFor(CouponViewModel)

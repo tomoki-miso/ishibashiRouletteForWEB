@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ishibashi/domain/coupon/domain.dart';
 
 // 生成されるdartファイルを記述
 part 'state.freezed.dart';
@@ -10,6 +11,8 @@ class CouponState with _$CouponState {
 
   // プロパティを指定
   const factory CouponState({
-    required String couponId,
+    required Coupon coupon,
+    @Default(true) bool isCanGetCoupon,
+    @Default(false) bool isLoading,
   }) = _CouponState;
 }

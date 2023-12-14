@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ishibashi/domain/coupon/domain.dart';
 import 'package:ishibashi/features/coupon/coupon/state.dart';
 import 'package:ishibashi/firebase/firebase.dart';
 import 'package:ishibashi/repositories/coupon/repository.dart';
@@ -28,7 +29,9 @@ class CouponViewModel extends _$CouponViewModel {
 
     final couponId = await _shuffleCouponNotInList(documentNames);
 
-    final state = CouponState(couponId: couponId);
+    final state = CouponState(
+      coupon: Coupon(couponId: couponId),
+    );
     return state;
   }
 
