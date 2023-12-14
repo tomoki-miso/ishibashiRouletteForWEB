@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:ishibashi/domain/coupon/domain.dart';
 import 'package:ishibashi/features/coupon/coupon_display/state.dart';
 import 'package:ishibashi/repositories/coupon/repository.dart';
+import 'package:ishibashi/repositories/user_info/repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'view_model.g.dart';
@@ -11,6 +12,8 @@ part 'view_model.g.dart';
 @riverpod
 class CouponDisplayViewModel extends _$CouponDisplayViewModel {
   CouponRepo get coupoRepo => ref.read(couponRepoProvider.notifier);
+  UserInfoClassRepo get userInfoRepo =>
+      ref.read(userInfoClassRepoProvider.notifier);
 
   @override
   FutureOr<CouponDisplayState> build(String couponId) async {
@@ -55,18 +58,20 @@ class CouponDisplayViewModel extends _$CouponDisplayViewModel {
       couponDetail: data.couponDetail,
       expiration: data.expiration,
       couponImage: data.couponImage,
-      remainingAmount: data.remainingAmount,
+      remainingAmount: data.remainingAmount - 1,
     );
     try {
       // ローディング開始
       _updateLoading(true);
-      await coupoRepo.saveCoupon(gotCoupon);
-      await coupoRepo.reduceCouponAmount(
-        couponId: gotCoupon.couponId,
-        coupon: gotCoupon,
-      );
+
+      await userInfoRepo.saveCoupon(gotCoupon).then(
+            (value) => coupoRepo.reduceCouponAmount(
+              coupon: gotCoupon,
+            ),
+          );
+
+      /// クーポンを保存した時間記録
     } catch (e) {
-      rethrow;
     } finally {
       //　ここでローディング止める
       _updateLoading(false);

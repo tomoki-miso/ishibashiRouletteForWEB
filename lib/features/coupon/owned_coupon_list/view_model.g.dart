@@ -7,7 +7,7 @@ part of 'view_model.dart';
 // **************************************************************************
 
 String _$ownedCouponListViewModelHash() =>
-    r'e6abaf3be4fed9654d708db58fb71364500c6374';
+    r'3aa3b4fb4525c566b8ef5d3f145fb65d3674d6f3';
 
 /// See also [OwnedCouponListViewModel].
 @ProviderFor(OwnedCouponListViewModel)
