@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ishibashi/domain/coupon/domain.dart';
+import 'package:ishibashi/domain/owned_coupon/domain.dart';
 import 'package:ishibashi/domain/user_info/domain_user_info.dart';
 import 'package:ishibashi/firebase/firebase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -41,15 +42,15 @@ class UserInfoClassRepo extends _$UserInfoClassRepo {
         .set(userInfo.toJson());
   }
 
-  Future<void> saveCoupon(Coupon coupon) async {
+  Future<void> saveCoupon(OwnedCoupon ownedCoupon) async {
     final DocumentReference userDocRef = db
         .collection('user_info')
         .doc(ref.read(firebaseAuthProvider).currentUser!.uid);
 
     await userDocRef
         .collection('coupons')
-        .doc(coupon.couponId)
-        .set(coupon.toJson());
+        .doc(ownedCoupon.couponId)
+        .set(ownedCoupon.toJson());
 
     await db.collection('user_info').doc(uid).update({
       'couponGotAt': FieldValue.serverTimestamp(),

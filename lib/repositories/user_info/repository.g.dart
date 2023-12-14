@@ -22,7 +22,7 @@ final userInfoFirestoreProvider =
 );
 
 typedef UserInfoFirestoreRef = ProviderRef<CollectionReference<UserInfoClass>>;
-String _$userInfoClassRepoHash() => r'4966898ed1c2ad7860cf6f576bdc8b204896c556';
+String _$userInfoClassRepoHash() => r'7cf247a4c67eba47326d2802ed790c1c54996fb8';
 
 /// See also [UserInfoClassRepo].
 @ProviderFor(UserInfoClassRepo)
