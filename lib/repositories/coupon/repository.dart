@@ -23,17 +23,6 @@ class CouponRepo extends _$CouponRepo {
   @override
   void build() {}
 
-  Future<void> saveCoupon(Coupon coupon) async {
-    final DocumentReference userDocRef = db
-        .collection('user_info')
-        .doc(ref.read(firebaseAuthProvider).currentUser!.uid);
-
-    await userDocRef
-        .collection('coupons')
-        .doc(coupon.couponId)
-        .set(coupon.toJson());
-  }
-
   Future<void> deleteCoupon(String couponId) async {
     final DocumentReference userDocRef = db
         .collection('user_info')
@@ -45,11 +34,11 @@ class CouponRepo extends _$CouponRepo {
   }
 
   Future<void> reduceCouponAmount({
-    required String couponId,
     required Coupon coupon,
   }) async {
-    await collection
-        .doc(couponId)
+    await db
+        .collection('coupon')
+        .doc(coupon.couponId)
         .update({Keys.remainingAmount: FieldValue.increment(-1)}).catchError(
       (e) => throw e,
     );
