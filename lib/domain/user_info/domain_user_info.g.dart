@@ -20,6 +20,9 @@ _$UserInfoClassImpl _$$UserInfoClassImplFromJson(Map<String, dynamic> json) =>
       updatedAt: json['updatedAt'] == null
           ? null
           : DateTime.parse(json['updatedAt'] as String),
+      couponGotAt: json['couponGotAt'] == null
+          ? null
+          : DateTime.parse(json['couponGotAt'] as String),
     );
 
 Map<String, dynamic> _$$UserInfoClassImplToJson(_$UserInfoClassImpl instance) =>
@@ -32,4 +35,5 @@ Map<String, dynamic> _$$UserInfoClassImplToJson(_$UserInfoClassImpl instance) =>
       'department': instance.department,
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
+      'couponGotAt': instance.couponGotAt?.toIso8601String(),
     };
