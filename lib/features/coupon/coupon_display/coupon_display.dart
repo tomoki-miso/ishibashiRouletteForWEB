@@ -47,7 +47,9 @@ class CouponDisplayPage extends ConsumerWidget {
                       const Padding(padding: EdgeInsets.all(4)),
 
                       /// ボタン
-                      SaveCouponButton(couponId: couponId),
+                      SaveCouponButton(
+                        couponId: couponId,
+                      ),
                     ],
                   ),
                 ),

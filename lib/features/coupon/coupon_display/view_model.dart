@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:intl/intl.dart';
 import 'package:ishibashi/domain/coupon/domain.dart';
+import 'package:ishibashi/domain/owned_coupon/domain.dart';
 import 'package:ishibashi/features/coupon/coupon_display/state.dart';
 import 'package:ishibashi/repositories/coupon/repository.dart';
 import 'package:ishibashi/repositories/user_info/repository.dart';
@@ -17,6 +18,7 @@ class CouponDisplayViewModel extends _$CouponDisplayViewModel {
 
   @override
   FutureOr<CouponDisplayState> build(String couponId) async {
+    /// クーポンのデータ
     final storeSnapshot = await FirebaseFirestore.instance
         .collection('coupon')
         .doc(couponId)
@@ -50,7 +52,7 @@ class CouponDisplayViewModel extends _$CouponDisplayViewModel {
   Future<void> saveCoupon() async {
     final data = state.requireValue.coupon;
 
-    final Coupon gotCoupon = Coupon(
+    final Coupon newCoupon = Coupon(
       storeId: data.storeId,
       couponId: data.couponId,
       couponName: data.couponName,
@@ -60,13 +62,24 @@ class CouponDisplayViewModel extends _$CouponDisplayViewModel {
       couponImage: data.couponImage,
       remainingAmount: data.remainingAmount - 1,
     );
+
+    final OwnedCoupon gotCoupon = OwnedCoupon(
+      storeId: data.storeId,
+      couponId: data.couponId,
+      couponName: data.couponName,
+      storeName: data.storeName,
+      couponDetail: data.couponDetail,
+      expiration: data.expiration,
+      couponImage: data.couponImage,
+      couponGotAt: DateTime.now(), //　TODO #27:サーバータイムスタンプに
+    );
     try {
       // ローディング開始
       _updateLoading(true);
 
       await userInfoRepo.saveCoupon(gotCoupon).then(
             (value) => coupoRepo.reduceCouponAmount(
-              coupon: gotCoupon,
+              coupon: newCoupon,
             ),
           );
 
