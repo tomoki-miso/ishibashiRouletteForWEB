@@ -14,29 +14,29 @@ class CouponButtonPart extends ConsumerWidget {
   final CouponState data;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) =>
-      data.coupon.couponId.isNotEmpty
-          ? PrimaryButton(
-              width: MediaQuery.of(context).size.width * 0.8,
-              height: MediaQuery.of(context).size.height * 0.08,
-              onPressed: () async {
-                data.isCanGetCoupon
-                    ? await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CouponDisplayPage(
-                            couponId: data.coupon.couponId,
-                          ),
-                        ),
-                      )
-                    : Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CouponPrePage(),
-                        ),
-                      );
-              },
-              text: 'クーポンガチャを回す',
-            )
-          : const Text('クーポンはすべて取得済みです');
+  Widget build(BuildContext context, WidgetRef ref) => PrimaryButton(
+        width: MediaQuery.of(context).size.width * 0.8,
+        height: MediaQuery.of(context).size.height * 0.08,
+        onPressed: () async {
+          /// TODO:クーポンがgetできるか確認する処理,条件分岐
+          if (data.coupon.couponId != '') {
+            await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CouponDisplayPage(
+                  couponId: data.coupon.couponId,
+                ),
+              ),
+            );
+          } else {
+            await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const CouponPrePage(),
+              ),
+            );
+          }
+        },
+        text: 'クーポンガチャを回す',
+      );
 }
