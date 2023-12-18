@@ -1,5 +1,9 @@
 {
   "projects": {
+<<<<<<< HEAD
     "default": "test-nomura-d6ec4"
+=======
+    "default": "ishibashi-gohan"
+>>>>>>> 874f6c5ebd23db7d35b570c6bba0b8a15ca26476
   }
 }
