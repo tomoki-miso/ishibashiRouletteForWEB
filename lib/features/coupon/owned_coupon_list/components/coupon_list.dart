@@ -24,82 +24,113 @@ class CouponList extends ConsumerWidget {
   final bool isAvailable;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 4,
-        ),
-        child: InkWell(
-          onTap: isAvailable
-              ? () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => UseCouponPage(couponId: couponId),
-                    ),
-                  );
-                }
-              : null,
-          child: Center(
-            child: Stack(
-              alignment: Alignment.topRight,
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.3,
-                  decoration: const BoxDecoration(
-                    color: ColorName.backGroundYellow,
+  Widget build(BuildContext context, WidgetRef ref) => InkWell(
+        borderRadius: BorderRadius.circular(20),
+        onTap: isAvailable
+            ? () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UseCouponPage(couponId: couponId),
                   ),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.15,
+                );
+              }
+            : null,
+        child: Stack(
+          alignment: Alignment.topRight,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width * 0.48,
+              height: MediaQuery.of(context).size.width * 0.75,
+              decoration: BoxDecoration(
+                color: ColorName.orangeSecondaryBase,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: ColorName.greyBase,
+                  width: 2,
+                ),
+              ),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.56,
+                      width: MediaQuery.of(context).size.width * 0.48,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
                         child: CachedNetworkImage(
-                          imageUrl: couponImage ?? '',
+                          imageUrl: couponImage ?? '', // TODO #28:仮画像
                           fit: BoxFit.cover,
                         ),
                       ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.6,
-                        child: Text(
-                          storeName ?? '',
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          style: const TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
-                            color: ColorName.black2,
-                          ),
-                        ),
-                      ),
-                      Text(couponName ?? ''),
-                      Text('有効期限:$expiration'),
-                    ],
-                  ),
-                ),
-                if (!isAvailable)
-                  SizedBox(
-                    height: 30,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorName.orangeBase,
-                        shape: const CircleBorder(),
-                      ),
-                      onPressed: () async {
-                        await ref
-                            .read(ownedCouponListViewModelProvider.notifier)
-                            .deleteCoupon(couponId);
-                      },
-                      child: const Icon(
-                        Icons.delete,
-                        color: ColorName.whiteBase,
-                      ),
                     ),
                   ),
-              ],
+                  Text(
+                    storeName ?? '',
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: ColorName.black2,
+                    ),
+                  ),
+                  Text(
+                    couponName ?? '',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16,
+                      color: ColorName.black2,
+                    ),
+                  ),
+                  Text(
+                    expiration ?? '',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: ColorName.black2,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+            if (!isAvailable)
+              Container(
+                width: MediaQuery.of(context).size.width * 0.48,
+                height: MediaQuery.of(context).size.width * 0.75,
+                decoration: BoxDecoration(
+                  color: ColorName.greySecondary.withOpacity(0.6),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: ColorName.greyBase,
+                    width: 2,
+                  ),
+                ),
+              ),
+            if (!isAvailable)
+              SizedBox(
+                height: 50,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ColorName.backGroundYellow,
+                    shape: const CircleBorder(),
+                  ),
+                  onPressed: () async {
+                    await ref
+                        .read(ownedCouponListViewModelProvider.notifier)
+                        .deleteCoupon(couponId);
+                  },
+                  child: const Icon(
+                    Icons.delete,
+                    color: ColorName.whiteBase,
+                  ),
+                ),
+              ),
+          ],
         ),
       );
 }
