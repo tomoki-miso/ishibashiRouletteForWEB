@@ -25,31 +25,41 @@ class OwnedCouponsPage extends ConsumerWidget {
         } else {
           return Scaffold(
             appBar: const OriginalAppBar(),
-            body: ListView.builder(
-              itemCount: data.couponList.length,
-              itemBuilder: (context, index) {
-                final controller = data.couponList[index];
-                return FutureBuilder<bool>(
-                  future: ref
-                      .read(ownedCouponListViewModelProvider.notifier)
-                      .checkExpiration(index),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    } else {
-                      final isAvailable = snapshot.data ?? false;
-                      return CouponList(
-                        isAvailable: isAvailable,
-                        couponId: controller.couponId,
-                        couponName: controller.couponName,
-                        storeName: controller.storeName,
-                        couponImage: controller.couponImage,
-                        expiration: controller.expiration,
-                      );
-                    }
-                  },
-                );
-              },
+            body: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Wrap(
+                  spacing: 4,
+                  runSpacing: 4,
+                  children: data.couponList
+                      .map(
+                        (controller) => FutureBuilder<bool>(
+                          future: ref
+                              .read(ownedCouponListViewModelProvider.notifier)
+                              .checkExpiration(
+                                  data.couponList.indexOf(controller)),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const CircularProgressIndicator();
+                            } else {
+                              final isAvailable = snapshot.data ?? false;
+                              return CouponList(
+                                isAvailable: isAvailable,
+                                couponId: controller.couponId,
+                                couponName: controller.couponName,
+                                storeName: controller.storeName,
+                                couponImage: controller.couponImage,
+                                expiration: controller.expiration,
+                              );
+                            }
+                          },
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
             ),
           );
         }
