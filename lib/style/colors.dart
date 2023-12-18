@@ -10,6 +10,7 @@ class ColorName {
 
   /// Grey
   static const Color greyBase = Color(0xFF969696);
+  static const Color greySecondary = Color(0xFFB9B7B7);
   static const Color mailGrey = Color(0xFF7C7C7C);
 
   /// Black
@@ -21,6 +22,7 @@ class ColorName {
 
   /// Orange
   static const Color orangeBase = Color(0xFFBE8F17);
+  static const Color orangeSecondaryBase = Color(0xFFFCDBA9);
 
   /// Blue
   static const Color xBlue = Color(0xFF2069BF);
