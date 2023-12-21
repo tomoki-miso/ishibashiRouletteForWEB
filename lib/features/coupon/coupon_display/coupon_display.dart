@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/loading.dart';
 import 'package:ishibashi/components/original_app_bar.dart';
-import 'package:ishibashi/features/coupon/components/coupon_info.dart';
+import 'package:ishibashi/features/coupon/components/coupon_info_tile.dart';
 import 'package:ishibashi/features/coupon/coupon_display/components/save_coupon_button.dart';
 import 'package:ishibashi/features/coupon/coupon_display/view_model.dart';
 
@@ -43,6 +43,7 @@ class CouponDisplayPage extends ConsumerWidget {
                         couponImage: couponData.couponImage,
                         detail: couponData.couponDetail,
                         expiration: couponData.expiration,
+                        storeId: couponData.storeId,
                       ),
                       const Padding(padding: EdgeInsets.all(4)),
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ishibashi/components/original_app_bar.dart';
-import 'package:ishibashi/features/coupon/components/coupon_info.dart';
+import 'package:ishibashi/features/coupon/components/coupon_app_bar.dart';
+import 'package:ishibashi/features/coupon/components/coupon_info_tile.dart';
 import 'package:ishibashi/features/coupon/use_coupon/componets/slidebar_part.dart';
 import 'package:ishibashi/features/coupon/use_coupon/view_model.dart';
 
@@ -20,22 +20,25 @@ class UseCouponPage extends ConsumerWidget {
       error: (error, stackTrace) => Container(),
       loading: () => const Center(child: CircularProgressIndicator()),
       data: (data) {
-        final controller = data.coupon;
+        final couponData = data.coupon;
         return Scaffold(
-          appBar: const OriginalAppBar(),
+          appBar: const CouponAppBar(
+            withIcon: false,
+          ),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 /// クーポン情報
                 CouponInfo(
-                  couponName: controller.couponName,
-                  storeName: controller.storeName,
-                  couponImage: controller.couponImage,
-                  detail: controller.couponDetail,
-                  expiration: controller.expiration,
+                  couponName: couponData.couponName,
+                  storeName: couponData.storeName,
+                  couponImage: couponData.couponImage,
+                  detail: couponData.couponDetail,
+                  expiration: couponData.expiration,
+                  storeId: couponData.storeId,
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 8),
 
                 /// スライドバー
                 SlideBarPart(couponId: couponId),
