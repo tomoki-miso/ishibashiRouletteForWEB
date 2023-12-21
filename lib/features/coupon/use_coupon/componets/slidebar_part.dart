@@ -28,8 +28,8 @@ class SlideBarPart extends ConsumerWidget {
               color: ColorName.black2,
               fontWeight: FontWeight.bold,
             ),
-            innerColor: ColorName.backGroundYellow,
-            outerColor: ColorName.orangeBase,
+            innerColor: ColorName.orangeBase,
+            outerColor: ColorName.backGroundYellow,
             borderRadius: 10,
             onSubmit: () async {
               await ref
