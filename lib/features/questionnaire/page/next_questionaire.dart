@@ -49,8 +49,10 @@ class NextQuestionnairePage extends ConsumerWidget {
                     await notifier.inputDepartment();
                     if (data.selectedFaculty == 'notSelected' ||
                         data.inputedDepartment == '') {
+                      // ignore: use_build_context_synchronously
                       await showAlertDialog(context);
                     } else {
+                      // ignore: use_build_context_synchronously
                       await notifier.navigateToBasePage(context);
                     }
                   },

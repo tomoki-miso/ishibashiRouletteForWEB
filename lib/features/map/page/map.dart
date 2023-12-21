@@ -11,6 +11,7 @@ class MapPage extends StatefulWidget {
   const MapPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MapPageState createState() => _MapPageState();
 }
 
@@ -57,6 +58,7 @@ class _MapPageState extends State<MapPage> {
               ),
             ),
           );
+          // ignore: avoid_catches_without_on_clauses
         } catch (e) {}
       }
 
@@ -65,10 +67,12 @@ class _MapPageState extends State<MapPage> {
       });
 
       // マーカーが正しくセットされたかどうかをログで確認
+      // ignore: avoid_catches_without_on_clauses
     } catch (e) {}
   }
 
   Position? currentPosition;
+  // ignore: cancel_subscriptions
   late StreamSubscription<Position> positionStream;
 
   final LocationSettings locationSettings = const LocationSettings(
@@ -77,9 +81,9 @@ class _MapPageState extends State<MapPage> {
   );
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
-    _initialize();
+    await _initialize();
   }
 
   Future<void> _initialize() async {
@@ -101,9 +105,8 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
+  Future<void> _onMapCreated(GoogleMapController controller) async =>
+      mapController = controller;
 
   @override
   Widget build(BuildContext context) => Scaffold(

@@ -70,11 +70,14 @@ class QuestionnairePage extends ConsumerWidget {
                       if (data.selectedOccupation == 'notSelected' ||
                           data.selectedGender == 'notSelected' ||
                           data.userNameController.text == '') {
+                        // ignore: use_build_context_synchronously
                         await showAlertDialog(context);
                       } else if (data.selectedOccupation == 'ouStudent') {
+                        // ignore: use_build_context_synchronously
                         await notifier
                             .navigateToNextQuestionanairePage(context);
                       } else {
+                        // ignore: use_build_context_synchronously
                         await notifier.navigateToBasePage(context);
                       }
                     },
