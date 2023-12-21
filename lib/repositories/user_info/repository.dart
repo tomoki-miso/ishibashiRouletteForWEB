@@ -42,18 +42,29 @@ class UserInfoClassRepo extends _$UserInfoClassRepo {
         .set(userInfo.toJson());
   }
 
-  Future<void> saveCoupon(OwnedCoupon ownedCoupon) async {
-    final DocumentReference userDocRef = db
-        .collection('user_info')
-        .doc(ref.read(firebaseAuthProvider).currentUser!.uid);
+  /// クーポン保存
+  Future<void> saveCoupon(OwnedCoupon ownedCoupon, Coupon coupon) async {
+    await db.runTransaction((t) async {
+      final DocumentReference userDocRef = db
+          .collection('user_info')
+          .doc(ref.read(firebaseAuthProvider).currentUser!.uid);
 
-    await userDocRef
-        .collection('coupons')
-        .doc(ownedCoupon.couponId)
-        .set(ownedCoupon.toJson());
+      final DocumentReference userCouponDocRef =
+          userDocRef.collection('coupons').doc(ownedCoupon.couponId);
 
-    await db.collection('user_info').doc(uid).update({
-      'couponGotAt': FieldValue.serverTimestamp(),
+      final DocumentReference couponDocRef =
+          db.collection('coupon').doc(coupon.couponId);
+
+      t
+        ..set(userCouponDocRef, ownedCoupon.toJson())
+        ..update(
+          userDocRef,
+          {
+            'couponGotAt': FieldValue.serverTimestamp(),
+            'isCanGetCoupon': false,
+          },
+        )
+        ..update(couponDocRef, {'remainingAmount': FieldValue.increment(-1)});
     });
   }
 }
