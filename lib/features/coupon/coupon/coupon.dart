@@ -6,6 +6,7 @@ import 'package:ishibashi/features/coupon/coupon/components/explanation.dart';
 import 'package:ishibashi/features/coupon/coupon/components/lottie_part.dart';
 import 'package:ishibashi/features/coupon/coupon/view_model.dart';
 import 'package:ishibashi/style/colors.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class CouponPage extends ConsumerWidget {
   const CouponPage({super.key});
@@ -40,7 +41,24 @@ class CouponPage extends ConsumerWidget {
               const Padding(padding: EdgeInsets.all(10)),
 
               /// クーポンボタン
-              CouponButtonPart(data: data),
+              if (data.coupon.couponId != '')
+                CouponButtonPart(
+                  data: data,
+                  userId: data.userInfo.userId,
+                )
+              else
+                Column(
+                  children: [
+                    const Text('すべてのクーポンを取得済みのようです。\n新しいクーポンの登場をお待ち下さい……'),
+                    TextButton(
+                      onPressed: () async {
+                        const url = 'https://twitter.com/pochipochitudoi';
+                        await launchUrlString(url);
+                      },
+                      child: const Text('最新情報を見る'),
+                    ),
+                  ],
+                ),
               const Padding(padding: EdgeInsets.all(10)),
             ],
           ),
