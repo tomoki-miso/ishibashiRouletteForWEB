@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ishibashi/domain/coupon/domain.dart';
 import 'package:ishibashi/firebase/firebase.dart';
-import 'package:ishibashi/style/keys.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'repository.g.dart';
@@ -31,17 +30,5 @@ class CouponRepo extends _$CouponRepo {
         .doc(couponId);
 
     await userDocRef.delete();
-  }
-
-  Future<void> reduceCouponAmount({
-    required Coupon coupon,
-  }) async {
-    await db
-        .collection('coupon')
-        .doc(coupon.couponId)
-        .update({Keys.remainingAmount: FieldValue.increment(-1)}).catchError(
-      (e) => throw e,
-    );
-    print(coupon.remainingAmount);
   }
 }
