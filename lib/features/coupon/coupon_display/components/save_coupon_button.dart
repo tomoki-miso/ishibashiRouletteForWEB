@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/primary_button.dart';
 import 'package:ishibashi/features/coupon/coupon_display/view_model.dart';
+import 'package:ishibashi/style/colors.dart';
 
 class SaveCouponButton extends ConsumerWidget {
   const SaveCouponButton({
@@ -13,6 +14,7 @@ class SaveCouponButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => PrimaryButton(
+        backgroundColor: ColorName.orangeBase,
         onPressed: () async {
           await ref
               .read(
