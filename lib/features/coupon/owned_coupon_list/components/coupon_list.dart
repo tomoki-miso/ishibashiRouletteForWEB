@@ -24,23 +24,23 @@ class CouponList extends ConsumerWidget {
   final bool isAvailable;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => InkWell(
+  InkWell build(BuildContext context, WidgetRef ref) => InkWell(
         borderRadius: BorderRadius.circular(20),
-        onTap: isAvailable
-            ? () async {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => UseCouponPage(couponId: couponId),
-                  ),
-                );
-              }
-            : null,
+        onTap: () async {
+          if (isAvailable) {
+            await _navigateToUseCouponPage(context, couponId);
+          } else {
+            await _showDeleteAlertDialog(context, ref, couponId: couponId);
+          }
+        },
+        onLongPress: () async {
+          await _showDeleteAlertDialog(context, ref, couponId: couponId);
+        },
         child: Stack(
           alignment: Alignment.topRight,
           children: [
             Container(
-              width: MediaQuery.of(context).size.width * 0.48,
+              width: MediaQuery.of(context).size.width * 0.5,
               height: MediaQuery.of(context).size.width * 0.75,
               decoration: BoxDecoration(
                 color: ColorName.orangeSecondaryBase,
@@ -55,11 +55,13 @@ class CouponList extends ConsumerWidget {
                   Expanded(
                     child: SizedBox(
                       height: MediaQuery.of(context).size.width * 0.56,
-                      width: MediaQuery.of(context).size.width * 0.48,
+                      width: MediaQuery.of(context).size.width * 0.5,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: CachedNetworkImage(
-                          imageUrl: couponImage ?? '', // TODO #28:仮画像
+                          imageUrl: couponImage != ''
+                              ? couponImage!
+                              : 'https://user0514.cdnw.net/shared/img/thumb/miuFTHG2912_TP_V.jpg', // TODO #28:仮画像
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -67,7 +69,7 @@ class CouponList extends ConsumerWidget {
                   ),
                   Text(
                     storeName ?? '',
-                    maxLines: 2,
+                    maxLines: 1,
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -100,7 +102,7 @@ class CouponList extends ConsumerWidget {
             ),
             if (!isAvailable)
               Container(
-                width: MediaQuery.of(context).size.width * 0.48,
+                width: MediaQuery.of(context).size.width * 0.5,
                 height: MediaQuery.of(context).size.width * 0.75,
                 decoration: BoxDecoration(
                   color: ColorName.greySecondary.withOpacity(0.6),
@@ -110,27 +112,62 @@ class CouponList extends ConsumerWidget {
                     width: 2,
                   ),
                 ),
-              ),
-            if (!isAvailable)
-              SizedBox(
-                height: 50,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorName.backGroundYellow,
-                    shape: const CircleBorder(),
-                  ),
-                  onPressed: () async {
-                    await ref
-                        .read(ownedCouponListViewModelProvider.notifier)
-                        .deleteCoupon(couponId);
-                  },
-                  child: const Icon(
-                    Icons.delete,
-                    color: ColorName.whiteBase,
+                child: const Center(
+                  child: Text(
+                    '期限切れです',
+                    style: TextStyle(
+                      color: ColorName.whiteBase,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
           ],
         ),
       );
+}
+
+Future<void> _navigateToUseCouponPage(
+  BuildContext context,
+  String couponId,
+) async {
+  await Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => UseCouponPage(couponId: couponId),
+    ),
+  );
+}
+
+Future<void> _showDeleteAlertDialog(
+  BuildContext context,
+  WidgetRef ref, {
+  required String couponId,
+}) async {
+  await showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('クーポン削除'),
+      content: const Text('このクーポンを削除してもよろしいですか？'),
+      actions: [
+        TextButton(
+          child: const Text('キャンセル'),
+          onPressed: () => Navigator.pop(context),
+        ),
+        TextButton(
+          child: const Text(
+            '削除',
+            style: TextStyle(color: Colors.red),
+          ),
+          onPressed: () {
+            ref
+                .read(ownedCouponListViewModelProvider.notifier)
+                .deleteCoupon(couponId);
+            Navigator.pop(context);
+          },
+        ),
+      ],
+    ),
+  );
 }
