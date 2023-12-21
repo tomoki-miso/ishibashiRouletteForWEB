@@ -24,10 +24,10 @@ class CouponDisplayViewModel extends _$CouponDisplayViewModel {
         .doc(couponId)
         .get();
 
-    final couponData = storeSnapshot.data()!;
+    final couponData = storeSnapshot.data();
 
     /// 型変換
-    final Timestamp expirationTimestamp = couponData[
+    final Timestamp expirationTimestamp = couponData?[
         'expiration']; // 仮にcouponData['expiration']がFirebaseのTimestamp型として取得されると仮定しています
 
     final DateTime expirationDateTime = expirationTimestamp.toDate();
@@ -35,14 +35,14 @@ class CouponDisplayViewModel extends _$CouponDisplayViewModel {
         DateFormat('yyyy年 M/dd HH:mm').format(expirationDateTime);
 
     final Coupon coupon = Coupon(
-      storeId: couponData['storeId'],
-      couponId: couponData['couponId'],
-      couponName: couponData['couponName'],
-      storeName: couponData['storeName'],
-      couponDetail: couponData['detail'],
+      storeId: couponData?['storeId'],
+      couponId: couponData?['couponId'],
+      couponName: couponData?['couponName'],
+      storeName: couponData?['storeName'],
+      couponDetail: couponData?['detail'] ?? '',
       expiration: formattedExpiration,
-      couponImage: couponData['couponImage'],
-      remainingAmount: couponData['remainingAmount'],
+      couponImage: couponData?['couponImage'] ?? '',
+      remainingAmount: couponData?['remainingAmount'],
     );
 
     final state = CouponDisplayState(coupon: coupon);
@@ -77,11 +77,7 @@ class CouponDisplayViewModel extends _$CouponDisplayViewModel {
       // ローディング開始
       _updateLoading(true);
 
-      await userInfoRepo.saveCoupon(gotCoupon).then(
-            (value) => coupoRepo.reduceCouponAmount(
-              coupon: newCoupon,
-            ),
-          );
+      await userInfoRepo.saveCoupon(gotCoupon, newCoupon);
 
       /// クーポンを保存した時間記録
     } catch (e) {
