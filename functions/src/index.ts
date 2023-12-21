@@ -6,7 +6,7 @@ admin.initializeApp();
 const firestore = admin.firestore();
 
 export const updateCouponStatus = functions.pubsub
-  .schedule("every day 17:35")
+  .schedule("every day 10:00")
   .timeZone("Asia/Tokyo") // タイムゾーンを指定
   .onRun(async (context) => {
     try {
