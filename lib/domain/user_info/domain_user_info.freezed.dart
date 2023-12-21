@@ -28,6 +28,7 @@ mixin _$UserInfoClass {
   String? get department => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
+  bool? get isCanGetCoupon => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +50,8 @@ abstract class $UserInfoClassCopyWith<$Res> {
       String? faculty,
       String? department,
       DateTime? createdAt,
-      DateTime? updatedAt});
+      DateTime? updatedAt,
+      bool? isCanGetCoupon});
 }
 
 /// @nodoc
@@ -73,6 +75,7 @@ class _$UserInfoClassCopyWithImpl<$Res, $Val extends UserInfoClass>
     Object? department = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? isCanGetCoupon = freezed,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -107,6 +110,10 @@ class _$UserInfoClassCopyWithImpl<$Res, $Val extends UserInfoClass>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      isCanGetCoupon: freezed == isCanGetCoupon
+          ? _value.isCanGetCoupon
+          : isCanGetCoupon // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -127,7 +134,8 @@ abstract class _$$UserInfoClassImplCopyWith<$Res>
       String? faculty,
       String? department,
       DateTime? createdAt,
-      DateTime? updatedAt});
+      DateTime? updatedAt,
+      bool? isCanGetCoupon});
 }
 
 /// @nodoc
@@ -149,6 +157,7 @@ class __$$UserInfoClassImplCopyWithImpl<$Res>
     Object? department = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? isCanGetCoupon = freezed,
   }) {
     return _then(_$UserInfoClassImpl(
       userId: null == userId
@@ -183,6 +192,10 @@ class __$$UserInfoClassImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      isCanGetCoupon: freezed == isCanGetCoupon
+          ? _value.isCanGetCoupon
+          : isCanGetCoupon // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -198,7 +211,8 @@ class _$UserInfoClassImpl implements _UserInfoClass {
       this.faculty,
       this.department,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.isCanGetCoupon});
 
   factory _$UserInfoClassImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserInfoClassImplFromJson(json);
@@ -219,10 +233,12 @@ class _$UserInfoClassImpl implements _UserInfoClass {
   final DateTime? createdAt;
   @override
   final DateTime? updatedAt;
+  @override
+  final bool? isCanGetCoupon;
 
   @override
   String toString() {
-    return 'UserInfoClass(userId: $userId, userName: $userName, gender: $gender, occupation: $occupation, faculty: $faculty, department: $department, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserInfoClass(userId: $userId, userName: $userName, gender: $gender, occupation: $occupation, faculty: $faculty, department: $department, createdAt: $createdAt, updatedAt: $updatedAt, isCanGetCoupon: $isCanGetCoupon)';
   }
 
   @override
@@ -242,13 +258,15 @@ class _$UserInfoClassImpl implements _UserInfoClass {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.isCanGetCoupon, isCanGetCoupon) ||
+                other.isCanGetCoupon == isCanGetCoupon));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, userId, userName, gender,
-      occupation, faculty, department, createdAt, updatedAt);
+      occupation, faculty, department, createdAt, updatedAt, isCanGetCoupon);
 
   @JsonKey(ignore: true)
   @override
@@ -273,7 +291,8 @@ abstract class _UserInfoClass implements UserInfoClass {
       final String? faculty,
       final String? department,
       final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$UserInfoClassImpl;
+      final DateTime? updatedAt,
+      final bool? isCanGetCoupon}) = _$UserInfoClassImpl;
 
   factory _UserInfoClass.fromJson(Map<String, dynamic> json) =
       _$UserInfoClassImpl.fromJson;
@@ -294,6 +313,8 @@ abstract class _UserInfoClass implements UserInfoClass {
   DateTime? get createdAt;
   @override
   DateTime? get updatedAt;
+  @override
+  bool? get isCanGetCoupon;
   @override
   @JsonKey(ignore: true)
   _$$UserInfoClassImplCopyWith<_$UserInfoClassImpl> get copyWith =>

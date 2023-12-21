@@ -19,6 +19,7 @@ class UserInfoClass with _$UserInfoClass {
     String? department,
     DateTime? createdAt,
     DateTime? updatedAt,
+    bool? isCanGetCoupon,
   }) = _UserInfoClass;
 
   factory UserInfoClass.fromJson(Map<String, dynamic> json) =>
