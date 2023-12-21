@@ -7,14 +7,21 @@ class CouponAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CouponAppBar({
     super.key,
     this.withIcon = true,
+    this.title,
   });
+
   final bool withIcon;
+  final String? title;
 
   @override
   Widget build(BuildContext context) => AppBar(
         iconTheme: const IconThemeData(color: ColorName.greyBase),
         backgroundColor: Colors.white,
-        centerTitle: false,
+        centerTitle: true,
+        title: Text(
+          title ?? '',
+          style: const TextStyle(color: ColorName.greyBase, fontSize: 14),
+        ),
         actions: [
           if (withIcon)
             IconButton(
