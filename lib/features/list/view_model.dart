@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:ishibashi/domain/store/store_class.dart';
 import 'package:ishibashi/features/list/state.dart';
 import 'package:ishibashi/features/store_details/page/store_detail.dart';
-import 'package:ishibashi/repositories/stores/repository.dart';
+import 'package:ishibashi/domain/store/repository.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

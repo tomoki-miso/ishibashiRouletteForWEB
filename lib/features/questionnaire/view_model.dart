@@ -4,7 +4,7 @@ import 'package:ishibashi/base.dart';
 import 'package:ishibashi/domain/user_info/domain_user_info.dart';
 import 'package:ishibashi/features/questionnaire/page/next_questionaire.dart';
 import 'package:ishibashi/features/questionnaire/state.dart';
-import 'package:ishibashi/repositories/user_info/repository.dart';
+import 'package:ishibashi/domain/user_info/repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'view_model.g.dart';
