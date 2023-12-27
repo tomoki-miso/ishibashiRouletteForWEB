@@ -28,41 +28,48 @@ Future<void> signInWithGoogle(BuildContext context) async {
   try {
     configureGoogleSignIn();
     final GoogleSignInAccount? signInAccount = await googleSignIn?.signIn();
-    final User? currentUser = FirebaseAuth.instance.currentUser;
+    await Future.delayed(const Duration(seconds: 2));
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    print(userId);
+    final userDoc = await FirebaseFirestore.instance
+        .collection('user_info')
+        .doc(userId)
+        .get();
 
-    if (currentUser != null) {
-      final userDoc = await FirebaseFirestore.instance
-          .collection('user_info')
-          .doc(currentUser.uid)
-          .get();
+    if (userDoc.exists) {
+      // Firestoreのドキュメントが存在する場合
+      print('basePageへ');
+      print(FirebaseAuth.instance.currentUser?.uid);
+      await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const BasePage(), // Firestoreのドキュメントが存在する場合の遷移先
+        ),
+      );
+    } else {
+      final GoogleSignInAuthentication auth =
+          await signInAccount!.authentication;
+      final credential = GoogleAuthProvider.credential(
+        idToken: auth.idToken,
+        accessToken: auth.accessToken,
+      );
 
-      if (userDoc.exists) {
-        // Firestoreのドキュメントが存在する場合
-        await Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) =>
-                const BasePage(), // Firestoreのドキュメントが存在する場合の遷移先
-          ),
-        );
-      } else {
-        final GoogleSignInAuthentication auth =
-            await signInAccount!.authentication;
-        final credential = GoogleAuthProvider.credential(
-          idToken: auth.idToken,
-          accessToken: auth.accessToken,
-        );
+      await FirebaseAuth.instance.signInWithCredential(credential);
 
-        await FirebaseAuth.instance.signInWithCredential(credential);
+      // Firestoreのドキュメントが存在しない場合
+      print(userId);
 
-        // Firestoreのドキュメントが存在しない場合
-        await Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) =>
-                const QuestionnairePage(), // Firestoreのドキュメントが存在しない場合の遷移先
-          ),
-        );
-      }
+      print('アンケートへ');
+      print(FirebaseAuth.instance.currentUser?.uid);
+
+      await Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) =>
+              const QuestionnairePage(), // Firestoreのドキュメントが存在しない場合の遷移先
+        ),
+      );
     }
+
+    print('uidがない');
   } catch (e) {
     debugPrint('サインイン中にエラーが発生しました: $e');
   }
