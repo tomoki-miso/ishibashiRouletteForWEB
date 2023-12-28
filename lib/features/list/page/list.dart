@@ -24,22 +24,27 @@ class ListPage extends ConsumerWidget {
                 onTap: () async {
                   await ref
                       .read(listViewModelProvider.notifier)
-                      .navigateToStorePage(context, state.documentId);
+                      .navigateToStorePage(context, state.id);
                 },
-                name: state.storeName,
-                imageUrl: state.storePhotoUrl,
+                name: state.name,
+                imageUrl: state.photo_url,
                 tags: state.tags,
-                openTime: state.openTime,
-                closeTime: state.closeTime,
-                openTimeSecond: state.openTimeSecond,
-                closeTimeSecond: state.closeTimeSecond,
+                openTime: state.formattedOpenTime,
+                closeTime: state.formattedCloseTime,
+                openTimeSecond: state.formattedOpenTimeSecond,
+                closeTimeSecond: state.formattedCloseTimeSecond,
                 remarksTime: state.remarksTime,
               );
             },
           ),
         ),
       ),
-      error: (error, stackTrace) => Container(),
+      error: (error, stackTrace) => ElevatedButton(
+        onPressed: () {
+          print(error);
+        },
+        child: Text(error.toString()),
+      ),
       loading: () => const Center(child: CircularProgressIndicator()),
     );
   }

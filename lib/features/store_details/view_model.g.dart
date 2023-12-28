@@ -7,7 +7,7 @@ part of 'view_model.dart';
 // **************************************************************************
 
 String _$listDetailViewModelHash() =>
-    r'4a2e37d16ad31333a03f1b933f56de3f3f6f464e';
+    r'a28e1bdf3eac518704bcb1d7fafe327fe8ef6786';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -32,10 +32,10 @@ class _SystemHash {
 
 abstract class _$ListDetailViewModel
     extends BuildlessAutoDisposeAsyncNotifier<ListDetailState> {
-  late final documentId;
+  late final String storeId;
 
   FutureOr<ListDetailState> build(
-    documentId,
+    String storeId,
   );
 }
 
@@ -50,10 +50,10 @@ class ListDetailViewModelFamily extends Family<AsyncValue<ListDetailState>> {
 
   /// See also [ListDetailViewModel].
   ListDetailViewModelProvider call(
-    documentId,
+    String storeId,
   ) {
     return ListDetailViewModelProvider(
-      documentId,
+      storeId,
     );
   }
 
@@ -63,7 +63,7 @@ class ListDetailViewModelFamily extends Family<AsyncValue<ListDetailState>> {
     covariant ListDetailViewModelProvider provider,
   ) {
     return call(
-      provider.documentId,
+      provider.storeId,
     );
   }
 
@@ -87,9 +87,9 @@ class ListDetailViewModelProvider extends AutoDisposeAsyncNotifierProviderImpl<
     ListDetailViewModel, ListDetailState> {
   /// See also [ListDetailViewModel].
   ListDetailViewModelProvider(
-    documentId,
+    String storeId,
   ) : this._internal(
-          () => ListDetailViewModel()..documentId = documentId,
+          () => ListDetailViewModel()..storeId = storeId,
           from: listDetailViewModelProvider,
           name: r'listDetailViewModelProvider',
           debugGetCreateSourceHash:
@@ -99,7 +99,7 @@ class ListDetailViewModelProvider extends AutoDisposeAsyncNotifierProviderImpl<
           dependencies: ListDetailViewModelFamily._dependencies,
           allTransitiveDependencies:
               ListDetailViewModelFamily._allTransitiveDependencies,
-          documentId: documentId,
+          storeId: storeId,
         );
 
   ListDetailViewModelProvider._internal(
@@ -109,17 +109,17 @@ class ListDetailViewModelProvider extends AutoDisposeAsyncNotifierProviderImpl<
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.documentId,
+    required this.storeId,
   }) : super.internal();
 
-  final documentId;
+  final String storeId;
 
   @override
   FutureOr<ListDetailState> runNotifierBuild(
     covariant ListDetailViewModel notifier,
   ) {
     return notifier.build(
-      documentId,
+      storeId,
     );
   }
 
@@ -128,13 +128,13 @@ class ListDetailViewModelProvider extends AutoDisposeAsyncNotifierProviderImpl<
     return ProviderOverride(
       origin: this,
       override: ListDetailViewModelProvider._internal(
-        () => create()..documentId = documentId,
+        () => create()..storeId = storeId,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        documentId: documentId,
+        storeId: storeId,
       ),
     );
   }
@@ -147,14 +147,13 @@ class ListDetailViewModelProvider extends AutoDisposeAsyncNotifierProviderImpl<
 
   @override
   bool operator ==(Object other) {
-    return other is ListDetailViewModelProvider &&
-        other.documentId == documentId;
+    return other is ListDetailViewModelProvider && other.storeId == storeId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, documentId.hashCode);
+    hash = _SystemHash.combine(hash, storeId.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -162,8 +161,8 @@ class ListDetailViewModelProvider extends AutoDisposeAsyncNotifierProviderImpl<
 
 mixin ListDetailViewModelRef
     on AutoDisposeAsyncNotifierProviderRef<ListDetailState> {
-  /// The parameter `documentId` of this provider.
-  get documentId;
+  /// The parameter `storeId` of this provider.
+  String get storeId;
 }
 
 class _ListDetailViewModelProviderElement
@@ -172,7 +171,7 @@ class _ListDetailViewModelProviderElement
   _ListDetailViewModelProviderElement(super.provider);
 
   @override
-  get documentId => (origin as ListDetailViewModelProvider).documentId;
+  String get storeId => (origin as ListDetailViewModelProvider).storeId;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter

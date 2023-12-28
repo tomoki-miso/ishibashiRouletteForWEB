@@ -14,23 +14,23 @@ class StoreClass with _$StoreClass {
 
   // プロパティを指定
   const factory StoreClass({
-    required String documentId,
-    String? storeName,
-    String? storeDetail,
-    String? storeWeb,
-    String? storeTwitter,
-    String? storeInsta,
-    String? storeInstaPosts,
-    String? storeTabelog,
-    String? storePhotoUrl,
-    String? openTime,
-    String? closeTime,
-    String? openTimeSecond,
-    String? closeTimeSecond,
+    required String id,
+    String? name,
+    String? detail,
+    String? web,
+    String? twitter,
+    String? insta,
+    String? instaPosts,
+    String? tabelog,
+    String? photo_url,
+    String? formattedOpenTime,
+    String? formattedCloseTime,
+    String? formattedOpenTimeSecond,
+    String? formattedCloseTimeSecond,
     String? remarksTime,
     String? remarksDay,
     List<String>? tags,
-    List<String>? businessDays,
+    List<String>? daysOfWeek,
   }) = _StoreClass;
   factory StoreClass.fromJson(Map<String, dynamic> json) =>
       _$StoreClassFromJson(json);

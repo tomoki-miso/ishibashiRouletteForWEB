@@ -12,14 +12,14 @@ import 'package:ishibashi/style/styles.dart';
 
 class StoreDetailPage extends ConsumerWidget {
   const StoreDetailPage({
-    required this.documentId,
+    required this.storeId,
     super.key,
   });
 
-  final String documentId;
+  final String storeId;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final data = ref.watch(listDetailViewModelProvider(documentId));
+    final data = ref.watch(listDetailViewModelProvider(storeId));
     return data.when(
       data: (data) => Scaffold(
         backgroundColor: ColorName.backGroundYellow,
@@ -33,7 +33,7 @@ class StoreDetailPage extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
-                  data.storeClass.storeName ?? '',
+                  data.storeClass.name ?? '',
                   textAlign: TextAlign.center,
                   style: Styles.detailStoreName,
                 ),
@@ -42,7 +42,7 @@ class StoreDetailPage extends ConsumerWidget {
 
               /// 画像部分
               StoreDetailImagePart(
-                storePhotoUrl: data.storeClass.storePhotoUrl ?? '',
+                storePhotoUrl: data.storeClass.photo_url ?? '',
               ),
               const Padding(padding: EdgeInsets.all(10)),
 
@@ -52,28 +52,28 @@ class StoreDetailPage extends ConsumerWidget {
 
               /// 営業時間、営業日
               StoreDetailStoreDayTimePart(
-                openTime: data.storeClass.openTime,
-                closeTime: data.storeClass.closeTime,
-                openTimeSecond: data.storeClass.openTimeSecond,
-                closeTimeSecond: data.storeClass.closeTimeSecond,
+                openTime: data.storeClass.formattedOpenTime,
+                closeTime: data.storeClass.formattedCloseTime,
+                openTimeSecond: data.storeClass.formattedOpenTimeSecond,
+                closeTimeSecond: data.storeClass.formattedCloseTimeSecond,
                 remarksTime: data.storeClass.remarksTime,
-                businessDays: data.storeClass.businessDays,
+                businessDays: data.storeClass.daysOfWeek,
                 remarksDay: data.storeClass.remarksDay,
               ),
 
               /// 紹介文章
               StoreDetailTextPart(
-                storeDetail: data.storeClass.storeDetail ?? '',
+                storeDetail: data.storeClass.detail ?? '',
               ),
               const Padding(padding: EdgeInsets.all(10)),
 
               //ジャンプ部分
               StoreDetailJumpPart(
-                storeWeb: data.storeClass.storeWeb ?? '',
-                storeTabelog: data.storeClass.storeTabelog ?? '',
-                storeTwitter: data.storeClass.storeTwitter ?? '',
-                storeInsta: data.storeClass.storeInsta ?? '',
-                storeInstaPosts: data.storeClass.storeInstaPosts ?? '',
+                storeWeb: data.storeClass.web ?? '',
+                storeTabelog: data.storeClass.tabelog ?? '',
+                storeTwitter: data.storeClass.twitter ?? '',
+                storeInsta: data.storeClass.insta ?? '',
+                storeInstaPosts: data.storeClass.instaPosts ?? '',
               ),
               const SizedBox(height: 25),
             ],
