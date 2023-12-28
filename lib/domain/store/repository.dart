@@ -41,7 +41,7 @@ class StoresRepo extends _$StoresRepo {
   ) async {
     final List<StoreClass> storeList = [
       ...await collection
-          .where('keyword', arrayContainsAny: searchWordList)
+          .where('keywords', arrayContainsAny: searchWordList)
           .get()
           .then((value) => value.docs.map((e) => e.data()).toList()),
     ];
