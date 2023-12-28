@@ -19,7 +19,7 @@ class StoresRepo extends _$StoresRepo {
   @override
   void build() {}
 
-  Future<List<StoreClass>> getStoresByIds() async {
+  Future<List<StoreClass>> getStores() async {
     final List<StoreClass> storesList = [
       ...await collection
           .get()
@@ -35,4 +35,28 @@ class StoresRepo extends _$StoresRepo {
         }
         return value.data()!;
       });
+
+  Future<List<StoreClass>> searchStoresByKeyWord(
+    List<String> searchWordList,
+  ) async {
+    final List<StoreClass> storeList = [
+      ...await collection
+          .where('keyword', arrayContainsAny: searchWordList)
+          .get()
+          .then((value) => value.docs.map((e) => e.data()).toList()),
+    ];
+    return storeList;
+  }
+
+  Future<List<StoreClass>> searchStoresByDays(
+    List<String> selectedDays,
+  ) async {
+    final List<StoreClass> storeList = [
+      ...await collection
+          .where('daysOfWeek', arrayContainsAny: selectedDays)
+          .get()
+          .then((value) => value.docs.map((e) => e.data()).toList()),
+    ];
+    return storeList;
+  }
 }

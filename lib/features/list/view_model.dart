@@ -16,7 +16,7 @@ class ListViewModel extends _$ListViewModel {
 
   @override
   FutureOr<ListState> build() async {
-    final List<StoreClass> storeList = await storesRepo.getStoresByIds();
+    final List<StoreClass> storeList = await storesRepo.getStores();
 
     final state = ListState(storeClassList: storeList);
     return state;
