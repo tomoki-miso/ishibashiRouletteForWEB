@@ -12,14 +12,10 @@ part 'view_model.g.dart';
 
 @riverpod
 class ListViewModel extends _$ListViewModel {
-  QuerySnapshot? _storeSnapshot;
   StoresRepo get storesRepo => ref.read(storesRepoProvider.notifier);
 
   @override
   FutureOr<ListState> build() async {
-    _storeSnapshot ??=
-        await FirebaseFirestore.instance.collection('stores').get();
-
     final List<StoreClass> storeList = await storesRepo.getStoresByIds();
 
     final state = ListState(storeClassList: storeList);
