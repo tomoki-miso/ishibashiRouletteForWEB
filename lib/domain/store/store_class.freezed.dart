@@ -20,23 +20,23 @@ StoreClass _$StoreClassFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$StoreClass {
-  String get documentId => throw _privateConstructorUsedError;
-  String? get storeName => throw _privateConstructorUsedError;
-  String? get storeDetail => throw _privateConstructorUsedError;
-  String? get storeWeb => throw _privateConstructorUsedError;
-  String? get storeTwitter => throw _privateConstructorUsedError;
-  String? get storeInsta => throw _privateConstructorUsedError;
-  String? get storeInstaPosts => throw _privateConstructorUsedError;
-  String? get storeTabelog => throw _privateConstructorUsedError;
-  String? get storePhotoUrl => throw _privateConstructorUsedError;
-  String? get openTime => throw _privateConstructorUsedError;
-  String? get closeTime => throw _privateConstructorUsedError;
-  String? get openTimeSecond => throw _privateConstructorUsedError;
-  String? get closeTimeSecond => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get detail => throw _privateConstructorUsedError;
+  String? get web => throw _privateConstructorUsedError;
+  String? get twitter => throw _privateConstructorUsedError;
+  String? get insta => throw _privateConstructorUsedError;
+  String? get instaPosts => throw _privateConstructorUsedError;
+  String? get tabelog => throw _privateConstructorUsedError;
+  String? get photo_url => throw _privateConstructorUsedError;
+  String? get formattedOpenTime => throw _privateConstructorUsedError;
+  String? get formattedCloseTime => throw _privateConstructorUsedError;
+  String? get formattedOpenTimeSecond => throw _privateConstructorUsedError;
+  String? get formattedCloseTimeSecond => throw _privateConstructorUsedError;
   String? get remarksTime => throw _privateConstructorUsedError;
   String? get remarksDay => throw _privateConstructorUsedError;
   List<String>? get tags => throw _privateConstructorUsedError;
-  List<String>? get businessDays => throw _privateConstructorUsedError;
+  List<String>? get daysOfWeek => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,23 +51,23 @@ abstract class $StoreClassCopyWith<$Res> {
       _$StoreClassCopyWithImpl<$Res, StoreClass>;
   @useResult
   $Res call(
-      {String documentId,
-      String? storeName,
-      String? storeDetail,
-      String? storeWeb,
-      String? storeTwitter,
-      String? storeInsta,
-      String? storeInstaPosts,
-      String? storeTabelog,
-      String? storePhotoUrl,
-      String? openTime,
-      String? closeTime,
-      String? openTimeSecond,
-      String? closeTimeSecond,
+      {String id,
+      String? name,
+      String? detail,
+      String? web,
+      String? twitter,
+      String? insta,
+      String? instaPosts,
+      String? tabelog,
+      String? photo_url,
+      String? formattedOpenTime,
+      String? formattedCloseTime,
+      String? formattedOpenTimeSecond,
+      String? formattedCloseTimeSecond,
       String? remarksTime,
       String? remarksDay,
       List<String>? tags,
-      List<String>? businessDays});
+      List<String>? daysOfWeek});
 }
 
 /// @nodoc
@@ -83,76 +83,76 @@ class _$StoreClassCopyWithImpl<$Res, $Val extends StoreClass>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? documentId = null,
-    Object? storeName = freezed,
-    Object? storeDetail = freezed,
-    Object? storeWeb = freezed,
-    Object? storeTwitter = freezed,
-    Object? storeInsta = freezed,
-    Object? storeInstaPosts = freezed,
-    Object? storeTabelog = freezed,
-    Object? storePhotoUrl = freezed,
-    Object? openTime = freezed,
-    Object? closeTime = freezed,
-    Object? openTimeSecond = freezed,
-    Object? closeTimeSecond = freezed,
+    Object? id = null,
+    Object? name = freezed,
+    Object? detail = freezed,
+    Object? web = freezed,
+    Object? twitter = freezed,
+    Object? insta = freezed,
+    Object? instaPosts = freezed,
+    Object? tabelog = freezed,
+    Object? photo_url = freezed,
+    Object? formattedOpenTime = freezed,
+    Object? formattedCloseTime = freezed,
+    Object? formattedOpenTimeSecond = freezed,
+    Object? formattedCloseTimeSecond = freezed,
     Object? remarksTime = freezed,
     Object? remarksDay = freezed,
     Object? tags = freezed,
-    Object? businessDays = freezed,
+    Object? daysOfWeek = freezed,
   }) {
     return _then(_value.copyWith(
-      documentId: null == documentId
-          ? _value.documentId
-          : documentId // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      storeName: freezed == storeName
-          ? _value.storeName
-          : storeName // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeDetail: freezed == storeDetail
-          ? _value.storeDetail
-          : storeDetail // ignore: cast_nullable_to_non_nullable
+      detail: freezed == detail
+          ? _value.detail
+          : detail // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeWeb: freezed == storeWeb
-          ? _value.storeWeb
-          : storeWeb // ignore: cast_nullable_to_non_nullable
+      web: freezed == web
+          ? _value.web
+          : web // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeTwitter: freezed == storeTwitter
-          ? _value.storeTwitter
-          : storeTwitter // ignore: cast_nullable_to_non_nullable
+      twitter: freezed == twitter
+          ? _value.twitter
+          : twitter // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeInsta: freezed == storeInsta
-          ? _value.storeInsta
-          : storeInsta // ignore: cast_nullable_to_non_nullable
+      insta: freezed == insta
+          ? _value.insta
+          : insta // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeInstaPosts: freezed == storeInstaPosts
-          ? _value.storeInstaPosts
-          : storeInstaPosts // ignore: cast_nullable_to_non_nullable
+      instaPosts: freezed == instaPosts
+          ? _value.instaPosts
+          : instaPosts // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeTabelog: freezed == storeTabelog
-          ? _value.storeTabelog
-          : storeTabelog // ignore: cast_nullable_to_non_nullable
+      tabelog: freezed == tabelog
+          ? _value.tabelog
+          : tabelog // ignore: cast_nullable_to_non_nullable
               as String?,
-      storePhotoUrl: freezed == storePhotoUrl
-          ? _value.storePhotoUrl
-          : storePhotoUrl // ignore: cast_nullable_to_non_nullable
+      photo_url: freezed == photo_url
+          ? _value.photo_url
+          : photo_url // ignore: cast_nullable_to_non_nullable
               as String?,
-      openTime: freezed == openTime
-          ? _value.openTime
-          : openTime // ignore: cast_nullable_to_non_nullable
+      formattedOpenTime: freezed == formattedOpenTime
+          ? _value.formattedOpenTime
+          : formattedOpenTime // ignore: cast_nullable_to_non_nullable
               as String?,
-      closeTime: freezed == closeTime
-          ? _value.closeTime
-          : closeTime // ignore: cast_nullable_to_non_nullable
+      formattedCloseTime: freezed == formattedCloseTime
+          ? _value.formattedCloseTime
+          : formattedCloseTime // ignore: cast_nullable_to_non_nullable
               as String?,
-      openTimeSecond: freezed == openTimeSecond
-          ? _value.openTimeSecond
-          : openTimeSecond // ignore: cast_nullable_to_non_nullable
+      formattedOpenTimeSecond: freezed == formattedOpenTimeSecond
+          ? _value.formattedOpenTimeSecond
+          : formattedOpenTimeSecond // ignore: cast_nullable_to_non_nullable
               as String?,
-      closeTimeSecond: freezed == closeTimeSecond
-          ? _value.closeTimeSecond
-          : closeTimeSecond // ignore: cast_nullable_to_non_nullable
+      formattedCloseTimeSecond: freezed == formattedCloseTimeSecond
+          ? _value.formattedCloseTimeSecond
+          : formattedCloseTimeSecond // ignore: cast_nullable_to_non_nullable
               as String?,
       remarksTime: freezed == remarksTime
           ? _value.remarksTime
@@ -166,9 +166,9 @@ class _$StoreClassCopyWithImpl<$Res, $Val extends StoreClass>
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      businessDays: freezed == businessDays
-          ? _value.businessDays
-          : businessDays // ignore: cast_nullable_to_non_nullable
+      daysOfWeek: freezed == daysOfWeek
+          ? _value.daysOfWeek
+          : daysOfWeek // ignore: cast_nullable_to_non_nullable
               as List<String>?,
     ) as $Val);
   }
@@ -183,23 +183,23 @@ abstract class _$$StoreClassImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String documentId,
-      String? storeName,
-      String? storeDetail,
-      String? storeWeb,
-      String? storeTwitter,
-      String? storeInsta,
-      String? storeInstaPosts,
-      String? storeTabelog,
-      String? storePhotoUrl,
-      String? openTime,
-      String? closeTime,
-      String? openTimeSecond,
-      String? closeTimeSecond,
+      {String id,
+      String? name,
+      String? detail,
+      String? web,
+      String? twitter,
+      String? insta,
+      String? instaPosts,
+      String? tabelog,
+      String? photo_url,
+      String? formattedOpenTime,
+      String? formattedCloseTime,
+      String? formattedOpenTimeSecond,
+      String? formattedCloseTimeSecond,
       String? remarksTime,
       String? remarksDay,
       List<String>? tags,
-      List<String>? businessDays});
+      List<String>? daysOfWeek});
 }
 
 /// @nodoc
@@ -213,76 +213,76 @@ class __$$StoreClassImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? documentId = null,
-    Object? storeName = freezed,
-    Object? storeDetail = freezed,
-    Object? storeWeb = freezed,
-    Object? storeTwitter = freezed,
-    Object? storeInsta = freezed,
-    Object? storeInstaPosts = freezed,
-    Object? storeTabelog = freezed,
-    Object? storePhotoUrl = freezed,
-    Object? openTime = freezed,
-    Object? closeTime = freezed,
-    Object? openTimeSecond = freezed,
-    Object? closeTimeSecond = freezed,
+    Object? id = null,
+    Object? name = freezed,
+    Object? detail = freezed,
+    Object? web = freezed,
+    Object? twitter = freezed,
+    Object? insta = freezed,
+    Object? instaPosts = freezed,
+    Object? tabelog = freezed,
+    Object? photo_url = freezed,
+    Object? formattedOpenTime = freezed,
+    Object? formattedCloseTime = freezed,
+    Object? formattedOpenTimeSecond = freezed,
+    Object? formattedCloseTimeSecond = freezed,
     Object? remarksTime = freezed,
     Object? remarksDay = freezed,
     Object? tags = freezed,
-    Object? businessDays = freezed,
+    Object? daysOfWeek = freezed,
   }) {
     return _then(_$StoreClassImpl(
-      documentId: null == documentId
-          ? _value.documentId
-          : documentId // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      storeName: freezed == storeName
-          ? _value.storeName
-          : storeName // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeDetail: freezed == storeDetail
-          ? _value.storeDetail
-          : storeDetail // ignore: cast_nullable_to_non_nullable
+      detail: freezed == detail
+          ? _value.detail
+          : detail // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeWeb: freezed == storeWeb
-          ? _value.storeWeb
-          : storeWeb // ignore: cast_nullable_to_non_nullable
+      web: freezed == web
+          ? _value.web
+          : web // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeTwitter: freezed == storeTwitter
-          ? _value.storeTwitter
-          : storeTwitter // ignore: cast_nullable_to_non_nullable
+      twitter: freezed == twitter
+          ? _value.twitter
+          : twitter // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeInsta: freezed == storeInsta
-          ? _value.storeInsta
-          : storeInsta // ignore: cast_nullable_to_non_nullable
+      insta: freezed == insta
+          ? _value.insta
+          : insta // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeInstaPosts: freezed == storeInstaPosts
-          ? _value.storeInstaPosts
-          : storeInstaPosts // ignore: cast_nullable_to_non_nullable
+      instaPosts: freezed == instaPosts
+          ? _value.instaPosts
+          : instaPosts // ignore: cast_nullable_to_non_nullable
               as String?,
-      storeTabelog: freezed == storeTabelog
-          ? _value.storeTabelog
-          : storeTabelog // ignore: cast_nullable_to_non_nullable
+      tabelog: freezed == tabelog
+          ? _value.tabelog
+          : tabelog // ignore: cast_nullable_to_non_nullable
               as String?,
-      storePhotoUrl: freezed == storePhotoUrl
-          ? _value.storePhotoUrl
-          : storePhotoUrl // ignore: cast_nullable_to_non_nullable
+      photo_url: freezed == photo_url
+          ? _value.photo_url
+          : photo_url // ignore: cast_nullable_to_non_nullable
               as String?,
-      openTime: freezed == openTime
-          ? _value.openTime
-          : openTime // ignore: cast_nullable_to_non_nullable
+      formattedOpenTime: freezed == formattedOpenTime
+          ? _value.formattedOpenTime
+          : formattedOpenTime // ignore: cast_nullable_to_non_nullable
               as String?,
-      closeTime: freezed == closeTime
-          ? _value.closeTime
-          : closeTime // ignore: cast_nullable_to_non_nullable
+      formattedCloseTime: freezed == formattedCloseTime
+          ? _value.formattedCloseTime
+          : formattedCloseTime // ignore: cast_nullable_to_non_nullable
               as String?,
-      openTimeSecond: freezed == openTimeSecond
-          ? _value.openTimeSecond
-          : openTimeSecond // ignore: cast_nullable_to_non_nullable
+      formattedOpenTimeSecond: freezed == formattedOpenTimeSecond
+          ? _value.formattedOpenTimeSecond
+          : formattedOpenTimeSecond // ignore: cast_nullable_to_non_nullable
               as String?,
-      closeTimeSecond: freezed == closeTimeSecond
-          ? _value.closeTimeSecond
-          : closeTimeSecond // ignore: cast_nullable_to_non_nullable
+      formattedCloseTimeSecond: freezed == formattedCloseTimeSecond
+          ? _value.formattedCloseTimeSecond
+          : formattedCloseTimeSecond // ignore: cast_nullable_to_non_nullable
               as String?,
       remarksTime: freezed == remarksTime
           ? _value.remarksTime
@@ -296,9 +296,9 @@ class __$$StoreClassImplCopyWithImpl<$Res>
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      businessDays: freezed == businessDays
-          ? _value._businessDays
-          : businessDays // ignore: cast_nullable_to_non_nullable
+      daysOfWeek: freezed == daysOfWeek
+          ? _value._daysOfWeek
+          : daysOfWeek // ignore: cast_nullable_to_non_nullable
               as List<String>?,
     ));
   }
@@ -308,55 +308,55 @@ class __$$StoreClassImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$StoreClassImpl implements _StoreClass {
   const _$StoreClassImpl(
-      {required this.documentId,
-      this.storeName,
-      this.storeDetail,
-      this.storeWeb,
-      this.storeTwitter,
-      this.storeInsta,
-      this.storeInstaPosts,
-      this.storeTabelog,
-      this.storePhotoUrl,
-      this.openTime,
-      this.closeTime,
-      this.openTimeSecond,
-      this.closeTimeSecond,
+      {required this.id,
+      this.name,
+      this.detail,
+      this.web,
+      this.twitter,
+      this.insta,
+      this.instaPosts,
+      this.tabelog,
+      this.photo_url,
+      this.formattedOpenTime,
+      this.formattedCloseTime,
+      this.formattedOpenTimeSecond,
+      this.formattedCloseTimeSecond,
       this.remarksTime,
       this.remarksDay,
       final List<String>? tags,
-      final List<String>? businessDays})
+      final List<String>? daysOfWeek})
       : _tags = tags,
-        _businessDays = businessDays;
+        _daysOfWeek = daysOfWeek;
 
   factory _$StoreClassImpl.fromJson(Map<String, dynamic> json) =>
       _$$StoreClassImplFromJson(json);
 
   @override
-  final String documentId;
+  final String id;
   @override
-  final String? storeName;
+  final String? name;
   @override
-  final String? storeDetail;
+  final String? detail;
   @override
-  final String? storeWeb;
+  final String? web;
   @override
-  final String? storeTwitter;
+  final String? twitter;
   @override
-  final String? storeInsta;
+  final String? insta;
   @override
-  final String? storeInstaPosts;
+  final String? instaPosts;
   @override
-  final String? storeTabelog;
+  final String? tabelog;
   @override
-  final String? storePhotoUrl;
+  final String? photo_url;
   @override
-  final String? openTime;
+  final String? formattedOpenTime;
   @override
-  final String? closeTime;
+  final String? formattedCloseTime;
   @override
-  final String? openTimeSecond;
+  final String? formattedOpenTimeSecond;
   @override
-  final String? closeTimeSecond;
+  final String? formattedCloseTimeSecond;
   @override
   final String? remarksTime;
   @override
@@ -371,19 +371,19 @@ class _$StoreClassImpl implements _StoreClass {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<String>? _businessDays;
+  final List<String>? _daysOfWeek;
   @override
-  List<String>? get businessDays {
-    final value = _businessDays;
+  List<String>? get daysOfWeek {
+    final value = _daysOfWeek;
     if (value == null) return null;
-    if (_businessDays is EqualUnmodifiableListView) return _businessDays;
+    if (_daysOfWeek is EqualUnmodifiableListView) return _daysOfWeek;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'StoreClass(documentId: $documentId, storeName: $storeName, storeDetail: $storeDetail, storeWeb: $storeWeb, storeTwitter: $storeTwitter, storeInsta: $storeInsta, storeInstaPosts: $storeInstaPosts, storeTabelog: $storeTabelog, storePhotoUrl: $storePhotoUrl, openTime: $openTime, closeTime: $closeTime, openTimeSecond: $openTimeSecond, closeTimeSecond: $closeTimeSecond, remarksTime: $remarksTime, remarksDay: $remarksDay, tags: $tags, businessDays: $businessDays)';
+    return 'StoreClass(id: $id, name: $name, detail: $detail, web: $web, twitter: $twitter, insta: $insta, instaPosts: $instaPosts, tabelog: $tabelog, photo_url: $photo_url, formattedOpenTime: $formattedOpenTime, formattedCloseTime: $formattedCloseTime, formattedOpenTimeSecond: $formattedOpenTimeSecond, formattedCloseTimeSecond: $formattedCloseTimeSecond, remarksTime: $remarksTime, remarksDay: $remarksDay, tags: $tags, daysOfWeek: $daysOfWeek)';
   }
 
   @override
@@ -391,62 +391,57 @@ class _$StoreClassImpl implements _StoreClass {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StoreClassImpl &&
-            (identical(other.documentId, documentId) ||
-                other.documentId == documentId) &&
-            (identical(other.storeName, storeName) ||
-                other.storeName == storeName) &&
-            (identical(other.storeDetail, storeDetail) ||
-                other.storeDetail == storeDetail) &&
-            (identical(other.storeWeb, storeWeb) ||
-                other.storeWeb == storeWeb) &&
-            (identical(other.storeTwitter, storeTwitter) ||
-                other.storeTwitter == storeTwitter) &&
-            (identical(other.storeInsta, storeInsta) ||
-                other.storeInsta == storeInsta) &&
-            (identical(other.storeInstaPosts, storeInstaPosts) ||
-                other.storeInstaPosts == storeInstaPosts) &&
-            (identical(other.storeTabelog, storeTabelog) ||
-                other.storeTabelog == storeTabelog) &&
-            (identical(other.storePhotoUrl, storePhotoUrl) ||
-                other.storePhotoUrl == storePhotoUrl) &&
-            (identical(other.openTime, openTime) ||
-                other.openTime == openTime) &&
-            (identical(other.closeTime, closeTime) ||
-                other.closeTime == closeTime) &&
-            (identical(other.openTimeSecond, openTimeSecond) ||
-                other.openTimeSecond == openTimeSecond) &&
-            (identical(other.closeTimeSecond, closeTimeSecond) ||
-                other.closeTimeSecond == closeTimeSecond) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.detail, detail) || other.detail == detail) &&
+            (identical(other.web, web) || other.web == web) &&
+            (identical(other.twitter, twitter) || other.twitter == twitter) &&
+            (identical(other.insta, insta) || other.insta == insta) &&
+            (identical(other.instaPosts, instaPosts) ||
+                other.instaPosts == instaPosts) &&
+            (identical(other.tabelog, tabelog) || other.tabelog == tabelog) &&
+            (identical(other.photo_url, photo_url) ||
+                other.photo_url == photo_url) &&
+            (identical(other.formattedOpenTime, formattedOpenTime) ||
+                other.formattedOpenTime == formattedOpenTime) &&
+            (identical(other.formattedCloseTime, formattedCloseTime) ||
+                other.formattedCloseTime == formattedCloseTime) &&
+            (identical(
+                    other.formattedOpenTimeSecond, formattedOpenTimeSecond) ||
+                other.formattedOpenTimeSecond == formattedOpenTimeSecond) &&
+            (identical(
+                    other.formattedCloseTimeSecond, formattedCloseTimeSecond) ||
+                other.formattedCloseTimeSecond == formattedCloseTimeSecond) &&
             (identical(other.remarksTime, remarksTime) ||
                 other.remarksTime == remarksTime) &&
             (identical(other.remarksDay, remarksDay) ||
                 other.remarksDay == remarksDay) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             const DeepCollectionEquality()
-                .equals(other._businessDays, _businessDays));
+                .equals(other._daysOfWeek, _daysOfWeek));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      documentId,
-      storeName,
-      storeDetail,
-      storeWeb,
-      storeTwitter,
-      storeInsta,
-      storeInstaPosts,
-      storeTabelog,
-      storePhotoUrl,
-      openTime,
-      closeTime,
-      openTimeSecond,
-      closeTimeSecond,
+      id,
+      name,
+      detail,
+      web,
+      twitter,
+      insta,
+      instaPosts,
+      tabelog,
+      photo_url,
+      formattedOpenTime,
+      formattedCloseTime,
+      formattedOpenTimeSecond,
+      formattedCloseTimeSecond,
       remarksTime,
       remarksDay,
       const DeepCollectionEquality().hash(_tags),
-      const DeepCollectionEquality().hash(_businessDays));
+      const DeepCollectionEquality().hash(_daysOfWeek));
 
   @JsonKey(ignore: true)
   @override
@@ -464,53 +459,53 @@ class _$StoreClassImpl implements _StoreClass {
 
 abstract class _StoreClass implements StoreClass {
   const factory _StoreClass(
-      {required final String documentId,
-      final String? storeName,
-      final String? storeDetail,
-      final String? storeWeb,
-      final String? storeTwitter,
-      final String? storeInsta,
-      final String? storeInstaPosts,
-      final String? storeTabelog,
-      final String? storePhotoUrl,
-      final String? openTime,
-      final String? closeTime,
-      final String? openTimeSecond,
-      final String? closeTimeSecond,
+      {required final String id,
+      final String? name,
+      final String? detail,
+      final String? web,
+      final String? twitter,
+      final String? insta,
+      final String? instaPosts,
+      final String? tabelog,
+      final String? photo_url,
+      final String? formattedOpenTime,
+      final String? formattedCloseTime,
+      final String? formattedOpenTimeSecond,
+      final String? formattedCloseTimeSecond,
       final String? remarksTime,
       final String? remarksDay,
       final List<String>? tags,
-      final List<String>? businessDays}) = _$StoreClassImpl;
+      final List<String>? daysOfWeek}) = _$StoreClassImpl;
 
   factory _StoreClass.fromJson(Map<String, dynamic> json) =
       _$StoreClassImpl.fromJson;
 
   @override
-  String get documentId;
+  String get id;
   @override
-  String? get storeName;
+  String? get name;
   @override
-  String? get storeDetail;
+  String? get detail;
   @override
-  String? get storeWeb;
+  String? get web;
   @override
-  String? get storeTwitter;
+  String? get twitter;
   @override
-  String? get storeInsta;
+  String? get insta;
   @override
-  String? get storeInstaPosts;
+  String? get instaPosts;
   @override
-  String? get storeTabelog;
+  String? get tabelog;
   @override
-  String? get storePhotoUrl;
+  String? get photo_url;
   @override
-  String? get openTime;
+  String? get formattedOpenTime;
   @override
-  String? get closeTime;
+  String? get formattedCloseTime;
   @override
-  String? get openTimeSecond;
+  String? get formattedOpenTimeSecond;
   @override
-  String? get closeTimeSecond;
+  String? get formattedCloseTimeSecond;
   @override
   String? get remarksTime;
   @override
@@ -518,7 +513,7 @@ abstract class _StoreClass implements StoreClass {
   @override
   List<String>? get tags;
   @override
-  List<String>? get businessDays;
+  List<String>? get daysOfWeek;
   @override
   @JsonKey(ignore: true)
   _$$StoreClassImplCopyWith<_$StoreClassImpl> get copyWith =>
