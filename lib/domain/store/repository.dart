@@ -27,4 +27,12 @@ class StoresRepo extends _$StoresRepo {
     ];
     return storesList;
   }
+
+  Future<StoreClass> getStoreById(String storeId) async =>
+      collection.doc(storeId).get().then((value) {
+        if (value.data() == null) {
+          throw ArgumentError('データが存在しません');
+        }
+        return value.data()!;
+      });
 }
