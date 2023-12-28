@@ -28,21 +28,21 @@ class BusinessDaySearchResultList extends ConsumerWidget {
               : ListView.builder(
                   itemCount: data.searchResultStoreList.length,
                   itemBuilder: (context, index) {
-                    final store = data.searchResultStoreList[index];
+                    final state = data.searchResultStoreList[index];
                     return StoreList(
                       onTap: () async {
                         await ref
                             .read(businessDaySearchViewModelProvider.notifier)
-                            .navigateToStorePage(context, store.documentId);
+                            .navigateToStorePage(context, state.id);
                       },
-                      name: store.storeName,
-                      imageUrl: store.storePhotoUrl,
-                      tags: store.tags,
-                      openTime: store.openTime,
-                      closeTime: store.closeTime,
-                      isBusinessTime: false,
-                      businessDays: store.businessDays,
-                      remarksDay: store.remarksDay,
+                      name: state.name,
+                      imageUrl: state.photo_url,
+                      tags: state.tags,
+                      openTime: state.formattedOpenTime,
+                      closeTime: state.formattedCloseTime,
+                      openTimeSecond: state.formattedOpenTimeSecond,
+                      closeTimeSecond: state.formattedCloseTimeSecond,
+                      remarksTime: state.remarksTime,
                     );
                   },
                 ),
