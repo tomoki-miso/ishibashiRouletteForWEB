@@ -43,7 +43,7 @@ class ListViewModel extends _$ListViewModel {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => StoreDetailPage(documentId: documentId),
+          builder: (context) => StoreDetailPage(storeId: documentId),
         ),
       );
 }
