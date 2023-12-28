@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:ishibashi/domain/store/repository.dart';
 import 'package:ishibashi/domain/store/store_class.dart';
 import 'package:ishibashi/features/list/state.dart';
 import 'package:ishibashi/features/store_details/page/store_detail.dart';
-import 'package:ishibashi/domain/store/repository.dart';
-
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'view_model.g.dart';
@@ -21,33 +20,7 @@ class ListViewModel extends _$ListViewModel {
     _storeSnapshot ??=
         await FirebaseFirestore.instance.collection('stores').get();
 
-    final List<Future<StoreClass>> futureStoreList =
-        _storeSnapshot!.docs.map((document) async {
-      final storeData = document.data() as Map<String, dynamic>?;
-
-      if (storeData != null) {
-        final tags = await _fetchTags(document.reference);
-        return StoreClass(
-          documentId: storeData['id'] ?? '',
-          storeName: storeData['name'] ?? '',
-          storeDetail: storeData['detail'] ?? '',
-          storeWeb: storeData['web'] ?? '',
-          storeTwitter: storeData['twitter'] ?? '',
-          storeInsta: storeData['insta'] ?? '',
-          storeTabelog: storeData['tabelog'] ?? '',
-          storePhotoUrl: storeData['photo_url'] ?? '',
-          openTime: storeData['formattedOpenTime'] ?? '',
-          closeTime: storeData['formattedCloseTime'] ?? '',
-          openTimeSecond: storeData['formattedOpenTimeSecond'] ?? '',
-          closeTimeSecond: storeData['formattedCloseTimeSecond'] ?? '',
-          remarksTime: storeData['remarksTime'] ?? '',
-          tags: tags,
-        );
-      }
-      return Future.value(const StoreClass(documentId: '1'));
-    }).toList();
-
-    final List<StoreClass> storeList = await Future.wait(futureStoreList);
+    final List<StoreClass> storeList = await storesRepo.getStoresByIds();
 
     final state = ListState(storeClassList: storeList);
     return state;
