@@ -30,7 +30,7 @@ class RandomPage extends ConsumerWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.8,
               child: Text(
-                data.storeClass.storeName ?? '',
+                data.storeClass.name ?? '',
                 textAlign: TextAlign.center,
                 style: Styles.detailStoreName,
                 maxLines: 1,
@@ -41,7 +41,7 @@ class RandomPage extends ConsumerWidget {
 
             /// 画像部分
             RandomStoreImagePart(
-              storePhotoUrl: data.storeClass.storePhotoUrl ?? '',
+              storePhotoUrl: data.storeClass.photo_url ?? '',
             ),
             const SizedBox(height: 14),
 
@@ -51,16 +51,16 @@ class RandomPage extends ConsumerWidget {
 
             /// 営業時間・営業日
             RandomStoreTimePart(
-              openTime: data.storeClass.openTime,
-              closeTime: data.storeClass.closeTime,
-              openTimeSecond: data.storeClass.openTimeSecond,
-              closeTimeSecond: data.storeClass.closeTimeSecond,
+              openTime: data.storeClass.formattedOpenTime,
+              closeTime: data.storeClass.formattedCloseTime,
+              openTimeSecond: data.storeClass.formattedOpenTimeSecond,
+              closeTimeSecond: data.storeClass.formattedCloseTimeSecond,
               remarksTime: data.storeClass.remarksTime,
             ),
             const SizedBox(height: 10),
 
             /// くわしくみる
-            StoreButton(documentId: data.storeClass.documentId),
+            StoreButton(documentId: data.storeClass.id),
             const SizedBox(height: 2),
 
             ///　ルーレットを回す

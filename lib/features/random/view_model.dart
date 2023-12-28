@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:ishibashi/domain/store/repository.dart';
 import 'package:ishibashi/domain/store/store_class.dart';
 import 'package:ishibashi/features/random/state.dart';
 import 'package:ishibashi/features/store_details/page/store_detail.dart';
@@ -11,7 +11,7 @@ part 'view_model.g.dart';
 
 @riverpod
 class RandomViewModel extends _$RandomViewModel {
-  QuerySnapshot? _storeSnapshot;
+  StoresRepo get storesRepo => ref.read(storesRepoProvider.notifier);
 
   @override
   FutureOr<RandomState> build() async {
@@ -29,34 +29,14 @@ class RandomViewModel extends _$RandomViewModel {
 
   /// シャッフル
   Future<StoreClass> _shuffle() async {
-    _storeSnapshot ??=
-        await FirebaseFirestore.instance.collection('stores').get();
+    final storeList = await storesRepo.getStores();
 
-    final storeIds =
-        List.generate(_storeSnapshot!.docs.length, (index) => index + 1);
+    final storeIds = List.generate(storeList.length, (index) => index + 1);
     storeIds.shuffle();
     storeIds.removeAt(0);
-    final storeId = storeIds.first;
-    final storeData = _storeSnapshot!.docs[storeId - 1];
-    final tags = await _fetchTags(_storeSnapshot!.docs[storeId - 1].reference);
-
-    final StoreClass storeClass = StoreClass(
-      documentId: storeData['id'] ?? '',
-      storeName: storeData['name'] ?? '',
-      storeDetail: storeData['detail'] ?? '',
-      storeWeb: storeData['web'] ?? '',
-      storeTwitter: storeData['twitter'] ?? '',
-      storeInsta: storeData['insta'] ?? '',
-      storeTabelog: storeData['tabelog'] ?? '',
-      storePhotoUrl: storeData['photo_url'] ?? '',
-      openTime: storeData['formattedOpenTime'] ?? '',
-      closeTime: storeData['formattedCloseTime'] ?? '',
-      openTimeSecond: storeData['formattedOpenTimeSecond'] ?? '',
-      closeTimeSecond: storeData['formattedCloseTimeSecond'] ?? '',
-      remarksTime: storeData['remarksTime'] ?? '',
-      tags: tags,
-    );
-    return storeClass;
+    final storeId = storeIds.first.toString();
+    final StoreClass store = await storesRepo.getStoreById(storeId);
+    return store;
   }
 
   /// 詳細ページへ
@@ -67,20 +47,7 @@ class RandomViewModel extends _$RandomViewModel {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => StoreDetailPage(documentId: documentId),
+          builder: (context) => StoreDetailPage(storeId: documentId),
         ),
       );
-
-  Future<List<String>> _fetchTags(DocumentReference storeReference) async {
-    final storeSnapshot = await storeReference.get();
-    final storeData = storeSnapshot.data() as Map<String, dynamic>?;
-
-    if (storeData != null && storeData.containsKey('tags')) {
-      final tags = storeData['tags'] as List<dynamic>;
-      final formattedTags = tags.map((tag) => tag.toString()).toList();
-      return formattedTags;
-    } else {
-      return [];
-    }
-  }
 }
