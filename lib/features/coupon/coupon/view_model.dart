@@ -47,7 +47,7 @@ class CouponViewModel extends _$CouponViewModel {
 
   Future<String> _shuffleCouponNotInList(List<String> documentNames) async {
     final couponSnapshot = await FirebaseFirestore.instance
-        .collection('coupon')
+        .collection(Coupon.collectionName)
         .where('remainingAmount', isGreaterThan: 0)
         .where('isObtainable', isEqualTo: true)
         .get();

@@ -33,7 +33,7 @@ class CouponButtonPart extends ConsumerWidget {
           // 更新後のデータのuserInfo.isCanGetCouponを使用
           if (updatedData.coupon.couponId.isNotEmpty &&
               // ignore: use_if_null_to_convert_nulls_to_bools
-              updatedData.userInfo.isCanGetCoupon == true) {
+              updatedData.userInfo.isCanGetCoupon != false) {
             // ignore: use_build_context_synchronously
             await Navigator.push(
               context,

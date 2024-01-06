@@ -15,7 +15,14 @@ class CouponPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(couponViewModelProvider);
     return state.when(
-      error: (error, stackTrace) => Container(),
+      error: (error, stackTrace) => Container(
+        child: ElevatedButton(
+          onPressed: () {
+            print(error);
+          },
+          child: Text(error.toString()),
+        ),
+      ),
       loading: () => const Center(child: CircularProgressIndicator()),
       data: (data) => Scaffold(
         appBar: const CouponAppBar(),

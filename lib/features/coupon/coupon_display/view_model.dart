@@ -20,7 +20,7 @@ class CouponDisplayViewModel extends _$CouponDisplayViewModel {
   FutureOr<CouponDisplayState> build(String couponId) async {
     /// クーポンのデータ
     final storeSnapshot = await FirebaseFirestore.instance
-        .collection('coupon')
+        .collection(Coupon.collectionName)
         .doc(couponId)
         .get();
 
