@@ -60,7 +60,6 @@ class MapStoreInfoBottomSheet extends ConsumerWidget {
                     ),
                   ),
                 ),
-                // Text(data.testText),
                 Container(
                   decoration:
                       const BoxDecoration(color: ColorName.backGroundYellow),
@@ -96,7 +95,6 @@ class MapStoreInfoBottomSheet extends ConsumerWidget {
                 ),
                 Padding(
                   padding:
-                     // const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
                      const EdgeInsets.fromLTRB(30, 9, 30, 0),
                   child: PrimaryButton(
                     backgroundColor: ColorName.orangeBase,
