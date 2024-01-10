@@ -6,7 +6,7 @@ class MapStoreInfoBusinessDaysPart extends StatelessWidget {
       {required this.isVisibleDay,
       this.businessDays,
       this.remarksDay,
-      super.key});
+      super.key,});
 
   final bool isVisibleDay;
   final List<String>? businessDays;
@@ -16,6 +16,7 @@ class MapStoreInfoBusinessDaysPart extends StatelessWidget {
         children: [
           const Icon(Icons.calendar_month),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (isVisibleDay)
                 Wrap(

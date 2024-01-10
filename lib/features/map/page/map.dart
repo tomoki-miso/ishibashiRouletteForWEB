@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:ishibashi/features/map/components/map_store_info_bottom_sheet/map_store_info_botton_sheet.dart';
+import 'package:ishibashi/features/map/components/map_store_info_bottom_sheet/map_store_info_bottom_sheet.dart';
 import 'package:ishibashi/style/colors.dart';
 
 class MapPage extends StatefulWidget {
@@ -61,13 +61,13 @@ class _MapPageState extends State<MapPage> {
     //現在位置を更新し続ける
     positionStream =
         Geolocator.getPositionStream(locationSettings: locationSettings).listen(
-            (position) {
-      setState(() {
-        currentPosition = position;
-      });
-    }, onError: (error) {
-      print('Error getting position stream: $error');
-    });
+      (position) {
+        setState(() {
+          currentPosition = position;
+        });
+      },
+      onError: (error) {},
+    );
   }
 
   void _onMapCreated(GoogleMapController controller) {
@@ -113,12 +113,13 @@ class _MapPageState extends State<MapPage> {
                 title: storeName, // マーカーのタイトル
                 onTap: () {
                   showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      backgroundColor: ColorName.whiteBase,
-                      builder: (builder) => MapStoreInfoBottomSheet(
-                            storeId: storeId,
-                          ));
+                    context: context,
+                    isScrollControlled: true,
+                    backgroundColor: ColorName.whiteBase,
+                    builder: (builder) => MapStoreInfoBottomSheet(
+                      storeId: storeId,
+                    ),
+                  );
                 },
               ),
             ),
