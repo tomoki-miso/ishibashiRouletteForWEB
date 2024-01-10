@@ -33,9 +33,7 @@ class MapStoreInfoViewModel extends _$MapStoreInfoViewModel {
       businessDays: businessDays,
       tags: tags,
     );
-    final String testText = 'こんにちは';
-    final state = MapStoreInfoState(storeClass: storeClass, testText: testText);
-    return state;
+    return MapStoreInfoState(storeClass: storeClass);
   }
 
   Future<List<String>> _fetchTags(DocumentReference storeReference) async {
@@ -63,15 +61,6 @@ class MapStoreInfoViewModel extends _$MapStoreInfoViewModel {
       return formattedBusinessDays;
     } else {
       return [];
-    }
-  }
-
-  Future<void> changeTestText() async {
-    final data = state.requireValue;
-    if (data.testText == 'こんにちは') {
-      state = AsyncData(data.copyWith(testText: 'こんばんは'));
-    } else if (data.testText == 'こんばんは') {
-      state = AsyncData(data.copyWith(testText: 'こんにちは'));
     }
   }
 }

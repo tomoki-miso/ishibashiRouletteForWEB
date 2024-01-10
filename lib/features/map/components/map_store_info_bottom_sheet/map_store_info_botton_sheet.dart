@@ -26,7 +26,7 @@ class MapStoreInfoBottomSheet extends ConsumerWidget {
             controller.openTime != '' && controller.closeTime != '';
         final bool isVisibleTimeSecond =
             controller.openTimeSecond != '' || controller.closeTimeSecond != '';
-        final bool isVisibleDay = controller.businessDays != '';
+        final bool isVisibleDay = controller.businessDays!.isNotEmpty;
         return SizedBox(
           height: 500,
           child: Padding(
@@ -39,11 +39,25 @@ class MapStoreInfoBottomSheet extends ConsumerWidget {
                       bottom: BorderSide(color: ColorName.graySecondary),
                     ),
                   ),
-                  child: Row(
+                  child: Stack(
                     children: [
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
-                        child: const Text('お店の情報'),
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
+                            child: const Text('お店の情報'),
+                          ),
+                        ],
+                      ),
+                      Positioned(
+                        top: -2,
+                        right: 3,
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: const Icon(Icons.clear),
+                        ),
                       ),
                     ],
                   ),
@@ -94,8 +108,7 @@ class MapStoreInfoBottomSheet extends ConsumerWidget {
                   ],
                 ),
                 Padding(
-                  padding:
-                     const EdgeInsets.fromLTRB(30, 9, 30, 0),
+                  padding: const EdgeInsets.fromLTRB(30, 9, 30, 0),
                   child: PrimaryButton(
                     backgroundColor: ColorName.orangeBase,
                     foregroundColor: Colors.white,
@@ -104,7 +117,8 @@ class MapStoreInfoBottomSheet extends ConsumerWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => StoreDetailPage(
-                              documentId: controller.documentId),
+                            documentId: controller.documentId,
+                          ),
                         ),
                       );
                     },

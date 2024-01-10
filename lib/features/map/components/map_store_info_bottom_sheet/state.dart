@@ -12,6 +12,5 @@ class MapStoreInfoState with _$MapStoreInfoState {
   // プロパティを指定
   const factory MapStoreInfoState({
     required StoreClass storeClass,
-    required String testText,
   }) = _MapStoreInfoState;
 }

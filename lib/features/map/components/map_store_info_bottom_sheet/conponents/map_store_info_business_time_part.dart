@@ -20,21 +20,19 @@ class MapStoreInfoBussinessTimePart extends StatelessWidget {
   final String? remarksTime;
   @override
   Widget build(BuildContext context) => Row(
-    children: [
-      Icon(Icons.schedule_outlined),
-      Column(
+        children: [
+          const Icon(Icons.schedule_outlined),
+          Column(
             children: [
               if (isVisibleTime)
                 Column(
                   children: [
-                    Text('$openTime～$closeTime',
-                      style: const TextStyle(
-                          fontSize: 13, fontWeight: FontWeight.bold),
-                    ),
                     Text(
-                      closeTime!,
+                      '$openTime～$closeTime',
                       style: const TextStyle(
-                          fontSize: 13, fontWeight: FontWeight.bold),
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 )
@@ -60,13 +58,16 @@ class MapStoreInfoBussinessTimePart extends StatelessWidget {
                   ],
                 ),
               ),
-              if (remarksTime != '') Text('※$remarksTime',
-                      style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                      ),),
+              if (remarksTime != '')
+                Text(
+                  '※$remarksTime',
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
             ],
           ),
-    ],
-  );
+        ],
+      );
 }

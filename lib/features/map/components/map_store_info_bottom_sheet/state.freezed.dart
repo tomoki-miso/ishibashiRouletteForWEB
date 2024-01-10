@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MapStoreInfoState {
   StoreClass get storeClass => throw _privateConstructorUsedError;
-  String get testText => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MapStoreInfoStateCopyWith<MapStoreInfoState> get copyWith =>
@@ -30,7 +29,7 @@ abstract class $MapStoreInfoStateCopyWith<$Res> {
           MapStoreInfoState value, $Res Function(MapStoreInfoState) then) =
       _$MapStoreInfoStateCopyWithImpl<$Res, MapStoreInfoState>;
   @useResult
-  $Res call({StoreClass storeClass, String testText});
+  $Res call({StoreClass storeClass});
 
   $StoreClassCopyWith<$Res> get storeClass;
 }
@@ -49,17 +48,12 @@ class _$MapStoreInfoStateCopyWithImpl<$Res, $Val extends MapStoreInfoState>
   @override
   $Res call({
     Object? storeClass = null,
-    Object? testText = null,
   }) {
     return _then(_value.copyWith(
       storeClass: null == storeClass
           ? _value.storeClass
           : storeClass // ignore: cast_nullable_to_non_nullable
               as StoreClass,
-      testText: null == testText
-          ? _value.testText
-          : testText // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 
@@ -80,7 +74,7 @@ abstract class _$$MapStoreInfoStateImplCopyWith<$Res>
       __$$MapStoreInfoStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({StoreClass storeClass, String testText});
+  $Res call({StoreClass storeClass});
 
   @override
   $StoreClassCopyWith<$Res> get storeClass;
@@ -98,17 +92,12 @@ class __$$MapStoreInfoStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? storeClass = null,
-    Object? testText = null,
   }) {
     return _then(_$MapStoreInfoStateImpl(
       storeClass: null == storeClass
           ? _value.storeClass
           : storeClass // ignore: cast_nullable_to_non_nullable
               as StoreClass,
-      testText: null == testText
-          ? _value.testText
-          : testText // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -116,17 +105,14 @@ class __$$MapStoreInfoStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MapStoreInfoStateImpl implements _MapStoreInfoState {
-  const _$MapStoreInfoStateImpl(
-      {required this.storeClass, required this.testText});
+  const _$MapStoreInfoStateImpl({required this.storeClass});
 
   @override
   final StoreClass storeClass;
-  @override
-  final String testText;
 
   @override
   String toString() {
-    return 'MapStoreInfoState(storeClass: $storeClass, testText: $testText)';
+    return 'MapStoreInfoState(storeClass: $storeClass)';
   }
 
   @override
@@ -135,13 +121,11 @@ class _$MapStoreInfoStateImpl implements _MapStoreInfoState {
         (other.runtimeType == runtimeType &&
             other is _$MapStoreInfoStateImpl &&
             (identical(other.storeClass, storeClass) ||
-                other.storeClass == storeClass) &&
-            (identical(other.testText, testText) ||
-                other.testText == testText));
+                other.storeClass == storeClass));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, storeClass, testText);
+  int get hashCode => Object.hash(runtimeType, storeClass);
 
   @JsonKey(ignore: true)
   @override
@@ -152,14 +136,11 @@ class _$MapStoreInfoStateImpl implements _MapStoreInfoState {
 }
 
 abstract class _MapStoreInfoState implements MapStoreInfoState {
-  const factory _MapStoreInfoState(
-      {required final StoreClass storeClass,
-      required final String testText}) = _$MapStoreInfoStateImpl;
+  const factory _MapStoreInfoState({required final StoreClass storeClass}) =
+      _$MapStoreInfoStateImpl;
 
   @override
   StoreClass get storeClass;
-  @override
-  String get testText;
   @override
   @JsonKey(ignore: true)
   _$$MapStoreInfoStateImplCopyWith<_$MapStoreInfoStateImpl> get copyWith =>
