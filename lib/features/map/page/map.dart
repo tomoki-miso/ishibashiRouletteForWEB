@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ishibashi/features/map/components/map_store_info_bottom_sheet/map_store_info_botton_sheet.dart';
+import 'package:ishibashi/style/colors.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -113,6 +114,8 @@ class _MapPageState extends State<MapPage> {
                 onTap: () {
                   showModalBottomSheet(
                       context: context,
+                      isScrollControlled: true,
+                      backgroundColor: ColorName.whiteBase,
                       builder: (builder) => MapStoreInfoBottomSheet(
                             storeId: storeId,
                           ));

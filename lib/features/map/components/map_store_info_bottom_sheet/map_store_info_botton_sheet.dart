@@ -29,81 +29,94 @@ class MapStoreInfoBottomSheet extends ConsumerWidget {
         final bool isVisibleTimeSecond =
             controller.openTimeSecond != '' || controller.closeTimeSecond != '';
         final bool isVisibleDay = controller.businessDays != '';
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 60),
-          child: Column(
-            children: [
-              DecoratedBox(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(color: ColorName.graySecondary),
+        return SizedBox(
+          height: 500,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 60),
+            child: Column(
+              children: [
+                DecoratedBox(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(color: ColorName.graySecondary),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
+                        child: const Text('お店の情報'),
+                      ),
+                    ],
                   ),
                 ),
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
-                  child: const Text('お店の情報'),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Center(
-                  child: Text(
-                    controller.storeName ?? '',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Center(
+                    child: Text(
+                      controller.storeName ?? '',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              // Text(data.testText),
-              MapStoreInfoPhotoPart(
-                storePhotoUrl: controller.storePhotoUrl,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: MapStoreInfoTagsPart(
-                  tags: controller.tags,
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MapStoreInfoBusinessDaysPart(
-                    isVisibleDay: isVisibleDay,
-                    businessDays: controller.businessDays,
-                    remarksDay: controller.remarksDay,
+                // Text(data.testText),
+                Container(
+                  decoration:
+                      const BoxDecoration(color: ColorName.backGroundYellow),
+                  width: double.infinity,
+                  child: MapStoreInfoPhotoPart(
+                    storePhotoUrl: controller.storePhotoUrl,
                   ),
-                  MapStoreInfoBussinessTimePart(
-                    isVisibleTime: isVisibleTime,
-                    isVisibleTimeSecond: isVisibleTimeSecond,
-                    openTime: controller.openTime,
-                    closeTime: controller.closeTime,
-                    openTimeSecond: controller.openTimeSecond,
-                    closeTimeSecond: controller.closeTimeSecond,
-                    remarksTime: controller.remarksTime,
-                  ),
-                ],
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                child: PrimaryButton(
-                  backgroundColor: ColorName.orangeBase,
-                  foregroundColor: Colors.white,
-                  onPressed: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            StoreDetailPage(documentId: controller.documentId),
-                      ),
-                    );
-                  },
-                  text: 'く わ し く み る',
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: MapStoreInfoTagsPart(
+                    tags: controller.tags,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    MapStoreInfoBusinessDaysPart(
+                      isVisibleDay: isVisibleDay,
+                      businessDays: controller.businessDays,
+                      remarksDay: controller.remarksDay,
+                    ),
+                    MapStoreInfoBussinessTimePart(
+                      isVisibleTime: isVisibleTime,
+                      isVisibleTimeSecond: isVisibleTimeSecond,
+                      openTime: controller.openTime,
+                      closeTime: controller.closeTime,
+                      openTimeSecond: controller.openTimeSecond,
+                      closeTimeSecond: controller.closeTimeSecond,
+                      remarksTime: controller.remarksTime,
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding:
+                     // const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
+                     const EdgeInsets.fromLTRB(30, 9, 30, 0),
+                  child: PrimaryButton(
+                    backgroundColor: ColorName.orangeBase,
+                    foregroundColor: Colors.white,
+                    onPressed: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => StoreDetailPage(
+                              documentId: controller.documentId),
+                        ),
+                      );
+                    },
+                    text: 'く わ し く み る',
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

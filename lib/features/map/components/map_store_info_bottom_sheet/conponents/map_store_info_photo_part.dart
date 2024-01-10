@@ -7,24 +7,26 @@ class MapStoreInfoPhotoPart extends StatelessWidget {
 
   final String? storePhotoUrl;
   @override
-  Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 50,
-          vertical: 20,
-        ),
-        decoration: const BoxDecoration(color: ColorName.backGroundYellow),
-        child: SizedBox(
-          
-          height: 150,
-          child: storePhotoUrl != ''
-              ? CachedNetworkImage(
-                  imageUrl: storePhotoUrl!,
-                  fit: BoxFit.cover,
-                )
-              : Image.asset(
-                  'assets/images/icon.png',
-                  fit: BoxFit.cover,
-                ),
-        ),
+  Widget build(BuildContext context) => Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 20,
+            ),
+            decoration: const BoxDecoration(color: ColorName.backGroundYellow),
+            child: SizedBox(
+              height: 150,
+              child: storePhotoUrl != ''
+                  ? CachedNetworkImage(
+                      imageUrl: storePhotoUrl!,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset(
+                      'assets/images/icon.png',
+                      fit: BoxFit.cover,
+                    ),
+            ),
+          ),
+        ],
       );
 }
