@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/components/primary_button.dart';
@@ -7,7 +6,6 @@ import 'package:ishibashi/features/map/components/map_store_info_bottom_sheet/co
 import 'package:ishibashi/features/map/components/map_store_info_bottom_sheet/conponents/map_store_info_photo_part.dart';
 import 'package:ishibashi/features/map/components/map_store_info_bottom_sheet/conponents/map_store_info_tags_part.dart';
 import 'package:ishibashi/features/map/components/map_store_info_bottom_sheet/view_model.dart';
-import 'package:ishibashi/features/search/business_day_search/view_model.dart';
 import 'package:ishibashi/features/store_details/page/store_detail.dart';
 import 'package:ishibashi/style/colors.dart';
 
