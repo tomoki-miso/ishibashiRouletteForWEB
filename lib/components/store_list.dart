@@ -10,6 +10,7 @@ class StoreList extends ConsumerWidget {
     required this.tags,
     required this.imageUrl,
     required this.name,
+    required this.isBusinessDay,
     this.isBusinessTime = true,
     this.openTime,
     this.closeTime,
@@ -31,7 +32,8 @@ class StoreList extends ConsumerWidget {
   final VoidCallback? onTap;
   final List<dynamic> tags;
   final List<dynamic>? businessDays;
-  final bool isBusinessTime;
+  final bool isBusinessTime; // 営業時間を表示するかどうか
+  final bool isBusinessDay; // 今日が営業日かどうか
   bool get isVisibleTime => closeTime != '' && openTime != '';
   bool get isVisibleTimeSecond => closeTimeSecond != '' || openTimeSecond != '';
 
@@ -58,15 +60,35 @@ class StoreList extends ConsumerWidget {
                         topLeft: Radius.circular(50),
                         bottomLeft: Radius.circular(50),
                       ),
-                      child: imageUrl.isNotEmpty
-                          ? CachedNetworkImage(
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          if (imageUrl.isNotEmpty)
+                            CachedNetworkImage(
                               imageUrl: imageUrl,
                               fit: BoxFit.cover,
                             )
-                          : Image.asset(
+                          else
+                            Image.asset(
                               'assets/images/icon.png',
                               fit: BoxFit.cover,
                             ),
+                          if (!isBusinessDay)
+                            Container(
+                              color: ColorName.greyBase.withOpacity(0.75),
+                              height: MediaQuery.of(context).size.height * 0.3,
+                              child: const Center(
+                                  child: Text(
+                                '定休日です',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: ColorName.whiteBase,
+                                ),
+                              )),
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
