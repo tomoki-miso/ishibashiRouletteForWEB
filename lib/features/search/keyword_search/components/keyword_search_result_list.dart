@@ -29,6 +29,7 @@ class KeywordSearchResultList extends ConsumerWidget {
             openTimeSecond: state.formattedOpenTimeSecond,
             closeTimeSecond: state.formattedCloseTimeSecond,
             remarksTime: state.remarksTime,
+            isBusinessDay: false,
           );
         },
       ),
