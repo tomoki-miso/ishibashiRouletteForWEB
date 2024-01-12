@@ -7,7 +7,6 @@ import 'package:ishibashi/base.dart';
 import 'package:ishibashi/features/auth/page/sign_in_confirm.dart';
 import 'package:ishibashi/firebase/firebase_options.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
