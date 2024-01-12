@@ -16,7 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ListState {
-  List<dynamic> get storeClassList => throw _privateConstructorUsedError;
+  List<dynamic> get storeIsBusinessDayList =>
+      throw _privateConstructorUsedError;
+  List<dynamic> get storeIsNotBusinessDayClassList =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ListStateCopyWith<ListState> get copyWith =>
@@ -28,7 +31,9 @@ abstract class $ListStateCopyWith<$Res> {
   factory $ListStateCopyWith(ListState value, $Res Function(ListState) then) =
       _$ListStateCopyWithImpl<$Res, ListState>;
   @useResult
-  $Res call({List<dynamic> storeClassList});
+  $Res call(
+      {List<dynamic> storeIsBusinessDayList,
+      List<dynamic> storeIsNotBusinessDayClassList});
 }
 
 /// @nodoc
@@ -44,12 +49,17 @@ class _$ListStateCopyWithImpl<$Res, $Val extends ListState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? storeClassList = null,
+    Object? storeIsBusinessDayList = null,
+    Object? storeIsNotBusinessDayClassList = null,
   }) {
     return _then(_value.copyWith(
-      storeClassList: null == storeClassList
-          ? _value.storeClassList
-          : storeClassList // ignore: cast_nullable_to_non_nullable
+      storeIsBusinessDayList: null == storeIsBusinessDayList
+          ? _value.storeIsBusinessDayList
+          : storeIsBusinessDayList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      storeIsNotBusinessDayClassList: null == storeIsNotBusinessDayClassList
+          ? _value.storeIsNotBusinessDayClassList
+          : storeIsNotBusinessDayClassList // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
     ) as $Val);
   }
@@ -63,7 +73,9 @@ abstract class _$$ListStateImplCopyWith<$Res>
       __$$ListStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<dynamic> storeClassList});
+  $Res call(
+      {List<dynamic> storeIsBusinessDayList,
+      List<dynamic> storeIsNotBusinessDayClassList});
 }
 
 /// @nodoc
@@ -77,12 +89,17 @@ class __$$ListStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? storeClassList = null,
+    Object? storeIsBusinessDayList = null,
+    Object? storeIsNotBusinessDayClassList = null,
   }) {
     return _then(_$ListStateImpl(
-      storeClassList: null == storeClassList
-          ? _value._storeClassList
-          : storeClassList // ignore: cast_nullable_to_non_nullable
+      storeIsBusinessDayList: null == storeIsBusinessDayList
+          ? _value._storeIsBusinessDayList
+          : storeIsBusinessDayList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      storeIsNotBusinessDayClassList: null == storeIsNotBusinessDayClassList
+          ? _value._storeIsNotBusinessDayClassList
+          : storeIsNotBusinessDayClassList // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
     ));
   }
@@ -91,20 +108,33 @@ class __$$ListStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ListStateImpl implements _ListState {
-  const _$ListStateImpl({required final List<dynamic> storeClassList})
-      : _storeClassList = storeClassList;
+  const _$ListStateImpl(
+      {required final List<dynamic> storeIsBusinessDayList,
+      required final List<dynamic> storeIsNotBusinessDayClassList})
+      : _storeIsBusinessDayList = storeIsBusinessDayList,
+        _storeIsNotBusinessDayClassList = storeIsNotBusinessDayClassList;
 
-  final List<dynamic> _storeClassList;
+  final List<dynamic> _storeIsBusinessDayList;
   @override
-  List<dynamic> get storeClassList {
-    if (_storeClassList is EqualUnmodifiableListView) return _storeClassList;
+  List<dynamic> get storeIsBusinessDayList {
+    if (_storeIsBusinessDayList is EqualUnmodifiableListView)
+      return _storeIsBusinessDayList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_storeClassList);
+    return EqualUnmodifiableListView(_storeIsBusinessDayList);
+  }
+
+  final List<dynamic> _storeIsNotBusinessDayClassList;
+  @override
+  List<dynamic> get storeIsNotBusinessDayClassList {
+    if (_storeIsNotBusinessDayClassList is EqualUnmodifiableListView)
+      return _storeIsNotBusinessDayClassList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_storeIsNotBusinessDayClassList);
   }
 
   @override
   String toString() {
-    return 'ListState(storeClassList: $storeClassList)';
+    return 'ListState(storeIsBusinessDayList: $storeIsBusinessDayList, storeIsNotBusinessDayClassList: $storeIsNotBusinessDayClassList)';
   }
 
   @override
@@ -112,13 +142,18 @@ class _$ListStateImpl implements _ListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ListStateImpl &&
-            const DeepCollectionEquality()
-                .equals(other._storeClassList, _storeClassList));
+            const DeepCollectionEquality().equals(
+                other._storeIsBusinessDayList, _storeIsBusinessDayList) &&
+            const DeepCollectionEquality().equals(
+                other._storeIsNotBusinessDayClassList,
+                _storeIsNotBusinessDayClassList));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_storeClassList));
+      runtimeType,
+      const DeepCollectionEquality().hash(_storeIsBusinessDayList),
+      const DeepCollectionEquality().hash(_storeIsNotBusinessDayClassList));
 
   @JsonKey(ignore: true)
   @override
@@ -128,11 +163,15 @@ class _$ListStateImpl implements _ListState {
 }
 
 abstract class _ListState implements ListState {
-  const factory _ListState({required final List<dynamic> storeClassList}) =
+  const factory _ListState(
+          {required final List<dynamic> storeIsBusinessDayList,
+          required final List<dynamic> storeIsNotBusinessDayClassList}) =
       _$ListStateImpl;
 
   @override
-  List<dynamic> get storeClassList;
+  List<dynamic> get storeIsBusinessDayList;
+  @override
+  List<dynamic> get storeIsNotBusinessDayClassList;
   @override
   @JsonKey(ignore: true)
   _$$ListStateImplCopyWith<_$ListStateImpl> get copyWith =>
