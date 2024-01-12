@@ -7,7 +7,7 @@ part of 'view_model.dart';
 // **************************************************************************
 
 String _$businessDaySearchViewModelHash() =>
-    r'2bddbd06cf1e2aef06ad29f50365ee27eeb04557';
+    r'd7fc304642c1320c020d2eb37b6a2f26fa173376';
 
 /// See also [BusinessDaySearchViewModel].
 @ProviderFor(BusinessDaySearchViewModel)
