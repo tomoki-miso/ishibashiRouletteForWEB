@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:ishibashi/domain/store/repository.dart';
 import 'package:ishibashi/domain/store/store_class.dart';
 import 'package:ishibashi/features/search/business_day_search/state.dart';
-import 'package:ishibashi/features/store_details/page/store_detail.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'view_model.g.dart';
@@ -14,7 +12,8 @@ class BusinessDaySearchViewModel extends _$BusinessDaySearchViewModel {
   @override
   FutureOr<BusinessDaySearchState> build() async {
     const state = BusinessDaySearchState(
-      searchResultStoreList: [],
+      searchResultIsBusinessDayStores: [],
+      searchResultIsNotBusinessDayStores: [],
       selectedDays: [],
     );
     return state;
@@ -22,14 +21,28 @@ class BusinessDaySearchViewModel extends _$BusinessDaySearchViewModel {
 
   Future<void> searchBusinessDay(List<String> selectedDays) async {
     if (selectedDays.isNotEmpty) {
-      final List<StoreClass> storeList =
+      final List<StoreClass> searchedStores =
           await storesRepo.searchStoresByDays(selectedDays);
+      final List<StoreClass> searchedIsBusinessDayStores =
+          await storesRepo.getIsBusinessDayStores(searchedStores);
+      final List<StoreClass> searchedIsNotBusinessDayStores =
+          await storesRepo.getIsNotBusinessDayStores(searchedStores);
 
       final data = state.requireValue;
-      state = AsyncData(data.copyWith(searchResultStoreList: storeList));
+      state = AsyncData(
+        data.copyWith(
+          searchResultIsBusinessDayStores: searchedIsBusinessDayStores,
+          searchResultIsNotBusinessDayStores: searchedIsNotBusinessDayStores,
+        ),
+      );
     } else {
       final data = state.requireValue;
-      state = AsyncData(data.copyWith(searchResultStoreList: []));
+      state = AsyncData(
+        data.copyWith(
+          searchResultIsBusinessDayStores: [],
+          searchResultIsNotBusinessDayStores: [],
+        ),
+      );
     }
   }
 
@@ -47,16 +60,4 @@ class BusinessDaySearchViewModel extends _$BusinessDaySearchViewModel {
     state = AsyncData(data.copyWith(selectedDays: updatedDays));
     await searchBusinessDay(updatedDays);
   }
-
-  /// detailPageに飛ばす
-  Future<void> navigateToStorePage(
-    BuildContext context,
-    String documentId,
-  ) async =>
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => StoreDetailPage(storeId: documentId),
-        ),
-      );
 }

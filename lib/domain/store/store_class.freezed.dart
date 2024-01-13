@@ -27,7 +27,8 @@ mixin _$StoreClass {
   String? get twitter => throw _privateConstructorUsedError;
   String? get insta => throw _privateConstructorUsedError;
   String? get instaPosts => throw _privateConstructorUsedError;
-  String? get tabelog => throw _privateConstructorUsedError;
+  String? get tabelog =>
+      throw _privateConstructorUsedError; // ignore: non_constant_identifier_names
   String? get photo_url => throw _privateConstructorUsedError;
   String? get formattedOpenTime => throw _privateConstructorUsedError;
   String? get formattedCloseTime => throw _privateConstructorUsedError;
@@ -347,6 +348,7 @@ class _$StoreClassImpl implements _StoreClass {
   final String? instaPosts;
   @override
   final String? tabelog;
+// ignore: non_constant_identifier_names
   @override
   final String? photo_url;
   @override
@@ -496,7 +498,7 @@ abstract class _StoreClass implements StoreClass {
   String? get instaPosts;
   @override
   String? get tabelog;
-  @override
+  @override // ignore: non_constant_identifier_names
   String? get photo_url;
   @override
   String? get formattedOpenTime;

@@ -22,6 +22,7 @@ class StoreClass with _$StoreClass {
     String? insta,
     String? instaPosts,
     String? tabelog,
+    // ignore: non_constant_identifier_names
     String? photo_url,
     String? formattedOpenTime,
     String? formattedCloseTime,

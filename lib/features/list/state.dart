@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ishibashi/domain/store/store_class.dart';
 
 // 生成されるdartファイルを記述
 part 'state.freezed.dart';
@@ -10,6 +11,7 @@ class ListState with _$ListState {
 
   // プロパティを指定
   const factory ListState({
-    required List storeClassList,
+    required List<StoreClass> storeIsBusinessDayStores,
+    required List<StoreClass> storeIsNotBusinessDayStores,
   }) = _ListState;
 }

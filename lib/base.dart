@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ishibashi/features/coupon/page/coupon_pre.dart';
-import 'package:ishibashi/features/list/page/list.dart';
+import 'package:ishibashi/features/list/list.dart';
 import 'package:ishibashi/features/map/page/map.dart';
 import 'package:ishibashi/features/random/page/random.dart';
 import 'package:ishibashi/features/top/page/top.dart';
@@ -23,7 +23,6 @@ class BasePage extends StatelessWidget {
     ];
 
     return Scaffold(
-      // final listIcon =
       body: PersistentTabView(
         context,
         controller: PersistentTabController(initialIndex: 2),

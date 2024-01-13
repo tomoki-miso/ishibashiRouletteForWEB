@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ishibashi/domain/store/store_class.dart';
 
 // 生成されるdartファイルを記述
 part 'state.freezed.dart';
@@ -10,7 +11,8 @@ class BusinessDaySearchState with _$BusinessDaySearchState {
 
   // プロパティを指定
   const factory BusinessDaySearchState({
-    required List searchResultStoreList,
+    required List<StoreClass> searchResultIsBusinessDayStores,
+    required List<StoreClass> searchResultIsNotBusinessDayStores,
     required List<String> selectedDays,
   }) = _BusinessDaySearchState;
 }

@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:ishibashi/domain/store/store_class.dart';
 import 'package:ishibashi/firebase/firebase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -28,6 +30,37 @@ class StoresRepo extends _$StoresRepo {
     return storesList;
   }
 
+  Future<List<StoreClass>> getIsBusinessDayStores([
+    List<StoreClass>? stores,
+  ]) async {
+    final String weekText = await _getWeekText();
+
+    if (stores == null || stores.isEmpty) {
+      stores = await getStores();
+    }
+
+    final List<StoreClass> isBusinessDaysStores = stores
+        .where((element) => element.daysOfWeek!.contains(weekText))
+        .toList();
+
+    return isBusinessDaysStores;
+  }
+
+  Future<List<StoreClass>> getIsNotBusinessDayStores([
+    List<StoreClass>? stores,
+  ]) async {
+    final String weekText = await _getWeekText();
+
+    if (stores == null || stores.isEmpty) {
+      stores = await getStores();
+    }
+    final List<StoreClass> isNotBusinessDaysStores = stores
+        .where((element) => !element.daysOfWeek!.contains(weekText))
+        .toList();
+
+    return isNotBusinessDaysStores;
+  }
+
   Future<StoreClass> getStoreById(String storeId) async =>
       collection.doc(storeId).get().then((value) {
         if (value.data() == null) {
@@ -51,12 +84,21 @@ class StoresRepo extends _$StoresRepo {
   Future<List<StoreClass>> searchStoresByDays(
     List<String> selectedDays,
   ) async {
-    final List<StoreClass> storeList = [
+    final List<StoreClass> searchedStoresByDays = [
       ...await collection
           .where('daysOfWeek', arrayContainsAny: selectedDays)
           .get()
           .then((value) => value.docs.map((e) => e.data()).toList()),
     ];
-    return storeList;
+
+    return searchedStoresByDays;
+  }
+
+  Future<String> _getWeekText() async {
+    await initializeDateFormatting('ja');
+    final DateTime todayDate = DateTime.now();
+    final String weekText = DateFormat.EEEE('ja').format(todayDate)[0];
+
+    return weekText;
   }
 }

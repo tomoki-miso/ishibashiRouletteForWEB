@@ -29,7 +29,7 @@ class RandomViewModel extends _$RandomViewModel {
 
   /// シャッフル
   Future<StoreClass> _shuffle() async {
-    final storeList = await storesRepo.getStores();
+    final storeList = await storesRepo.getIsBusinessDayStores();
 
     final storeIds = List.generate(storeList.length, (index) => index + 1);
     storeIds.shuffle();

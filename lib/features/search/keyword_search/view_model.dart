@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ishibashi/domain/store/repository.dart';
 import 'package:ishibashi/domain/store/store_class.dart';
 import 'package:ishibashi/features/search/keyword_search/state.dart';
-import 'package:ishibashi/features/store_details/page/store_detail.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'view_model.g.dart';
@@ -15,29 +14,38 @@ class KeywordSearchViewModel extends _$KeywordSearchViewModel {
   FutureOr<KeywordSearchState> build() async {
     final state = KeywordSearchState(
       searchWordController: TextEditingController(),
-      searchResultStoreList: [],
+      searchedIsBusinessDayStoresByKeyWord: [],
+      searchedIsNotBusinessDayStoresByKeyWord: [],
     );
     return state;
   }
 
   Future<void> searchKeyword(String searchWord) async {
-    final searchWordList = [searchWord];
-
-    final List<StoreClass> storeList =
+    final List<String> searchWordList = [searchWord];
+    final List<StoreClass> searchedStores =
         await storesRepo.searchStoresByKeyWord(searchWordList);
-    final data = state.requireValue;
-    state = AsyncData(data.copyWith(searchResultStoreList: storeList));
-  }
+    final List<StoreClass> searchedIsBusinessDayStores =
+        await storesRepo.getIsBusinessDayStores(searchedStores);
+    final List<StoreClass> searchedIsNotBusinessDayStores =
+        await storesRepo.getIsNotBusinessDayStores(searchedStores);
 
-  /// detailPageに飛ばす
-  Future<void> navigateToStorePage(
-    BuildContext context,
-    String documentId,
-  ) async =>
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => StoreDetailPage(storeId: documentId),
+    if (searchWordList.isEmpty || searchWordList.contains('')) {
+      final data = state.requireValue;
+      state = AsyncData(
+        data.copyWith(
+          searchedIsBusinessDayStoresByKeyWord: [],
+          searchedIsNotBusinessDayStoresByKeyWord: [],
         ),
       );
+    } else {
+      final data = state.requireValue;
+      state = AsyncData(
+        data.copyWith(
+          searchedIsBusinessDayStoresByKeyWord: searchedIsBusinessDayStores,
+          searchedIsNotBusinessDayStoresByKeyWord:
+              searchedIsNotBusinessDayStores,
+        ),
+      );
+    }
+  }
 }

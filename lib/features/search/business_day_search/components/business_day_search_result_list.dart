@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ishibashi/components/store_list.dart';
+import 'package:ishibashi/components/store_list_items.dart';
 import 'package:ishibashi/features/search/business_day_search/view_model.dart';
 
 class BusinessDaySearchResultList extends ConsumerWidget {
@@ -11,40 +11,27 @@ class BusinessDaySearchResultList extends ConsumerWidget {
     final data = ref.watch(businessDaySearchViewModelProvider).requireValue;
 
     return Expanded(
-      child: data.selectedDays.isEmpty && data.searchResultStoreList.isEmpty
+      child: data.selectedDays.isEmpty &&
+              data.searchResultIsBusinessDayStores.isEmpty
           ? const Center(
               child: Text(
                 '曜日を選択してください',
                 style: TextStyle(fontSize: 16),
               ),
             )
-          : data.selectedDays.isNotEmpty && data.searchResultStoreList.isEmpty
+          : data.selectedDays.isNotEmpty &&
+                  data.searchResultIsBusinessDayStores.isEmpty
               ? const Center(
                   child: Text(
                     '選択された曜日に営業しているお店はありません',
                     style: TextStyle(fontSize: 16),
                   ),
                 )
-              : ListView.builder(
-                  itemCount: data.searchResultStoreList.length,
-                  itemBuilder: (context, index) {
-                    final state = data.searchResultStoreList[index];
-                    return StoreList(
-                      onTap: () async {
-                        await ref
-                            .read(businessDaySearchViewModelProvider.notifier)
-                            .navigateToStorePage(context, state.id);
-                      },
-                      name: state.name,
-                      imageUrl: state.photo_url,
-                      tags: state.tags,
-                      openTime: state.formattedOpenTime,
-                      closeTime: state.formattedCloseTime,
-                      openTimeSecond: state.formattedOpenTimeSecond,
-                      closeTimeSecond: state.formattedCloseTimeSecond,
-                      remarksTime: state.remarksTime,
-                    );
-                  },
+              : StoreListItems(
+                  storeIsBusinessDayStores:
+                      data.searchResultIsBusinessDayStores,
+                  storeIsNotBusinessDayStores:
+                      data.searchResultIsNotBusinessDayStores,
                 ),
     );
   }
