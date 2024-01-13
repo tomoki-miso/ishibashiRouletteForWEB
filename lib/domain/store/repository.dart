@@ -27,22 +27,34 @@ class StoresRepo extends _$StoresRepo {
           .get()
           .then((value) => value.docs.map((e) => e.data()).toList()),
     ];
-
     return storesList;
   }
 
-  Future<List<StoreClass>> getIsBusinessDayStores() async {
+  Future<List<StoreClass>> getIsBusinessDayStores([
+    List<StoreClass>? stores,
+  ]) async {
     final String weekText = await _getWeekText();
-    final List<StoreClass> isBusinessDaysStores = (await getStores())
+
+    if (stores == null || stores.isEmpty) {
+      stores = await getStores();
+    }
+
+    final List<StoreClass> isBusinessDaysStores = stores
         .where((element) => element.daysOfWeek!.contains(weekText))
         .toList();
 
     return isBusinessDaysStores;
   }
 
-  Future<List<StoreClass>> getIsNotBusinessDayStores() async {
+  Future<List<StoreClass>> getIsNotBusinessDayStores([
+    List<StoreClass>? stores,
+  ]) async {
     final String weekText = await _getWeekText();
-    final List<StoreClass> isNotBusinessDaysStores = (await getStores())
+
+    if (stores == null || stores.isEmpty) {
+      stores = await getStores();
+    }
+    final List<StoreClass> isNotBusinessDaysStores = stores
         .where((element) => !element.daysOfWeek!.contains(weekText))
         .toList();
 
@@ -72,13 +84,14 @@ class StoresRepo extends _$StoresRepo {
   Future<List<StoreClass>> searchStoresByDays(
     List<String> selectedDays,
   ) async {
-    final List<StoreClass> storeList = [
+    final List<StoreClass> searchedStoresByDays = [
       ...await collection
           .where('daysOfWeek', arrayContainsAny: selectedDays)
           .get()
           .then((value) => value.docs.map((e) => e.data()).toList()),
     ];
-    return storeList;
+
+    return searchedStoresByDays;
   }
 
   Future<String> _getWeekText() async {

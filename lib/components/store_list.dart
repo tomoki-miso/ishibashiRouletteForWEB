@@ -7,10 +7,10 @@ import 'package:ishibashi/style/styles.dart';
 class StoreList extends ConsumerWidget {
   const StoreList({
     required this.onTap,
-    required this.tags,
-    required this.imageUrl,
-    required this.name,
     required this.isBusinessDay,
+    this.tags,
+    this.imageUrl,
+    this.name,
     this.isBusinessTime = true,
     this.openTime,
     this.closeTime,
@@ -21,8 +21,8 @@ class StoreList extends ConsumerWidget {
     this.businessDays,
     super.key,
   });
-  final String name;
-  final String imageUrl;
+  final String? name;
+  final String? imageUrl;
   final String? remarksTime;
   final String? remarksDay;
   final String? openTime;
@@ -30,7 +30,7 @@ class StoreList extends ConsumerWidget {
   final String? openTimeSecond;
   final String? closeTimeSecond;
   final VoidCallback? onTap;
-  final List<dynamic> tags;
+  final List<dynamic>? tags;
   final List<dynamic>? businessDays;
   final bool isBusinessTime; // 営業時間を表示するかどうか
   final bool isBusinessDay; // 今日が営業日かどうか
@@ -63,9 +63,9 @@ class StoreList extends ConsumerWidget {
                       child: Stack(
                         fit: StackFit.expand,
                         children: [
-                          if (imageUrl.isNotEmpty)
+                          if (imageUrl!.isNotEmpty)
                             CachedNetworkImage(
-                              imageUrl: imageUrl,
+                              imageUrl: imageUrl!,
                               fit: BoxFit.cover,
                             )
                           else
@@ -102,7 +102,7 @@ class StoreList extends ConsumerWidget {
                         children: [
                           /// 名前
                           Text(
-                            name,
+                            name!,
                             style: Styles.storeNameStyle,
                           ),
                           const Padding(padding: EdgeInsets.all(12)),
@@ -111,9 +111,10 @@ class StoreList extends ConsumerWidget {
                           Wrap(
                             spacing: 1,
                             runSpacing: 1,
-                            children: tags.isNotEmpty
-                                ? tags.take(3).map((formattedTag) {
-                                    final isLastTag = formattedTag == tags.last;
+                            children: tags!.isNotEmpty && tags!.length >= 3
+                                ? tags!.take(3).map((formattedTag) {
+                                    final isLastTag =
+                                        formattedTag == tags!.last;
                                     return Text(
                                       '#$formattedTag${isLastTag ? '' : ','}',
                                       style: Styles.tagsTextStyle,
