@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ishibashi/features/map/components/map_store_info_bottom_sheet/conponents/map_store_info_button_part.dart';
 import 'package:ishibashi/features/map/components/map_store_info_bottom_sheet/conponents/map_store_info_business_days_part.dart';
 import 'package:ishibashi/features/map/components/map_store_info_bottom_sheet/conponents/map_store_info_business_time_part.dart';
+import 'package:ishibashi/features/map/components/map_store_info_bottom_sheet/conponents/map_store_info_button_part.dart';
 import 'package:ishibashi/features/map/components/map_store_info_bottom_sheet/conponents/map_store_info_photo_part.dart';
 import 'package:ishibashi/features/map/components/map_store_info_bottom_sheet/conponents/map_store_info_tags_part.dart';
 import 'package:ishibashi/features/map/components/map_store_info_bottom_sheet/view_model.dart';
@@ -21,41 +21,37 @@ class MapStoreInfoBottomSheet extends ConsumerWidget {
     return state.when(
       data: (data) {
         final controller = data.storeClass;
-        final bool isVisibleDay = controller.businessDays!.isNotEmpty;
         return SizedBox(
           height: MediaQuery.of(context).size.height * 0.6,
           child: Column(
             children: [
+              /// ヘッダー
               DecoratedBox(
                 decoration: const BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(color: ColorName.graySecondary),
+                    bottom: BorderSide(
+                      color: ColorName.greyBase,
+                    ),
                   ),
                 ),
-                child: Stack(
+                child: Row(
                   children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
-                          child: const Text('お店の情報'),
-                        ),
-                      ],
+                    const SizedBox(
+                      width: 24,
                     ),
-                    Positioned(
-                      top: -2,
-                      right: 3,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        icon: const Icon(Icons.clear),
-                      ),
+                    const Expanded(child: Text('お店の情報')),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      icon: const Icon(Icons.clear),
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 10),
+
+              /// 店名
               Text(
                 controller.storeName ?? '',
                 style: const TextStyle(
@@ -64,35 +60,40 @@ class MapStoreInfoBottomSheet extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              Container(
-                decoration:
-                    const BoxDecoration(color: ColorName.backGroundYellow),
-                width: double.infinity,
-                child: MapStoreInfoPhotoPart(
-                  storePhotoUrl: controller.storePhotoUrl,
-                ),
+
+              /// 画像
+              MapStoreInfoPhotoPart(storePhotoUrl: controller.storePhotoUrl),
+              const SizedBox(height: 8),
+
+              /// タグ
+              MapStoreInfoTagsPart(
+                tags: controller.tags,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: MapStoreInfoTagsPart(
-                  tags: controller.tags,
-                ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  /// 営業日
+                  MapStoreInfoBusinessDaysPart(
+                    businessDays: controller.businessDays,
+                    remarksDay: controller.remarksDay,
+                  ),
+                  const SizedBox(width: 8),
+
+                  /// 営業時間
+                  MapStoreInfoBussinessTimePart(
+                    openTime: controller.openTime,
+                    closeTime: controller.closeTime,
+                    openTimeSecond: controller.openTimeSecond,
+                    closeTimeSecond: controller.closeTimeSecond,
+                    remarksTime: controller.remarksTime,
+                  ),
+                ],
               ),
-              Align(
-                child: MapStoreInfoBusinessDaysPart(
-                  isVisibleDay: isVisibleDay,
-                  businessDays: controller.businessDays,
-                  remarksDay: controller.remarksDay,
-                ),
-              ),
-              const SizedBox(height: 5),
-              MapStoreInfoBussinessTimePart(
-                openTime: controller.openTime,
-                closeTime: controller.closeTime,
-                openTimeSecond: controller.openTimeSecond,
-                closeTimeSecond: controller.closeTimeSecond,
-                remarksTime: controller.remarksTime,
-              ),
+
+              const SizedBox(height: 16),
+
+              /// ボタン
               MapStoreInfoBottonPart(storeId: storeId),
             ],
           ),

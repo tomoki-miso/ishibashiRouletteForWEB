@@ -21,8 +21,10 @@ class MapStoreInfoBussinessTimePart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Icon(Icons.schedule_outlined),
+          const SizedBox(width: 4),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -30,7 +32,7 @@ class MapStoreInfoBussinessTimePart extends StatelessWidget {
                 Text(
                   '$openTime～$closeTime',
                   style: const TextStyle(
-                    fontSize: 12,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
                 )
@@ -38,7 +40,7 @@ class MapStoreInfoBussinessTimePart extends StatelessWidget {
                 const Text(
                   '営業時間の情報がありません',
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -47,17 +49,22 @@ class MapStoreInfoBussinessTimePart extends StatelessWidget {
                 child: Text(
                   '$openTimeSecond～$closeTimeSecond',
                   style: const TextStyle(
-                    fontSize: 12,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               if (remarksTime != '')
-                Text(
-                  '※$remarksTime',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  child: Text(
+                    '※$remarksTime',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    maxLines: 1,
                   ),
                 ),
             ],

@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:ishibashi/style/colors.dart';
 
 class MapStoreInfoBusinessDaysPart extends StatelessWidget {
-  const MapStoreInfoBusinessDaysPart(
-      {required this.isVisibleDay,
-      this.businessDays,
-      this.remarksDay,
-      super.key,});
+  const MapStoreInfoBusinessDaysPart({
+    this.businessDays,
+    this.remarksDay,
+    super.key,
+  });
 
-  final bool isVisibleDay;
   final List<String>? businessDays;
   final String? remarksDay;
+  bool get isVisibleDay => businessDays!.isNotEmpty;
+
   @override
   Widget build(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Icon(Icons.calendar_month),
+          const SizedBox(width: 4),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -30,7 +33,7 @@ class MapStoreInfoBusinessDaysPart extends StatelessWidget {
                             '$formattedBusinessDays${isLastDay ? '' : ','}',
                             style: const TextStyle(
                               color: ColorName.black2,
-                              fontSize: 13,
+                              fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
                           );
@@ -40,14 +43,18 @@ class MapStoreInfoBusinessDaysPart extends StatelessWidget {
               else
                 const Text(
                   '営業日の情報がありません',
-                  style: TextStyle(fontSize: 13),
+                  style: TextStyle(fontSize: 14),
                 ),
               if (remarksDay != '')
-                Text(
-                  '※$remarksDay!',
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  child: Text(
+                    '※$remarksDay!',
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis),
+                    maxLines: 1,
                   ),
                 ),
             ],
