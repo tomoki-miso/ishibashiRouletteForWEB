@@ -29,7 +29,10 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: '石橋ごはんルーレット',
-        theme: ThemeData(fontFamily: 'MPLUS'),
+        theme: ThemeData(
+          fontFamily: 'MPLUS',
+          useMaterial3: false,
+        ),
         home: const HomePage(),
       );
 }
