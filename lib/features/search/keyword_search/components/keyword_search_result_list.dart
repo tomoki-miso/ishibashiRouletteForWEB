@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ishibashi/components/store_list.dart';
+import 'package:ishibashi/components/store_list_items.dart';
 import 'package:ishibashi/features/search/keyword_search/view_model.dart';
 
 class KeywordSearchResultList extends ConsumerWidget {
@@ -9,30 +9,34 @@ class KeywordSearchResultList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(keywordSearchViewModelProvider).requireValue;
+    final String keyWord = data.searchWordController.text;
 
     return Expanded(
-      child: ListView.builder(
-        itemCount: data.searchResultStoreList.length,
-        itemBuilder: (context, index) {
-          final state = data.searchResultStoreList[index];
-          return StoreList(
-            onTap: () async {
-              await ref
-                  .read(keywordSearchViewModelProvider.notifier)
-                  .navigateToStorePage(context, state.id);
-            },
-            name: state.name,
-            imageUrl: state.photo_url,
-            tags: state.tags,
-            openTime: state.formattedOpenTime,
-            closeTime: state.formattedCloseTime,
-            openTimeSecond: state.formattedOpenTimeSecond,
-            closeTimeSecond: state.formattedCloseTimeSecond,
-            remarksTime: state.remarksTime,
-            isBusinessDay: false,
-          );
-        },
-      ),
+      child: keyWord.isEmpty
+          ? const Center(
+              child: Text(
+                'キーワードを入力してお店を探しましょう！',
+                style: TextStyle(fontSize: 16),
+              ),
+            )
+          : data.searchedIsBusinessDayStoresByKeyWord.isNotEmpty &&
+                  data.searchedIsNotBusinessDayStoresByKeyWord.isNotEmpty
+              ? StoreListItems(
+                  storeIsBusinessDayStores:
+                      data.searchedIsBusinessDayStoresByKeyWord,
+                  storeIsNotBusinessDayStores:
+                      data.searchedIsNotBusinessDayStoresByKeyWord,
+                )
+              : Center(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Text(
+                      '「$keyWord」に一致するお店は見つかりませんでした.......',
+                      style: const TextStyle(fontSize: 16),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
     );
   }
 }
