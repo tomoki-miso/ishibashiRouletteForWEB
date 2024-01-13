@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:ishibashi/domain/store/store_class.dart';
 import 'package:ishibashi/firebase/firebase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -25,7 +27,26 @@ class StoresRepo extends _$StoresRepo {
           .get()
           .then((value) => value.docs.map((e) => e.data()).toList()),
     ];
+
     return storesList;
+  }
+
+  Future<List<StoreClass>> getIsBusinessDayStores() async {
+    final String weekText = await _getWeekText();
+    final List<StoreClass> isBusinessDaysStores = (await getStores())
+        .where((element) => element.daysOfWeek!.contains(weekText))
+        .toList();
+
+    return isBusinessDaysStores;
+  }
+
+  Future<List<StoreClass>> getIsNotBusinessDayStores() async {
+    final String weekText = await _getWeekText();
+    final List<StoreClass> isNotBusinessDaysStores = (await getStores())
+        .where((element) => !element.daysOfWeek!.contains(weekText))
+        .toList();
+
+    return isNotBusinessDaysStores;
   }
 
   Future<StoreClass> getStoreById(String storeId) async =>
@@ -58,5 +79,13 @@ class StoresRepo extends _$StoresRepo {
           .then((value) => value.docs.map((e) => e.data()).toList()),
     ];
     return storeList;
+  }
+
+  Future<String> _getWeekText() async {
+    await initializeDateFormatting('ja');
+    final DateTime todayDate = DateTime.now();
+    final String weekText = DateFormat.EEEE('ja').format(todayDate)[0];
+
+    return weekText;
   }
 }
