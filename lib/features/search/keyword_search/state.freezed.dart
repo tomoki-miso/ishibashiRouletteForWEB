@@ -16,7 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$KeywordSearchState {
-  List<dynamic> get searchResultStoreList => throw _privateConstructorUsedError;
+  List<StoreClass> get searchedIsBusinessDayStoresByKeyWord =>
+      throw _privateConstructorUsedError;
+  List<StoreClass> get searchedIsNotBusinessDayStoresByKeyWord =>
+      throw _privateConstructorUsedError;
   TextEditingController get searchWordController =>
       throw _privateConstructorUsedError;
 
@@ -32,7 +35,8 @@ abstract class $KeywordSearchStateCopyWith<$Res> {
       _$KeywordSearchStateCopyWithImpl<$Res, KeywordSearchState>;
   @useResult
   $Res call(
-      {List<dynamic> searchResultStoreList,
+      {List<StoreClass> searchedIsBusinessDayStoresByKeyWord,
+      List<StoreClass> searchedIsNotBusinessDayStoresByKeyWord,
       TextEditingController searchWordController});
 }
 
@@ -49,14 +53,21 @@ class _$KeywordSearchStateCopyWithImpl<$Res, $Val extends KeywordSearchState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchResultStoreList = null,
+    Object? searchedIsBusinessDayStoresByKeyWord = null,
+    Object? searchedIsNotBusinessDayStoresByKeyWord = null,
     Object? searchWordController = null,
   }) {
     return _then(_value.copyWith(
-      searchResultStoreList: null == searchResultStoreList
-          ? _value.searchResultStoreList
-          : searchResultStoreList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      searchedIsBusinessDayStoresByKeyWord: null ==
+              searchedIsBusinessDayStoresByKeyWord
+          ? _value.searchedIsBusinessDayStoresByKeyWord
+          : searchedIsBusinessDayStoresByKeyWord // ignore: cast_nullable_to_non_nullable
+              as List<StoreClass>,
+      searchedIsNotBusinessDayStoresByKeyWord: null ==
+              searchedIsNotBusinessDayStoresByKeyWord
+          ? _value.searchedIsNotBusinessDayStoresByKeyWord
+          : searchedIsNotBusinessDayStoresByKeyWord // ignore: cast_nullable_to_non_nullable
+              as List<StoreClass>,
       searchWordController: null == searchWordController
           ? _value.searchWordController
           : searchWordController // ignore: cast_nullable_to_non_nullable
@@ -74,7 +85,8 @@ abstract class _$$KeywordSearchStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<dynamic> searchResultStoreList,
+      {List<StoreClass> searchedIsBusinessDayStoresByKeyWord,
+      List<StoreClass> searchedIsNotBusinessDayStoresByKeyWord,
       TextEditingController searchWordController});
 }
 
@@ -89,14 +101,21 @@ class __$$KeywordSearchStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchResultStoreList = null,
+    Object? searchedIsBusinessDayStoresByKeyWord = null,
+    Object? searchedIsNotBusinessDayStoresByKeyWord = null,
     Object? searchWordController = null,
   }) {
     return _then(_$KeywordSearchStateImpl(
-      searchResultStoreList: null == searchResultStoreList
-          ? _value._searchResultStoreList
-          : searchResultStoreList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      searchedIsBusinessDayStoresByKeyWord: null ==
+              searchedIsBusinessDayStoresByKeyWord
+          ? _value._searchedIsBusinessDayStoresByKeyWord
+          : searchedIsBusinessDayStoresByKeyWord // ignore: cast_nullable_to_non_nullable
+              as List<StoreClass>,
+      searchedIsNotBusinessDayStoresByKeyWord: null ==
+              searchedIsNotBusinessDayStoresByKeyWord
+          ? _value._searchedIsNotBusinessDayStoresByKeyWord
+          : searchedIsNotBusinessDayStoresByKeyWord // ignore: cast_nullable_to_non_nullable
+              as List<StoreClass>,
       searchWordController: null == searchWordController
           ? _value.searchWordController
           : searchWordController // ignore: cast_nullable_to_non_nullable
@@ -109,17 +128,30 @@ class __$$KeywordSearchStateImplCopyWithImpl<$Res>
 
 class _$KeywordSearchStateImpl implements _KeywordSearchState {
   const _$KeywordSearchStateImpl(
-      {required final List<dynamic> searchResultStoreList,
+      {required final List<StoreClass> searchedIsBusinessDayStoresByKeyWord,
+      required final List<StoreClass> searchedIsNotBusinessDayStoresByKeyWord,
       required this.searchWordController})
-      : _searchResultStoreList = searchResultStoreList;
+      : _searchedIsBusinessDayStoresByKeyWord =
+            searchedIsBusinessDayStoresByKeyWord,
+        _searchedIsNotBusinessDayStoresByKeyWord =
+            searchedIsNotBusinessDayStoresByKeyWord;
 
-  final List<dynamic> _searchResultStoreList;
+  final List<StoreClass> _searchedIsBusinessDayStoresByKeyWord;
   @override
-  List<dynamic> get searchResultStoreList {
-    if (_searchResultStoreList is EqualUnmodifiableListView)
-      return _searchResultStoreList;
+  List<StoreClass> get searchedIsBusinessDayStoresByKeyWord {
+    if (_searchedIsBusinessDayStoresByKeyWord is EqualUnmodifiableListView)
+      return _searchedIsBusinessDayStoresByKeyWord;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_searchResultStoreList);
+    return EqualUnmodifiableListView(_searchedIsBusinessDayStoresByKeyWord);
+  }
+
+  final List<StoreClass> _searchedIsNotBusinessDayStoresByKeyWord;
+  @override
+  List<StoreClass> get searchedIsNotBusinessDayStoresByKeyWord {
+    if (_searchedIsNotBusinessDayStoresByKeyWord is EqualUnmodifiableListView)
+      return _searchedIsNotBusinessDayStoresByKeyWord;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_searchedIsNotBusinessDayStoresByKeyWord);
   }
 
   @override
@@ -127,7 +159,7 @@ class _$KeywordSearchStateImpl implements _KeywordSearchState {
 
   @override
   String toString() {
-    return 'KeywordSearchState(searchResultStoreList: $searchResultStoreList, searchWordController: $searchWordController)';
+    return 'KeywordSearchState(searchedIsBusinessDayStoresByKeyWord: $searchedIsBusinessDayStoresByKeyWord, searchedIsNotBusinessDayStoresByKeyWord: $searchedIsNotBusinessDayStoresByKeyWord, searchWordController: $searchWordController)';
   }
 
   @override
@@ -135,8 +167,12 @@ class _$KeywordSearchStateImpl implements _KeywordSearchState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$KeywordSearchStateImpl &&
-            const DeepCollectionEquality()
-                .equals(other._searchResultStoreList, _searchResultStoreList) &&
+            const DeepCollectionEquality().equals(
+                other._searchedIsBusinessDayStoresByKeyWord,
+                _searchedIsBusinessDayStoresByKeyWord) &&
+            const DeepCollectionEquality().equals(
+                other._searchedIsNotBusinessDayStoresByKeyWord,
+                _searchedIsNotBusinessDayStoresByKeyWord) &&
             (identical(other.searchWordController, searchWordController) ||
                 other.searchWordController == searchWordController));
   }
@@ -144,7 +180,10 @@ class _$KeywordSearchStateImpl implements _KeywordSearchState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_searchResultStoreList),
+      const DeepCollectionEquality()
+          .hash(_searchedIsBusinessDayStoresByKeyWord),
+      const DeepCollectionEquality()
+          .hash(_searchedIsNotBusinessDayStoresByKeyWord),
       searchWordController);
 
   @JsonKey(ignore: true)
@@ -157,12 +196,15 @@ class _$KeywordSearchStateImpl implements _KeywordSearchState {
 
 abstract class _KeywordSearchState implements KeywordSearchState {
   const factory _KeywordSearchState(
-          {required final List<dynamic> searchResultStoreList,
-          required final TextEditingController searchWordController}) =
-      _$KeywordSearchStateImpl;
+      {required final List<StoreClass> searchedIsBusinessDayStoresByKeyWord,
+      required final List<StoreClass> searchedIsNotBusinessDayStoresByKeyWord,
+      required final TextEditingController
+          searchWordController}) = _$KeywordSearchStateImpl;
 
   @override
-  List<dynamic> get searchResultStoreList;
+  List<StoreClass> get searchedIsBusinessDayStoresByKeyWord;
+  @override
+  List<StoreClass> get searchedIsNotBusinessDayStoresByKeyWord;
   @override
   TextEditingController get searchWordController;
   @override

@@ -7,7 +7,7 @@ part of 'view_model.dart';
 // **************************************************************************
 
 String _$keywordSearchViewModelHash() =>
-    r'3337e0c371babe03534c54f252843a1561e599cf';
+    r'c0e23570ea8b9293fbe5c4b106da17906fa18c17';
 
 /// See also [KeywordSearchViewModel].
 @ProviderFor(KeywordSearchViewModel)
