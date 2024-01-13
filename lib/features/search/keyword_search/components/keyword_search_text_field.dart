@@ -23,7 +23,7 @@ class KeywordSearchTextField extends ConsumerWidget {
         onChanged: (value) async {
           await ref
               .read(keywordSearchViewModelProvider.notifier)
-              .searchKeyword(data.searchWordController.text);
+              .searchKeyword(data.searchWordController.text.trim());
         },
       ),
     );
