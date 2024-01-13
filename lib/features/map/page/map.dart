@@ -6,6 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:ishibashi/features/map/components/map_store_info_bottom_sheet/map_store_info_bottom_sheet.dart';
+import 'package:ishibashi/style/colors.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -33,41 +35,6 @@ class _MapPageState extends State<MapPage> {
     return dataList;
   }
 
-  Future<void> _createMarkersFromFirebaseData() async {
-    try {
-      final List<Map<String, dynamic>> firebaseData =
-          await _fetchDataFromFirestore();
-      final Set<Marker> markerSet = {};
-
-      for (final data in firebaseData) {
-        // ignore: duplicate_ignore
-        try {
-          // データの型を適切に変換
-          final double lat = double.parse(data['lat']);
-          final double long = double.parse(data['long']);
-          final String name = data['name'];
-
-          // マーカーの作成と追加
-          markerSet.add(
-            Marker(
-              markerId: MarkerId(name), // 一意のIDを指定
-              position: LatLng(lat, long),
-              infoWindow: InfoWindow(
-                title: name, // マーカーのタイトル
-              ),
-            ),
-          );
-        } catch (e) {}
-      }
-
-      setState(() {
-        markers = markerSet; // マーカーセットを更新
-      });
-
-      // マーカーが正しくセットされたかどうかをログで確認
-    } catch (e) {}
-  }
-
   Position? currentPosition;
   late StreamSubscription<Position> positionStream;
 
@@ -93,12 +60,14 @@ class _MapPageState extends State<MapPage> {
 
     //現在位置を更新し続ける
     positionStream =
-        Geolocator.getPositionStream(locationSettings: locationSettings)
-            .listen((position) {
-      setState(() {
-        currentPosition = position;
-      });
-    });
+        Geolocator.getPositionStream(locationSettings: locationSettings).listen(
+      (position) {
+        setState(() {
+          currentPosition = position;
+        });
+      },
+      onError: (error) {},
+    );
   }
 
   void _onMapCreated(GoogleMapController controller) {
@@ -110,11 +79,59 @@ class _MapPageState extends State<MapPage> {
         body: GoogleMap(
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
-            target: _center,
+            target: currentPosition != null
+                ? LatLng(currentPosition!.latitude, currentPosition!.longitude)
+                : _center,
             zoom: 18,
           ),
           myLocationEnabled: true, //現在位置をマップ上に表示
           markers: markers,
         ),
       );
+
+  Future<void> _createMarkersFromFirebaseData() async {
+    try {
+      final List<Map<String, dynamic>> firebaseData =
+          await _fetchDataFromFirestore();
+      final Set<Marker> markerSet = {};
+
+      for (final data in firebaseData) {
+        // ignore: duplicate_ignore
+        try {
+          // データの型を適切に変換
+          final double lat = double.parse(data['lat']);
+          final double long = double.parse(data['long']);
+          final String storeName = data['name'];
+          final String storeId = data['id'];
+
+          // マーカーの作成と追加
+          markerSet.add(
+            Marker(
+              markerId: MarkerId(storeId), // 一意のIDを指定
+              position: LatLng(lat, long),
+              infoWindow: InfoWindow(
+                title: storeName, // マーカーのタイトル
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    backgroundColor: ColorName.whiteBase,
+                    builder: (builder) => MapStoreInfoBottomSheet(
+                      storeId: storeId,
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
+        } catch (e) {}
+      }
+
+      setState(() {
+        markers = markerSet; // マーカーセットを更新
+      });
+
+      // マーカーが正しくセットされたかどうかをログで確認
+    } catch (e) {}
+  }
 }
