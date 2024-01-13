@@ -18,8 +18,8 @@ class ListViewModel extends _$ListViewModel {
         await storesRepo.getIsNotBusinessDayStores();
 
     final state = ListState(
-      storeIsBusinessDayList: storeIsBusinessDayStores,
-      storeIsNotBusinessDayClassList: storeIsNotBusinessDay,
+      storeIsBusinessDayStores: storeIsBusinessDayStores,
+      storeIsNotBusinessDayStores: storeIsNotBusinessDay,
     );
     return state;
   }

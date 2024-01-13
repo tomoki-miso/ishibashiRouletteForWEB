@@ -11,7 +11,7 @@ class ListState with _$ListState {
 
   // プロパティを指定
   const factory ListState({
-    required List<StoreClass> storeIsBusinessDayList,
-    required List<StoreClass> storeIsNotBusinessDayClassList,
+    required List<StoreClass> storeIsBusinessDayStores,
+    required List<StoreClass> storeIsNotBusinessDayStores,
   }) = _ListState;
 }
