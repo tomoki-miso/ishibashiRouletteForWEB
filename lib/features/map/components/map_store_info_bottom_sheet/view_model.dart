@@ -21,16 +21,16 @@ class MapStoreInfoViewModel extends _$MapStoreInfoViewModel {
     final businessDays = await _fetchBusinessDays(storeSnapshot.reference);
 
     final StoreClass storeClass = StoreClass(
-      documentId: storeData['id'] ?? '',
-      storeName: storeData['name'] ?? '',
-      storePhotoUrl: storeData['photo_url'] ?? '',
-      openTime: storeData['formattedOpenTime'] ?? '',
-      closeTime: storeData['formattedCloseTime'] ?? '',
-      openTimeSecond: storeData['formattedOpenTimeSecond'] ?? '',
-      closeTimeSecond: storeData['formattedCloseTimeSecond'] ?? '',
+      id: storeData['id'] ?? '',
+      name: storeData['name'] ?? '',
+      photo_url: storeData['photo_url'] ?? '',
+      formattedOpenTime: storeData['formattedOpenTime'] ?? '',
+      formattedCloseTime: storeData['formattedCloseTime'] ?? '',
+      formattedOpenTimeSecond: storeData['formattedOpenTimeSecond'] ?? '',
+      formattedCloseTimeSecond: storeData['formattedCloseTimeSecond'] ?? '',
       remarksTime: storeData['remarksTime'] ?? '',
       remarksDay: storeData['remarksDay'] ?? '',
-      businessDays: businessDays,
+      daysOfWeek: businessDays,
       tags: tags,
     );
     return MapStoreInfoState(storeClass: storeClass);

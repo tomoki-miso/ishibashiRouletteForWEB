@@ -20,7 +20,7 @@ class MapStoreInfoBottonPart extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => StoreDetailPage(
-                documentId: storeId,
+                storeId: storeId,
               ),
             ),
           );

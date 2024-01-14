@@ -53,7 +53,7 @@ class MapStoreInfoBottomSheet extends ConsumerWidget {
 
               /// 店名
               Text(
-                controller.storeName ?? '',
+                controller.name ?? '',
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -62,7 +62,7 @@ class MapStoreInfoBottomSheet extends ConsumerWidget {
               const SizedBox(height: 10),
 
               /// 画像
-              MapStoreInfoPhotoPart(storePhotoUrl: controller.storePhotoUrl),
+              MapStoreInfoPhotoPart(storePhotoUrl: controller.photo_url),
               const SizedBox(height: 8),
 
               /// タグ
@@ -75,17 +75,17 @@ class MapStoreInfoBottomSheet extends ConsumerWidget {
                 children: [
                   /// 営業日
                   MapStoreInfoBusinessDaysPart(
-                    businessDays: controller.businessDays,
+                    businessDays: controller.daysOfWeek,
                     remarksDay: controller.remarksDay,
                   ),
                   const SizedBox(width: 8),
 
                   /// 営業時間
                   MapStoreInfoBussinessTimePart(
-                    openTime: controller.openTime,
-                    closeTime: controller.closeTime,
-                    openTimeSecond: controller.openTimeSecond,
-                    closeTimeSecond: controller.closeTimeSecond,
+                    openTime: controller.formattedOpenTime,
+                    closeTime: controller.formattedCloseTime,
+                    openTimeSecond: controller.formattedOpenTimeSecond,
+                    closeTimeSecond: controller.formattedCloseTimeSecond,
                     remarksTime: controller.remarksTime,
                   ),
                 ],
