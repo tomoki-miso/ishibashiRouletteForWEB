@@ -1,10 +1,8 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ishibashi/base.dart';
-import 'package:ishibashi/features/auth/page/sign_in_confirm.dart';
 import 'package:ishibashi/firebase/firebase_options.dart';
 
 void main() async {
@@ -31,23 +29,11 @@ class MyApp extends ConsumerWidget {
         title: '石橋ごはんルーレット',
         theme: ThemeData(
           fontFamily: 'MPLUS',
+          textTheme: const TextTheme(
+            bodyMedium: TextStyle(fontWeight: FontWeight.w600),
+          ),
           useMaterial3: false,
         ),
         home: const BasePage(),
       );
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final User? user = FirebaseAuth.instance.currentUser;
-
-    if (user != null) {
-      return const BasePage();
-    } else {
-      return const SignInConfirmPage();
-    }
-  }
 }
