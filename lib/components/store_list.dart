@@ -78,14 +78,15 @@ class StoreList extends ConsumerWidget {
                               color: ColorName.greyBase.withOpacity(0.75),
                               height: MediaQuery.of(context).size.height * 0.3,
                               child: const Center(
-                                  child: Text(
-                                '定休日です',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: ColorName.whiteBase,
+                                child: Text(
+                                  '定休日です',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: ColorName.whiteBase,
+                                  ),
                                 ),
-                              )),
+                              ),
                             ),
                         ],
                       ),
