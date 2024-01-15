@@ -33,7 +33,7 @@ class MyApp extends ConsumerWidget {
           fontFamily: 'MPLUS',
           useMaterial3: false,
         ),
-        home: const HomePage(),
+        home: const BasePage(),
       );
 }
 
