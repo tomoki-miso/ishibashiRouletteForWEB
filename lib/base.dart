@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ishibashi/features/coupon/page/coupon_pre.dart';
+import 'package:ishibashi/features/coupon/page/coupon_intro.dart';
 import 'package:ishibashi/features/list/list.dart';
 import 'package:ishibashi/features/map/page/map.dart';
 import 'package:ishibashi/features/random/page/random.dart';
@@ -18,7 +18,7 @@ class BasePage extends StatelessWidget {
       const ListPage(),
       const RandomPage(),
       const TopPage(),
-      const CouponPrePage(),
+      const CouponIntroPage(),
       const MapPage(),
     ];
 
