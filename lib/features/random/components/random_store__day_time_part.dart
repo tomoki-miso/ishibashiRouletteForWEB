@@ -24,7 +24,7 @@ class RandomStoreTimePart extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => SizedBox(
-        height: MediaQuery.of(context).size.height * 0.06,
+        height: MediaQuery.of(context).size.height * 0.08,
         child: Column(
           children: [
             Row(
