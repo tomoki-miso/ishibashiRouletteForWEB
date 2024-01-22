@@ -32,7 +32,7 @@ class StoreDetailPage extends ConsumerWidget {
               /// 名前
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
+                child: SelectableText(
                   data.storeClass.name ?? '',
                   textAlign: TextAlign.center,
                   style: Styles.detailStoreName,
