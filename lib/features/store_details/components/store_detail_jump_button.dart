@@ -58,7 +58,8 @@ class StoreDetailsJumpButton extends StatelessWidget {
               const SizedBox(width: 4),
               Text(
                 text,
-                style: const TextStyle(fontSize: 14),
+                style:
+                    const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
               ),
             ],
           ),
