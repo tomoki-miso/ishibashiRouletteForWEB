@@ -1,5 +1,3 @@
-// ignore_for_file: empty_catches
-
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
