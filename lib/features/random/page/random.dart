@@ -29,12 +29,12 @@ class RandomPage extends ConsumerWidget {
             /// 名前
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.8,
-              child: Text(
+              child: SelectableText(
                 data.storeClass.name ?? '',
                 textAlign: TextAlign.center,
                 style: Styles.detailStoreName,
                 maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+                // overflow: TextOverflow.ellipsis,
               ),
             ),
             const SizedBox(height: 12),
