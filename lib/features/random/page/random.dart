@@ -38,6 +38,7 @@ class RandomPage extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 12),
+            const Text('test'),
 
             /// 画像部分
             RandomStoreImagePart(
